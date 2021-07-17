@@ -24,6 +24,7 @@
   name="Aspect Ratio"
   args={{
     youTubeId: 'mM5_T-F1Yn4',
+    aspectRatio: '4:3',
   }}
 />
 

@@ -6,7 +6,7 @@
   export let aspectRatio = '16:9'
   export let skipTo = { h: 0, m: 0, s: 0 }
 
-  const { h, m, s } = skipTo 
+  const { h, m, s } = skipTo
 
   const tH = h * 60
   const tM = m * 60
