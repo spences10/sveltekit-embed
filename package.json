@@ -8,22 +8,33 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --write --plugin-search-dir=. ."
+    "format": "prettier --write --plugin-search-dir=. .",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/addon-svelte-csf": "^1.1.0",
+    "@storybook/svelte": "^6.3.4",
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-svelte3": "^3.2.0",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
-    "svelte": "^3.34.0",
+    "svelte": "^3.38.3",
     "svelte-check": "^2.0.0",
+    "svelte-loader": "^3.1.2",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
     "typescript": "^4.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {}
 }
