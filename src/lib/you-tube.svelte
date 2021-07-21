@@ -35,7 +35,7 @@
   <iframe
     {width}
     {height}
-    class="youtube-mdx-embed"
+    class="youtube-sveltekit-embed"
     title={`youTube-${youTubeId}`}
     src={`https://www.youtube-nocookie.com/embed/${youTubeId}?&autoplay=${autoPlay}&start=${startTime}`}
     frameborder="0"
