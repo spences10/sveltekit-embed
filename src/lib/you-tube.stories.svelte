@@ -10,6 +10,7 @@
     width: { control: 'number' },
     height: { control: 'number' },
     youTubeId: { control: 'text' },
+    listId: { control: 'text' },
     autoPlay: { control: 'boolean' },
     aspectRatio: { control: 'text' },
     skipTo: { control: 'object' },
@@ -41,5 +42,12 @@
   args={{
     youTubeId: 'mM5_T-F1Yn4',
     autoPlay: true,
+  }}
+/>
+
+<Story
+  name="Playlist"
+  args={{
+    listId: 'PL5SvzogSTpeH1Szqw4tPi9ZfgXDbY8GU-',
   }}
 />
