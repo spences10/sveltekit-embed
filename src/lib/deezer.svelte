@@ -11,6 +11,6 @@
   {width}
   {height}
   frameborder="0"
-  allowtransparency="true"
+  allowtransparency={true}
   allow="encrypted-media; clipboard-write"
 />
