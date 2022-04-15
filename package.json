@@ -30,7 +30,7 @@
     "prettier": "2.6.2",
     "prettier-plugin-svelte": "2.7.0",
     "svelte": "3.47.0",
-    "svelte-check": "2.6.0",
+    "svelte-check": "2.7.0",
     "svelte-loader": "3.1.2",
     "svelte-preprocess": "4.10.5",
     "tslib": "2.3.1",
