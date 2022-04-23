@@ -23,7 +23,7 @@
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
-    "babel-loader": "8.2.4",
+    "babel-loader": "8.2.5",
     "eslint": "8.13.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-svelte3": "3.4.1",
