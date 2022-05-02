@@ -2,7 +2,7 @@
   import GeneralObserver from './general-observer.svelte'
 
   export let episodeId: string = ''
-  export let theme = `dark`
+  export let theme: string = `dark`
 </script>
 
 <GeneralObserver>

@@ -2,13 +2,13 @@
   import GeneralObserver from './general-observer.svelte'
 
   export let buzzsproutId: string
-  export let width = 100
-  export let height = 200
+  export let width: string = '100'
+  export let height: string = '200'
 </script>
 
 <GeneralObserver>
   <div
-    class="buzzsprout-mdx-embed"
+    class="buzzsprout-sveltekit-embed"
     style={`
       position: relative; 
       height: ${height}px;
