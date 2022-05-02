@@ -13,7 +13,7 @@
 </script>
 
 <main>
-  <h1>SvekteKit Embed</h1>
+  <h1>SvelteKit Embed</h1>
 
   <p>
     This is a collection of embed components I use on a regular basis
