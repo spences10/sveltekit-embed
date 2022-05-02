@@ -12,6 +12,17 @@
   import '../global.css'
 </script>
 
+<svelte:head>
+  <title>SvelteKit Embed</title>
+  <link rel="canonical" href="https://sveltekit-embed.vercel.app" />
+  <meta
+    name="description"
+    content="Embed 3rd part media in your SvelteKit projects with SvelteKit Embed."
+  />
+  <meta name="author" content="Scott Spence" />
+</svelte:head>
+
+<header />
 <main>
   <h1>SvelteKit Embed</h1>
 
