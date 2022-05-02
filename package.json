@@ -1,6 +1,12 @@
 {
   "name": "sveltekit-embed",
   "version": "0.0.1",
+  "author": {
+    "name": "Scott Spence",
+    "email": "yo@scottspence.dev",
+    "url": "https://scottspence.com"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
