@@ -1,12 +1,14 @@
 <script>
-  import AnchorFm from '$lib/components/anchor-fm.svelte'
-  import Buzzsprout from '$lib/components/buzzsprout.svelte'
-  import Deezer from '$lib/components/deezer.svelte'
-  import SimpleCast from '$lib/components/simple-cast.svelte'
-  import Spotify from '$lib/components/spotify.svelte'
-  import Tweet from '$lib/components/tweet.svelte'
-  import Vimeo from '$lib/components/vimeo.svelte'
-  import YouTube from '$lib/components/you-tube.svelte'
+  import {
+    AnchorFm,
+    Buzzsprout,
+    Deezer,
+    SimpleCast,
+    Spotify,
+    Tweet,
+    Vimeo,
+    YouTube,
+  } from 'sveltekit-embed'
 </script>
 
 <main>

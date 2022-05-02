@@ -6,6 +6,15 @@
     "email": "yo@scottspence.dev",
     "url": "https://scottspence.com"
   },
+  "description": "This is a collection of embed components I use on a regular basis packaged up for use.",
+  "keywords": [
+    "svelte",
+    "sveltekit",
+    "youtube",
+    "spotify",
+    "deezer",
+    "vimeo"
+  ],
   "license": "MIT",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -41,8 +50,17 @@
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.10.1",
     "svelte2tsx": "^0.5.9",
+    "sveltekit-embed": "link:package",
     "tslib": "^2.3.1",
     "typescript": "~4.6.4"
   },
-  "type": "module"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spences10/sveltekit-embed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spences10/sveltekit-embed/issues"
+  },
+  "homepage": "https://github.com/spences10/sveltekit-embed#readme"
 }
