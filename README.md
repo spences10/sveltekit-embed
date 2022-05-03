@@ -42,6 +42,23 @@ Create an
 - [ ] If you know how to type a custom action in Svelte, please submit
       a PR
 
+## Developing locally
+
+You can use the components locally via the `src/routes/index.svelte`
+file. If there any changes you want to test in the package then run
+the `sveltekit package` command and you can then install that package
+locally:
+
+```bash
+# package with sveltkit
+npm run package
+# install local package
+npm i -D ./package
+```
+
+If you're adding a new component to `src/lib/components` then add the
+export to `src/lib/index.ts`.
+
 ## Thanks
 
 Credit to [@pauliescanlon](https://github.com/pauliescanlon) for the
