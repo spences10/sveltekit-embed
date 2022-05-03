@@ -1,6 +1,9 @@
 # SvelteKit Embed
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This is a collection of embed components I use on a regular basis
@@ -47,10 +50,9 @@ Create an
 
 ## Developing locally
 
-You can use the components locally via the `src/routes/index.svelte`
-file. If there any changes you want to test in the package then run
-the `sveltekit package` command and you can then install that package
-locally:
+If you have cloned this locally and are wondering why there's a linter
+warning for `sveltekit-embed` that's because you'll need to package
+and install the project locally.
 
 ```bash
 # package with sveltkit
@@ -58,6 +60,9 @@ npm run package
 # install local package
 npm i -D ./package
 ```
+
+You can use the components locally via the `src/routes/index.svelte`
+file.
 
 If you're adding a new component to `src/lib/components` then add the
 export to `src/lib/index.ts`.
@@ -70,7 +75,8 @@ original version of this project in
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -87,4 +93,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
