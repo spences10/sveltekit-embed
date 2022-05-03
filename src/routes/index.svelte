@@ -4,6 +4,7 @@
     Buzzsprout,
     Deezer,
     SimpleCast,
+    SoundCloud,
     Spotify,
     Tweet,
     Vimeo,
@@ -101,6 +102,27 @@
 </div>
 
 <SimpleCast episodeId="46aaf483-8567-451a-aa7c-4c92fbb13f28" />
+
+<h2>SoundCloud</h2>
+<p>Props:</p>
+<div class="mockup-code mb-8 not-prose">
+  <pre><code>soundcloudLink: </code><code class="text-secondary"
+      >string = ''</code
+    ></pre>
+  <pre><code>height: </code><code class="text-secondary"
+      >string = '300'</code
+    ></pre>
+  <pre><code>width: </code><code class="text-secondary"
+      >string = '100%'</code
+    ></pre>
+  <pre><code>showVisual: </code><code class="text-secondary"
+      >boolean = true</code
+    ></pre>
+</div>
+
+<SoundCloud
+  soundcloudLink="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
+/>
 
 <h2>Spotify</h2>
 <p>Props:</p>
