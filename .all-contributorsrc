@@ -1,0 +1,24 @@
+{
+  "projectName": "sveltekit-embed",
+  "projectOwner": "spences10",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "spences10",
+      "name": "Scott Spence",
+      "avatar_url": "https://avatars.githubusercontent.com/u/234708?v=4",
+      "profile": "https://scottspence.com/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
