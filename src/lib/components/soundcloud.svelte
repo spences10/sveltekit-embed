@@ -10,7 +10,7 @@
   <iframe
     {width}
     {height}
-    title={`spotify-${soundcloudLink}`}
+    title={`soundcloud-${soundcloudLink}`}
     scrolling="false"
     frameborder="0"
     allow="autoplay"
