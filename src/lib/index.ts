@@ -7,3 +7,4 @@ export { default as Spotify } from './components/spotify.svelte'
 export { default as Tweet } from './components/tweet.svelte'
 export { default as Vimeo } from './components/vimeo.svelte'
 export { default as YouTube } from './components/you-tube.svelte'
+export {default as SoundCloud} from "./components/soundcloud.svelte"
