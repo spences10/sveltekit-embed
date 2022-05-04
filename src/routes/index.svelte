@@ -97,6 +97,9 @@
   <pre><code
       >// This component passes all provided props to the iframe</code
     ></pre>
+  <pre><code>// This component also provides a slot,</code></pre>
+  <pre><code>// to bring your own markup besides the iframe</code
+    ></pre>
   <pre><code>width: </code><code class="text-secondary"
       >string = '100%'</code
     ></pre>
