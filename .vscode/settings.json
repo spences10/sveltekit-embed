@@ -1,5 +1,27 @@
 {
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "sync",
-  "cSpell.words": ["deezer", "sveltejs", "vite"]
+  "cSpell.words": [
+    "adamwathan",
+    "atrule",
+    "Cahllagerfeld",
+    "daisyui",
+    "deezer",
+    "Drasner",
+    "Drasner's",
+    "Mandal",
+    "mdsvex",
+    "noopener",
+    "pauliescanlon",
+    "purrfect",
+    "sdras",
+    "Souvik",
+    "spences",
+    "sveltejs",
+    "sveltkit",
+    "vieria",
+    "vite",
+    "Zrzbx"
+  ],
+  "css.validate": false
 }
