@@ -3,6 +3,7 @@
     AnchorFm,
     Buzzsprout,
     Deezer,
+    GenericEmbed,
     SimpleCast,
     SoundCloud,
     Spotify,
@@ -89,6 +90,48 @@
 </div>
 
 <Deezer frameSrc="show/496882" />
+
+<h2>GenericEmbed</h2>
+<p>Props:</p>
+<div class="mockup-code mb-8 not-prose">
+  <pre><code
+      >// This component passes all provided props to the iframe</code
+    ></pre>
+  <pre><code>// This component also provides a slot,</code></pre>
+  <pre><code>// to bring your own markup besides the iframe</code
+    ></pre>
+  <pre><code>width: </code><code class="text-secondary"
+      >string = '100%'</code
+    ></pre>
+  <pre><code>height: </code><code class="text-secondary"
+      >string = '180px'</code
+    ></pre>
+  <pre><code>data-testid: </code><code class="text-secondary"
+      >string = 'spotify'</code
+    ></pre>
+  <pre><code>title: </code><code class="text-secondary"
+      >string = 'spotify-generic'</code
+    ></pre>
+  <pre><code>src: </code><code class="text-secondary"
+      >string = 'https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5'</code
+    ></pre>
+  <pre><code>frameBorder: </code><code class="text-secondary"
+      >string = '0'</code
+    ></pre>
+  <pre><code>allow: </code><code class="text-secondary"
+      >string = 'encrypted-media'</code
+    ></pre>
+</div>
+
+<GenericEmbed
+  width="100%"
+  height="180px"
+  data-testid="spotify"
+  title="spotify-generic"
+  src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
+  frameBorder="0"
+  allow="encrypted-media"
+/>
 
 <h2>SimpleCast</h2>
 <p>Props:</p>
