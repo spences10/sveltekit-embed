@@ -1,4 +1,53 @@
 /* Write your global styles here, in PostCSS syntax */
 @tailwind base;
+
+html {
+  scroll-behavior: smooth;
+  /* margin-left: calc(100vw - 100%); */
+  word-break: break-word;
+}
+
+/* 
+  These are the styles from DaisyUI needed 
+  for the scroll bar colours 
+*/
+:root {
+  /* Default is Night */
+  --primary: #38bdf8;
+  --secondary: #818cf8;
+}
+[data-theme='night'] {
+  --primary: #38bdf8;
+  --secondary: #818cf8;
+}
+[data-theme='winter'] {
+  --primary: #047aff;
+  --secondary: #463aa2;
+}
+
+/* Scrollbar styles */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
 @tailwind components;
 @tailwind utilities;
