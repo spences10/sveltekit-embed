@@ -3,6 +3,7 @@
     AnchorFm,
     Buzzsprout,
     Deezer,
+    GenericEmbed,
     SimpleCast,
     SoundCloud,
     Spotify,
@@ -100,6 +101,51 @@ Usage:
 Output:
 
 <Deezer frameSrc="show/496882" />
+
+## GenericEmbed
+
+Props:
+
+This component passes all provided props to the iframe This component
+also provides a slot, to bring your own markup besides the iframe
+
+```ts
+width: string = '100%'
+height: string = '180px'
+data-testid: string = 'spotify'
+title: string = 'spotify-generic'
+src: string = 'https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5'
+frameBorder: string = '0'
+allow: string = 'encrypted-media'
+```
+
+Usage:
+
+<!-- prettier-ignore -->
+```html
+<GenericEmbed
+  width="100%"
+  height="180px"
+  data-testid="spotify"
+  title="spotify-generic"
+  src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
+  frameBorder="0"
+  allow="encrypted-media"
+/>
+```
+
+Output:
+
+<!-- prettier-ignore -->
+<GenericEmbed
+  width="100%"
+  height="180px"
+  data-testid="spotify"
+  title="spotify-generic"
+  src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
+  frameBorder="0"
+  allow="encrypted-media"
+/>
 
 ## SimpleCast
 
