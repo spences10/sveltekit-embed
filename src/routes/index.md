@@ -104,10 +104,19 @@ Output:
 
 ## GenericEmbed
 
-Props:
-
 This component passes all provided props to the iframe This component
 also provides a slot, to bring your own markup besides the iframe
+
+Props:
+
+```ts
+src: string = ''
+title: string = ''
+height: string = '300'
+width: string = '100%'
+```
+
+Usage:
 
 ```ts
 width: string = '100%'
@@ -118,8 +127,6 @@ src: string = 'https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5'
 frameBorder: string = '0'
 allow: string = 'encrypted-media'
 ```
-
-Usage:
 
 <!-- prettier-ignore -->
 ```html
