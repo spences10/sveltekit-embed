@@ -3,7 +3,7 @@
     AnchorFm,
     Buzzsprout,
     Deezer,
-    Generic,
+    GenericEmbed,
     SimpleCast,
     SoundCloud,
     Spotify,
@@ -91,7 +91,7 @@
 
 <Deezer frameSrc="show/496882" />
 
-<h2>Generic</h2>
+<h2>GenericEmbed</h2>
 <p>Props:</p>
 <div class="mockup-code mb-8 not-prose">
   <pre><code
@@ -123,7 +123,7 @@
     ></pre>
 </div>
 
-<Generic
+<GenericEmbed
   width="100%"
   height="180px"
   data-testid="spotify"
