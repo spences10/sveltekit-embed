@@ -1,5 +1,6 @@
 <script>
   import '../app.css'
+  import '../prism.css'
 </script>
 
 <header class="text-right">
@@ -27,6 +28,7 @@
     </div></span
   >
 </header>
+
 <main class="prose prose-xl container max-w-3xl mx-auto px-4 mb-20">
   <slot />
 </main>
