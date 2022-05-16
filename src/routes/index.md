@@ -11,18 +11,18 @@
     Vimeo,
     YouTube,
   } from 'sveltekit-embed'
+  import { Head } from 'svead'
+  import { page } from '$app/stores'
+
+  // Head variables 
+  let title = 'This is SvelteKit embed'
+  let description = 'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
+  let image = `https://og.tailgraph.com/og?fontFamily=Roboto&title=SvelteKit%20Embed&titleTailwind=text-gray-800+font-bold+text-6xl&text=Embed%203rd%20part%20media%20in%20your%20SvelteKit%20projects%20with%20SvelteKit%20Embed.&textTailwind=text-gray-700+text-2xl+mt-4&logoTailwind=h-8&bgTailwind=bg-white&footer=sveltekit-embed.vercel.app&footerTailwind=text-teal-600`
+  let website = 'https://sveltekit-embed.vercel.app'
+  let url = $page.url.toString()
 </script>
 
-<svelte:head>
-
-  <title>SvelteKit Embed</title>
-  <link rel="canonical" href="https://sveltekit-embed.vercel.app" />
-  <meta
-    name="description"
-    content="Embed 3rd part media in your SvelteKit projects with SvelteKit Embed."
-  />
-  <meta name="author" content="Scott Spence" />
-</svelte:head>
+<Head {title} {description} {image} {url} {website} />
 
 # SvelteKit Embed
 
