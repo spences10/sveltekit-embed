@@ -46,7 +46,7 @@
     "eslint": "8.15.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "4.0.0",
-    "husky": "^7.0.4",
+    "husky": "8.0.1",
     "mdsvex": "^0.10.5",
     "postcss": "^8.4.12",
     "postcss-load-config": "^3.1.4",
