@@ -18,7 +18,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "svelte-kit dev",
-    "build": "svelte-kit package && svelte-kit build",
+    "build": "pnpm un svead && pnpm i -D svead && svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "prepare": "svelte-kit sync",
@@ -26,7 +26,8 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "pretty-quick"
+    "format": "pretty-quick",
+    "package:local": "svelte-kit package && pnpm i -D ./package"
   },
   "husky": {
     "hooks": {
