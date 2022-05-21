@@ -50,22 +50,28 @@ Create an
 
 ## Developing locally
 
-If you have cloned this locally and are wondering why there's a linter
-warning for `sveltekit-embed` that's because you'll need to package
-and install the project locally.
+Import the component locally into the `index.md` file:
 
-```bash
-# package with sveltkit
-npm run package
-# install local package
-npm i -D ./package
+```svelte
+import MyComponent from '$lib/components/my-component.svelte'
 ```
 
-You can use the components locally via the `src/routes/index.svelte`
-file.
+Test the package locally with the `package:local` script:
 
-If you're adding a new component to `src/lib/components` then add the
-export to `src/lib/index.ts`.
+```bash
+npm run package:local
+```
+
+And add it to the import statement in the `index.md` file:
+
+```svelte
+import { MyComponent } from 'sveltekit-embed'
+```
+
+Test locally, then submit a PR 🙏
+
+If you're adding a new component to be used in the package then add an
+export to the `src/lib/index.ts` file.
 
 ## Thanks
 
