@@ -9,6 +9,7 @@
     "deezer",
     "Drasner",
     "Drasner's",
+    "iframe",
     "Mandal",
     "mdsvex",
     "noopener",
@@ -23,5 +24,8 @@
     "vite",
     "Zrzbx"
   ],
-  "css.validate": false
+  "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }
