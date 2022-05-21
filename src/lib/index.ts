@@ -1,5 +1,6 @@
 export { default as AnchorFm } from './components/anchor-fm.svelte'
 export { default as Buzzsprout } from './components/buzzsprout.svelte'
+export { default as CodePen } from './components/code-pen.svelte'
 export { default as Deezer } from './components/deezer.svelte'
 export { default as GeneralObserver } from './components/general-observer.svelte'
 export { default as GenericEmbed } from './components/generic-embed.svelte'
