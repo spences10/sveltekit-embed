@@ -2,6 +2,7 @@
   import {
     AnchorFm,
     Buzzsprout,
+    CodePen,
     Deezer,
     GenericEmbed,
     SimpleCast,
@@ -80,6 +81,39 @@ Output:
 <Buzzsprout
   buzzsproutId="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
 />
+
+## CodePen
+
+Props:
+
+```ts
+width: string = '100'
+height: string = '500'
+codePenId: string = ''
+tabs:
+  | string[]
+  | 'js'
+  | 'css'
+  | 'scss'
+  | 'less'
+  | 'result' = 'result'
+clickToLoad: boolean = true
+editable: boolean = true
+theme: string | 'light' | 'dark' | 'default' = 'default'
+```
+
+Usage:
+
+For a CodePen URL like this: https://codepen.io/spences10/pen/WNMvXpa
+take the `codePenId` this `WNMvXpa` and add it to the component.
+
+```html
+<CodePen codePenId="WNMvXpa" />
+```
+
+Output:
+
+<CodePen codePenId="WNMvXpa" />
 
 ## Deezer
 
