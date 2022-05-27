@@ -13,7 +13,7 @@ specifiers:
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
   husky: 8.0.1
-  mdsvex: 0.10.5
+  mdsvex: 0.10.6
   postcss: 8.4.14
   postcss-load-config: 4.0.0
   prettier: 2.6.2
@@ -32,7 +32,7 @@ specifiers:
 devDependencies:
   '@playwright/test': 1.22.2
   '@sveltejs/adapter-auto': 1.0.0-next.48
-  '@sveltejs/kit': 1.0.0-next.344_svelte@3.48.0
+  '@sveltejs/kit': 1.0.0-next.345_svelte@3.48.0
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.24
   '@typescript-eslint/eslint-plugin': 5.26.0_gu4clceiw6ditaem5r577qrdpi
   '@typescript-eslint/parser': 5.26.0_utdtartgf6fqqgkivzeynh76la
@@ -42,7 +42,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.16.0
   eslint-plugin-svelte3: 4.0.0_vypdqzeyqutkgs6qzc7qod4c64
   husky: 8.0.1
-  mdsvex: 0.10.5_svelte@3.48.0
+  mdsvex: 0.10.6_svelte@3.48.0
   postcss: 8.4.14
   postcss-load-config: 4.0.0_postcss@8.4.14
   prettier: 2.6.2
@@ -205,8 +205,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.344_svelte@3.48.0:
-    resolution: {integrity: sha512-IKFyB/ErD1E6/Gl/AKA2EvOPmu6jdHDIoDYStL0PP12ZASOKTPNfSgusPHMNOTV+qyJKwo8JdOTWwLuFmZLq8A==}
+  /@sveltejs/kit/1.0.0-next.345_svelte@3.48.0:
+    resolution: {integrity: sha512-2nLZoXZ02uXMSxqRAMRCr/J4aCphqgKLxEhRRyh3c3aWLAjWiDWLDcvSB770eHt3y0MkYrTvp7JrDF7RhfyuBA==}
     engines: {node: '>=16.7'}
     hasBin: true
     peerDependencies:
@@ -673,7 +673,7 @@ packages:
     dev: true
 
   /code-point-at/1.1.0:
-    resolution: {integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=}
+    resolution: {integrity: sha512-RpAVKQA5T63xEj6/giIbUEtZwJ4UFIc3ZtvEkiaUERylqe8xb5IvqcgOurZLahv93CLKfxcw5YI+DZcUBRyLXA==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -713,7 +713,7 @@ packages:
     dev: true
 
   /console-control-strings/1.1.0:
-    resolution: {integrity: sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=}
+    resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
   /core-util-is/1.0.3:
@@ -1677,8 +1677,8 @@ packages:
       semver: 6.3.0
     dev: true
 
-  /mdsvex/0.10.5_svelte@3.48.0:
-    resolution: {integrity: sha512-/B23WZn5Vjrjh7Qp2YsOXLkU9YFm59IEylKNXC10o05ZaCP4LNv32tGXKP6aEssss6hk/LdISJuneELHFIS2pQ==}
+  /mdsvex/0.10.6_svelte@3.48.0:
+    resolution: {integrity: sha512-aGRDY0r5jx9+OOgFdyB9Xm3EBr9OUmcrTDPWLB7a7g8VPRxzPy4MOBmcVYgz7ErhAJ7bZ/coUoj6aHio3x/2mA==}
     peerDependencies:
       svelte: 3.x
     dependencies:
