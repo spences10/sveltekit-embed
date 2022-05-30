@@ -13,7 +13,7 @@ specifiers:
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
   husky: 8.0.1
-  mdsvex: 0.10.5
+  mdsvex: 0.10.6
   postcss: 8.4.14
   postcss-load-config: 4.0.0
   prettier: 2.6.2
@@ -42,7 +42,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.16.0
   eslint-plugin-svelte3: 4.0.0_vypdqzeyqutkgs6qzc7qod4c64
   husky: 8.0.1
-  mdsvex: 0.10.5_svelte@3.48.0
+  mdsvex: 0.10.6_svelte@3.48.0
   postcss: 8.4.14
   postcss-load-config: 4.0.0_postcss@8.4.14
   prettier: 2.6.2
@@ -713,7 +713,7 @@ packages:
     dev: true
 
   /console-control-strings/1.1.0:
-    resolution: {integrity: sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=}
+    resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
   /core-util-is/1.0.3:
@@ -1677,8 +1677,8 @@ packages:
       semver: 6.3.0
     dev: true
 
-  /mdsvex/0.10.5_svelte@3.48.0:
-    resolution: {integrity: sha512-/B23WZn5Vjrjh7Qp2YsOXLkU9YFm59IEylKNXC10o05ZaCP4LNv32tGXKP6aEssss6hk/LdISJuneELHFIS2pQ==}
+  /mdsvex/0.10.6_svelte@3.48.0:
+    resolution: {integrity: sha512-aGRDY0r5jx9+OOgFdyB9Xm3EBr9OUmcrTDPWLB7a7g8VPRxzPy4MOBmcVYgz7ErhAJ7bZ/coUoj6aHio3x/2mA==}
     peerDependencies:
       svelte: 3.x
     dependencies:
