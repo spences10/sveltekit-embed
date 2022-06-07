@@ -22,7 +22,7 @@ specifiers:
   svead: 0.0.3
   svelte: 3.48.0
   svelte-check: 2.7.2
-  svelte-preprocess: 4.10.6
+  svelte-preprocess: 4.10.7
   svelte2tsx: 0.5.10
   sveltekit-embed: 0.0.5
   tailwindcss: 3.0.24
@@ -51,7 +51,7 @@ devDependencies:
   svead: 0.0.3
   svelte: 3.48.0
   svelte-check: 2.7.2_f7jympgstafqz7m4z373rocx7q
-  svelte-preprocess: 4.10.6_4d44yy5nnq5fpgh5rm5gitxnk4
+  svelte-preprocess: 4.10.7_4d44yy5nnq5fpgh5rm5gitxnk4
   svelte2tsx: 0.5.10_dg7s4kx4gpzom5ifrkhkr632g4
   sveltekit-embed: 'link:'
   tailwindcss: 3.0.24
@@ -870,7 +870,7 @@ packages:
     dev: true
 
   /es6-promise/3.3.1:
-    resolution: {integrity: sha1-oIzd6EzNvzTQJ6FFG8kdS80ophM=}
+    resolution: {integrity: sha512-SOp9Phqvqn7jtEUxPWdWfWoLmyt2VaJ6MpvP9Comy1MceMXqE6bxvaTu4iaxpYYPzhny28Lc+M87/c2cPK6lDg==}
     dev: true
 
   /esbuild-android-64/0.14.42:
@@ -2030,7 +2030,7 @@ packages:
     dev: true
 
   /path-is-absolute/1.0.1:
-    resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=}
+    resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -2514,7 +2514,7 @@ packages:
       picocolors: 1.0.0
       sade: 1.8.1
       svelte: 3.48.0
-      svelte-preprocess: 4.10.6_4d44yy5nnq5fpgh5rm5gitxnk4
+      svelte-preprocess: 4.10.7_4d44yy5nnq5fpgh5rm5gitxnk4
       typescript: 4.7.3
     transitivePeerDependencies:
       - '@babel/core'
@@ -2538,8 +2538,8 @@ packages:
       svelte: 3.48.0
     dev: true
 
-  /svelte-preprocess/4.10.6_4d44yy5nnq5fpgh5rm5gitxnk4:
-    resolution: {integrity: sha512-I2SV1w/AveMvgIQlUF/ZOO3PYVnhxfcpNyGt8pxpUVhPfyfL/CZBkkw/KPfuFix5FJ9TnnNYMhACK3DtSaYVVQ==}
+  /svelte-preprocess/4.10.7_4d44yy5nnq5fpgh5rm5gitxnk4:
+    resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
     peerDependencies:
@@ -2548,7 +2548,7 @@ packages:
       less: ^3.11.3 || ^4.0.0
       node-sass: '*'
       postcss: ^7 || ^8
-      postcss-load-config: ^2.1.0 || ^3.0.0
+      postcss-load-config: ^2.1.0 || ^3.0.0 || ^4.0.0
       pug: ^3.0.0
       sass: ^1.26.8
       stylus: ^0.55.0
