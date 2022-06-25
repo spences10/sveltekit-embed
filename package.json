@@ -42,7 +42,7 @@
     "@typescript-eslint/eslint-plugin": "5.29.0",
     "@typescript-eslint/parser": "5.29.0",
     "autoprefixer": "10.4.7",
-    "daisyui": "2.15.4",
+    "daisyui": "2.17.0",
     "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-svelte3": "4.0.0",
