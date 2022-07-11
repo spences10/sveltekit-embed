@@ -28,7 +28,7 @@ specifiers:
   tailwindcss: 3.1.4
   tslib: 2.4.0
   typescript: 4.7.4
-  vite: ^2.9.14
+  vite: 2.9.14
 
 devDependencies:
   '@playwright/test': 1.23.1
@@ -54,7 +54,7 @@ devDependencies:
   svelte-check: 2.8.0_blrkfmplrezk6jx3arz7bdc3pa
   svelte-preprocess: 4.10.7_6avtyouqcdws46kxwsvk4vhxre
   svelte2tsx: 0.5.11_uslzfc62di2n2otc2tvfklnwji
-  sveltekit-embed: 0.0.5
+  sveltekit-embed: 'link:'
   tailwindcss: 3.1.4
   tslib: 2.4.0
   typescript: 4.7.4
@@ -2629,10 +2629,6 @@ packages:
       pascal-case: 3.1.2
       svelte: 3.49.0
       typescript: 4.7.4
-    dev: true
-
-  /sveltekit-embed/0.0.5:
-    resolution: {integrity: sha512-2YpLULXG4CNPaCWh2IKb+TaEnrOX1UZTzeKSPY10Yhlv44ssbVm66eJEWbJV/Clng4EX0cWVo6sSFnIOzWZnVA==}
     dev: true
 
   /tailwindcss/3.1.4:
