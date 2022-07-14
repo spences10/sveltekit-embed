@@ -4,7 +4,7 @@ specifiers:
   '@playwright/test': 1.23.2
   '@sveltejs/adapter-auto': next
   '@sveltejs/kit': next
-  '@tailwindcss/typography': 0.5.3
+  '@tailwindcss/typography': 0.5.4
   '@typescript-eslint/eslint-plugin': 5.30.6
   '@typescript-eslint/parser': 5.30.6
   autoprefixer: 10.4.7
@@ -32,9 +32,9 @@ specifiers:
 
 devDependencies:
   '@playwright/test': 1.23.2
-  '@sveltejs/adapter-auto': 1.0.0-next.55
-  '@sveltejs/kit': 1.0.0-next.368_svelte@3.49.0+vite@2.9.14
-  '@tailwindcss/typography': 0.5.3_tailwindcss@3.1.5
+  '@sveltejs/adapter-auto': 1.0.0-next.57
+  '@sveltejs/kit': 1.0.0-next.370_svelte@3.49.0+vite@2.9.14
+  '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.5
   '@typescript-eslint/eslint-plugin': 5.30.6_2vt5mtrqleafs33qg2bhpmbaqm
   '@typescript-eslint/parser': 5.30.6_4x5o4skxv6sl53vpwefgt23khm
   autoprefixer: 10.4.7_postcss@8.4.14
@@ -61,6 +61,10 @@ devDependencies:
   vite: 2.9.14
 
 packages:
+
+  /@cloudflare/workers-types/3.14.1:
+    resolution: {integrity: sha512-B1/plF62pt+H2IJHvApK8fdOJAVsvojvacuac8x8s+JIyqbropMyqNqHTKLm3YD8ZFLGwYeFTudU+PQ7vGvBdA==}
+    dev: true
 
   /@eslint/eslintrc/1.3.0:
     resolution: {integrity: sha512-UWW0TMTmk2d7hLcWD1/e2g5HDM/HQ3csaLSqXCfqwh4uNDuNqlaKWXmEsL4Cs41Z0KnILNvwbHAah3C2yt06kw==}
@@ -170,26 +174,27 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.55:
-    resolution: {integrity: sha512-Z/yin8+tXwq/a8rtDXB+H2HDoVVT16fZYphXHa3WAK+Z/OXwPoEiz9ZSWZYWxBKVFpvtH+IXijAPl1CPJnosxw==}
+  /@sveltejs/adapter-auto/1.0.0-next.57:
+    resolution: {integrity: sha512-OuIt5CZzezKvncs8sPwGAv3MbQRKJ7rqofAfMvBiHO4XEtOUneUSaKQ78o3Td6AH3JNfHJQkTykhLBWUOmQLOg==}
     dependencies:
-      '@sveltejs/adapter-cloudflare': 1.0.0-next.26
-      '@sveltejs/adapter-netlify': 1.0.0-next.67
+      '@sveltejs/adapter-cloudflare': 1.0.0-next.27
+      '@sveltejs/adapter-netlify': 1.0.0-next.68
       '@sveltejs/adapter-vercel': 1.0.0-next.60
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: true
 
-  /@sveltejs/adapter-cloudflare/1.0.0-next.26:
-    resolution: {integrity: sha512-70GQzX5iHedlWdvfdlBmS4qrIReocZem5TPOARF3yYQYCliMH2bd+dbcHt0sGugx73Gks11HxWj+/WpPw0LljA==}
+  /@sveltejs/adapter-cloudflare/1.0.0-next.27:
+    resolution: {integrity: sha512-uon/ciCBalRt8vyeUbEsVjDBHzNC61lTtmqIJi9GbvTm8i4xbHoyJ97+wO9qug75jFg63pjT51sL7b+Cb1MFYw==}
     dependencies:
+      '@cloudflare/workers-types': 3.14.1
       esbuild: 0.14.42
       worktop: 0.8.0-next.14
     dev: true
 
-  /@sveltejs/adapter-netlify/1.0.0-next.67:
-    resolution: {integrity: sha512-0C4TlePu1grsY/rhYUiQUwU8pFK9ImvI0u/T8KpwwXAeMjmxCfZa8B1syil389iAykBoiKlx0mxIzT7tawwFzg==}
+  /@sveltejs/adapter-netlify/1.0.0-next.68:
+    resolution: {integrity: sha512-j/kofUuWcVImZpl0S64g4/axnnQO0iAQIPy2JIDWyrwb+xSpLc8d266g2fW+1K3zwVuzcLLaMSE4ajtV1scyZA==}
     dependencies:
       '@iarna/toml': 2.2.5
       esbuild: 0.14.42
@@ -207,8 +212,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.368_svelte@3.49.0+vite@2.9.14:
-    resolution: {integrity: sha512-0+JrQebSLbDrc7qPa4HsdG1v1+95ftHJhZtJD/VRifVoyUjURnWL4TrNcfnqNsgtacFWw+rO6obBr1PWc6Mlig==}
+  /@sveltejs/kit/1.0.0-next.370_svelte@3.49.0+vite@2.9.14:
+    resolution: {integrity: sha512-HAQtw8IjXs9yOPWKpuwpGgDT8x6Dgqm14NmFx0emF52vo5wn3tQzu0cBx299Po2RdRgfSDFKrNqVSlL1hVTHcA==}
     engines: {node: '>=16.9'}
     hasBin: true
     peerDependencies:
@@ -248,8 +253,8 @@ packages:
       - supports-color
     dev: true
 
-  /@tailwindcss/typography/0.5.3_tailwindcss@3.1.5:
-    resolution: {integrity: sha512-Cn4MufL/xiTh2Npw26xiL7gP3GFkJH+zWM8DAm/NNEr4gF5N9D6gY9zMNNQUu27m8g0IIk665BUuoU92wVUBkA==}
+  /@tailwindcss/typography/0.5.4_tailwindcss@3.1.5:
+    resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
