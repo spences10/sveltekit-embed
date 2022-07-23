@@ -8,7 +8,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.30.7
   '@typescript-eslint/parser': 5.30.7
   autoprefixer: 10.4.7
-  daisyui: 2.19.1
+  daisyui: 2.20.0
   eslint: 8.20.0
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
@@ -33,12 +33,12 @@ specifiers:
 devDependencies:
   '@playwright/test': 1.23.4
   '@sveltejs/adapter-auto': 1.0.0-next.63
-  '@sveltejs/kit': 1.0.0-next.386_svelte@3.49.0+vite@3.0.2
+  '@sveltejs/kit': 1.0.0-next.391_svelte@3.49.0+vite@3.0.2
   '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.6
   '@typescript-eslint/eslint-plugin': 5.30.7_6wltbjakwuqm7awqswigmiuhd4
   '@typescript-eslint/parser': 5.30.7_he2ccbldppg44uulnyq4rwocfa
   autoprefixer: 10.4.7_postcss@8.4.14
-  daisyui: 2.19.1_ugi4xkrfysqkt4c4y6hkyfj344
+  daisyui: 2.20.0_ugi4xkrfysqkt4c4y6hkyfj344
   eslint: 8.20.0
   eslint-config-prettier: 8.5.0_eslint@8.20.0
   eslint-plugin-svelte3: 4.0.0_piwa6j2njmnknm35bh3wz5v52y
@@ -212,8 +212,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.386_svelte@3.49.0+vite@3.0.2:
-    resolution: {integrity: sha512-7Olw/QoZ0lvcjRqMNnR8vM7FCy8NN6NwNEhWTO8/J39yR6li1Q0aV0vW4Fh/7LetoVtyZqEyrqaUypgmbeH9rQ==}
+  /@sveltejs/kit/1.0.0-next.391_svelte@3.49.0+vite@3.0.2:
+    resolution: {integrity: sha512-2KWIPF7YjVCFldXRuMcSmv3tliTf92kkJaws/hxJ+MioTJx9QwYB/V+JYzIEMRMcddZDb+Rp1ko3vrQ95c1vmg==}
     engines: {node: '>=16.9'}
     hasBin: true
     peerDependencies:
@@ -747,8 +747,8 @@ packages:
     hasBin: true
     dev: true
 
-  /daisyui/2.19.1_ugi4xkrfysqkt4c4y6hkyfj344:
-    resolution: {integrity: sha512-qExtDCp7N3F0Nlt7oVVehP1QMulbav8dXmEo66wavVxLVIf5tM4cV0F2Oi0OO0drzaez9v1LjBzk/vHMESs/lw==}
+  /daisyui/2.20.0_ugi4xkrfysqkt4c4y6hkyfj344:
+    resolution: {integrity: sha512-97xFBWQOXV/JCVRrGI5xranElKMmXIajDxojTQ1qoYwcWlkfFE7hY4D/NyHVIzlQb+B4xbiXhVPJM7EleRAY8g==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
