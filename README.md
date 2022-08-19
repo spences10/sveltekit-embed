@@ -11,6 +11,8 @@
 This is a collection of embed components I use on a regular basis
 packaged up for use.
 
+![sveltekit embed cover](.github/sveltekit-embed.jpg)
+
 Each component is wrapped in an intersection observer
 `GeneralObserver` which will load up the component when it scrolls
 into the viewport.
