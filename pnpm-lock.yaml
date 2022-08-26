@@ -21,7 +21,7 @@ specifiers:
   pretty-quick: 3.1.3
   svead: 0.0.3
   svelte: 3.49.0
-  svelte-check: 2.8.0
+  svelte-check: 2.8.1
   svelte-preprocess: 4.10.7
   svelte2tsx: 0.5.13
   sveltekit-embed: 0.0.5
@@ -51,10 +51,10 @@ devDependencies:
   pretty-quick: 3.1.3_prettier@2.7.1
   svead: 0.0.3
   svelte: 3.49.0
-  svelte-check: 2.8.0_cxyr4u5iq6mzd44wkmoxyq62gi
+  svelte-check: 2.8.1_cxyr4u5iq6mzd44wkmoxyq62gi
   svelte-preprocess: 4.10.7_2gxycpxbczdceodty77wdrmyia
   svelte2tsx: 0.5.13_uslzfc62di2n2otc2tvfklnwji
-  sveltekit-embed: 0.0.5
+  sveltekit-embed: 'link:'
   tailwindcss: 3.1.8_postcss@8.4.16
   tslib: 2.4.0
   typescript: 4.7.4
@@ -2382,8 +2382,8 @@ packages:
     resolution: {integrity: sha512-hYkqSpBbprCUIqmAsL95jshM0hp83yRtezZjep9p4Ukd5yICcFZ04OAp+5fPw7GnArSD6W7t6a1EUDYzoiF/6w==}
     dev: true
 
-  /svelte-check/2.8.0_cxyr4u5iq6mzd44wkmoxyq62gi:
-    resolution: {integrity: sha512-HRL66BxffMAZusqe5I5k26mRWQ+BobGd9Rxm3onh7ZVu0nTk8YTKJ9vu3LVPjUGLU9IX7zS+jmwPVhJYdXJ8vg==}
+  /svelte-check/2.8.1_cxyr4u5iq6mzd44wkmoxyq62gi:
+    resolution: {integrity: sha512-cibyY1sgt3ONIDnQbSgV2X9AJFhwEslRHNo95lijrYfPzVEvTvbmL2ohsUyqB5L7j1GhLXtQbjCJ4lZZ/fwbeQ==}
     hasBin: true
     peerDependencies:
       svelte: ^3.24.0
@@ -2487,10 +2487,6 @@ packages:
       pascal-case: 3.1.2
       svelte: 3.49.0
       typescript: 4.7.4
-    dev: true
-
-  /sveltekit-embed/0.0.5:
-    resolution: {integrity: sha512-2YpLULXG4CNPaCWh2IKb+TaEnrOX1UZTzeKSPY10Yhlv44ssbVm66eJEWbJV/Clng4EX0cWVo6sSFnIOzWZnVA==}
     dev: true
 
   /tailwindcss/3.1.8_postcss@8.4.16:
