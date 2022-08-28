@@ -54,7 +54,7 @@
     "pretty-quick": "3.1.3",
     "svead": "0.0.3",
     "svelte": "3.49.0",
-    "svelte-check": "2.8.0",
+    "svelte-check": "2.8.1",
     "svelte-preprocess": "4.10.7",
     "svelte2tsx": "0.5.13",
     "sveltekit-embed": "0.0.5",
