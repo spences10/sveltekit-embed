@@ -7,7 +7,7 @@ specifiers:
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/eslint-plugin': 5.37.0
   '@typescript-eslint/parser': 5.37.0
-  autoprefixer: 10.4.10
+  autoprefixer: 10.4.11
   daisyui: 2.28.0
   eslint: 8.23.1
   eslint-config-prettier: 8.5.0
@@ -33,12 +33,12 @@ specifiers:
 devDependencies:
   '@playwright/test': 1.25.2
   '@sveltejs/adapter-auto': 1.0.0-next.75
-  '@sveltejs/kit': 1.0.0-next.483_svelte@3.50.1+vite@3.1.1
+  '@sveltejs/kit': 1.0.0-next.484_svelte@3.50.1+vite@3.1.1
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
   '@typescript-eslint/eslint-plugin': 5.37.0_22c5fnooleyfkzrkkgdmel5kmi
   '@typescript-eslint/parser': 5.37.0_irgkl5vooow2ydyo6aokmferha
-  autoprefixer: 10.4.10_postcss@8.4.16
-  daisyui: 2.28.0_wh6birz6bzek2zjlzgyc32cby4
+  autoprefixer: 10.4.11_postcss@8.4.16
+  daisyui: 2.28.0_6b4luod745iryv24jvdbvzbbsa
   eslint: 8.23.1
   eslint-config-prettier: 8.5.0_eslint@8.23.1
   eslint-plugin-svelte3: 4.0.0_rhh4tpcyg7zwtq6pdnkzw5gxma
@@ -242,8 +242,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.483_svelte@3.50.1+vite@3.1.1:
-    resolution: {integrity: sha512-0aiVdVJSy1kiK7xp4bw81qjDkErVaA6oIPlpbjsIYe2UYfeg3aRtST41b6XzLbyg61qLlHVGoM5WTLTIdLnbAQ==}
+  /@sveltejs/kit/1.0.0-next.484_svelte@3.50.1+vite@3.1.1:
+    resolution: {integrity: sha512-Y3l8OmlgmfJX3m081rMUZmmEQWHtiSsj3+YWYK/CQ4V99jqoztXPz/4cAxUt5mC45jVF5Ee9ykmh6GzkYjvfAQ==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -252,6 +252,7 @@ packages:
       vite: ^3.1.0
     dependencies:
       '@sveltejs/vite-plugin-svelte': 1.0.5_svelte@3.50.1+vite@3.1.1
+      '@types/cookie': 0.5.1
       cookie: 0.5.0
       devalue: 3.1.2
       kleur: 4.1.5
@@ -303,6 +304,10 @@ packages:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.1.8_postcss@8.4.16
+    dev: true
+
+  /@types/cookie/0.5.1:
+    resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -592,8 +597,8 @@ packages:
     resolution: {integrity: sha512-tLRNUXati5MFePdAk8dw7Qt7DpxPB60ofAgn8WRhW6a2rcimZnYBP9oxHiv0OHy+Wz7kPMG+t4LGdt31+4EmGg==}
     dev: true
 
-  /autoprefixer/10.4.10_postcss@8.4.16:
-    resolution: {integrity: sha512-nMaiDARyp1e74c8IeAXkr+BmFKa8By4Zak7tyaNPF09Iu39WFpNXOWrVirmXjKr+5cOyERwvtbMOLYz6iBJYgQ==}
+  /autoprefixer/10.4.11_postcss@8.4.16:
+    resolution: {integrity: sha512-5lHp6DgRodxlBLSkzHOTcufWFflH1ewfy2hvFQyjrblBFlP/0Yh4O/Wrg4ow8WRlN3AAUFFLAQwX8hTptzqVHg==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -768,13 +773,13 @@ packages:
     hasBin: true
     dev: true
 
-  /daisyui/2.28.0_wh6birz6bzek2zjlzgyc32cby4:
+  /daisyui/2.28.0_6b4luod745iryv24jvdbvzbbsa:
     resolution: {integrity: sha512-UmqFNPu8U8IE9sKzLvbvk80oogZE9jTYj8SskiSbnrwm8YPK8B+cKYLHHR8Usdh1j9hhUGVc8Sjt15p328gV9g==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
     dependencies:
-      autoprefixer: 10.4.10_postcss@8.4.16
+      autoprefixer: 10.4.11_postcss@8.4.16
       color: 4.2.3
       css-selector-tokenizer: 0.8.0
       postcss: 8.4.16
