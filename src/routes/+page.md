@@ -327,6 +327,27 @@ Output:
 
 ## StackBlitz 
 
+Props:
+
+```ts
+
+width: string = '100'
+height: string = '500'
+id: string = ''
+view: 'editor' | 'preview' | 'default' = 'default'
+clickToLoad: boolean = true 
+hideNavigation: boolean = false
+hideExplorer: boolean = true
+theme: string | 'light' | 'dark' | 'default' = 'dark'
+file: string | undefined
+```
+
+Usage:
+
+```html
+<StackBlitz id="vitejs-vite-yyoood" theme="light"/>
+```
+
 Output:
 
-<StackBlitz id="vitejs-vite-yyoood" />
+<StackBlitz id="vitejs-vite-yyoood" hideNavigation />
