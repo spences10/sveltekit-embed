@@ -23,7 +23,7 @@ specifiers:
   svelte: 3.50.1
   svelte-check: 2.9.0
   svelte-preprocess: 4.10.7
-  svelte2tsx: 0.5.18
+  svelte2tsx: 0.5.19
   sveltekit-embed: 0.0.5
   tailwindcss: 3.1.8
   tslib: 2.4.0
@@ -53,7 +53,7 @@ devDependencies:
   svelte: 3.50.1
   svelte-check: 2.9.0_zy537mcxrfn3wq4nghluxnsi5a
   svelte-preprocess: 4.10.7_sxt3mkf5m54vn3maobdwhqzitu
-  svelte2tsx: 0.5.18_iprco5tylfmvffqgrvqxc46njy
+  svelte2tsx: 0.5.19_iprco5tylfmvffqgrvqxc46njy
   sveltekit-embed: 'link:'
   tailwindcss: 3.1.8_postcss@8.4.16
   tslib: 2.4.0
@@ -2487,8 +2487,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.5.18_iprco5tylfmvffqgrvqxc46njy:
-    resolution: {integrity: sha512-yhfEv1xvTYJZR/6Abygw09IH7uhAprKbar6Vk/YsfJyNcz4PQc/EHlG0LJbsm+FW8Us6ihZ9KJC4u+FnNW99lg==}
+  /svelte2tsx/0.5.19_iprco5tylfmvffqgrvqxc46njy:
+    resolution: {integrity: sha512-PvhcjG3fVhFmoO7XWYYqWYkg7lQzO8Q9/T4RQiCAsTZ+lK+9jCAPV8rbeQD8M4AN44u3JqgvaxHrmh095SaxBA==}
     peerDependencies:
       svelte: ^3.24
       typescript: ^4.1.2
