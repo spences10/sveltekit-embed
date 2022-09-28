@@ -47,6 +47,7 @@
     "eslint-plugin-svelte3": "4.0.0",
     "husky": "8.0.1",
     "mdsvex": "0.10.6",
+    "package": "link:package",
     "postcss": "8.4.16",
     "postcss-load-config": "4.0.1",
     "prettier": "2.7.1",

@@ -11,6 +11,7 @@
     Tweet,
     Vimeo,
     YouTube,
+    StackBlitz
   } from 'sveltekit-embed'
   import { Head } from 'svead'
   import { page } from '$app/stores'
@@ -322,3 +323,10 @@ Usage:
 Output:
 
 <YouTube youTubeId="L7_z8rcbFPg" />
+
+
+## StackBlitz 
+
+Output:
+
+<StackBlitz id="vitejs-vite-yyoood" />
