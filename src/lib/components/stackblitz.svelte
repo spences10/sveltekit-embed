@@ -11,7 +11,7 @@
     export let theme: string | 'light' | 'dark' | 'default' = 'dark'
     export let file: string | undefined
 
-    let baseUrl = "https://stackblitz.com/edit/vitejs-vite-yyoood?embed=1"
+    let baseUrl = `https://stackblitz.com/edit/${id}?embed=1
     const config = {
         ctl: `${clickToLoad ? 1 : 0}`,
         hideExplorer: `${hideExplorer ? 1 : 0}`,
