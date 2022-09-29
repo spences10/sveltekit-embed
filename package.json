@@ -26,7 +26,9 @@
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "pretty-quick",
-    "package:local": "svelte-package && pnpm i -D ./package"
+    "package:local": "svelte-package && pnpm i -D ./package",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "husky": {
     "hooks": {
@@ -41,6 +43,7 @@
     "@tailwindcss/typography": "0.5.7",
     "@typescript-eslint/eslint-plugin": "5.38.1",
     "@typescript-eslint/parser": "5.38.1",
+    "all-contributors-cli": "^6.22.0",
     "autoprefixer": "10.4.12",
     "daisyui": "2.31.0",
     "eslint": "8.24.0",
