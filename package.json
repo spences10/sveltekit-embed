@@ -18,15 +18,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite dev",
-    "build": "pnpm un sveltekit-embed && pnpm i -D sveltekit-embed && vite build",
-    "package": "svelte-kit package",
+    "build": "pnpm run sveltekit-embed && pnpm i -D sveltekit-embed && vite build",
+    "package": "svelte-package",
     "preview": "vite preview",
     "test": "playwright test",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "pretty-quick",
-    "package:local": "svelte-kit package && pnpm i -D ./package"
+    "package:local": "svelte-package && pnpm i -D ./package"
   },
   "husky": {
     "hooks": {
@@ -37,6 +37,7 @@
     "@playwright/test": "1.26.0",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
+    "@sveltejs/package": "1.0.0-next.5",
     "@tailwindcss/typography": "0.5.7",
     "@typescript-eslint/eslint-plugin": "5.38.1",
     "@typescript-eslint/parser": "5.38.1",
@@ -47,6 +48,7 @@
     "eslint-plugin-svelte3": "4.0.0",
     "husky": "8.0.1",
     "mdsvex": "0.10.6",
+    "package": "link:package",
     "postcss": "8.4.16",
     "postcss-load-config": "4.0.1",
     "prettier": "2.7.1",

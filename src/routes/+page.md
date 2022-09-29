@@ -11,6 +11,7 @@
     Tweet,
     Vimeo,
     YouTube,
+    StackBlitz
   } from 'sveltekit-embed'
   import { Head } from 'svead'
   import { page } from '$app/stores'
@@ -322,3 +323,31 @@ Usage:
 Output:
 
 <YouTube youTubeId="L7_z8rcbFPg" />
+
+
+## StackBlitz 
+
+Props:
+
+```ts
+
+width: string = '100'
+height: string = '500'
+id: string = ''
+view: 'editor' | 'preview' | 'default' = 'default'
+clickToLoad: boolean = true 
+hideNavigation: boolean = false
+hideExplorer: boolean = true
+theme: string | 'light' | 'dark' | 'default' = 'dark'
+file: string | undefined
+```
+
+Usage:
+
+```html
+<StackBlitz id="vitejs-vite-yyoood" theme="light"/>
+```
+
+Output:
+
+<StackBlitz id="vitejs-vite-yyoood" hideNavigation />

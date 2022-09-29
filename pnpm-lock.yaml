@@ -4,6 +4,7 @@ specifiers:
   '@playwright/test': 1.26.0
   '@sveltejs/adapter-auto': next
   '@sveltejs/kit': next
+  '@sveltejs/package': 1.0.0-next.5
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/eslint-plugin': 5.38.1
   '@typescript-eslint/parser': 5.38.1
@@ -14,6 +15,7 @@ specifiers:
   eslint-plugin-svelte3: 4.0.0
   husky: 8.0.1
   mdsvex: 0.10.6
+  package: link:package
   postcss: 8.4.16
   postcss-load-config: 4.0.1
   prettier: 2.7.1
@@ -44,6 +46,7 @@ devDependencies:
   eslint-plugin-svelte3: 4.0.0_snydkosur25h6rjxszquwacaua
   husky: 8.0.1
   mdsvex: 0.10.6_svelte@3.50.1
+  package: link:package
   postcss: 8.4.16
   postcss-load-config: 4.0.1_postcss@8.4.16
   prettier: 2.7.1
@@ -260,6 +263,22 @@ packages:
     transitivePeerDependencies:
       - diff-match-patch
       - supports-color
+    dev: true
+
+  /@sveltejs/package/1.0.0-next.5_iprco5tylfmvffqgrvqxc46njy:
+    resolution: {integrity: sha512-cXH8ESgZ5wSPspqsuIpz0hupz+gZlX9SfVV6FdwzY2A/dzKsTXUJKOjSd7hkjr69sBMyQRLfnk9eEaTG1EXGFA==}
+    engines: {node: '>=16.14'}
+    hasBin: true
+    peerDependencies:
+      svelte: ^3.44.0
+    dependencies:
+      chokidar: 3.5.3
+      kleur: 4.1.5
+      sade: 1.8.1
+      svelte: 3.50.1
+      svelte2tsx: 0.5.18_iprco5tylfmvffqgrvqxc46njy
+    transitivePeerDependencies:
+      - typescript
     dev: true
 
   /@sveltejs/vite-plugin-svelte/1.0.5_svelte@3.50.1+vite@3.1.3:
