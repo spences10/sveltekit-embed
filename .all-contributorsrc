@@ -27,6 +27,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "matiasfha",
+      "name": "Matías Hernández Arellano",
+      "avatar_url": "https://avatars.githubusercontent.com/u/282006?v=4",
+      "profile": "https://matiashernandez.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
