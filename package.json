@@ -43,7 +43,7 @@
     "@tailwindcss/typography": "0.5.7",
     "@typescript-eslint/eslint-plugin": "5.39.0",
     "@typescript-eslint/parser": "5.39.0",
-    "all-contributors-cli": "6.23.1",
+    "all-contributors-cli": "6.24.0",
     "autoprefixer": "10.4.12",
     "daisyui": "2.33.0",
     "eslint": "8.26.0",
