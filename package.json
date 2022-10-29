@@ -44,7 +44,7 @@
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
     "all-contributors-cli": "6.24.0",
-    "autoprefixer": "10.4.12",
+    "autoprefixer": "10.4.13",
     "daisyui": "2.33.0",
     "eslint": "8.26.0",
     "eslint-config-prettier": "8.5.0",
