@@ -16,7 +16,7 @@
         aria-label="Github"
         target="_blank"
         href="https://github.com/spences10/sveltekit-embed"
-        rel="noopener"
+        rel="noopener noreferrer"
         class="btn btn-ghost drawer-button btn-square normal-case"
       >
         <GitHub height="30" width="30" fill="fill-white fill-primary" />
@@ -44,7 +44,7 @@
         class="link transition hover:text-secondary"
         href="https://scottspence.com"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
         Scott Spence
       </a>
@@ -59,7 +59,7 @@
       <a
         aria-label="Twitter"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         href="https://twitter.com/spences10"
       >
         <Twitter />
@@ -67,7 +67,7 @@
       <a
         aria-label="GitHub"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         href="https://github.com/spences10"
       >
         <GitHub />
@@ -75,7 +75,7 @@
       <a
         aria-label="YouTube"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         href="https://ss10/yt"
       >
         <YouTube />
