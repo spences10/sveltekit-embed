@@ -104,6 +104,8 @@ pnpm run package
 # publish from package directory
 cd package
 npm publish
+# push tags to github
+git push --tags
 ```
 
 ## Contributors ✨
