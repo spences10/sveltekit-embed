@@ -103,8 +103,6 @@ npm version 0.0.8
 pnpm run package
 # publish from package directory
 cd package
-# version in this directory is the same as the root
-npm version 0.0.8
 # publish
 npm publish
 # push tags to github
