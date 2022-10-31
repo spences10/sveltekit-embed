@@ -1,7 +1,9 @@
 # SvelteKit Embed
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
@@ -11,9 +13,9 @@ packaged up for use.
 
 ![sveltekit embed cover](.github/sveltekit-embed.jpg)
 
-Each component is wrapped in an intersection observer
-`GeneralObserver` which will load up the component when it scrolls
-into the viewport.
+Each component with the exception of `Toot` and `Tweet` is wrapped in
+an intersection observer `GeneralObserver` which will load up the
+component when it scrolls into the viewport.
 
 ## Use
 
@@ -80,6 +82,31 @@ export to the `src/lib/index.ts` file.
 Credit to [@pauliescanlon](https://github.com/pauliescanlon) for the
 original version of this project in
 [MDX Embed](https://github.com/pauliescanlon/mdx-embed).
+
+## Packaging for NPM
+
+Scott, this is here for you to remember how to do this 🙃
+
+Although I detailed this in
+[Making npm Packages with SvelteKit](https://scottspence.com/posts/making-npm-packages-with-sveltekit)
+I think it's best to put it here as I always come to the README and
+the instructions are never there! 😅
+
+**Publish the project to NPM**
+
+```bash
+# authenticate with npm
+npm login
+# bump version with npm
+npm version 0.0.2
+# package with sveltkit
+pnpm run package
+# publish from package directory
+cd package
+npm publish
+# push tags to github
+git push --tags
+```
 
 ## Contributors ✨
 

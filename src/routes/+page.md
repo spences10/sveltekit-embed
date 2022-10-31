@@ -9,6 +9,7 @@
     SoundCloud,
     Spotify,
     StackBlitz,
+    Toot,
     Tweet,
     Vimeo,
     YouTube,
@@ -286,6 +287,34 @@ Usage:
 Output:
 
 <StackBlitz id="vitejs-vite-yyoood" hideNavigation />
+
+## Toot
+
+Props:
+
+```ts
+instance: string = ''
+username: string = ''
+tootId: string = ''
+```
+
+Usage:
+
+```html
+<Toot
+  instance="mas.to"
+  username="@spences10"
+  tootId="109252587760962553"
+/>
+```
+
+Output:
+
+<Toot 
+  instance="mas.to" 
+  username="@spences10" 
+  tootId="109252587760962553"
+/>
 
 ## Tweet
 
