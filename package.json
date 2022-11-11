@@ -49,7 +49,7 @@
     "eslint": "8.26.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-svelte3": "4.0.0",
-    "husky": "8.0.1",
+    "husky": "8.0.2",
     "mdsvex": "0.10.6",
     "postcss": "8.4.18",
     "postcss-load-config": "4.0.1",
