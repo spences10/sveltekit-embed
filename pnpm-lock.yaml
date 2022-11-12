@@ -27,7 +27,7 @@ specifiers:
   svelte-preprocess: 4.10.7
   svelte2tsx: 0.5.20
   sveltekit-embed: ^0.0.8
-  tailwindcss: 3.2.2
+  tailwindcss: 3.2.4
   tslib: 2.4.1
   typescript: 4.8.4
   vite: 3.2.3
@@ -35,9 +35,9 @@ specifiers:
 devDependencies:
   '@playwright/test': 1.27.1
   '@sveltejs/adapter-auto': 1.0.0-next.87
-  '@sveltejs/kit': 1.0.0-next.542_svelte@3.52.0+vite@3.2.3
+  '@sveltejs/kit': 1.0.0-next.544_svelte@3.52.0+vite@3.2.3
   '@sveltejs/package': 1.0.0-next.5_besnmoibwkhwtentvwuriss7pa
-  '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.2
+  '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   '@typescript-eslint/eslint-plugin': 5.42.1_2udltptbznfmezdozpdoa2aemq
   '@typescript-eslint/parser': 5.42.1_rmayb2veg2btbq6mbmnyivgasy
   all-contributors-cli: 6.24.0
@@ -59,7 +59,7 @@ devDependencies:
   svelte-preprocess: 4.10.7_4n3z2octtzg5pdokl7pjruqnki
   svelte2tsx: 0.5.20_besnmoibwkhwtentvwuriss7pa
   sveltekit-embed: 'link:'
-  tailwindcss: 3.2.2_postcss@8.4.18
+  tailwindcss: 3.2.4_postcss@8.4.18
   tslib: 2.4.1
   typescript: 4.8.4
   vite: 3.2.3
@@ -241,8 +241,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.542_svelte@3.52.0+vite@3.2.3:
-    resolution: {integrity: sha512-0YaNfrNsCwgCYuYEEKUF7G/QAkeGNJRlAFnPa9WTG2kRQPqlfUKOJlAniRHVG08ARdfNJgBSootWFvAUsKSoYA==}
+  /@sveltejs/kit/1.0.0-next.544_svelte@3.52.0+vite@3.2.3:
+    resolution: {integrity: sha512-zgQHiSvxiTDjJJROj9mPwIEoT6sAopagDroh89cHKarKc2eK/1nISA2dascKz/atGF8mghOn7RXZPnPofr01fQ==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -307,7 +307,7 @@ packages:
       - supports-color
     dev: true
 
-  /@tailwindcss/typography/0.5.8_tailwindcss@3.2.2:
+  /@tailwindcss/typography/0.5.8_tailwindcss@3.2.4:
     resolution: {integrity: sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -316,7 +316,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.2.2_postcss@8.4.18
+      tailwindcss: 3.2.4_postcss@8.4.18
     dev: true
 
   /@types/cookie/0.5.1:
@@ -869,7 +869,7 @@ packages:
       css-selector-tokenizer: 0.8.0
       postcss: 8.4.18
       postcss-js: 4.0.0_postcss@8.4.18
-      tailwindcss: 3.2.2_postcss@8.4.18
+      tailwindcss: 3.2.4_postcss@8.4.18
     transitivePeerDependencies:
       - ts-node
     dev: true
@@ -2702,8 +2702,8 @@ packages:
       typescript: 4.8.4
     dev: true
 
-  /tailwindcss/3.2.2_postcss@8.4.18:
-    resolution: {integrity: sha512-c2GtSdqg+harR4QeoTmex0Ngfg8IIHNeLQH5yr2B9uZbZR1Xt1rYbjWOWTcj3YLTZhrmZnPowoQDbSRFyZHQ5Q==}
+  /tailwindcss/3.2.4_postcss@8.4.18:
+    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
