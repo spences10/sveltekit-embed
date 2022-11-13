@@ -6,6 +6,7 @@
     Deezer,
     GenericEmbed,
     SimpleCast,
+    Slides,
     SoundCloud,
     Spotify,
     StackBlitz,
@@ -208,6 +209,37 @@ Usage:
 Output:
 
 <SimpleCast episodeId="46aaf483-8567-451a-aa7c-4c92fbb13f28" />
+
+## Slides
+
+Props:
+
+```ts
+width: string = '576'
+height: string = '420'
+username: string = ''
+title: string = ''
+byline: 'hidden' | 'visible' | 'default' = 'hidden'
+share: 'hidden' | 'visible' | 'default' = 'hidden'
+style: | 'light'
+    | 'dark'
+    | 'hidden'
+    | 'transparent'
+    | 'default' = 'dark'
+```
+
+Usage:
+
+```html
+<Slides
+  username="spences10"
+  title="building-with-sveltekit-and-graphql"
+/>
+```
+
+Output:
+
+<Slides username="spences10" title="building-with-sveltekit-and-graphql"/>
 
 ## SoundCloud
 
