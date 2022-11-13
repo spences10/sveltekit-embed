@@ -33,9 +33,9 @@
 This is a collection of embed components I use on a regular basis
 packaged up for use.
 
-Each component is wrapped in an intersection observer
-`GeneralObserver` which will load up the component when it scrolls
-into the viewport.
+Each component (except tweet and toot) is wrapped in an intersection
+observer `GeneralObserver` which will load up the component when it
+scrolls into the viewport.
 
 ## AnchorFm
 
