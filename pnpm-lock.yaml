@@ -10,7 +10,7 @@ specifiers:
   '@typescript-eslint/parser': 5.42.1
   all-contributors-cli: 6.24.0
   autoprefixer: 10.4.13
-  daisyui: 2.39.1
+  daisyui: 2.40.1
   eslint: 8.27.0
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
@@ -42,7 +42,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.42.1_rmayb2veg2btbq6mbmnyivgasy
   all-contributors-cli: 6.24.0
   autoprefixer: 10.4.13_postcss@8.4.19
-  daisyui: 2.39.1_2lwn2upnx27dqeg6hqdu7sq75m
+  daisyui: 2.40.1_2lwn2upnx27dqeg6hqdu7sq75m
   eslint: 8.27.0
   eslint-config-prettier: 8.5.0_eslint@8.27.0
   eslint-plugin-svelte3: 4.0.0_ktwpzwc5ejqdbyb2mks6m4mhya
@@ -58,7 +58,7 @@ devDependencies:
   svelte-check: 2.9.2_g7z2chviobwh5b53nr2x4mtdq4
   svelte-preprocess: 4.10.7_ipbdh7cyfqksu7wxqf2yjzz6i4
   svelte2tsx: 0.5.20_f4bsrsgtzvlkrtbz2ig7nipio4
-  sveltekit-embed: 0.0.10
+  sveltekit-embed: 'link:'
   tailwindcss: 3.2.4_postcss@8.4.19
   tslib: 2.4.1
   typescript: 4.8.4
@@ -858,8 +858,8 @@ packages:
     hasBin: true
     dev: true
 
-  /daisyui/2.39.1_2lwn2upnx27dqeg6hqdu7sq75m:
-    resolution: {integrity: sha512-J7goHjiQ6zk7irpKJ0HyElAuWF+x8iGoebQ1IfHM6BuvKoGSOcfZC/bedTultsX2Co5XARsE+qvE7BI1amUtsQ==}
+  /daisyui/2.40.1_2lwn2upnx27dqeg6hqdu7sq75m:
+    resolution: {integrity: sha512-nzLpcU8kCLU4zoMQ0hUKw1orRRn2x/LJLZenIsHF+UlGVsml02U4u20nb/knN7B06MPpDZ4RAZyp0rEp67iwzQ==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
@@ -2700,10 +2700,6 @@ packages:
       pascal-case: 3.1.2
       svelte: 3.53.1
       typescript: 4.8.4
-    dev: true
-
-  /sveltekit-embed/0.0.10:
-    resolution: {integrity: sha512-DQa5JYg44bID+cJlk9pr+05PkTj1ownSXo+1sprVYkvet0Jvc8+0F8wb3RCAo0KzzM6REUFUzuKhDZQKoTQYHA==}
     dev: true
 
   /tailwindcss/3.2.4_postcss@8.4.19:
