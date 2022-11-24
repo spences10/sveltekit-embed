@@ -53,7 +53,7 @@
     "mdsvex": "0.10.6",
     "postcss": "8.4.19",
     "postcss-load-config": "4.0.1",
-    "prettier": "2.7.1",
+    "prettier": "2.8.0",
     "prettier-plugin-svelte": "2.8.1",
     "pretty-quick": "3.1.3",
     "svead": "0.0.3",
