@@ -23,7 +23,7 @@ specifiers:
   pretty-quick: 3.1.3
   svead: 0.0.3
   svelte: 3.53.1
-  svelte-check: 2.9.2
+  svelte-check: 2.10.0
   svelte-preprocess: 4.10.7
   svelte2tsx: 0.5.20
   sveltekit-embed: ^0.0.10
@@ -34,8 +34,8 @@ specifiers:
 
 devDependencies:
   '@playwright/test': 1.28.1
-  '@sveltejs/adapter-auto': 1.0.0-next.89
-  '@sveltejs/kit': 1.0.0-next.564_svelte@3.53.1+vite@3.2.4
+  '@sveltejs/adapter-auto': 1.0.0-next.90
+  '@sveltejs/kit': 1.0.0-next.567_svelte@3.53.1+vite@3.2.4
   '@sveltejs/package': 1.0.0-next.6_7dvewpees4iyn2tkw2qzal77a4
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   '@typescript-eslint/eslint-plugin': 5.45.0_czs5uoqkd3podpy6vgtsxfc7au
@@ -55,7 +55,7 @@ devDependencies:
   pretty-quick: 3.1.3_prettier@2.8.0
   svead: 0.0.3
   svelte: 3.53.1
-  svelte-check: 2.9.2_g7z2chviobwh5b53nr2x4mtdq4
+  svelte-check: 2.10.0_g7z2chviobwh5b53nr2x4mtdq4
   svelte-preprocess: 4.10.7_jgeygver3mevbte7srfft5qwby
   svelte2tsx: 0.5.20_7dvewpees4iyn2tkw2qzal77a4
   sveltekit-embed: 'link:'
@@ -178,14 +178,14 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.89:
-    resolution: {integrity: sha512-S+sASFX4sSZD1xEKmZ3zHxQh2DGxXBUpCGAtUakKkI2MRvFIm+zYIm+7GPekofMLd19FjdFDKkuOjBKPdmA8+w==}
+  /@sveltejs/adapter-auto/1.0.0-next.90:
+    resolution: {integrity: sha512-qxH46Oqqn40998wTmnbffONI0HcW/kiZ3OIjZoysjONne+LU4uEsG425MZ2RHDxmR04zxhsdjCAsn6B4du8D7w==}
     dependencies:
-      import-meta-resolve: 2.1.0
+      import-meta-resolve: 2.2.0
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.564_svelte@3.53.1+vite@3.2.4:
-    resolution: {integrity: sha512-j5X8NVA+ros3YDaybsrybnsZasrsMKacAhLGll36SGkBDagCQANlY6O5B7fxP0FrejiuN6ZLh0hnROGsl5qAlQ==}
+  /@sveltejs/kit/1.0.0-next.567_svelte@3.53.1+vite@3.2.4:
+    resolution: {integrity: sha512-4Q74HPLZb9Rr60n7EJANXH2Ng3d7wwrz67TuXxVfYuxARigWO9YzjcLHxG2IVMwRZIeT+LlwOKkg9vYYdBiezQ==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -1449,8 +1449,8 @@ packages:
       resolve-from: 4.0.0
     dev: true
 
-  /import-meta-resolve/2.1.0:
-    resolution: {integrity: sha512-yG9pxkWJVTy4cmRsNWE3ztFdtFuYIV8G4N+cbCkO8b+qngkLyIUhxQFuZ0qJm67+0nUOxjMPT7nfksPKza1v2g==}
+  /import-meta-resolve/2.2.0:
+    resolution: {integrity: sha512-CpPOtiCHxP9HdtDM5F45tNiAe66Cqlv3f5uHoJjt+KlaLrUh9/Wz9vepADZ78SlqEo62aDWZtj9ydMGXV+CPnw==}
     dev: true
 
   /imurmurhash/0.1.4:
@@ -2322,8 +2322,8 @@ packages:
     resolution: {integrity: sha512-hYkqSpBbprCUIqmAsL95jshM0hp83yRtezZjep9p4Ukd5yICcFZ04OAp+5fPw7GnArSD6W7t6a1EUDYzoiF/6w==}
     dev: true
 
-  /svelte-check/2.9.2_g7z2chviobwh5b53nr2x4mtdq4:
-    resolution: {integrity: sha512-DRi8HhnCiqiGR2YF9ervPGvtoYrheE09cXieCTEqeTPOTJzfoa54Py8rovIBv4bH4n5HgZYIyTQ3DDLHQLl2uQ==}
+  /svelte-check/2.10.0_g7z2chviobwh5b53nr2x4mtdq4:
+    resolution: {integrity: sha512-5iLCoja/WsithyRkNtIeDQ0euJlgWj3Zzo2IA6iuHMuuX9D9OrRYZj2WlA5ACnAFQnN5L9mxWcwUW9VxDNEoGg==}
     hasBin: true
     peerDependencies:
       svelte: ^3.24.0
