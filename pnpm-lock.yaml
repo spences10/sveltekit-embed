@@ -25,7 +25,7 @@ specifiers:
   svelte: 3.53.1
   svelte-check: 2.10.1
   svelte-preprocess: 4.10.7
-  svelte2tsx: 0.5.21
+  svelte2tsx: 0.5.22
   sveltekit-embed: ^0.0.10
   tailwindcss: 3.2.4
   tslib: 2.4.1
@@ -57,7 +57,7 @@ devDependencies:
   svelte: 3.53.1
   svelte-check: 2.10.1_g7z2chviobwh5b53nr2x4mtdq4
   svelte-preprocess: 4.10.7_jgeygver3mevbte7srfft5qwby
-  svelte2tsx: 0.5.21_7dvewpees4iyn2tkw2qzal77a4
+  svelte2tsx: 0.5.22_7dvewpees4iyn2tkw2qzal77a4
   sveltekit-embed: 'link:'
   tailwindcss: 3.2.4_postcss@8.4.19
   tslib: 2.4.1
@@ -223,7 +223,7 @@ packages:
       kleur: 4.1.5
       sade: 1.8.1
       svelte: 3.53.1
-      svelte2tsx: 0.5.21_7dvewpees4iyn2tkw2qzal77a4
+      svelte2tsx: 0.5.22_7dvewpees4iyn2tkw2qzal77a4
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -2424,8 +2424,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.5.21_7dvewpees4iyn2tkw2qzal77a4:
-    resolution: {integrity: sha512-ntc5K1q5TdIu4c/d4j9FaRYhpIcE6m61Tjkj+XbUcy3io6Hx1ex99x4EfjV5tSMCo7dqf5L4eurjH0AvWWsXFA==}
+  /svelte2tsx/0.5.22_7dvewpees4iyn2tkw2qzal77a4:
+    resolution: {integrity: sha512-OytIql7Bv53oFuL0jjsnp/gNvR4ngAUdAjswgibmIQT2Lj2OIQYn2J3gKqRd+wSj/n3M/wrz4zJpudQRSfncZw==}
     peerDependencies:
       svelte: ^3.24
       typescript: ^4.1.2
