@@ -14,6 +14,7 @@ specifiers:
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0
   eslint-plugin-svelte3: 4.0.0
+  fathom-client: ^3.5.0
   husky: 8.0.2
   mdsvex: 0.10.6
   postcss: 8.4.19
@@ -46,6 +47,7 @@ devDependencies:
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0_eslint@8.29.0
   eslint-plugin-svelte3: 4.0.0_kzv3boqmfymw5ol254gxmp75rq
+  fathom-client: 3.5.0
   husky: 8.0.2
   mdsvex: 0.10.6_svelte@3.53.1
   postcss: 8.4.19
@@ -58,7 +60,7 @@ devDependencies:
   svelte-check: 2.10.1_g7z2chviobwh5b53nr2x4mtdq4
   svelte-preprocess: 4.10.7_jgeygver3mevbte7srfft5qwby
   svelte2tsx: 0.5.22_7dvewpees4iyn2tkw2qzal77a4
-  sveltekit-embed: 'link:'
+  sveltekit-embed: 0.0.10
   tailwindcss: 3.2.4_postcss@8.4.19
   tslib: 2.4.1
   typescript: 4.9.3
@@ -1265,6 +1267,10 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /fathom-client/3.5.0:
+    resolution: {integrity: sha512-BiRDS9Q9a8Zma0H717FWC5cvf545K/CsxBpxKT22TcSl1EbRhhlHWIJgrdeiQUfdorBK2ppy09TwMOhRsbos/A==}
+    dev: true
+
   /figures/3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -2434,6 +2440,10 @@ packages:
       pascal-case: 3.1.2
       svelte: 3.53.1
       typescript: 4.9.3
+    dev: true
+
+  /sveltekit-embed/0.0.10:
+    resolution: {integrity: sha512-DQa5JYg44bID+cJlk9pr+05PkTj1ownSXo+1sprVYkvet0Jvc8+0F8wb3RCAo0KzzM6REUFUzuKhDZQKoTQYHA==}
     dev: true
 
   /tailwindcss/3.2.4_postcss@8.4.19:
