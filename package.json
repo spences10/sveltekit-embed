@@ -57,7 +57,7 @@
     "prettier": "2.8.0",
     "prettier-plugin-svelte": "2.8.1",
     "pretty-quick": "3.1.3",
-    "svead": "0.0.3",
+    "svead": "0.0.4",
     "svelte": "3.53.1",
     "svelte-check": "2.10.1",
     "svelte-preprocess": "4.10.7",
