@@ -6,12 +6,11 @@ function ensureIntersectionObserver() {
   if (intersectionObserver) return
 
   intersectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const eventName = entry.isIntersecting
-        ? 'enterViewport'
-        : 'exitViewport'
-      entry.target.dispatchEvent(new CustomEvent(eventName))
+    entries.filter(({isIntersecting}) => isIntersecting).forEach(entry => {
+        entry.target.dispatchEvent(new CustomEvent('enterViewport'))
     })
+  }, {
+    rootMargin: "1000px"
   })
 }
 
