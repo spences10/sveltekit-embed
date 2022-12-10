@@ -1,7 +1,9 @@
 # SvelteKit Embed
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
@@ -52,6 +54,20 @@ Create an
 
 ## Developing locally
 
+Rename the `.sample.env` file to `.env`.
+
+```bash
+mv .sample.env .env
+```
+
+Create the component in the `src/lib/components` directory.
+
+Add the component to the `src/lib/index.ts` file:
+
+```ts
+export { default as MyComponent } from './components/my-component.svelte'
+```
+
 Import the component locally into the `index.md` file:
 
 ```svelte
@@ -64,16 +80,7 @@ Test the package locally with the `package:local` script:
 npm run package:local
 ```
 
-And add it to the import statement in the `index.md` file:
-
-```svelte
-import { MyComponent } from 'sveltekit-embed'
-```
-
 Test locally, then submit a PR 🙏
-
-If you're adding a new component to be used in the package then add an
-export to the `src/lib/index.ts` file.
 
 ## Thanks
 
