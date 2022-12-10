@@ -5,6 +5,7 @@
     CodePen,
     Deezer,
     GenericEmbed,
+    Gist,
     SimpleCast,
     Slides,
     SoundCloud,
@@ -14,13 +15,13 @@
     Tweet,
     Vimeo,
     YouTube,
-  } from 'sveltekit-embed'
+  } from '$lib'
   import { Head } from 'svead'
   import { page } from '$app/stores'
 
   // Head variables 
   let title = 'This is SvelteKit embed'
-  let description = 'Embed 3rd party media in your SvelteKit projects with SvelteKit Embed.'
+  let description = 'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
   let image = `https://og.tailgraph.com/og?fontFamily=Roboto&title=SvelteKit%20Embed&titleTailwind=text-gray-800+font-bold+text-6xl&text=Embed%203rd%20part%20media%20in%20your%20SvelteKit%20projects%20with%20SvelteKit%20Embed.&textTailwind=text-gray-700+text-2xl+mt-4&logoTailwind=h-8&bgTailwind=bg-white&footer=sveltekit-embed.vercel.app&footerTailwind=text-teal-600`
   let website = 'https://sveltekit-embed.vercel.app'
   let url = $page.url.toString()
@@ -190,6 +191,24 @@ Output:
   frameBorder="0"
   allow="encrypted-media"
 />
+
+## Gist
+
+Props:
+
+```ts
+gistUri: string = ''
+```
+
+Usage:
+
+```html
+<Gist gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
+```
+
+Output:
+
+<Gist gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
 
 ## SimpleCast
 
