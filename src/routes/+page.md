@@ -34,9 +34,50 @@
 This is a collection of embed components I use on a regular basis
 packaged up for use.
 
-Each component (except tweet and toot) is wrapped in an intersection
-observer `GeneralObserver` which will load up the component when it
-scrolls into the viewport.
+Each component (except `Tweet` and `Toot`) is wrapped in an
+intersection observer `GeneralObserver` which will load up the
+component when it scrolls into the viewport.
+
+## Install it
+
+```bash
+pnpm i -D sveltekit-embed # npm or yarn even
+```
+
+## Use it
+
+```svelte
+<!-- +page.svelte -->
+<script>
+  import { AnchorFm } from 'sveltekit-embed'
+</script>
+
+<AnchorFm
+  episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+/>
+```
+
+## Available Components List
+
+Your embed not here? Start a
+[discussion](https://github.com/spences10/sveltekit-embed/discussions)
+or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
+
+- [AnchorFm](#anchorfm)
+- [Buzzsprout](#buzzsprout)
+- [CodePen](#codepen)
+- [Deezer](#deezer)
+- [GenericEmbed](#genericembed)
+- [Gist](#gist)
+- [SimpleCast](#simplecast)
+- [Slides](#slides)
+- [SoundCloud](#soundcloud)
+- [Spotify](#spotify)
+- [StackBlitz](#stackblitz)
+- [Toot](#toot)
+- [Tweet](#tweet)
+- [Vimeo](#vimeo)
+- [YouTube](#youtube)
 
 ## AnchorFm
 
