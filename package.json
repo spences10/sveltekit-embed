@@ -57,6 +57,8 @@
     "prettier": "2.8.1",
     "prettier-plugin-svelte": "2.8.1",
     "pretty-quick": "3.1.3",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.1.0",
     "svead": "0.0.4",
     "svelte": "3.53.1",
     "svelte-check": "2.10.2",
