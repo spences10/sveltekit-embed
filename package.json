@@ -52,7 +52,7 @@
     "fathom-client": "^3.5.0",
     "husky": "8.0.2",
     "mdsvex": "0.10.6",
-    "postcss": "8.4.19",
+    "postcss": "8.4.20",
     "postcss-load-config": "4.0.1",
     "prettier": "2.8.1",
     "prettier-plugin-svelte": "2.9.0",
