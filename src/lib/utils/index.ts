@@ -1,4 +1,4 @@
-export const getPadding = aspectRatio => {
+export const getPadding = (aspectRatio: string) => {
   const config = {
     '1:1': `padding-top: 100%;`,
     '16:9': `padding-top: 56.25%;`,
