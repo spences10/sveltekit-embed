@@ -15,4 +15,15 @@ describe('AnchorFm', () => {
     const { container } = render(AnchorFm)
     expect(container).toBeTruthy()
   })
+
+  it.skip('has episode url', async () => {
+    const { container } = render(AnchorFm, {
+      episodeUrl:
+        'purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a',
+    })
+
+    expect(container.querySelectorAll('h2')).toBe(
+      '1.31 - Delivering Digital Content with GraphCMS'
+    )
+  })
 })
