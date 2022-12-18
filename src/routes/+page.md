@@ -263,12 +263,12 @@ theme: string = `dark`
 Usage:
 
 ```html
-<SimpleCast episodeId="46aaf483-8567-451a-aa7c-4c92fbb13f28" />
+<SimpleCast episodeId="1c254f66-5d75-48ef-b960-4cfec94baa0b" />
 ```
 
 Output:
 
-<SimpleCast episodeId="46aaf483-8567-451a-aa7c-4c92fbb13f28" />
+<SimpleCast episodeId="1c254f66-5d75-48ef-b960-4cfec94baa0b" />
 
 ## Slides
 
