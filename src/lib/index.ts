@@ -14,4 +14,5 @@ export { default as Toot } from './components/toot.svelte'
 export { default as Tweet } from './components/tweet.svelte'
 export { default as Vimeo } from './components/vimeo.svelte'
 export { default as YouTube } from './components/you-tube.svelte'
+export { default as Zencastr } from './components/zencastr.svelte'
 

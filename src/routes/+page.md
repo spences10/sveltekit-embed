@@ -15,6 +15,7 @@
     Tweet,
     Vimeo,
     YouTube,
+    Zencastr
   } from '$lib'
   import { Head } from 'svead'
   import { page } from '$app/stores'
@@ -470,3 +471,21 @@ Usage:
 Output:
 
 <YouTube youTubeId="L7_z8rcbFPg" />
+
+## Zencastr
+
+Props:
+
+```ts
+zencastrId: string = ''
+```
+
+Usage:
+
+```html
+<Zencastr zencastrId="TARGseQu" />
+```
+
+Output:
+
+<Zencastr zencastrId='TARGseQu'/>
