@@ -39,7 +39,7 @@
     "@playwright/test": "1.28.1",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
-    "@sveltejs/package": "1.0.0-next.6",
+    "@sveltejs/package": "1.0.1",
     "@tailwindcss/typography": "0.5.8",
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
