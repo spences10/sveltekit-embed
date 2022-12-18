@@ -12,6 +12,7 @@
   import { onMount } from 'svelte'
   import '../app.css'
   import '../prism.css'
+  import spencee_img from '$lib/images/spencee.png'
 
   onMount(() => {
     Fathom.load(PUBLIC_FATHOM_ID, {
@@ -55,7 +56,7 @@
 >
   <div class="text-xl">
     <img
-      src="spencee.png"
+      src={spencee_img}
       alt="Scott avatar"
       class="rounded-full h-20"
     />
