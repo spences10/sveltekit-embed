@@ -3,6 +3,10 @@ import { sveltekit } from '@sveltejs/kit/vite'
 /** @type {import('vite').UserConfig} */
 const config = {
   plugins: [sveltekit()],
+  test: {
+    environment: 'jsdom',
+    include: ['src/**/*.{test,spec}.{js,ts}'],
+  },
   // https://vitejs.dev/config/#server-fs-allow
   server: {
     fs: {
