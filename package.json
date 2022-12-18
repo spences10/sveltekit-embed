@@ -30,7 +30,8 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "test:unit": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:ci": "vitest run"
   },
   "husky": {
     "hooks": {
