@@ -1,4 +1,4 @@
-name: 'Tests: E2E'
+name: 'Tests: Unit'
 on:
   - push
   - pull_request
@@ -12,10 +12,12 @@ jobs:
           version: 6.0.2
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: install dependencies
-        run: npm i && npm run build
-      - name: npm run test:ci
-        run: npm run test:ci
+      - name: Install pnpm
+        run: pnpm i
+      - name: Build
+        run: pnpm run build
         env:
           PUBLIC_FATHOM_ID: ${{ secrets.PUBLIC_FATHOM_ID }}
           PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
+      - name: Test
+        run: pnpm run test:ci
