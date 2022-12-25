@@ -50,7 +50,7 @@
     "@vitest/ui": "^0.26.0",
     "all-contributors-cli": "6.24.0",
     "autoprefixer": "10.4.13",
-    "daisyui": "2.45.0",
+    "daisyui": "2.46.0",
     "eslint": "8.30.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-svelte3": "4.0.0",
