@@ -55,7 +55,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-svelte3": "4.0.0",
     "fathom-client": "^3.5.0",
-    "husky": "8.0.2",
+    "husky": "8.0.3",
     "jsdom": "^20.0.3",
     "mdsvex": "0.10.6",
     "postcss": "8.4.20",
