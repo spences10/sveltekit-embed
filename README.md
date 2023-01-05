@@ -1,7 +1,9 @@
 # SvelteKit Embed
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
@@ -47,7 +49,7 @@ Create an
 
 - [ ] Add more components
 - [ ] Tests... need adding
-- [ ] If you know how to type a custom action in Svelte, please submit
+- [x] If you know how to type a custom action in Svelte, please submit
       a PR
 
 ## Developing locally
