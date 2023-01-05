@@ -17,7 +17,7 @@ specifiers:
   eslint-config-prettier: 8.6.0
   eslint-plugin-svelte3: 4.0.0
   fathom-client: ^3.5.0
-  husky: 8.0.2
+  husky: 8.0.3
   jsdom: ^20.0.3
   mdsvex: 0.10.6
   postcss: 8.4.20
@@ -56,7 +56,7 @@ devDependencies:
   eslint-config-prettier: 8.6.0_eslint@8.31.0
   eslint-plugin-svelte3: 4.0.0_6go7qzsvzihesfwmyvq3tnl5qq
   fathom-client: 3.5.0
-  husky: 8.0.2
+  husky: 8.0.3
   jsdom: 20.0.3
   mdsvex: 0.10.6_svelte@3.55.0
   postcss: 8.4.20
@@ -1875,8 +1875,8 @@ packages:
     engines: {node: '>=8.12.0'}
     dev: true
 
-  /husky/8.0.2:
-    resolution: {integrity: sha512-Tkv80jtvbnkK3mYWxPZePGFpQ/tT3HNSs/sasF9P2YfkMezDl3ON37YN6jUUI4eTg5LcyVynlb6r4eyvOmspvg==}
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
