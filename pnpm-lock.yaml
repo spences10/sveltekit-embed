@@ -18,7 +18,7 @@ specifiers:
   eslint-plugin-svelte3: 4.0.0
   fathom-client: ^3.5.0
   husky: 8.0.3
-  jsdom: ^20.0.3
+  jsdom: ^21.0.0
   mdsvex: 0.10.6
   postcss: 8.4.20
   postcss-load-config: 4.0.1
@@ -57,7 +57,7 @@ devDependencies:
   eslint-plugin-svelte3: 4.0.0_6go7qzsvzihesfwmyvq3tnl5qq
   fathom-client: 3.5.0
   husky: 8.0.3
-  jsdom: 20.0.3
+  jsdom: 21.0.0
   mdsvex: 0.10.6_svelte@3.55.0
   postcss: 8.4.20
   postcss-load-config: 4.0.1_postcss@8.4.20
@@ -76,7 +76,7 @@ devDependencies:
   tslib: 2.4.1
   typescript: 4.9.4
   vite: 4.0.4
-  vitest: 0.26.1_tbw3dzyeff7ovfzr4gcxommoom
+  vitest: 0.26.1_k3lyuxyll7xtgac7a2imivbcwa
 
 packages:
 
@@ -2126,8 +2126,8 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /jsdom/20.0.3:
-    resolution: {integrity: sha512-SYhBvTh89tTfCD/CRdSOm13mOBa42iTaTyfyEWBdKcGdPxPtLFBXuHR8XHb33YNYaP+lLbmSvBTsnoesCNJEsQ==}
+  /jsdom/21.0.0:
+    resolution: {integrity: sha512-AIw+3ZakSUtDYvhwPwWHiZsUi3zHugpMEKlNPaurviseYoBqo0zBd3zqoUi3LPCNtPFlEP8FiW9MqCZdjb2IYA==}
     engines: {node: '>=14'}
     peerDependencies:
       canvas: ^2.5.0
@@ -3637,7 +3637,7 @@ packages:
       vite: 4.0.4
     dev: true
 
-  /vitest/0.26.1_tbw3dzyeff7ovfzr4gcxommoom:
+  /vitest/0.26.1_k3lyuxyll7xtgac7a2imivbcwa:
     resolution: {integrity: sha512-qTLRnjYmjmJpHlLUtErxtlRqGCe8WItFhGXKklpWivu7CLP9KXN9iTezROe+vf51Kb+BB/fzxK6fUG9DvFGL5Q==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -3667,7 +3667,7 @@ packages:
       acorn-walk: 8.2.0
       chai: 4.3.7
       debug: 4.3.4
-      jsdom: 20.0.3
+      jsdom: 21.0.0
       local-pkg: 0.4.2
       source-map: 0.6.1
       strip-literal: 1.0.0
