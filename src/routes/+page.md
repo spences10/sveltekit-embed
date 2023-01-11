@@ -6,6 +6,7 @@
     Deezer,
     GenericEmbed,
     Gist,
+    Relive,
     SimpleCast,
     Slides,
     SoundCloud,
@@ -70,6 +71,7 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 - [Deezer](#deezer)
 - [GenericEmbed](#genericembed)
 - [Gist](#gist)
+- [Relive](#relive)
 - [SimpleCast](#simplecast)
 - [Slides](#slides)
 - [SoundCloud](#soundcloud)
@@ -251,6 +253,12 @@ Usage:
 Output:
 
 <Gist gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
+
+## Relive
+
+Output:
+
+<Relive />
 
 ## SimpleCast
 
