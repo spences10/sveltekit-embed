@@ -4,4 +4,9 @@
   export let reliveId: string
 </script>
 
-<GeneralObserver>Hello</GeneralObserver>
+<GeneralObserver>
+  <iframe
+    title={`relive-${reliveId}`}
+    src={`https://www.relive.cc/view/${reliveId}/widget`}
+  />
+</GeneralObserver>
