@@ -68,11 +68,40 @@ Add the component to the `src/lib/index.ts` file:
 export { default as MyComponent } from './components/my-component.svelte'
 ```
 
-Import the component locally into the `index.md` file:
+Import the component locally into the `src/routes/+page.md` file:
 
 ```svelte
-import MyComponent from '$lib/components/my-component.svelte'
+import { MyComponent } from '$lib'
 ```
+
+After importing the component, add it to the
+`Available Components List` and document it:
+
+```markdown
+## Available Components List
+
+- [MyComponent](#mycomponent)
+```
+
+````markdown
+## MyComponent
+
+Props:
+
+```ts
+myComponentId: string
+```
+
+Usage:
+
+```html
+<MyComponent myComponentId="..." />
+```
+
+Output:
+
+<MyComponent myComponentId="..." />
+````
 
 Test the package locally with the `package:local` script:
 
