@@ -22,7 +22,7 @@ specifiers:
   mdsvex: 0.10.6
   postcss: 8.4.21
   postcss-load-config: 4.0.1
-  prettier: 2.8.1
+  prettier: 2.8.2
   prettier-plugin-svelte: 2.9.0
   pretty-quick: 3.1.3
   rehype-autolink-headings: ^6.1.1
@@ -61,9 +61,9 @@ devDependencies:
   mdsvex: 0.10.6_svelte@3.55.0
   postcss: 8.4.21
   postcss-load-config: 4.0.1_postcss@8.4.21
-  prettier: 2.8.1
-  prettier-plugin-svelte: 2.9.0_ajxj753sv7dbwexjherrch25ta
-  pretty-quick: 3.1.3_prettier@2.8.1
+  prettier: 2.8.2
+  prettier-plugin-svelte: 2.9.0_74vfyr7qjo56zgjcvkwi6gyjxm
+  pretty-quick: 3.1.3_prettier@2.8.2
   rehype-autolink-headings: 6.1.1
   rehype-slug: 5.1.0
   svead: 0.0.4
@@ -2757,18 +2757,18 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte/2.9.0_ajxj753sv7dbwexjherrch25ta:
+  /prettier-plugin-svelte/2.9.0_74vfyr7qjo56zgjcvkwi6gyjxm:
     resolution: {integrity: sha512-3doBi5NO4IVgaNPtwewvrgPpqAcvNv0NwJNflr76PIGgi9nf1oguQV1Hpdm9TI2ALIQVn/9iIwLpBO5UcD2Jiw==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
       svelte: ^3.2.0
     dependencies:
-      prettier: 2.8.1
+      prettier: 2.8.2
       svelte: 3.55.0
     dev: true
 
-  /prettier/2.8.1:
-    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
+  /prettier/2.8.2:
+    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -2782,7 +2782,7 @@ packages:
       react-is: 17.0.2
     dev: true
 
-  /pretty-quick/3.1.3_prettier@2.8.1:
+  /pretty-quick/3.1.3_prettier@2.8.2:
     resolution: {integrity: sha512-kOCi2FJabvuh1as9enxYmrnBC6tVMoVOenMaBqRfsvBHB0cbpYHjdQEpSglpASDFEXVwplpcGR4CLEaisYAFcA==}
     engines: {node: '>=10.13'}
     hasBin: true
@@ -2795,7 +2795,7 @@ packages:
       ignore: 5.2.1
       mri: 1.2.0
       multimatch: 4.0.0
-      prettier: 2.8.1
+      prettier: 2.8.2
     dev: true
 
   /prism-svelte/0.4.7:
