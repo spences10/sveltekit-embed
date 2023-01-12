@@ -256,6 +256,19 @@ Output:
 
 ## Relive
 
+Props:
+
+```ts
+reliveId: string = ''
+width: string = '100%'
+```
+
+Usage:
+
+```html
+<Relive reliveId="vAOZokmYVo6" />
+```
+
 Output:
 
 <Relive reliveId="vAOZokmYVo6" />
