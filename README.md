@@ -89,7 +89,7 @@ After importing the component, add it to the
 Props:
 
 ```ts
-myComponentId: string
+myComponentId: string = ''
 ```
 
 Usage:
