@@ -81,6 +81,7 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 - [Tweet](#tweet)
 - [Vimeo](#vimeo)
 - [YouTube](#youtube)
+- [Zencastr](#zencastr)
 
 ## AnchorFm
 
@@ -509,4 +510,4 @@ Usage:
 
 Output:
 
-<Zencastr zencastrId='TARGseQu'/>
+<Zencastr zencastrId="TARGseQu" />
