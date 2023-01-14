@@ -66,7 +66,7 @@
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^5.1.0",
     "svead": "0.0.4",
-    "svelte": "3.55.0",
+    "svelte": "3.55.1",
     "svelte-check": "3.0.2",
     "svelte-preprocess": "5.0.0",
     "svelte2tsx": "0.6.0",
