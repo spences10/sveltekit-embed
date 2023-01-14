@@ -1,10 +1,15 @@
 # SvelteKit Embed
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
@@ -147,12 +152,19 @@ git push --tags
 ## Contributors ✨
 
 Thanks goes to these wonderful people
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
   <tbody>
     <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://scottspence.com/"><img src="https://avatars.githubusercontent.com/u/234708?v=4?s=100" width="100px;" alt="Scott Spence"/><br /><sub><b>Scott Spence</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=spences10" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Cahllagerfeld"><img src="https://avatars.githubusercontent.com/u/43843195?v=4?s=100" width="100px;" alt="Cahllagerfeld"/><br /><sub><b>Cahllagerfeld</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=Cahllagerfeld" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://matiashernandez.dev/"><img src="https://avatars.githubusercontent.com/u/282006?v=4?s=100" width="100px;" alt="Matías Hernández Arellano"/><br /><sub><b>Matías Hernández Arellano</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=matiasfha" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://ruhr.social/@sphinxc0re"><img src="https://avatars.githubusercontent.com/u/3702016?v=4?s=100" width="100px;" alt="Julian Laubstein"/><br /><sub><b>Julian Laubstein</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=sphinxc0re" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ennoriel"><img src="https://avatars.githubusercontent.com/u/23211596?v=4?s=100" width="100px;" alt="Maxime Dupont"/><br /><sub><b>Maxime Dupont</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=Ennoriel" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://jamesperkins.dev/"><img src="https://avatars.githubusercontent.com/u/45409975?v=4?s=100" width="100px;" alt="James Perkins"/><br /><sub><b>James Perkins</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=perkinsjr" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://joaopalmeiro.github.io/"><img src="https://avatars.githubusercontent.com/u/17132927?v=4?s=100" width="100px;" alt="João Palmeiro"/><br /><sub><b>João Palmeiro</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=joaopalmeiro" title="Code">💻</a></td>
     </tr>
   </tbody>
@@ -171,28 +183,8 @@ Thanks goes to these wonderful people
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://scottspence.com/"><img src="https://avatars.githubusercontent.com/u/234708?v=4?s=100" width="100px;" alt="Scott Spence"/><br /><sub><b>Scott Spence</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=spences10" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Cahllagerfeld"><img src="https://avatars.githubusercontent.com/u/43843195?v=4?s=100" width="100px;" alt="Cahllagerfeld"/><br /><sub><b>Cahllagerfeld</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=Cahllagerfeld" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://matiashernandez.dev/"><img src="https://avatars.githubusercontent.com/u/282006?v=4?s=100" width="100px;" alt="Matías Hernández Arellano"/><br /><sub><b>Matías Hernández Arellano</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=matiasfha" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://ruhr.social/@sphinxc0re"><img src="https://avatars.githubusercontent.com/u/3702016?v=4?s=100" width="100px;" alt="Julian Laubstein"/><br /><sub><b>Julian Laubstein</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=sphinxc0re" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ennoriel"><img src="https://avatars.githubusercontent.com/u/23211596?v=4?s=100" width="100px;" alt="Maxime Dupont"/><br /><sub><b>Maxime Dupont</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=Ennoriel" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://jamesperkins.dev/"><img src="https://avatars.githubusercontent.com/u/45409975?v=4?s=100" width="100px;" alt="James Perkins"/><br /><sub><b>James Perkins</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=perkinsjr" title="Code">💻</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
