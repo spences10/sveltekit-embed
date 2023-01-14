@@ -11,6 +11,60 @@
   "commitConvention": "gitmoji",
   "contributors": [
     {
+      "login": "spences10",
+      "name": "Scott Spence",
+      "avatar_url": "https://avatars.githubusercontent.com/u/234708?v=4",
+      "profile": "https://scottspence.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Cahllagerfeld",
+      "name": "Cahllagerfeld",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43843195?v=4",
+      "profile": "https://github.com/Cahllagerfeld",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "matiasfha",
+      "name": "Matías Hernández Arellano",
+      "avatar_url": "https://avatars.githubusercontent.com/u/282006?v=4",
+      "profile": "https://matiashernandez.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sphinxc0re",
+      "name": "Julian Laubstein",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3702016?v=4",
+      "profile": "https://ruhr.social/@sphinxc0re",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Ennoriel",
+      "name": "Maxime Dupont",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23211596?v=4",
+      "profile": "https://github.com/Ennoriel",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "perkinsjr",
+      "name": "James Perkins",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45409975?v=4",
+      "profile": "https://jamesperkins.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "joaopalmeiro",
       "name": "João Palmeiro",
       "avatar_url": "https://avatars.githubusercontent.com/u/17132927?v=4",
