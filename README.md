@@ -6,12 +6,6 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
 
 This is a collection of embed components I use on a regular basis
@@ -41,6 +35,26 @@ Use like a normal Svelte component:
   episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
 />
 ```
+
+## Supported platforms
+
+- AnchorFm
+- Buzzsprout
+- CodePen
+- Deezer
+- GenericEmbed
+- Gist
+- Relive
+- SimpleCast
+- Slides
+- SoundCloud
+- Spotify
+- StackBlitz
+- Toot
+- Tweet
+- Vimeo
+- YouTube
+- Zencastr
 
 ## Got questions?
 
