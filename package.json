@@ -39,7 +39,7 @@
     }
   },
   "devDependencies": {
-    "@playwright/test": "1.29.2",
+    "@playwright/test": "1.30.0",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "@sveltejs/package": "1.0.2",
