@@ -41,7 +41,7 @@
   "devDependencies": {
     "@playwright/test": "1.30.0",
     "@sveltejs/adapter-auto": "next",
-    "@sveltejs/kit": "next",
+    "@sveltejs/kit": "^1.5.0",
     "@sveltejs/package": "1.0.2",
     "@tailwindcss/typography": "0.5.9",
     "@testing-library/svelte": "^3.2.2",
