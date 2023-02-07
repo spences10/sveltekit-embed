@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@playwright/test': 1.30.0
-  '@sveltejs/adapter-auto': next
+  '@sveltejs/adapter-auto': ^2.0.0
   '@sveltejs/kit': ^1.5.0
   '@sveltejs/package': 1.0.2
   '@tailwindcss/typography': 0.5.9
@@ -41,7 +41,7 @@ specifiers:
 
 devDependencies:
   '@playwright/test': 1.30.0
-  '@sveltejs/adapter-auto': 1.0.0-next.91_@sveltejs+kit@1.5.0
+  '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.5.0
   '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
   '@sveltejs/package': 1.0.2_4x7phaipmicbaooxtnresslofa
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
@@ -393,13 +393,13 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.91_@sveltejs+kit@1.5.0:
-    resolution: {integrity: sha512-U57tQdzTfFINim8tzZSARC9ztWPzwOoHwNOpGdb2o6XrD0mEQwU9DsII7dBblvzg+xCnmd0pw7PDtXz5c5t96w==}
+  /@sveltejs/adapter-auto/2.0.0_@sveltejs+kit@1.5.0:
+    resolution: {integrity: sha512-b+gkHFZgD771kgV3aO4avHFd7y1zhmMYy9i6xOK7m/rwmwaRO8gnF5zBc0Rgca80B2PMU1bKNxyBTHA14OzUAQ==}
     peerDependencies:
-      '@sveltejs/kit': ^1.0.0-next.587
+      '@sveltejs/kit': ^1.0.0
     dependencies:
       '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
-      import-meta-resolve: 2.2.0
+      import-meta-resolve: 2.2.1
     dev: true
 
   /@sveltejs/kit/1.5.0_svelte@3.55.1+vite@4.1.1:
@@ -1979,8 +1979,8 @@ packages:
       resolve-from: 4.0.0
     dev: true
 
-  /import-meta-resolve/2.2.0:
-    resolution: {integrity: sha512-CpPOtiCHxP9HdtDM5F45tNiAe66Cqlv3f5uHoJjt+KlaLrUh9/Wz9vepADZ78SlqEo62aDWZtj9ydMGXV+CPnw==}
+  /import-meta-resolve/2.2.1:
+    resolution: {integrity: sha512-C6lLL7EJPY44kBvA80gq4uMsVFw5x3oSKfuMl1cuZ2RkI5+UJqQXgn+6hlUew0y4ig7Ypt4CObAAIzU53Nfpuw==}
     dev: true
 
   /imurmurhash/0.1.4:
