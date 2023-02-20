@@ -5,14 +5,12 @@
     PUBLIC_FATHOM_ID,
     PUBLIC_FATHOM_URL,
   } from '$env/static/public'
-  import GitHub from '$lib/icons/git-hub.svelte'
-  import Twitter from '$lib/icons/twitter.svelte'
-  import YouTube from '$lib/icons/you-tube.svelte'
+  import { GitHub, Twitter, YouTube } from '$lib/icons'
+  import spencee_img from '$lib/images/spencee.png'
   import * as Fathom from 'fathom-client'
   import { onMount } from 'svelte'
   import '../app.css'
   import '../prism.css'
-  import spencee_img from '$lib/images/spencee.png'
 
   onMount(() => {
     Fathom.load(PUBLIC_FATHOM_ID, {
