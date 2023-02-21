@@ -26,7 +26,7 @@
 <script lang="ts">
   import GeneralObserver from './general-observer.svelte'
 
-  export let height: string = '350'
+  export let height: string = '380'
   export let width: string = '100'
   export let card_id: string
   export let type: 'guild' | 'user' | 'event' | 'presentation' =
