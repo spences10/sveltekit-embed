@@ -17,7 +17,7 @@ Each component with the exception of `Toot` and `Tweet` is wrapped in
 an intersection observer `GeneralObserver` which will load up the
 component when it scrolls into the viewport.
 
-## Use
+## Use it
 
 ```bash
 npm i -D sveltekit-embed
@@ -44,6 +44,7 @@ Use like a normal Svelte component:
 - Deezer
 - GenericEmbed
 - Gist
+- Guild
 - Relive
 - SimpleCast
 - Slides
@@ -68,7 +69,7 @@ Create an
 ## Todo
 
 - [ ] Add more components
-- [ ] Tests... need adding
+- [ ] Tests... need expanding
 - [x] If you know how to type a custom action in Svelte, please submit
       a PR
 
