@@ -6,6 +6,7 @@
     Deezer,
     GenericEmbed,
     Gist,
+    Guild,
     Relive,
     SimpleCast,
     Slides,
@@ -71,6 +72,7 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 - [Deezer](#deezer)
 - [GenericEmbed](#genericembed)
 - [Gist](#gist)
+- [Guild](#guild)
 - [Relive](#relive)
 - [SimpleCast](#simplecast)
 - [Slides](#slides)
@@ -254,6 +256,45 @@ Usage:
 Output:
 
 <Gist gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
+
+## Guild
+
+Props:
+
+```ts
+height: string = '350'
+width: string = '100'
+card_id: string
+type: 'guild' | 'user' | 'event' | 'presentation' =
+  'guild'
+display_type:
+  | 'card'
+  | 'item'
+  | 'events/latest'
+  | 'events/upcoming'
+  | 'events/past'
+  | 'presentations/latest'
+  | 'presentations/upcoming'
+  | 'presentations/other' = 'card'
+```
+
+Usage:
+
+```html
+<Guild
+  type="guild"
+  card_id="svelte-society-london"
+  display_type="events/latest"
+/>
+```
+
+Output:
+
+<Guild
+  type="guild"
+  card_id="svelte-society-london"
+  display_type="card"
+/>
 
 ## Relive
 
