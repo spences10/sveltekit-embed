@@ -67,7 +67,7 @@
     "rehype-slug": "^5.1.0",
     "svead": "0.0.4",
     "svelte": "3.55.1",
-    "svelte-check": "3.0.3",
+    "svelte-check": "3.0.4",
     "svelte-preprocess": "5.0.1",
     "svelte2tsx": "0.6.2",
     "sveltekit-embed": "^0.0.12",
