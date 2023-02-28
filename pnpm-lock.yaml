@@ -29,7 +29,7 @@ specifiers:
   rehype-slug: ^5.1.0
   svead: 0.0.4
   svelte: 3.55.1
-  svelte-check: 3.0.3
+  svelte-check: 3.0.4
   svelte-preprocess: 5.0.1
   svelte2tsx: 0.6.2
   sveltekit-embed: ^0.0.12
@@ -68,7 +68,7 @@ devDependencies:
   rehype-slug: 5.1.0
   svead: 0.0.4
   svelte: 3.55.1
-  svelte-check: 3.0.3_gqx7lw3sljhsd4bstor5m2aa2u
+  svelte-check: 3.0.4_gqx7lw3sljhsd4bstor5m2aa2u
   svelte-preprocess: 5.0.1_b25a55hc532q56kmuqlrolam2i
   svelte2tsx: 0.6.2_4x7phaipmicbaooxtnresslofa
   sveltekit-embed: 'link:'
@@ -3273,8 +3273,8 @@ packages:
     resolution: {integrity: sha512-BrS8WAvrdUs6nbXyZN/kABjLBcPFqA1QBnbpJQiRzxfdA/8XchNJmiRmcPFTElw5NA5k7AG/eYWjj91V+8+Heg==}
     dev: true
 
-  /svelte-check/3.0.3_gqx7lw3sljhsd4bstor5m2aa2u:
-    resolution: {integrity: sha512-ByBFXo3bfHRGIsYEasHkdMhLkNleVfszX/Ns1oip58tPJlKdo5Ssr8kgVIuo5oq00hss8AIcdesuy0Xt0BcTvg==}
+  /svelte-check/3.0.4_gqx7lw3sljhsd4bstor5m2aa2u:
+    resolution: {integrity: sha512-feIyBAA5cSIxq4vq6mwGvGQTHy/wBVQbs5b+/VvE21WN8X7nonAuSqwvZv0UDBowzRka3Rh4gmLPH8rPePz3/w==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0
