@@ -12,7 +12,7 @@ specifiers:
   '@vitest/ui': ^0.29.0
   all-contributors-cli: 6.24.0
   autoprefixer: 10.4.13
-  daisyui: 2.50.2
+  daisyui: 2.51.3
   eslint: 8.35.0
   eslint-config-prettier: 8.6.0
   eslint-plugin-svelte3: 4.0.0
@@ -51,7 +51,7 @@ devDependencies:
   '@vitest/ui': 0.29.2
   all-contributors-cli: 6.24.0
   autoprefixer: 10.4.13_postcss@8.4.21
-  daisyui: 2.50.2_gbtt6ss3tbiz4yjtvdr6fbrj44
+  daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
   eslint: 8.35.0
   eslint-config-prettier: 8.6.0_eslint@8.35.0
   eslint-plugin-svelte3: 4.0.0_n4ieifq2d7jq3sqoe474cgqlim
@@ -1194,8 +1194,8 @@ packages:
       cssom: 0.3.8
     dev: true
 
-  /daisyui/2.50.2_gbtt6ss3tbiz4yjtvdr6fbrj44:
-    resolution: {integrity: sha512-CzyTsqdkpP2Zwk5Fl+1pFfL7XewRn/COm4TyKx4DbdITpzADMe01j6YZRG/D0kAOyd7t4rXA3zvkqNc7Ak9ukQ==}
+  /daisyui/2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44:
+    resolution: {integrity: sha512-AQa9exq/DsnvjyDi6bwOqHExQr9LJJag0iKRXNvRRtHXPo1gaAQ3ASJWylUB8J8KMH2M9zIpr7cvPHc7yGckyQ==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
