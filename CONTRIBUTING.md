@@ -17,4 +17,4 @@ export to `src/lib/index.ts`.
 <!-- Links -->
 
 [discussions]:
-  https://github.com/spences10/sveltekit-embed/discussions/new
+	https://github.com/spences10/sveltekit-embed/discussions/new

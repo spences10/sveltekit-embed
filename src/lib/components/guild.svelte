@@ -24,42 +24,42 @@
   https://beta.guild.host/embeds/presentation/microfrontends-with-e6mtnf/item
 -->
 <script lang="ts">
-  import GeneralObserver from './general-observer.svelte'
+	import GeneralObserver from './general-observer.svelte'
 
-  export let height: string = '380'
-  export let width: string = '100'
-  export let card_id: string
-  export let type: 'guild' | 'user' | 'event' | 'presentation' =
-    'guild'
-  export let display_type:
-    | 'card'
-    | 'item'
-    | 'events/latest'
-    | 'events/upcoming'
-    | 'events/past'
-    | 'presentations/latest'
-    | 'presentations/upcoming'
-    | 'presentations/other' = 'card'
+	export let height: string = '380'
+	export let width: string = '100'
+	export let card_id: string
+	export let type: 'guild' | 'user' | 'event' | 'presentation' =
+		'guild'
+	export let display_type:
+		| 'card'
+		| 'item'
+		| 'events/latest'
+		| 'events/upcoming'
+		| 'events/past'
+		| 'presentations/latest'
+		| 'presentations/upcoming'
+		| 'presentations/other' = 'card'
 </script>
 
 <GeneralObserver>
-  <div
-    class="guild-card"
-    style={`
+	<div
+		class="guild-card"
+		style={`
       position: relative;
       height: ${height}px;
       width: ${width}%;
     `}
-  >
-    <iframe
-      data-testid="guild-card"
-      title={`guild-card-${card_id}`}
-      src={`https://beta.guild.host/embeds/${type}/${card_id}/${display_type}`}
-      {height}
-      {width}
-      frameborder="0"
-      scrolling="no"
-      style={`
+	>
+		<iframe
+			data-testid="guild-card"
+			title={`guild-card-${card_id}`}
+			src={`https://beta.guild.host/embeds/${type}/${card_id}/${display_type}`}
+			{height}
+			{width}
+			frameborder="0"
+			scrolling="no"
+			style={`
         position: absolute;
         top: 0;
         left: 0;
@@ -67,6 +67,6 @@
         height: 100%;
         border-radius: 0.5rem;
       `}
-    />
-  </div>
+		/>
+	</div>
 </GeneralObserver>

@@ -27,12 +27,12 @@ Use like a normal Svelte component:
 
 ```html
 <script>
-  import { AnchorFm } from 'sveltekit-embed'
+	import { AnchorFm } from 'sveltekit-embed'
 </script>
 
 <AnchorFm
-  height="165"
-  episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+	height="165"
+	episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
 />
 ```
 
@@ -92,7 +92,7 @@ export { default as MyComponent } from './components/my-component.svelte'
 Import the component locally into the `src/routes/+page.md` file:
 
 ```svelte
-import { MyComponent } from '$lib'
+import {MyComponent} from '$lib'
 ```
 
 After importing the component, add it to the
@@ -154,7 +154,7 @@ the instructions are never there! 😅
 npm login
 # bump version with npm
 npm version 0.0.8
-# package with sveltkit
+# package with sveltekit
 pnpm run package
 # publish from package directory
 cd package

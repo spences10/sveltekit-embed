@@ -3,10 +3,10 @@ import { cleanup, render } from '@testing-library/svelte'
 import { afterEach, describe, expect, it } from 'vitest'
 
 describe('Toot', () => {
-  afterEach(() => cleanup())
+	afterEach(() => cleanup())
 
-  it('mounts', () => {
-    const { container } = render(Toot)
-    expect(container).toBeTruthy()
-  })
+	it('mounts', () => {
+		const { container } = render(Toot)
+		expect(container).toBeTruthy()
+	})
 })

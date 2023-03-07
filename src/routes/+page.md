@@ -32,6 +32,8 @@
 
 <Head {title} {description} {image} {url} {website} />
 
+<!-- cSpell:ignore yyoood,Zokm,Zrzbx -->
+
 # SvelteKit Embed
 
 This is a collection of embed components I use on a regular basis
@@ -52,11 +54,11 @@ pnpm i -D sveltekit-embed # npm or yarn even
 ```svelte
 <!-- +page.svelte -->
 <script>
-  import { AnchorFm } from 'sveltekit-embed'
+	import { AnchorFm } from 'sveltekit-embed'
 </script>
 
 <AnchorFm
-  episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+	episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
 />
 ```
 
@@ -99,7 +101,7 @@ Usage:
 
 ```html
 <AnchorFm
-  episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+	episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
 />
 ```
 
@@ -123,7 +125,7 @@ Usage:
 
 ```html
 <Buzzsprout
-  buzzsproutId="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
+	buzzsproutId="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
 />
 ```
 
@@ -282,9 +284,9 @@ Usage:
 
 ```html
 <Guild
-  type="guild"
-  card_id="svelte-society-london"
-  display_type="events/latest"
+	type="guild"
+	card_id="svelte-society-london"
+	display_type="events/latest"
 />
 ```
 
@@ -356,8 +358,8 @@ Usage:
 
 ```html
 <Slides
-  username="spences10"
-  title="building-with-sveltekit-and-graphql"
+	username="spences10"
+	title="building-with-sveltekit-and-graphql"
 />
 ```
 
@@ -380,7 +382,7 @@ Usage:
 
 ```html
 <SoundCloud
-  soundcloudLink="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
+	soundcloudLink="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
 />
 ```
 
@@ -404,9 +406,9 @@ Usage:
 
 ```html
 <Spotify
-  spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5"
-  width="100%"
-  height="180px"
+	spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5"
+	width="100%"
+	height="180px"
 />
 ```
 
@@ -458,9 +460,9 @@ Usage:
 
 ```html
 <Toot
-  instance="mas.to"
-  username="@spences10"
-  tootId="109252587760962553"
+	instance="mas.to"
+	username="@spences10"
+	tootId="109252587760962553"
 />
 ```
 

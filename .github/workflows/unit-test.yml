@@ -1,19 +1,33 @@
 name: 'Tests: Unit'
 on:
-  - push
-  - pull_request
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
 jobs:
-  unit_tests:
+  unit-tests:
     name: Run unit tests
     runs-on: ubuntu-latest
+
     steps:
+      - uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key:
+            ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: 6.0.2
-      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Install pnpm
-        run: pnpm i
+        with:
+          node-version: 18.x
+      - name: Install dependencies
+        run: pnpm install
       - name: Build
         run: pnpm run build
         env:
@@ -21,3 +35,5 @@ jobs:
           PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
       - name: Test
         run: pnpm run test:ci
+      - name: Check spelling
+        run: pnpm run cspell
