@@ -1,0 +1,38 @@
+{
+	"version": "0.2",
+	"ignorePaths": [
+		"node_modules/**/*",
+		"pnpm-lock.yaml",
+		"package/**/*"
+	],
+	"dictionaryDefinitions": [
+		{
+			"name": "cambridge_dictionary",
+			"path": ".cspell/cambridge-dictionary-words.txt",
+			"addWords": true
+		},
+		{
+			"name": "my_words",
+			"path": ".cspell/my-words.txt",
+			"addWords": true
+		},
+		{
+			"name": "names",
+			"path": ".cspell/names.txt",
+			"addWords": true
+		},
+		{
+			"name": "code",
+			"path": ".cspell/code.txt",
+			"addWords": true
+		}
+	],
+	"dictionaries": [
+		"cambridge_dictionary",
+		"names",
+		"my_words",
+		"code"
+	],
+	"ignoreWords": [],
+	"import": []
+}
