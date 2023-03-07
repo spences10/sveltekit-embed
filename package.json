@@ -49,7 +49,7 @@
 		"cspell": "^6.28.0",
 		"daisyui": "2.51.3",
 		"eslint": "8.35.0",
-		"eslint-config-prettier": "8.6.0",
+		"eslint-config-prettier": "8.7.0",
 		"eslint-plugin-svelte3": "4.0.0",
 		"fathom-client": "^3.5.0",
 		"jsdom": "^21.0.0",
