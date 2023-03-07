@@ -6,22 +6,31 @@
   import { onDestroy, onMount } from 'svelte'
   import { fade } from 'svelte/transition'
 
-  let loaded = false
+  export let threshold = 0.5
+  export let disable_observer = false
+
+  let loaded = disable_observer
   let root: HTMLElement
 
-  // check if IntersectionObserver is available
   const hasIntersectionObserver =
     typeof IntersectionObserver !== 'undefined'
-  let observer = hasIntersectionObserver
-    ? new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            loaded = true
-            observer.disconnect()
+  let observer =
+    hasIntersectionObserver && !disable_observer
+      ? new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.intersectionRatio >= threshold) {
+                loaded = true
+                observer.disconnect()
+              }
+            })
+          },
+          {
+            rootMargin: '0px',
+            threshold,
           }
-        })
-      })
-    : null
+        )
+      : null
 
   onMount(() => {
     if (observer) {
