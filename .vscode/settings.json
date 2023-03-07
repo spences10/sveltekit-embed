@@ -1,34 +1,8 @@
 {
-  "css.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
-  "git.enableSmartCommit": true,
-  "git.postCommitCommand": "sync",
-  "cSpell.words": [
-    "adamwathan",
-    "allowtransparency",
-    "atrule",
-    "Cahllagerfeld",
-    "daisyui",
-    "deezer",
-    "Drasner",
-    "Drasner's",
-    "iframe",
-    "Mandal",
-    "mdsvex",
-    "noopener",
-    "pauliescanlon",
-    "purrfect",
-    "sdras",
-    "Souvik",
-    "spencee",
-    "spences",
-    "sveltejs",
-    "sveltkit",
-    "vieria",
-    "vite",
-    "zencastr",
-    "Zrzbx"
-  ]
+	"css.validate": false,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true
+	},
+	"git.enableSmartCommit": true,
+	"git.postCommitCommand": "sync"
 }
