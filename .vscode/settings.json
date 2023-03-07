@@ -1,8 +1,13 @@
 {
+  "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "sync",
   "cSpell.words": [
     "adamwathan",
+    "allowtransparency",
     "atrule",
     "Cahllagerfeld",
     "daisyui",
@@ -25,9 +30,5 @@
     "vite",
     "zencastr",
     "Zrzbx"
-  ],
-  "css.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  }
+  ]
 }
