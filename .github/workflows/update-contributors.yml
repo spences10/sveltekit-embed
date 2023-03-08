@@ -2,9 +2,7 @@ name: 'Update Contributors'
 on:
   workflow_run:
     workflows: ["Tests: Unit"]
-    branches: 
-      - main
-      - 'refactor/*'
+    branches: [main]
     types:
       - completed
 
