@@ -26,6 +26,7 @@ simplecast
 smartypants
 soundcloud
 Souvik
+spences
 stackblitz
 svead
 sveltekit
