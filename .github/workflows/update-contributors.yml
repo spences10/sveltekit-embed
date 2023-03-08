@@ -1,0 +1,46 @@
+name: 'Update Contributors'
+on:
+  workflow_run:
+    workflows: ["Tests: Unit"]
+    branches: [main]
+    types:
+      - completed
+
+jobs:
+  update-contributors:
+    name: Update Contributors
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache pnpm
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Determine contributor and contribution
+        run: |
+          # Determine the username and contribution type of the user who made the contribution
+          if [ -n "${{ github.event.pull_request }}"]; then
+            # Pull request event
+            USERNAME=$(echo "${{ github.event.pull_request.user.login }}" | tr '[:upper:]' '[:lower:]')
+            # Determine the contribution type based on the changes in the pull request
+            CONTYPE=$(git diff --name-only origin/main "${{ github.event.pull_request.head.sha }}" | grep "\.ts$" >/dev/null && echo "code" || echo "doc")
+          else
+            # Push event
+            COMMITTER=$(echo "${{ github.event.head_commit.author.username }}" | tr '[:upper:]' '[:lower:]')
+            CONTYPE="test"
+          fi
+          echo "Adding $USERNAME with contribution type $CONTYPE"
+      - name: Update contributors
+        run: npx all-contributors-cli add $USERNAME $CONTYPE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
