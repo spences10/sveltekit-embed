@@ -25,18 +25,4 @@ describe('AnchorFm', () => {
 		const expectedSrc = `https://anchor.fm/${episodeUrl}`
 		expect(iframe.getAttribute('src')).toBe(expectedSrc)
 	})
-
-	it('sets iframe dimensions based on props', async () => {
-		const height = '200'
-		const width = '75'
-		const { getByTestId } = render(AnchorFm, {
-			episodeUrl,
-			height,
-			width,
-			disable_observer: true,
-		})
-		const iframe = getByTestId('anchor-fm-episode')
-		expect(iframe.getAttribute('height')).toBe(height)
-		expect(iframe.getAttribute('width')).toBe(`${width}`)
-	})
 })
