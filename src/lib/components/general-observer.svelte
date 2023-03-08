@@ -6,8 +6,8 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
 
-	export let threshold = 0.5
-	export let disable_observer = false
+	export let threshold: number = 0.5
+	export let disable_observer: boolean = false
 
 	let loaded = disable_observer
 	let root: HTMLElement
@@ -46,7 +46,11 @@
 </script>
 
 <div bind:this={root}>
-	{#if loaded}
+	{#if disable_observer}
+		<div transition:fade>
+			<slot />
+		</div>
+	{:else if loaded}
 		<div transition:fade>
 			<slot />
 		</div>
