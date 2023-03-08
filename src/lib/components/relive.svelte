@@ -3,11 +3,12 @@
 
 	export let reliveId: string = ''
 	export let width: string = '100%'
+	export let disable_observer: boolean = false
 
 	const defaultMargin: number = 2
 </script>
 
-<GeneralObserver>
+<GeneralObserver {disable_observer}>
 	<div
 		style={`
       position: relative;

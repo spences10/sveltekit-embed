@@ -2,13 +2,15 @@
 	import { getPadding } from '$lib/utils'
 	import GeneralObserver from './general-observer.svelte'
 
-	export let width: string = '560'
-	export let height: string = '315'
 	export let youTubeId: string = ''
 	export let listId: string = ''
 	export let autoPlay: boolean = false
 	export let aspectRatio: string = '16:9'
 	export let skipTo = { h: 0, m: 0, s: 0 }
+	export let disable_observer: boolean = false
+	export let iframe_styles: string = `
+		border-radius: 0.6rem;
+	`
 
 	const { h, m, s } = skipTo
 
@@ -16,6 +18,8 @@
 	const tM = m * 60
 
 	const startTime = tH + tM + s
+
+	// cspell:ignore videoseries
 
 	const baseUrl = `https://www.youtube-nocookie.com/embed/`
 	const src = `${baseUrl}${
@@ -25,17 +29,15 @@
 	}`
 </script>
 
-<GeneralObserver {height} {width}>
+<GeneralObserver {disable_observer}>
 	<div
 		style={`
-    position: relative;
-    width: 100%;
-    ${getPadding(aspectRatio)}
+    	position: relative;
+    	width: 100%;
+  	  ${getPadding(aspectRatio)}
   `}
 	>
 		<iframe
-			{width}
-			{height}
 			class="youtube-sveltekit-embed"
 			title={`youTube-${youTubeId}`}
 			{src}
@@ -43,11 +45,12 @@
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 			allowfullscreen
 			style={`
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+	      position: absolute;
+  	    top: 0;
+    	  left: 0;
+      	width: 100%;
+      	height: 100%;
+				${iframe_styles}
     `}
 		/>
 	</div>

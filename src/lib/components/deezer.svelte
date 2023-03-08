@@ -5,18 +5,21 @@
 	export let frameSrc: string = ''
 	export let height: string = '300px'
 	export let width: string = '100%'
-	export let iframe_style: string = 'border-radius: 0.6rem;'
+	export let disable_observer: boolean = false
+	export let iframe_styles: string = `
+		border-radius: 0.6rem;
+		height: ${height};
+		width: ${width};	
+	`
 </script>
 
-<GeneralObserver {height} {width}>
+<GeneralObserver {disable_observer}>
 	<iframe
 		title="deezer-widget"
 		src={`https://widget.deezer.com/widget/${theme}/${frameSrc}`}
-		{width}
-		{height}
 		frameborder="0"
 		allowtransparency
 		allow="encrypted-media; clipboard-write"
-		style={iframe_style}
+		style={iframe_styles}
 	/>
 </GeneralObserver>

@@ -1,33 +1,68 @@
-<script>
-  import {
-    AnchorFm,
-    Buzzsprout,
-    CodePen,
-    Deezer,
-    GenericEmbed,
-    Gist,
-    Guild,
-    Relive,
-    SimpleCast,
-    Slides,
-    SoundCloud,
-    Spotify,
-    StackBlitz,
-    Toot,
-    Tweet,
-    Vimeo,
-    YouTube,
-    Zencastr
-  } from '$lib'
-  import { Head } from 'svead'
-  import { page } from '$app/stores'
+<script lang="ts">
+	import { browser } from '$app/environment'
+	import { page } from '$app/stores'
+	import {
+		AnchorFm,
+		Buzzsprout,
+		CodePen,
+		Deezer,
+		GenericEmbed,
+		Gist,
+		Guild,
+		Relive,
+		SimpleCast,
+		Slides,
+		SoundCloud,
+		Spotify,
+		StackBlitz,
+		Toot,
+		Tweet,
+		Vimeo,
+		YouTube,
+		Zencastr,
+	} from '$lib'
+	import { Head } from 'svead'
+	import { onMount } from 'svelte'
+	import { writable } from 'svelte/store'
 
-  // Head variables 
-  let title = 'This is SvelteKit embed'
-  let description = 'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
-  let image = `https://og.tailgraph.com/og?fontFamily=Roboto&title=SvelteKit%20Embed&titleTailwind=text-gray-800+font-bold+text-6xl&text=Embed%203rd%20part%20media%20in%20your%20SvelteKit%20projects%20with%20SvelteKit%20Embed.&textTailwind=text-gray-700+text-2xl+mt-4&logoTailwind=h-8&bgTailwind=bg-white&footer=sveltekit-embed.vercel.app&footerTailwind=text-teal-600`
-  let website = 'https://sveltekit-embed.vercel.app'
-  let url = $page.url.toString()
+	// Head variables
+	let title = 'This is SvelteKit embed'
+	let description =
+		'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
+	let image = `https://og.tailgraph.com/og?fontFamily=Roboto&title=SvelteKit%20Embed&titleTailwind=text-gray-800+font-bold+text-6xl&text=Embed%203rd%20part%20media%20in%20your%20SvelteKit%20projects%20with%20SvelteKit%20Embed.&textTailwind=text-gray-700+text-2xl+mt-4&logoTailwind=h-8&bgTailwind=bg-white&footer=sveltekit-embed.vercel.app&footerTailwind=text-teal-600`
+	let website = 'https://sveltekit-embed.vercel.app'
+	let url = $page.url.toString()
+
+	const default_value = true
+	const stored_value = browser
+		? window.localStorage.getItem('disable_observer')
+		: null
+	const disable_observer_store = writable(
+		stored_value !== null ? JSON.parse(stored_value) : default_value
+	)
+
+	disable_observer_store.subscribe(value => {
+		if (browser) {
+			window.localStorage.setItem(
+				'disable_observer',
+				JSON.stringify(value)
+			)
+		}
+	})
+
+	let disable_observer: boolean = true
+	disable_observer_store.subscribe(value => {
+		disable_observer = value
+	})
+
+	onMount(() => {
+		disable_observer_store.update(() => {
+			return disable_observer
+		})
+	})
+	$: enabled_state = $disable_observer_store
+		? 'enabled so all the components are loaded on page load'
+		: 'disabled so components are only loaded when they scroll into viewport'
 </script>
 
 <Head {title} {description} {image} {url} {website} />
@@ -39,9 +74,32 @@
 This is a collection of embed components I use on a regular basis
 packaged up for use.
 
-Each component (except `Tweet` and `Toot`) is wrapped in an
-intersection observer `GeneralObserver` which will load up the
+Each component (except `Tweet`, `Toot` and `Zencastr`) is wrapped in
+an intersection observer `GeneralObserver` which will load up the
 component when it scrolls into the viewport.
+
+Currently the GeneralObserver is {enabled_state}.
+
+You can toggle the GeneralObserver on and off from here, just bear in
+mind that if this is the first time you've loaded this page then the
+default is to load all the components.
+
+If you want to see the intersection observer in action then you'll
+need to toggle it off, reload the page and scroll down the page.
+
+<div class="flex items-end">
+  <label for="general-observer-toggle" class="mr-2">
+    Toggle the GeneralObserver:
+  </label>
+  <input
+    id="general-observer-toggle"
+    class="toggle toggle-sm"
+    type="checkbox"
+    bind:checked={$disable_observer_store}
+  />
+</div>
+
+All props listed are the defaults for the component.
 
 ## Install it
 
@@ -93,8 +151,9 @@ Props:
 
 ```ts
 episodeUrl: string
-height: string = '100'
-width: string = '100'
+height: string = '100px'
+width: string = '100%'
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -108,6 +167,7 @@ Usage:
 Output:
 
 <AnchorFm
+  disable_observer={$disable_observer_store}
   episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
 />
 
@@ -117,8 +177,9 @@ Props:
 
 ```ts
 buzzsproutId: string
-height: string = '100'
-width: string = '200'
+width: string = '100%'
+height: string = '200px'
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -132,6 +193,7 @@ Usage:
 Output:
 
 <Buzzsprout
+  disable_observer={$disable_observer_store}
   buzzsproutId="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
 />
 
@@ -140,8 +202,8 @@ Output:
 Props:
 
 ```ts
-width: string = '100'
-height: string = '500'
+height: string = '500px'
+width: string = '100%'
 codePenId: string = ''
 tabs:
   | string[]
@@ -153,6 +215,11 @@ tabs:
 clickToLoad: boolean = true
 editable: boolean = true
 theme: string | 'light' | 'dark' | 'default' = 'default'
+disable_observer: boolean = false
+iframe_styles: string = `
+  height: ${height};
+  width: ${width};
+`
 ```
 
 Usage:
@@ -166,7 +233,10 @@ take the `codePenId` this `WNMvXpa` and add it to the component.
 
 Output:
 
-<CodePen codePenId="WNMvXpa" />
+<CodePen
+  disable_observer={$disable_observer_store}
+  codePenId="WNMvXpa"
+/>
 
 ## Deezer
 
@@ -177,6 +247,12 @@ theme: string = 'auto'
 frameSrc: string = ''
 height: string = '300px'
 width: string = '100%'
+disable_observer: boolean = false
+iframe_styles: string = `
+  border-radius: 0.6rem;
+  height: ${height};
+  width: ${width};	
+`
 ```
 
 Usage:
@@ -187,7 +263,10 @@ Usage:
 
 Output:
 
-<Deezer frameSrc="show/496882" />
+<Deezer
+  disable_observer={$disable_observer_store}
+  frameSrc="show/496882"
+/>
 
 ## GenericEmbed
 
@@ -199,27 +278,18 @@ Props:
 ```ts
 src: string = ''
 title: string = ''
-height: string = '300'
+height: string = '152px'
 width: string = '100%'
+disable_observer: boolean = false
 ```
 
 Usage:
-
-```ts
-width: string = '100%'
-height: string = '180px'
-data-testid: string = 'spotify'
-title: string = 'spotify-generic'
-src: string = 'https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5'
-frameBorder: string = '0'
-allow: string = 'encrypted-media'
-```
 
 <!-- prettier-ignore -->
 ```html
 <GenericEmbed
   width="100%"
-  height="180px"
+  height="152px"
   data-testid="spotify"
   title="spotify-generic"
   src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
@@ -233,7 +303,7 @@ Output:
 <!-- prettier-ignore -->
 <GenericEmbed
   width="100%"
-  height="180px"
+  height="152px"
   data-testid="spotify"
   title="spotify-generic"
   src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
@@ -246,7 +316,14 @@ Output:
 Props:
 
 ```ts
-gistUri: string = ''
+width = '100%'
+height = '320px'
+gistUri = ''
+disable_observer: boolean = false
+iframe_styles: string = `
+  height: ${height};
+  width: ${width};
+`
 ```
 
 Usage:
@@ -257,15 +334,18 @@ Usage:
 
 Output:
 
-<Gist gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
+<Gist
+  disable_observer={$disable_observer_store}
+  gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" 
+/>
 
 ## Guild
 
 Props:
 
 ```ts
-height: string = '350'
-width: string = '100'
+height: string = '380px'
+width: string = '100%'
 card_id: string
 type: 'guild' | 'user' | 'event' | 'presentation' =
   'guild'
@@ -278,6 +358,7 @@ display_type:
   | 'presentations/latest'
   | 'presentations/upcoming'
   | 'presentations/other' = 'card'
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -293,6 +374,7 @@ Usage:
 Output:
 
 <Guild
+  disable_observer={$disable_observer_store}
   type="guild"
   card_id="svelte-society-london"
   display_type="card"
@@ -305,6 +387,7 @@ Props:
 ```ts
 reliveId: string = ''
 width: string = '100%'
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -315,7 +398,10 @@ Usage:
 
 Output:
 
-<Relive reliveId="vAOZokmYVo6" />
+<Relive
+  disable_observer={$disable_observer_store}
+  reliveId="vAOZokmYVo6" 
+/>
 
 ## SimpleCast
 
@@ -324,6 +410,7 @@ Props:
 ```ts
 episodeId: string = ''
 theme: string = `dark`
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -334,24 +421,29 @@ Usage:
 
 Output:
 
-<SimpleCast episodeId="1c254f66-5d75-48ef-b960-4cfec94baa0b" />
+<SimpleCast 
+  disable_observer={$disable_observer_store}
+  episodeId="1c254f66-5d75-48ef-b960-4cfec94baa0b" 
+/>
 
 ## Slides
 
 Props:
 
 ```ts
-width: string = '576'
-height: string = '420'
+width: string = '100%'
+height: string = '420px'
 username: string = ''
 title: string = ''
 byline: 'hidden' | 'visible' | 'default' = 'hidden'
 share: 'hidden' | 'visible' | 'default' = 'hidden'
-style: | 'light'
-    | 'dark'
-    | 'hidden'
-    | 'transparent'
-    | 'default' = 'dark'
+style:
+  | 'light'
+  | 'dark'
+  | 'hidden'
+  | 'transparent'
+  | 'default' = 'dark'
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -365,7 +457,11 @@ Usage:
 
 Output:
 
-<Slides username="spences10" title="building-with-sveltekit-and-graphql"/>
+<Slides 
+  disable_observer={$disable_observer_store}
+  username="spences10"
+  title="building-with-sveltekit-and-graphql"
+/>
 
 ## SoundCloud
 
@@ -373,9 +469,11 @@ Props:
 
 ```ts
 soundcloudLink: string = ''
-height: string = '300'
 width: string = '100%'
+height: string = '300px'
 showVisual: boolean = true
+disable_observer: boolean = false
+iframe_styles: string = ''
 ```
 
 Usage:
@@ -389,6 +487,7 @@ Usage:
 Output:
 
 <SoundCloud
+  disable_observer={$disable_observer_store}
   soundcloudLink="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
 />
 
@@ -398,26 +497,27 @@ Props:
 
 ```ts
 spotifyLink: string = ''
-height: string = '320'
-width: string = '380'
+height: string = '100%'
+width: string = '152px'
+disable_observer: boolean = false
+iframe_styles: string = `
+  border-radius: 0.8rem;
+  height: ${height};
+  width: ${width};
+`
 ```
 
 Usage:
 
 ```html
-<Spotify
-	spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5"
-	width="100%"
-	height="180px"
-/>
+<Spotify spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5" />
 ```
 
 Output:
 
 <Spotify
-  spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5"
-  width="100%"
-  height="180px"
+  disable_observer={$disable_observer_store}
+  spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5" 
 />
 
 ## StackBlitz
@@ -425,15 +525,19 @@ Output:
 Props:
 
 ```ts
-width: string = '100'
-height: string = '500'
+width: string = '100%'
+height: string = '500px'
 id: string = ''
 view: 'editor' | 'preview' | 'default' = 'default'
-clickToLoad: boolean = true
-hideNavigation: boolean = false
+clickToLoad: boolean = true //ctl
+hideNavigation: boolean = false //hideNavigation
 hideExplorer: boolean = true
 theme: string | 'light' | 'dark' | 'default' = 'dark'
-file: string | undefined
+file: string | undefined
+disable_observer: boolean = false
+iframe_styles: string = `
+  height: ${height};
+  width: ${width};
 ```
 
 Usage:
@@ -444,7 +548,11 @@ Usage:
 
 Output:
 
-<StackBlitz id="vitejs-vite-yyoood" hideNavigation />
+<StackBlitz
+  disable_observer={$disable_observer_store}
+  id="vitejs-vite-yyoood"
+  hideNavigation
+/>
 
 ## Toot
 
@@ -501,6 +609,7 @@ vimeoId: string = ''
 autoPlay: boolean = false
 aspectRatio: string = '16:9'
 skipTo: { h: 0, m: 0, s: 0 }
+disable_observer: boolean = false
 ```
 
 Usage:
@@ -511,20 +620,25 @@ Usage:
 
 Output:
 
-<Vimeo vimeoId="246846978" />
+<Vimeo
+  disable_observer={$disable_observer_store}
+  vimeoId="246846978" 
+/>
 
 ## YouTube
 
 Props:
 
 ```ts
-height: string = '560'
-width: string = '315'
 youTubeId: string = ''
 listId: string = ''
 autoPlay: boolean = false
 aspectRatio: string = '16:9'
 skipTo: { h: 0, m: 0, s: 0 }
+disable_observer: boolean = false
+export let iframe_styles: string = `
+  border-radius: 0.6rem;
+`
 ```
 
 Usage:
@@ -535,7 +649,10 @@ Usage:
 
 Output:
 
-<YouTube youTubeId="L7_z8rcbFPg" />
+<YouTube
+  disable_observer={$disable_observer_store}
+  youTubeId="L7_z8rcbFPg"
+/>
 
 ## Zencastr
 
@@ -553,4 +670,6 @@ Usage:
 
 Output:
 
-<Zencastr zencastrId="TARGseQu" />
+<Zencastr 
+  zencastrId="TARGseQu" 
+/>
