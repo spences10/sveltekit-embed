@@ -1,8 +1,8 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte'
 
-	export let width: string = '576'
-	export let height: string = '420'
+	export let width: string = '100%'
+	export let height: string = '420px'
 	export let username: string = ''
 	export let title: string = ''
 	export let byline: 'hidden' | 'visible' | 'default' = 'hidden'
@@ -13,6 +13,7 @@
 		| 'hidden'
 		| 'transparent'
 		| 'default' = 'dark'
+	export let disable_observer: boolean = false
 
 	let baseUrl = `https://slides.com/${username}/${title}/embed?`
 	const config = {
@@ -25,7 +26,7 @@
 	const src = `${baseUrl}&${queryString.toString()}`
 </script>
 
-<GeneralObserver {height} {width}>
+<GeneralObserver {disable_observer}>
 	<iframe
 		{src}
 		{width}

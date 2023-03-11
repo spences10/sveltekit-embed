@@ -3,9 +3,10 @@
 
 	export let episodeId: string = ''
 	export let theme: string = `dark`
+	export let disable_observer: boolean = false
 </script>
 
-<GeneralObserver>
+<GeneralObserver {disable_observer}>
 	<div
 		class="simplecast-episode-svelte-embed"
 		style={`

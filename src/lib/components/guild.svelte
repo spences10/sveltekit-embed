@@ -26,8 +26,8 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte'
 
-	export let height: string = '380'
-	export let width: string = '100'
+	export let height: string = '380px'
+	export let width: string = '100%'
 	export let card_id: string
 	export let type: 'guild' | 'user' | 'event' | 'presentation' =
 		'guild'
@@ -40,15 +40,16 @@
 		| 'presentations/latest'
 		| 'presentations/upcoming'
 		| 'presentations/other' = 'card'
+	export let disable_observer: boolean = false
 </script>
 
-<GeneralObserver>
+<GeneralObserver {disable_observer}>
 	<div
 		class="guild-card"
 		style={`
       position: relative;
-      height: ${height}px;
-      width: ${width}%;
+      height: ${height};
+      width: ${width};
     `}
 	>
 		<iframe

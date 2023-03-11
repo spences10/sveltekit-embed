@@ -6,17 +6,19 @@
 	export let autoPlay: boolean = false
 	export let aspectRatio: string = '16:9'
 	export let skipTo = { h: 0, m: 0, s: 0 }
+	export let disable_observer: boolean = false
+
 	const { h, m, s } = skipTo
 </script>
 
-<GeneralObserver>
+<GeneralObserver {disable_observer}>
 	<div
 		data-testid="vimeo"
 		class="vimeo-svelte-embed"
 		style={`
-    position: relative;
-    width: 100%;
-   ${getPadding(aspectRatio)}
+    	position: relative;
+    	width: 100%;
+   		${getPadding(aspectRatio)}
   `}
 	>
 		<iframe

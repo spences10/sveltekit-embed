@@ -22,21 +22,29 @@ describe('AnchorFm', () => {
 			disable_observer: true,
 		})
 		const iframe = getByTestId('anchor-fm-episode')
-		const expectedSrc = `https://anchor.fm/${episodeUrl}`
-		expect(iframe.getAttribute('src')).toBe(expectedSrc)
+		const expected_src = `https://anchor.fm/${episodeUrl}`
+		expect(iframe.getAttribute('src')).toBe(expected_src)
 	})
 
-	it('sets iframe dimensions based on props', async () => {
-		const height = '200'
-		const width = '75'
-		const { getByTestId } = render(AnchorFm, {
+	it('mounts with custom height and width', async () => {
+		const { container } = render(AnchorFm, {
 			episodeUrl,
-			height,
-			width,
+			height: '200px',
+			width: '50%',
 			disable_observer: true,
 		})
-		const iframe = getByTestId('anchor-fm-episode')
-		expect(iframe.getAttribute('height')).toBe(height)
-		expect(iframe.getAttribute('width')).toBe(`${width}`)
+		const iframe = container.querySelector('iframe')
+
+		expect(iframe.parentElement.style.height).toBe('200px')
+		expect(iframe.parentElement.style.width).toBe('50%')
+	})
+
+	it('renders with a GeneralObserver', async () => {
+		const { getByTestId } = render(AnchorFm, {
+			episodeUrl,
+			disable_observer: false,
+		})
+		const general_observer = getByTestId('general-observer')
+		expect(general_observer).toBeTruthy()
 	})
 })

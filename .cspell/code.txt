@@ -1,3 +1,4 @@
+allowtransparency
 colspan
 iframe
 markdownlint
@@ -6,3 +7,4 @@ testid
 tfoot
 valign
 webdev
+writable

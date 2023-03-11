@@ -8,11 +8,11 @@ const config = {
 		extend: {},
 	},
 
-	plugins: [typography, daisyui],
-
 	daisyui: {
 		themes: ['night', 'winter'],
 	},
+
+	plugins: [typography, daisyui],
 }
 
 module.exports = config

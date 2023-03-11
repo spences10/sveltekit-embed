@@ -2,25 +2,24 @@
 	import GeneralObserver from './general-observer.svelte'
 
 	export let buzzsproutId: string
-	export let width: string = '100'
-	export let height: string = '200'
+	export let width: string = '100%'
+	export let height: string = '200px'
+	export let disable_observer: boolean = false
 </script>
 
-<GeneralObserver>
+<GeneralObserver {disable_observer}>
 	<div
 		class="buzzsprout-sveltekit-embed"
 		style={`
       position: relative; 
-      height: ${height}px;
-      width: ${width}%;
+      height: ${height};
+      width: ${width};
     `}
 	>
 		<iframe
 			data-testid="buzzsprout"
 			title={`buzzsprout-${buzzsproutId}`}
 			src={`https://www.buzzsprout.com/${buzzsproutId}?client_source=admin&amp;iframe=true`}
-			{width}
-			{height}
 			frameBorder="0"
 			scrolling="no"
 			style={`
