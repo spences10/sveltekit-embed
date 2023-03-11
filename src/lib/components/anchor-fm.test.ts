@@ -22,8 +22,8 @@ describe('AnchorFm', () => {
 			disable_observer: true,
 		})
 		const iframe = getByTestId('anchor-fm-episode')
-		const expectedSrc = `https://anchor.fm/${episodeUrl}`
-		expect(iframe.getAttribute('src')).toBe(expectedSrc)
+		const expected_src = `https://anchor.fm/${episodeUrl}`
+		expect(iframe.getAttribute('src')).toBe(expected_src)
 	})
 
 	it('mounts with custom height and width', async () => {
