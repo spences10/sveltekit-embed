@@ -24,8 +24,8 @@
 	const baseUrl = `https://www.youtube-nocookie.com/embed/`
 	const src = `${baseUrl}${
 		youTubeId.length > 0
-			? `${youTubeId}?&autoplay=${autoPlay}&start=${startTime}`
-			: `&videoseries?list=${listId}`
+			? `${youTubeId}?autoplay=${autoPlay}&start=${startTime}`
+			: `?videoseries?list=${listId}`
 	}`
 </script>
 
@@ -38,8 +38,8 @@
   `}
 	>
 		<iframe
-			class="youtube-sveltekit-embed"
-			title={`youTube-${youTubeId}`}
+			data-testid="youTube"
+			title={`youTube-${listId.length > 0 ? listId : youTubeId}`}
 			{src}
 			frameborder="0"
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
