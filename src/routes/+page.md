@@ -116,7 +116,7 @@ pnpm i -D sveltekit-embed # npm or yarn even
 </script>
 
 <AnchorFm
-	episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+	episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 ```
 
@@ -160,7 +160,7 @@ Usage:
 
 ```html
 <AnchorFm
-	episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+	episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 ```
 
@@ -168,7 +168,7 @@ Output:
 
 <AnchorFm
   disable_observer={$disable_observer_store}
-  episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+  episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 
 ## Buzzsprout
