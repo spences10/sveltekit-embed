@@ -11,7 +11,7 @@ specifiers:
   '@typescript-eslint/parser': 5.54.1
   '@vitest/ui': ^0.29.0
   all-contributors-cli: 6.24.0
-  autoprefixer: 10.4.13
+  autoprefixer: 10.4.14
   cspell: ^6.28.0
   daisyui: 2.51.3
   eslint: 8.35.0
@@ -49,9 +49,9 @@ devDependencies:
   '@typescript-eslint/parser': 5.54.1_ycpbpc6yetojsgtrx3mwntkhsu
   '@vitest/ui': 0.29.2
   all-contributors-cli: 6.24.0
-  autoprefixer: 10.4.13_postcss@8.4.21
+  autoprefixer: 10.4.14_postcss@8.4.21
   cspell: 6.28.0
-  daisyui: 2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44
+  daisyui: 2.51.3_j7yt3jd32cwenjqavrrga47yr4
   eslint: 8.35.0
   eslint-config-prettier: 8.7.0_eslint@8.35.0
   eslint-plugin-svelte3: 4.0.0_n4ieifq2d7jq3sqoe474cgqlim
@@ -1167,15 +1167,15 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: true
 
-  /autoprefixer/10.4.13_postcss@8.4.21:
-    resolution: {integrity: sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==}
+  /autoprefixer/10.4.14_postcss@8.4.21:
+    resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001462
+      caniuse-lite: 1.0.30001464
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1220,7 +1220,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001462
+      caniuse-lite: 1.0.30001464
       electron-to-chromium: 1.4.325
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
@@ -1264,8 +1264,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001462:
-    resolution: {integrity: sha512-PDd20WuOBPiasZ7KbFnmQRyuLE7cFXW2PVd7dmALzbkUXEP46upAuCDm9eY9vho8fgNMGmbAX92QBZHzcnWIqw==}
+  /caniuse-lite/1.0.30001464:
+    resolution: {integrity: sha512-oww27MtUmusatpRpCGSOneQk2/l5czXANDSFvsc7VuOQ86s3ANhZetpwXNf1zY/zdfP63Xvjz325DAdAoES13g==}
     dev: true
 
   /chai/4.3.7:
@@ -1602,13 +1602,13 @@ packages:
       cssom: 0.3.8
     dev: true
 
-  /daisyui/2.51.3_gbtt6ss3tbiz4yjtvdr6fbrj44:
+  /daisyui/2.51.3_j7yt3jd32cwenjqavrrga47yr4:
     resolution: {integrity: sha512-AQa9exq/DsnvjyDi6bwOqHExQr9LJJag0iKRXNvRRtHXPo1gaAQ3ASJWylUB8J8KMH2M9zIpr7cvPHc7yGckyQ==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
     dependencies:
-      autoprefixer: 10.4.13_postcss@8.4.21
+      autoprefixer: 10.4.14_postcss@8.4.21
       color: 4.2.3
       css-selector-tokenizer: 0.8.0
       postcss: 8.4.21
@@ -3854,10 +3854,6 @@ packages:
       pascal-case: 3.1.2
       svelte: 3.55.1
       typescript: 4.9.5
-    dev: true
-
-  /sveltekit-embed/0.0.12:
-    resolution: {integrity: sha512-77GiPxkn4ZyF5tcq+YuosYjiFTrjYwA+sOMUiWoN+8sTCM0vJVi9sxHpIHWK6Cvmn0fAeaHagV//2i+tFmELkA==}
     dev: true
 
   /symbol-tree/3.2.4:

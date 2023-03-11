@@ -45,7 +45,7 @@
 		"@typescript-eslint/parser": "5.54.1",
 		"@vitest/ui": "^0.29.0",
 		"all-contributors-cli": "6.24.0",
-		"autoprefixer": "10.4.13",
+		"autoprefixer": "10.4.14",
 		"cspell": "^6.28.0",
 		"daisyui": "2.51.3",
 		"eslint": "8.35.0",
