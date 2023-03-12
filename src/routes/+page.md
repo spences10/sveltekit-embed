@@ -24,6 +24,7 @@
 	import { Head } from 'svead'
 	import { onMount } from 'svelte'
 	import { writable } from 'svelte/store'
+  import BackToTop from './back-to-top.svelte'
 
 	// Head variables
 	let title = 'This is SvelteKit embed'
@@ -68,6 +69,8 @@
 <Head {title} {description} {image} {url} {website} />
 
 <!-- cSpell:ignore yyoood,Zokm,Zrzbx -->
+
+<BackToTop />
 
 # SvelteKit Embed
 
