@@ -90,7 +90,7 @@ default is to load all the components.
 If you want to see the intersection observer in action then you'll
 need to toggle it off, reload the page and scroll down the page.
 
-<div class="flex items-end">
+<div class="flex items-center">
   <label for="general-observer-toggle" class="mr-2">
     Toggle the GeneralObserver:
   </label>
@@ -298,6 +298,7 @@ Usage:
   src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
   frameBorder="0"
   allow="encrypted-media"
+  style="border-radius: 0.9rem;"
 />
 ```
 
@@ -312,6 +313,7 @@ Output:
   src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
   frameBorder="0"
   allow="encrypted-media"
+  style="border-radius: 0.9rem;"
 />
 
 ## Gist
