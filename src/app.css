@@ -6,30 +6,12 @@ html {
 	word-break: break-word;
 }
 
-/* 
-  These are the styles from DaisyUI needed 
-  for the scroll bar colours 
-*/
-:root {
-	/* Default is Night */
-	--primary: #38bdf8;
-	--secondary: #818cf8;
-}
-[data-theme='night'] {
-	--primary: #38bdf8;
-	--secondary: #818cf8;
-}
-[data-theme='winter'] {
-	--primary: #047aff;
-	--secondary: #463aa2;
-}
-
 /* Scrollbar styles */
 
 /* Firefox */
 * {
 	scrollbar-width: thin;
-	scrollbar-color: var(--secondary) var(--primary);
+	scrollbar-color: hsl(var(--s)) hsl(var(--p));
 }
 
 /* Chrome, Edge, and Safari */
@@ -38,14 +20,18 @@ html {
 }
 
 *::-webkit-scrollbar-track {
-	background: var(--primary);
+	background: hsl(var(--p));
 	border-radius: 5px;
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: var(--secondary);
+	background-color: hsl(var(--s));
 	border-radius: 14px;
-	border: 3px solid var(--primary);
+	border: 3px solid hsl(var(--p));
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: hsl(var(--a));
 }
 
 @tailwind components;
