@@ -5,6 +5,7 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
+		environment: 'jsdom',
 	},
 	// https://vitejs.dev/config/#server-fs-allow
 	server: {
