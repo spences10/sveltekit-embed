@@ -170,7 +170,7 @@ Same procedure except use the `--tag` flag:
 # authenticate with npm
 npm login
 # bump version with npm
-npm version 0.0.8
+npm version 0.0.13
 # package with sveltekit
 pnpm run package
 # publish with tag
@@ -185,7 +185,7 @@ git push --tags
 # authenticate with npm
 npm login
 # move @next to latest
-npm dist-tag add
+npm dist-tag add sveltekit-embed@0.0.13 latest
 ```
 
 ## Contributors ✨
