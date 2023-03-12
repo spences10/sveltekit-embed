@@ -34,8 +34,8 @@ describe('Guild', () => {
 		})
 		const iframe = container.querySelector('iframe')
 
-		expect(iframe.parentElement.style.height).toBe('350px')
-		expect(iframe.parentElement.style.width).toBe('80%')
+		expect(iframe?.parentElement?.style.height).toBe('350px')
+		expect(iframe?.parentElement?.style.width).toBe('80%')
 	})
 
 	it('renders with a GeneralObserver', async () => {
