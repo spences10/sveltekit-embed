@@ -156,8 +156,6 @@ npm login
 npm version 0.0.8
 # package with sveltekit
 pnpm run package
-# publish from package directory
-cd package
 # publish
 npm publish
 # push tags to github
