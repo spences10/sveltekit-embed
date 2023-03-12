@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte'
-	
+
 	export let soundcloudLink: string = ''
 	export let width: string = '100%'
 	export let height: string = '300px'
