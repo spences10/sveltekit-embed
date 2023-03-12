@@ -71,8 +71,8 @@
 			</a>
 		</p>
 		<p>
-			Copyright © {`${new Date().getFullYear()}`} - All rights reserved
-			<span role="img" aria-label="shruggin emoji">🤷</span>
+			Copyright © 2021-{`${new Date().getFullYear()}`}. All rights reserved
+			<span role="img" aria-label="shrugging emoji">🤷</span>
 		</p>
 	</div>
 	<div>
