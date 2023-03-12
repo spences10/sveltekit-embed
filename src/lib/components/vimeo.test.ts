@@ -37,7 +37,7 @@ describe('Vimeo', () => {
 		})
 		const wrapper = container.querySelector('.vimeo-svelte-embed')
 
-		expect(wrapper.getAttribute('style')).toContain(
+		expect(wrapper?.getAttribute('style')).toContain(
 			'padding-top: 100%;'
 		)
 	})

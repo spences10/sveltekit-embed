@@ -29,8 +29,8 @@ describe('Relive', () => {
 			disable_observer: true,
 		})
 		const iframe = container.querySelector('iframe')
-		const div = iframe.parentElement
-		expect(div.style.width).toBe('80%')
+		const div = iframe?.parentElement
+		expect(div?.style.width).toBe('80%')
 	})
 
 	it('renders with a GeneralObserver', async () => {

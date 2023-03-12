@@ -1,11 +1,11 @@
 import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vitest/config'
 
-/** @type {import('vite').UserConfig} */
-const config = {
+export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
-		environment: 'jsdom',
 		include: ['src/**/*.{test,spec}.{js,ts}'],
+		environment: 'jsdom',
 	},
 	// https://vitejs.dev/config/#server-fs-allow
 	server: {
@@ -15,6 +15,4 @@ const config = {
 			allow: ['..'],
 		},
 	},
-}
-
-export default config
+})

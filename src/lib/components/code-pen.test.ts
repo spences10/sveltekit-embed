@@ -46,8 +46,8 @@ describe('CodePen', () => {
 			disable_observer: true,
 		})
 		const iframe = container.querySelector('iframe')
-		expect(iframe.getAttribute('style')).toContain('height: 200px')
-		expect(iframe.getAttribute('style')).toContain('width: 50%')
+		expect(iframe?.getAttribute('style')).toContain('height: 200px')
+		expect(iframe?.getAttribute('style')).toContain('width: 50%')
 	})
 
 	it('renders with a GeneralObserver', async () => {

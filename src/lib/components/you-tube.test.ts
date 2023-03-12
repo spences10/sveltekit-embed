@@ -49,21 +49,24 @@ describe('YouTube', () => {
 		expect(iframe.getAttribute('src')).toBe(expectedSrc)
 	})
 
-	const { getByTestId } = render(YouTube, {
-		youTubeId: 'abc123',
-		listId: '',
-		autoPlay: false,
-		skipTo: { h: 0, m: 0, s: 0 },
-		aspectRatio: '4:3',
-		iframe_styles: 'border-radius: 0.8rem;',
-		disable_observer: true,
-	})
-	const iframe = getByTestId('youTube')
-	const iframeWrapper = iframe.parentElement
+	it('sets aspect ratio using padding-top style', async () => {
+		const { getByTestId } = render(YouTube, {
+			youTubeId: 'abc123',
+			listId: '',
+			autoPlay: false,
+			skipTo: { h: 0, m: 0, s: 0 },
+			aspectRatio: '4:3',
+			iframe_styles: 'border-radius: 0.8rem;',
+			disable_observer: true,
+		})
 
-	expect(iframeWrapper.getAttribute('style')).toContain(
-		'padding-top: 75%;'
-	)
+		const iframe = getByTestId('youTube')
+		const iframeWrapper = iframe.parentElement
+
+		expect(iframeWrapper?.getAttribute('style')).toContain(
+			'padding-top: 75%;'
+		)
+	})
 
 	it('renders with a GeneralObserver', async () => {
 		const { getByTestId } = render(YouTube, {

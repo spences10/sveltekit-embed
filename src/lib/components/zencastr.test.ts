@@ -19,7 +19,8 @@ describe('Zencastr', () => {
 		})
 
 		const player = container.querySelector('blockquote')
-		expect(player.getAttribute('data-episode-href')).toBe(
+
+		expect(player?.getAttribute('data-episode-href')).toBe(
 			'https://zencastr.com/embed/abc123'
 		)
 	})
@@ -30,7 +31,8 @@ describe('Zencastr', () => {
 		})
 
 		const link = container.querySelector('a')
-		expect(link.getAttribute('href')).toBe(
+
+		expect(link?.getAttribute('href')).toBe(
 			'https://zencastr.com/embed/abc123'
 		)
 	})

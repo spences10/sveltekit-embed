@@ -1,12 +1,16 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte'
 
+	type Config = {
+		[key: string]: string
+	}
+
 	export let width: string = '100%'
 	export let height: string = '500px'
 	export let id: string = ''
 	export let view: 'editor' | 'preview' | 'default' = 'default'
-	export let clickToLoad: boolean = true //ctl
-	export let hideNavigation: boolean = false //hideNavigation
+	export let clickToLoad: boolean = true
+	export let hideNavigation: boolean = false
 	export let hideExplorer: boolean = true
 	export let theme: string | 'light' | 'dark' | 'default' = 'dark'
 	export let file: string | undefined
@@ -17,7 +21,7 @@
 	`
 
 	let baseUrl = `https://stackblitz.com/edit/${id}?embed=1`
-	const config = {
+	const config: Config = {
 		ctl: `${clickToLoad ? 1 : 0}`,
 		hideExplorer: `${hideExplorer ? 1 : 0}`,
 		hideNavigation: `${hideNavigation ? 1 : 0}`,

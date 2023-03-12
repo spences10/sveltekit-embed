@@ -14,14 +14,14 @@
 
 	const hasIntersectionObserver =
 		typeof IntersectionObserver !== 'undefined'
-	let observer =
+	let observer: IntersectionObserver | null =
 		hasIntersectionObserver && !disable_observer
 			? new IntersectionObserver(
 					entries => {
 						entries.forEach(entry => {
 							if (entry.intersectionRatio >= threshold) {
 								loaded = true
-								observer.disconnect()
+								observer!.disconnect()
 							}
 						})
 					},

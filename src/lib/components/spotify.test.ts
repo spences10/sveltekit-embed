@@ -30,8 +30,8 @@ describe('Spotify', () => {
 		})
 		const iframe = container.querySelector('iframe')
 
-		expect(iframe.style.height).toBe('300px')
-		expect(iframe.style.width).toBe('80%')
+		expect(iframe?.style.height).toBe('300px')
+		expect(iframe?.style.width).toBe('80%')
 	})
 
 	it('renders with a GeneralObserver', async () => {

@@ -78,7 +78,7 @@ Each component (except `Tweet`, `Toot` and `Zencastr`) is wrapped in
 an intersection observer `GeneralObserver` which will load up the
 component when it scrolls into the viewport.
 
-Currently the GeneralObserver is {enabled_state}.
+**Currently the GeneralObserver is {enabled_state}.**
 
 You can toggle the GeneralObserver on and off from here, just bear in
 mind that if this is the first time you've loaded this page then the

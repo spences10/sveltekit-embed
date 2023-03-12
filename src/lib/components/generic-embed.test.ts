@@ -41,8 +41,8 @@ describe('GenericEmbed', () => {
 		})
 		const iframe = container.querySelector('iframe')
 
-		expect(iframe.getAttribute('height')).toBe('200px')
-		expect(iframe.getAttribute('width')).toBe('50%')
+		expect(iframe?.getAttribute('height')).toBe('200px')
+		expect(iframe?.getAttribute('width')).toBe('50%')
 	})
 
 	it('renders with a GeneralObserver', async () => {

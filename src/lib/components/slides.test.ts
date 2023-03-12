@@ -38,8 +38,8 @@ describe('Slides', () => {
 		})
 		const iframe = container.querySelector('iframe')
 
-		expect(iframe.getAttribute('width')).toBe('80%')
-		expect(iframe.getAttribute('height')).toBe('300px')
+		expect(iframe?.getAttribute('width')).toBe('80%')
+		expect(iframe?.getAttribute('height')).toBe('300px')
 	})
 
 	it('renders with a GeneralObserver', async () => {

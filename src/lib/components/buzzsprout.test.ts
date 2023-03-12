@@ -34,8 +34,8 @@ describe('Buzzsprout', () => {
 		})
 		const iframe = container.querySelector('iframe')
 
-		expect(iframe.parentElement.style.height).toBe('200px')
-		expect(iframe.parentElement.style.width).toBe('50%')
+		expect(iframe?.parentElement?.style.height).toBe('200px')
+		expect(iframe?.parentElement?.style.width).toBe('50%')
 	})
 
 	it('renders with a GeneralObserver', async () => {

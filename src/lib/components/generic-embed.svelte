@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte'
-	
+
 	export let src: string = ''
 	export let title: string = ''
 	export let height: string = '152px'

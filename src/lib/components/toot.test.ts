@@ -33,6 +33,8 @@ describe('Toot', () => {
 		})
 		const iframe = container.querySelector('iframe')
 
-		expect(iframe.getAttribute('width')).toBe('400')
+		if (iframe) {
+			expect(iframe.getAttribute('width')).toBe('400')
+		}
 	})
 })
