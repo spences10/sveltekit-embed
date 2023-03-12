@@ -162,6 +162,32 @@ npm publish
 git push --tags
 ```
 
+**Publish @next package**
+
+Same procedure except use the `--tag` flag:
+
+```bash
+# authenticate with npm
+npm login
+# bump version with npm
+npm version 0.0.8
+# package with sveltekit
+pnpm run package
+# publish with tag
+npm publish --tag next
+# push tags to github
+git push --tags
+```
+
+**Move @next package to latest**
+
+```bash
+# authenticate with npm
+npm login
+# move @next to latest
+npm dist-tag add
+```
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people
