@@ -25,7 +25,7 @@
 			title={`vimeo-${vimeoId}`}
 			src={`https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay}#t=${h}h${m}m${s}s`}
 			frameBorder="0"
-			allow="autoplay; fullscreen"
+			allow="autoplay; fullscreen; picture-in-picture"
 			allowFullScreen
 			style={`
       position: absolute;
