@@ -1,9 +1,7 @@
 # SvelteKit Embed
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
@@ -205,6 +203,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ennoriel"><img src="https://avatars.githubusercontent.com/u/23211596?v=4?s=100" width="100px;" alt="Maxime Dupont"/><br /><sub><b>Maxime Dupont</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=Ennoriel" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://jamesperkins.dev/"><img src="https://avatars.githubusercontent.com/u/45409975?v=4?s=100" width="100px;" alt="James Perkins"/><br /><sub><b>James Perkins</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=perkinsjr" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://joaopalmeiro.github.io/"><img src="https://avatars.githubusercontent.com/u/17132927?v=4?s=100" width="100px;" alt="João Palmeiro"/><br /><sub><b>João Palmeiro</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=joaopalmeiro" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Jason3S"><img src="https://avatars.githubusercontent.com/u/3740137?v=4?s=100" width="100px;" alt="Jason Dent"/><br /><sub><b>Jason Dent</b></sub></a><br /><a href="https://github.com/spences10/sveltekit-embed/commits?author=Jason3S" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>

@@ -72,6 +72,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Jason3S",
+      "name": "Jason Dent",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3740137?v=4",
+      "profile": "https://github.com/Jason3S",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
