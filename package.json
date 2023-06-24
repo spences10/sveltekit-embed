@@ -52,7 +52,7 @@
 		"@sveltejs/kit": "^1.11.0",
 		"@sveltejs/package": "^2.0.2",
 		"@tailwindcss/typography": "^0.5.9",
-		"@testing-library/svelte": "^3.2.2",
+		"@testing-library/svelte": "^4.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.54.1",
 		"@typescript-eslint/parser": "^5.54.1",
 		"autoprefixer": "^10.4.14",
