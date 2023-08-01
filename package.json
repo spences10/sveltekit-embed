@@ -68,7 +68,7 @@
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^3.0.0",
 		"prettier-plugin-svelte": "^3.0.0",
-		"publint": "^0.1.12",
+		"publint": "^0.2.0",
 		"rehype-autolink-headings": "^6.1.1",
 		"rehype-slug": "^5.1.0",
 		"svead": "^0.0.4",
