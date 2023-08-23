@@ -6,6 +6,8 @@
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
 
+[![Tests: Unit](https://github.com/spences10/sveltekit-embed/actions/workflows/unit-test.yml/badge.svg)](https://github.com/spences10/sveltekit-embed/actions/workflows/unit-test.yml)
+
 This is a collection of embed components I use on a regular basis
 packaged up for use.
 
