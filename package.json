@@ -70,7 +70,7 @@
 		"prettier-plugin-svelte": "^3.0.3",
 		"publint": "^0.2.2",
 		"rehype-autolink-headings": "^6.1.1",
-		"rehype-slug": "^5.1.0",
+		"rehype-slug": "^6.0.0",
 		"svead": "^0.0.4",
 		"svelte": "^4.2.0",
 		"svelte-check": "^3.5.0",
