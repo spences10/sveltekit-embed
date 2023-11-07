@@ -56,7 +56,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.9.0",
 		"@typescript-eslint/parser": "^6.9.0",
 		"autoprefixer": "^10.4.16",
-		"cspell": "^7.3.8",
+		"cspell": "^8.0.0",
 		"daisyui": "^3.9.4",
 		"eslint": "^8.52.0",
 		"eslint-config-prettier": "^9.0.0",
