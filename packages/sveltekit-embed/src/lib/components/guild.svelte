@@ -24,13 +24,13 @@
   https://beta.guild.host/embeds/presentation/microfrontends-with-e6mtnf/item
 -->
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte'
+	import GeneralObserver from './general-observer.svelte';
 
-	export let height: string = '380px'
-	export let width: string = '100%'
-	export let card_id: string
+	export let height: string = '380px';
+	export let width: string = '100%';
+	export let card_id: string;
 	export let type: 'guild' | 'user' | 'event' | 'presentation' =
-		'guild'
+		'guild';
 	export let display_type:
 		| 'card'
 		| 'item'
@@ -39,8 +39,8 @@
 		| 'events/past'
 		| 'presentations/latest'
 		| 'presentations/upcoming'
-		| 'presentations/other' = 'card'
-	export let disable_observer: boolean = false
+		| 'presentations/other' = 'card';
+	export let disable_observer: boolean = false;
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -68,6 +68,6 @@
         height: 100%;
         border-radius: 0.5rem;
       `}
-		/>
+		></iframe>
 	</div>
 </GeneralObserver>

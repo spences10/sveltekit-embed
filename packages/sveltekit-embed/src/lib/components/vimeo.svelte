@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { getPadding } from '$lib/utils'
-	import GeneralObserver from './general-observer.svelte'
+	import { getPadding } from '$lib/utils/index.js';
+	import GeneralObserver from './general-observer.svelte';
 
-	export let vimeoId: string = ''
-	export let autoPlay: boolean = false
-	export let aspectRatio: string = '16:9'
-	export let skipTo = { h: 0, m: 0, s: 0 }
-	export let disable_observer: boolean = false
+	export let vimeoId: string = '';
+	export let autoPlay: boolean = false;
+	export let aspectRatio: string = '16:9';
+	export let skipTo = { h: 0, m: 0, s: 0 };
+	export let disable_observer: boolean = false;
 
-	const { h, m, s } = skipTo
+	const { h, m, s } = skipTo;
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -34,6 +34,6 @@
       width: 100%;
       height: 100%;
     `}
-		/>
+		></iframe>
 	</div>
 </GeneralObserver>

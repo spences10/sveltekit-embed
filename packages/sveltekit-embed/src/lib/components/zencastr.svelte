@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount } from 'svelte';
 
-	export let zencastrId: string = ''
+	export let zencastrId: string = '';
 
 	// TODO: want to do this the Svelte way, but using <svelte:head> doesn't work
 	onMount(() => {
-		const script = document.createElement('script')
-		script.async = true
-		script.src = 'https://zencastr.com/static/js/embed-player.js'
-		document.body.appendChild(script)
-	})
+		const script = document.createElement('script');
+		script.async = true;
+		script.src = 'https://zencastr.com/static/js/embed-player.js';
+		document.body.appendChild(script);
+	});
 </script>
 
 <section style="display:flex; justify-content: center;">

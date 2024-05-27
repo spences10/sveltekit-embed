@@ -1,10 +1,10 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte'
+	import GeneralObserver from './general-observer.svelte';
 
-	export let buzzsproutId: string
-	export let width: string = '100%'
-	export let height: string = '200px'
-	export let disable_observer: boolean = false
+	export let buzzsproutId: string;
+	export let width: string = '100%';
+	export let height: string = '200px';
+	export let disable_observer: boolean = false;
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -29,6 +29,6 @@
         width: 100%;
         height: 100%;
       `}
-		/>
+		></iframe>
 	</div>
 </GeneralObserver>
