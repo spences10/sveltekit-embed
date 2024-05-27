@@ -20,8 +20,8 @@
 		Vimeo,
 		YouTube,
 		Zencastr,
-	} from '$lib'
-	import { Head } from 'svead'
+	} from 'sveltekit-embed'
+	// import { Head } from 'svead'
 	import { onMount } from 'svelte'
 	import { writable } from 'svelte/store'
   import BackToTop from './back-to-top.svelte'
@@ -66,7 +66,7 @@
 		: 'disabled so components are only loaded when they scroll into viewport'
 </script>
 
-<Head {title} {description} {image} {url} {website} />
+<!-- <Head {title} {description} {image} {url} {website} /> -->
 
 <!-- cSpell:ignore yyoood,Zokm,Zrzbx -->
 
