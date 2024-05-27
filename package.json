@@ -7,15 +7,20 @@
 		"test:unit:web": "pnpm run build:packages && pnpm --filter=web test:unit",
 		"test:int:web": "pnpm run build:packages && pnpm --filter=web test:integration",
 		"coverage:web": "pnpm run build:packages && pnpm --filter=web coverage",
-		"dev:svead": "pnpm run build:packages && pnpm --filter=svead dev",
-		"build:svead": "pnpm run build:packages && pnpm --filter=svead build",
-		"preview:svead": "pnpm run build:packages && pnpm --filter=svead preview",
-		"test:unit:svead": "pnpm run build:packages && pnpm --filter=svead test:unit",
-		"test:int:svead": "pnpm run build:packages && pnpm --filter=svead test:integration",
-		"coverage:svead": "pnpm run build:packages && pnpm --filter=svead coverage",
+		"dev:sveltekit-embed": "pnpm run build:packages && pnpm --filter=sveltekit-embed dev",
+		"build:sveltekit-embed": "pnpm run build:packages && pnpm --filter=sveltekit-embed build",
+		"preview:sveltekit-embed": "pnpm run build:packages && pnpm --filter=sveltekit-embed preview",
+		"test:unit:sveltekit-embed": "pnpm run build:packages && pnpm --filter=sveltekit-embed test:unit",
+		"test:int:sveltekit-embed": "pnpm run build:packages && pnpm --filter=sveltekit-embed test:integration",
+		"coverage:sveltekit-embed": "pnpm run build:packages && pnpm --filter=sveltekit-embed coverage",
 		"build:packages": "pnpm -r --filter=\"./packages/*\" run build",
 		"format": "pnpm -r --filter=\"./apps/*\" --filter=\"./packages/*\" run format",
-		"lint": "pnpm -r --filter=\"./apps/*\" --filter=\"./packages/*\" run lint"
+		"lint": "pnpm -r --filter=\"./apps/*\" --filter=\"./packages/*\" run lint",
+		"cspell": "cspell '**/*.md' --config cspell.json --wordsOnly",
+		"contributors:add": "all-contributors add",
+		"contributors:generate": "all-contributors generate"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"cspell": "^8.8.3"
+	}
 }
