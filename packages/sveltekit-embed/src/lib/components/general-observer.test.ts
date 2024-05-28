@@ -1,6 +1,7 @@
-import GeneralObserver from '$lib/components/general-observer.svelte';
-import { cleanup, render } from '@testing-library/svelte';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
+import { afterEach, describe, expect, it } from 'vitest';
+
+import GeneralObserver from './general-observer.svelte';
 
 describe('General Observer', () => {
 	afterEach(() => cleanup());

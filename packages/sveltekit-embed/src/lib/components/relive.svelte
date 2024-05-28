@@ -1,9 +1,17 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let reliveId: string = '';
-	export let width: string = '100%';
-	export let disable_observer: boolean = false;
+	interface Props {
+		reliveId?: string;
+		width?: string;
+		disable_observer?: boolean;
+	}
+
+	let {
+		reliveId = '',
+		width = '100%',
+		disable_observer = false,
+	}: Props = $props();
 
 	const defaultMargin: number = 2;
 </script>

@@ -1,5 +1,5 @@
 import Slides from '$lib/components/slides.svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
 import { afterEach, describe, expect, it } from 'vitest';
 
 describe('Slides', () => {

@@ -1,14 +1,24 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let width = '100%';
-	export let height = '320px';
-	export let gistUri = '';
-	export let disable_observer: boolean = false;
-	export let iframe_styles: string = `
-		height: ${height};
-		width: ${width};
-	`;
+	interface Props {
+		width?: string;
+		height?: string;
+		gistUri?: string;
+		disable_observer?: boolean;
+		iframe_styles?: string;
+	}
+
+	let {
+		width = '100%',
+		height = '320px',
+		gistUri = '',
+		disable_observer = false,
+		iframe_styles = `
+			height: ${height};
+			width: ${width};
+		`,
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>

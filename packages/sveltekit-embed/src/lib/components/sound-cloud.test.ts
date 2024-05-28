@@ -1,5 +1,5 @@
 import SoundCloud from '$lib/components/sound-cloud.svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
 import { afterEach, describe, expect, it } from 'vitest';
 
 describe('SoundCloud', () => {

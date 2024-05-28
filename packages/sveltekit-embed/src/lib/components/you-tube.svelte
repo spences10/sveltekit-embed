@@ -2,15 +2,27 @@
 	import { getPadding } from '$lib/utils/index.js';
 	import GeneralObserver from './general-observer.svelte';
 
-	export let youTubeId: string = '';
-	export let listId: string = '';
-	export let autoPlay: boolean = false;
-	export let aspectRatio: string = '16:9';
-	export let skipTo = { h: 0, m: 0, s: 0 };
-	export let disable_observer: boolean = false;
-	export let iframe_styles: string = `
-		border-radius: 0.6rem;
-	`;
+	interface Props {
+		youTubeId?: string;
+		listId?: string;
+		autoPlay?: boolean;
+		aspectRatio?: string;
+		skipTo?: any;
+		disable_observer?: boolean;
+		iframe_styles?: string;
+	}
+
+	let {
+		youTubeId = '',
+		listId = '',
+		autoPlay = false,
+		aspectRatio = '16:9',
+		skipTo = { h: 0, m: 0, s: 0 },
+		disable_observer = false,
+		iframe_styles = `
+			border-radius: 0.6rem;
+		`,
+	}: Props = $props();
 
 	const { h, m, s } = skipTo;
 

@@ -1,5 +1,5 @@
 import CodePen from '$lib/components/code-pen.svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
 import { afterEach, describe, expect, it } from 'vitest';
 
 let codePenId = 'abcde';

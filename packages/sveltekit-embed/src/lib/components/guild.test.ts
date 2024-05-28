@@ -1,5 +1,5 @@
 import Guild from '$lib/components/guild.svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
 import { afterEach, describe, expect, it } from 'vitest';
 
 describe('Guild', () => {

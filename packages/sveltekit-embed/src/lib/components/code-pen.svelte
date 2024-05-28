@@ -1,24 +1,32 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let height: string = '500px';
-	export let width: string = '100%';
-	export let codePenId: string = '';
-	export let tabs:
-		| string[]
-		| 'js'
-		| 'css'
-		| 'scss'
-		| 'less'
-		| 'result' = 'result';
-	export let clickToLoad: boolean = true;
-	export let editable: boolean = true;
-	export let theme: string | 'light' | 'dark' | 'default' = 'default';
-	export let disable_observer: boolean = false;
-	export let iframe_styles: string = `
-		height: ${height};
-		width: ${width};	
-	`;
+	interface Props {
+		height?: string;
+		width?: string;
+		codePenId?: string;
+		tabs?: string[] | 'js' | 'css' | 'scss' | 'less' | 'result';
+		clickToLoad?: boolean;
+		editable?: boolean;
+		theme?: string | 'light' | 'dark' | 'default';
+		disable_observer?: boolean;
+		iframe_styles?: string;
+	}
+
+	let {
+		height = '500px',
+		width = '100%',
+		codePenId = '',
+		tabs = 'result',
+		clickToLoad = true,
+		editable = true,
+		theme = 'default',
+		disable_observer = false,
+		iframe_styles = `
+			height: ${height};
+			width: ${width};	
+		`,
+	}: Props = $props();
 
 	const baseUrl = `https://codepen.io/team/codepen/embed`;
 	const src = `${baseUrl}/${

@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	export let zencastrId: string = '';
+	interface Props {
+		zencastrId?: string;
+	}
+
+	let { zencastrId = '' }: Props = $props();
 
 	// TODO: want to do this the Svelte way, but using <svelte:head> doesn't work
 	onMount(() => {

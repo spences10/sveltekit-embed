@@ -1,10 +1,19 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let episodeUrl: string;
-	export let height: string = '100px';
-	export let width: string = '100%';
-	export let disable_observer: boolean = false;
+	interface Props {
+		episodeUrl: string;
+		height?: string;
+		width?: string;
+		disable_observer?: boolean;
+	}
+
+	let {
+		episodeUrl,
+		height = '100px',
+		width = '100%',
+		disable_observer = false,
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>

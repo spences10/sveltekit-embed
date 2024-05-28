@@ -5,20 +5,36 @@
 		[key: string]: string;
 	};
 
-	export let width: string = '100%';
-	export let height: string = '500px';
-	export let id: string = '';
-	export let view: 'editor' | 'preview' | 'default' = 'default';
-	export let clickToLoad: boolean = true;
-	export let hideNavigation: boolean = false;
-	export let hideExplorer: boolean = true;
-	export let theme: string | 'light' | 'dark' | 'default' = 'dark';
-	export let file: string | undefined;
-	export let disable_observer: boolean = false;
-	export let iframe_styles: string = `
-		height: ${height};
-		width: ${width};
-	`;
+	interface Props {
+		width?: string;
+		height?: string;
+		id?: string;
+		view?: 'editor' | 'preview' | 'default';
+		clickToLoad?: boolean;
+		hideNavigation?: boolean;
+		hideExplorer?: boolean;
+		theme?: string | 'light' | 'dark' | 'default';
+		file: string | undefined;
+		disable_observer?: boolean;
+		iframe_styles?: string;
+	}
+
+	let {
+		width = '100%',
+		height = '500px',
+		id = '',
+		view = 'default',
+		clickToLoad = true,
+		hideNavigation = false,
+		hideExplorer = true,
+		theme = 'dark',
+		file,
+		disable_observer = false,
+		iframe_styles = `
+			height: ${height};
+			width: ${width};
+		`,
+	}: Props = $props();
 
 	let baseUrl = `https://stackblitz.com/edit/${id}?embed=1`;
 	const config: Config = {

@@ -1,5 +1,5 @@
 import Buzzsprout from '$lib/components/buzzsprout.svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
 import { afterEach, describe, expect, it } from 'vitest';
 
 let buzzsproutId = '12345';

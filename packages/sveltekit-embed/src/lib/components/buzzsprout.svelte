@@ -1,10 +1,19 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let buzzsproutId: string;
-	export let width: string = '100%';
-	export let height: string = '200px';
-	export let disable_observer: boolean = false;
+	interface Props {
+		buzzsproutId: string;
+		width?: string;
+		height?: string;
+		disable_observer?: boolean;
+	}
+
+	let {
+		buzzsproutId,
+		width = '100%',
+		height = '200px',
+		disable_observer = false,
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>

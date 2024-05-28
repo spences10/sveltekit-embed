@@ -2,11 +2,21 @@
 	import { getPadding } from '$lib/utils/index.js';
 	import GeneralObserver from './general-observer.svelte';
 
-	export let vimeoId: string = '';
-	export let autoPlay: boolean = false;
-	export let aspectRatio: string = '16:9';
-	export let skipTo = { h: 0, m: 0, s: 0 };
-	export let disable_observer: boolean = false;
+	interface Props {
+		vimeoId?: string;
+		autoPlay?: boolean;
+		aspectRatio?: string;
+		skipTo?: any;
+		disable_observer?: boolean;
+	}
+
+	let {
+		vimeoId = '',
+		autoPlay = false,
+		aspectRatio = '16:9',
+		skipTo = { h: 0, m: 0, s: 0 },
+		disable_observer = false,
+	}: Props = $props();
 
 	const { h, m, s } = skipTo;
 </script>

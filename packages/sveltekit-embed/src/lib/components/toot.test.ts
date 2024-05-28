@@ -1,5 +1,5 @@
 import Toot from '$lib/components/toot.svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { cleanup, render } from '@testing-library/svelte/svelte5';
 import { afterEach, describe, expect, it } from 'vitest';
 
 describe('Toot', () => {

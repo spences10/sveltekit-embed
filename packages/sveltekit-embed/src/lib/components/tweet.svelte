@@ -1,6 +1,9 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	export let tweetLink: string = '';
+	interface Props {
+		tweetLink?: string;
+	}
+
+	let { tweetLink = '' }: Props = $props();
 
 	let twitter_widgets_script: HTMLScriptElement | null = null;
 
@@ -20,8 +23,12 @@
 		}
 	};
 
-	onMount(load_twitter_widgets_script);
-	onDestroy(remove_twitter_widget_script);
+	$effect(() => {
+		load_twitter_widgets_script();
+		return () => {
+			remove_twitter_widget_script();
+		};
+	});
 </script>
 
 <div class="tweet-wrapper">

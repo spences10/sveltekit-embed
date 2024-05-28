@@ -1,9 +1,17 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let episodeId: string = '';
-	export let theme: string = `dark`;
-	export let disable_observer: boolean = false;
+	interface Props {
+		episodeId?: string;
+		theme?: string;
+		disable_observer?: boolean;
+	}
+
+	let {
+		episodeId = '',
+		theme = `dark`,
+		disable_observer = false,
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>

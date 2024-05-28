@@ -1,12 +1,23 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let soundcloudLink: string = '';
-	export let width: string = '100%';
-	export let height: string = '300px';
-	export let showVisual: boolean = true;
-	export let disable_observer: boolean = false;
-	export let iframe_styles: string = '';
+	interface Props {
+		soundcloudLink?: string;
+		width?: string;
+		height?: string;
+		showVisual?: boolean;
+		disable_observer?: boolean;
+		iframe_styles?: string;
+	}
+
+	let {
+		soundcloudLink = '',
+		width = '100%',
+		height = '300px',
+		showVisual = true,
+		disable_observer = false,
+		iframe_styles = '',
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>

@@ -1,15 +1,25 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let spotifyLink: string = '';
-	export let width: string = '100%';
-	export let height: string = '152px';
-	export let disable_observer: boolean = false;
-	export let iframe_styles: string = `
-		border-radius: 0.8rem;
-		height: ${height};
-		width: ${width};
-	`;
+	interface Props {
+		spotifyLink?: string;
+		width?: string;
+		height?: string;
+		disable_observer?: boolean;
+		iframe_styles?: string;
+	}
+
+	let {
+		spotifyLink = '',
+		width = '100%',
+		height = '152px',
+		disable_observer = false,
+		iframe_styles = `
+			border-radius: 0.8rem;
+			height: ${height};
+			width: ${width};
+		`,
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>

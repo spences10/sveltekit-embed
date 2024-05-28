@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	export let instance: string = '';
-	export let username: string = '';
-	export let tootId: string = '';
+	interface Props {
+		instance?: string;
+		username?: string;
+		tootId?: string;
+	}
+
+	let { instance = '', username = '', tootId = '' }: Props = $props();
 
 	let mastodon_embed_script: HTMLScriptElement | null = null;
 
@@ -21,13 +24,19 @@
 		}
 	};
 
-	onMount(load_mastodon_embed_script);
-	onDestroy(remove_mastodon_embed_script);
+	$effect(() => {
+		load_mastodon_embed_script();
+		return () => {
+			remove_mastodon_embed_script();
+		};
+	});
 
-	$: trimmedUsername = username.trim();
-	$: atUsername = trimmedUsername.startsWith('@')
-		? trimmedUsername
-		: `@${trimmedUsername}`;
+	let trimmedUsername = $derived(username.trim());
+	let atUsername = $derived(
+		trimmedUsername.startsWith('@')
+			? trimmedUsername
+			: `@${trimmedUsername}`,
+	);
 </script>
 
 <div>

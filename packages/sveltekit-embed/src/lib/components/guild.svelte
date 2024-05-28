@@ -26,21 +26,31 @@
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
 
-	export let height: string = '380px';
-	export let width: string = '100%';
-	export let card_id: string;
-	export let type: 'guild' | 'user' | 'event' | 'presentation' =
-		'guild';
-	export let display_type:
-		| 'card'
-		| 'item'
-		| 'events/latest'
-		| 'events/upcoming'
-		| 'events/past'
-		| 'presentations/latest'
-		| 'presentations/upcoming'
-		| 'presentations/other' = 'card';
-	export let disable_observer: boolean = false;
+	interface Props {
+		height?: string;
+		width?: string;
+		card_id: string;
+		type?: 'guild' | 'user' | 'event' | 'presentation';
+		display_type?:
+			| 'card'
+			| 'item'
+			| 'events/latest'
+			| 'events/upcoming'
+			| 'events/past'
+			| 'presentations/latest'
+			| 'presentations/upcoming'
+			| 'presentations/other';
+		disable_observer?: boolean;
+	}
+
+	let {
+		height = '380px',
+		width = '100%',
+		card_id,
+		type = 'guild',
+		display_type = 'card',
+		disable_observer = false,
+	}: Props = $props();
 </script>
 
 <GeneralObserver {disable_observer}>
