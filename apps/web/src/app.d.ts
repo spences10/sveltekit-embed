@@ -8,7 +8,6 @@ declare global {
 		// interface PageState {}
 		interface Platform {
 			env: {
-				VERCEL?: string;
 				CF_PAGES?: string;
 			};
 		}

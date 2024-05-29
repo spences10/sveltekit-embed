@@ -21,13 +21,7 @@
 	});
 
 	$: $page.url.pathname, browser && Fathom.trackPageview();
-
-	console.log('=====================')
-	console.log(data)
-	console.log('=====================')
 </script>
-
-<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <header class="text-right">
 	<span
@@ -53,6 +47,14 @@
 		</div>
 	</span>
 </header>
+
+{#if !data.is_cloudflare}
+	<div class="text-center">
+		<p class="text-sm">
+			This site is hosted on <a href="https://vercel.com">Vercel</a>.
+		</p>
+	</div>
+{/if}
 
 <main class="prose prose-xl container mx-auto mb-20 max-w-3xl px-4">
 	<slot />
