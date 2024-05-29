@@ -80,6 +80,9 @@ importers:
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
+      svead:
+        specifier: ^0.0.4
+        version: 0.0.4
       svelte:
         specifier: 5.0.0-next.144
         version: 5.0.0-next.144
@@ -4124,6 +4127,10 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+    dev: true
+
+  /svead@0.0.4:
+    resolution: {integrity: sha512-BrS8WAvrdUs6nbXyZN/kABjLBcPFqA1QBnbpJQiRzxfdA/8XchNJmiRmcPFTElw5NA5k7AG/eYWjj91V+8+Heg==}
     dev: true
 
   /svelte-check@3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144):
