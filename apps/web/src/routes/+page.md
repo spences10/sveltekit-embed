@@ -26,7 +26,10 @@
 	import { writable } from 'svelte/store'
   import BackToTop from './back-to-top.svelte'
 
-	// Head variables
+  // is vercel?
+  const is_vercel = process.env.VERCEL === '1';
+	
+  // Head variables
 	let title = 'This is SvelteKit embed'
 	let description =
 		'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
@@ -73,6 +76,8 @@
 <BackToTop />
 
 # SvelteKit Embed
+
+{is_vercel}
 
 This is a collection of embed components I use on a regular basis
 packaged up for use.
