@@ -21,15 +21,12 @@
 		YouTube,
 		Zencastr,
 	} from 'sveltekit-embed'
-	// import { Head } from 'svead'
+	import { Head } from 'svead'
 	import { onMount } from 'svelte'
 	import { writable } from 'svelte/store'
   import BackToTop from './back-to-top.svelte'
 
-  // is vercel?
-  const is_vercel = process.env.VERCEL === '1';
-	
-  // Head variables
+	// Head variables
 	let title = 'This is SvelteKit embed'
 	let description =
 		'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
@@ -69,15 +66,13 @@
 		: 'disabled so components are only loaded when they scroll into viewport'
 </script>
 
-<!-- <Head {title} {description} {image} {url} {website} /> -->
+<Head {title} {description} {image} {url} {website} />
 
 <!-- cSpell:ignore yyoood,Zokm,Zrzbx -->
 
 <BackToTop />
 
 # SvelteKit Embed
-
-{is_vercel}
 
 This is a collection of embed components I use on a regular basis
 packaged up for use.
@@ -120,7 +115,7 @@ pnpm i -D sveltekit-embed # npm or yarn even
 ```svelte
 <!-- +page.svelte -->
 <script>
-	import { AnchorFm } from 'sveltekit-embed'
+	import { AnchorFm } from 'sveltekit-embed';
 </script>
 
 <AnchorFm
@@ -158,10 +153,10 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 Props:
 
 ```ts
-episodeUrl: string
-height: string = '100px'
-width: string = '100%'
-disable_observer: boolean = false
+episodeUrl: string;
+height: string = '100px';
+width: string = '100%';
+disable_observer: boolean = false;
 ```
 
 Usage:
@@ -184,10 +179,10 @@ Output:
 Props:
 
 ```ts
-buzzsproutId: string
-width: string = '100%'
-height: string = '200px'
-disable_observer: boolean = false
+buzzsproutId: string;
+width: string = '100%';
+height: string = '200px';
+disable_observer: boolean = false;
 ```
 
 Usage:
@@ -251,16 +246,16 @@ Output:
 Props:
 
 ```ts
-theme: string = 'auto'
-frameSrc: string = ''
-height: string = '300px'
-width: string = '100%'
-disable_observer: boolean = false
+theme: string = 'auto';
+frameSrc: string = '';
+height: string = '300px';
+width: string = '100%';
+disable_observer: boolean = false;
 iframe_styles: string = `
   border-radius: 0.6rem;
   height: ${height};
   width: ${width};	
-`
+`;
 ```
 
 Usage:
@@ -284,11 +279,11 @@ also provides a slot, to bring your own markup besides the iframe
 Props:
 
 ```ts
-src: string = ''
-title: string = ''
-height: string = '152px'
-width: string = '100%'
-disable_observer: boolean = false
+src: string = '';
+title: string = '';
+height: string = '152px';
+width: string = '100%';
+disable_observer: boolean = false;
 ```
 
 Usage:
@@ -326,14 +321,14 @@ Output:
 Props:
 
 ```ts
-width = '100%'
-height = '320px'
-gistUri = ''
-disable_observer: boolean = false
+width = '100%';
+height = '320px';
+gistUri = '';
+disable_observer: boolean = false;
 iframe_styles: string = `
   height: ${height};
   width: ${width};
-`
+`;
 ```
 
 Usage:
@@ -395,9 +390,9 @@ Output:
 Props:
 
 ```ts
-reliveId: string = ''
-width: string = '100%'
-disable_observer: boolean = false
+reliveId: string = '';
+width: string = '100%';
+disable_observer: boolean = false;
 ```
 
 Usage:
@@ -418,9 +413,9 @@ Output:
 Props:
 
 ```ts
-episodeId: string = ''
-theme: string = `dark`
-disable_observer: boolean = false
+episodeId: string = '';
+theme: string = `dark`;
+disable_observer: boolean = false;
 ```
 
 Usage:
@@ -478,12 +473,12 @@ Output:
 Props:
 
 ```ts
-soundcloudLink: string = ''
-width: string = '100%'
-height: string = '300px'
-showVisual: boolean = true
-disable_observer: boolean = false
-iframe_styles: string = ''
+soundcloudLink: string = '';
+width: string = '100%';
+height: string = '300px';
+showVisual: boolean = true;
+disable_observer: boolean = false;
+iframe_styles: string = '';
 ```
 
 Usage:
@@ -506,15 +501,15 @@ Output:
 Props:
 
 ```ts
-spotifyLink: string = ''
-height: string = '100%'
-width: string = '152px'
-disable_observer: boolean = false
+spotifyLink: string = '';
+height: string = '100%';
+width: string = '152px';
+disable_observer: boolean = false;
 iframe_styles: string = `
   border-radius: 0.8rem;
   height: ${height};
   width: ${width};
-`
+`;
 ```
 
 Usage:
@@ -569,9 +564,9 @@ Output:
 Props:
 
 ```ts
-instance: string = ''
-username: string = ''
-tootId: string = ''
+instance: string = '';
+username: string = '';
+tootId: string = '';
 ```
 
 Usage:
@@ -597,7 +592,7 @@ Output:
 Props:
 
 ```ts
-tweetLink: string = ''
+tweetLink: string = '';
 ```
 
 Usage:
@@ -669,7 +664,7 @@ Output:
 Props:
 
 ```ts
-zencastrId: string = ''
+zencastrId: string = '';
 ```
 
 Usage:
