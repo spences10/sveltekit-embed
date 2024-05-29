@@ -156,8 +156,8 @@ importers:
         specifier: ^3.1.2
         version: 3.2.3(prettier@3.2.5)(svelte@5.0.0-next.144)
       publint:
-        specifier: ^0.1.9
-        version: 0.1.16
+        specifier: ^0.2.0
+        version: 0.2.8
       svelte:
         specifier: 5.0.0-next.144
         version: 5.0.0-next.144
@@ -3996,8 +3996,8 @@ packages:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
     dev: true
 
-  /publint@0.1.16:
-    resolution: {integrity: sha512-wJgk7HnXDT5Ap0DjFYbGz78kPkN44iQvDiaq8P63IEEyNU9mYXvaMd2cAyIM6OgqXM/IA3CK6XWIsRq+wjNpgw==}
+  /publint@0.2.8:
+    resolution: {integrity: sha512-C5MjGJ7gpanqaDpgBN+6QhjvXcoj0/YpbucoW29oO5729CGTMzfr3wZTIYcpzB1xl9ZfEqj4KL86P2Z50pt/JA==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
