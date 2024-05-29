@@ -49,9 +49,23 @@
 </header>
 
 {#if !data.is_cloudflare}
-	<div class="text-center">
-		<p class="text-sm">
-			This site is hosted on <a href="https://vercel.com">Vercel</a>.
+	<div
+		role="banner"
+		class="rounded-box prose-a:text-info-content bg-primary relative mx-5 my-8 text-center shadow-lg lg:mx-20"
+	>
+		<h2
+			class="text-primary-content p-4 text-3xl font-bold tracking-wide"
+		>
+			We've moved to Cloudflare!
+		</h2>
+		<p class="text-primary-content px-4 pb-6 text-xl">
+			This is now being hosted on Cloudflare Pages. You can check it
+			out on <a
+				href="https://sveltekit-embed.pages.dev"
+				class="link link-secondary"
+			>
+				https://sveltekit-embed.pages.dev
+			</a>
 		</p>
 	</div>
 {/if}
