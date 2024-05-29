@@ -85,7 +85,7 @@ importers:
         version: 5.0.0-next.144
       svelte-check:
         specifier: ^3.7.1
-        version: 3.7.1(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144)
+        version: 3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144)
       sveltekit-embed:
         specifier: workspace:*
         version: link:../../packages/sveltekit-embed
@@ -163,7 +163,7 @@ importers:
         version: 5.0.0-next.144
       svelte-check:
         specifier: ^3.6.0
-        version: 3.7.1(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144)
+        version: 3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144)
       tslib:
         specifier: ^2.4.1
         version: 2.6.2
@@ -4386,8 +4386,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-check@3.7.1(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144):
-    resolution: {integrity: sha512-U4uJoLCzmz2o2U33c7mPDJNhRYX/DNFV11XTUDlFxaKLsO7P+40gvJHMPpoRfa24jqZfST4/G9fGNcUGMO8NAQ==}
+  /svelte-check@3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.144):
+    resolution: {integrity: sha512-7Nxn+3X97oIvMzYJ7t27w00qUf1Y52irE2RU2dQAd5PyvfGp4E7NLhFKVhb6PV2fx7dCRMpNKDIuazmGthjpSQ==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
