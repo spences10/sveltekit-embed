@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import {
@@ -12,6 +12,8 @@
 	import '../app.pcss';
 	import '../prism.css';
 
+	export let data;
+
 	onMount(() => {
 		Fathom.load(PUBLIC_FATHOM_ID, {
 			url: PUBLIC_FATHOM_URL,
@@ -19,7 +21,13 @@
 	});
 
 	$: $page.url.pathname, browser && Fathom.trackPageview();
+
+	console.log('=====================')
+	console.log(data)
+	console.log('=====================')
 </script>
+
+<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <header class="text-right">
 	<span
@@ -46,12 +54,12 @@
 	</span>
 </header>
 
-<main class="container prose prose-xl mx-auto mb-20 max-w-3xl px-4">
+<main class="prose prose-xl container mx-auto mb-20 max-w-3xl px-4">
 	<slot />
 </main>
 
 <footer
-	class="footer footer-center bg-primary p-10 text-primary-content"
+	class="footer footer-center bg-primary text-primary-content p-10"
 >
 	<div class="text-xl">
 		<img
@@ -62,7 +70,7 @@
 		<p class="font-bold">
 			Made with <span role="img" aria-label="red heart">❤️</span> by
 			<a
-				class="link transition hover:text-secondary"
+				class="link hover:text-secondary transition"
 				on:click={() => Fathom.trackEvent(`scottspence.com click`)}
 				href="https://scottspence.com"
 				target="_blank"
