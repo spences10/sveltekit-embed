@@ -1,4 +1,5 @@
 name: 'Tests: Unit'
+
 on:
   push:
     branches: [main]
@@ -7,33 +8,29 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  unit-tests:
-    name: Run unit tests
+  unit_tests:
+    name: Run unit tests for Package
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key:
-            ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
-      - uses: pnpm/action-setup@v3.0.0
-        with:
-          version: 8.0.0
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          # prettier-ignore
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-
+      - uses: pnpm/action-setup@v2.4.0
+        with:
+          version: '^8.0.0'
       - name: Install dependencies
-        run: pnpm install
-      - name: Build
-        run: pnpm run build
+        run: pnpm recursive install
+      - name: Run unit tests
+        run: pnpm run test:ci
+        working-directory: packages/sveltekit-embed
         env:
           PUBLIC_FATHOM_ID: ${{ secrets.PUBLIC_FATHOM_ID }}
           PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
-      - name: Test
-        run: pnpm run test:ci
-      - name: Check spelling
-        run: pnpm run cspell

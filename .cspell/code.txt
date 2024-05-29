@@ -2,6 +2,7 @@ allowtransparency
 colspan
 iframe
 markdownlint
+pcss
 tbody
 testid
 tfoot
