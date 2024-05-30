@@ -51,7 +51,7 @@
 {#if !data.is_cloudflare}
 	<div
 		role="banner"
-		class="rounded-box prose-a:text-info-content bg-primary relative mx-5 my-8 text-center shadow-lg lg:mx-20"
+		class="rounded-box prose-a:text-info-content bg-primary relative mb-8 text-center shadow-lg lg:mx-20"
 	>
 		<h2
 			class="text-primary-content p-4 text-3xl font-bold tracking-wide"
