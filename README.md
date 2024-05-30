@@ -1,7 +1,9 @@
 # SvelteKit Embed
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MadeWithSvelte.com shield](https://madewithsvelte.com/storage/repo-shields/3786-shield.svg)](https://madewithsvelte.com/p/sveltekit-embed/shield-link)
@@ -27,7 +29,7 @@ Use like a normal Svelte component:
 
 ```html
 <script>
-	import { AnchorFm } from 'sveltekit-embed'
+	import { AnchorFm } from 'sveltekit-embed';
 </script>
 
 <AnchorFm
@@ -66,33 +68,30 @@ Use like a normal Svelte component:
 Create an
 [issue](https://github.com/spences10/sveltekit-embed/issues/new)
 
-## Todo
-
-- [ ] Add more components
-- [ ] Tests... need expanding
-- [x] If you know how to type a custom action in Svelte, please submit
-      a PR
-
 ## Developing locally
 
-Rename the `.sample.env` file to `.env`.
+For the `web` page and testing new components there you'll need to
+have empty `env` variables. Rename the `.sample.env` file to `.env`.
 
 ```bash
-mv .sample.env .env
+mv .sample.env apps/web/.env
 ```
 
-Create the component in the `src/lib/components` directory.
+Create the component in the
+`packages/sveltekit-embed/src/lib/components` directory.
 
-Add the component to the `src/lib/index.ts` file:
+Export the component from the
+`packages/sveltekit-embed/src/lib/index.ts` file:
 
 ```ts
-export { default as MyComponent } from './components/my-component.svelte'
+export { default as MyComponent } from './components/my-component.svelte';
 ```
 
-Import the component locally into the `src/routes/+page.md` file:
+Import the component locally into the `src/routes/+page.md` file, or
+create your own (`+page.svelte`) page for testing:
 
 ```svelte
-import {MyComponent} from '$lib'
+import {MyComponent} from 'sveltekit-embed'
 ```
 
 After importing the component, add it to the
@@ -110,7 +109,7 @@ After importing the component, add it to the
 Props:
 
 ```ts
-myComponentId: string = ''
+myComponentId: string = '';
 ```
 
 Usage:
@@ -124,11 +123,8 @@ Output:
 <MyComponent myComponentId="..." />
 ````
 
-Test the package locally with the `package:local` script:
-
-```bash
-npm run package:local
-```
+Running the dev server on the `web` page will package the changes for
+use in the web app.
 
 Test locally, then submit a PR 🙏
 
