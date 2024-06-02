@@ -63,8 +63,8 @@ importers:
         specifier: ^8.4.38
         version: 8.4.38
       postcss-load-config:
-        specifier: ^5.1.0
-        version: 5.1.0(postcss@8.4.38)
+        specifier: ^6.0.0
+        version: 6.0.0(postcss@8.4.38)
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -88,7 +88,7 @@ importers:
         version: 5.0.0-next.148
       svelte-check:
         specifier: ^3.7.1
-        version: 3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.148)
+        version: 3.8.0(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.148)
       sveltekit-embed:
         specifier: workspace:*
         version: link:../../packages/sveltekit-embed
@@ -166,7 +166,7 @@ importers:
         version: 5.0.0-next.148
       svelte-check:
         specifier: ^3.6.0
-        version: 3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.148)
+        version: 3.8.0(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.148)
       tslib:
         specifier: ^2.4.1
         version: 2.6.2
@@ -3575,13 +3575,14 @@ packages:
       yaml: 2.4.2
     dev: true
 
-  /postcss-load-config@5.1.0(postcss@8.4.38):
-    resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
+  /postcss-load-config@6.0.0(postcss@8.4.38):
+    resolution: {integrity: sha512-Awdbn0DxIoOD0y9ljT7T8nm57tA0EGhnBRN2o8Dn/qZj4XuFfQ9q3mDgB5f4+A8wuD6x23RUgr0RMaId4bcFvA==}
     engines: {node: '>= 18'}
     peerDependencies:
       jiti: '>=1.21.0'
       postcss: '>=8.0.9'
       tsx: ^4.8.1
+      yaml: ^2.4.2
     peerDependenciesMeta:
       jiti:
         optional: true
@@ -3589,10 +3590,11 @@ packages:
         optional: true
       tsx:
         optional: true
+      yaml:
+        optional: true
     dependencies:
       lilconfig: 3.1.1
       postcss: 8.4.38
-      yaml: 2.4.2
     dev: true
 
   /postcss-nested@6.0.1(postcss@8.4.38):
@@ -4146,7 +4148,7 @@ packages:
     resolution: {integrity: sha512-BrS8WAvrdUs6nbXyZN/kABjLBcPFqA1QBnbpJQiRzxfdA/8XchNJmiRmcPFTElw5NA5k7AG/eYWjj91V+8+Heg==}
     dev: true
 
-  /svelte-check@3.8.0(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.148):
+  /svelte-check@3.8.0(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.148):
     resolution: {integrity: sha512-7Nxn+3X97oIvMzYJ7t27w00qUf1Y52irE2RU2dQAd5PyvfGp4E7NLhFKVhb6PV2fx7dCRMpNKDIuazmGthjpSQ==}
     hasBin: true
     peerDependencies:
@@ -4159,7 +4161,7 @@ packages:
       picocolors: 1.0.1
       sade: 1.8.1
       svelte: 5.0.0-next.148
-      svelte-preprocess: 5.1.4(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.148)(typescript@5.4.5)
+      svelte-preprocess: 5.1.4(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.148)(typescript@5.4.5)
       typescript: 5.4.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -4199,7 +4201,7 @@ packages:
       svelte: 5.0.0-next.148
     dev: true
 
-  /svelte-preprocess@5.1.4(postcss-load-config@5.1.0)(postcss@8.4.38)(svelte@5.0.0-next.148)(typescript@5.4.5):
+  /svelte-preprocess@5.1.4(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.148)(typescript@5.4.5):
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}
     engines: {node: '>= 16.0.0'}
     requiresBuild: true
@@ -4241,7 +4243,7 @@ packages:
       detect-indent: 6.1.0
       magic-string: 0.30.10
       postcss: 8.4.38
-      postcss-load-config: 5.1.0(postcss@8.4.38)
+      postcss-load-config: 6.0.0(postcss@8.4.38)
       sorcery: 0.11.0
       strip-indent: 3.0.0
       svelte: 5.0.0-next.148
