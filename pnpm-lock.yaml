@@ -58,7 +58,7 @@ importers:
         version: 3.6.0
       mdsvex:
         specifier: ^0.11.0
-        version: 0.11.0(svelte@5.0.0-next.154)
+        version: 0.11.2(svelte@5.0.0-next.154)
       postcss:
         specifier: ^8.4.38
         version: 8.4.38
@@ -3141,10 +3141,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /mdsvex@0.11.0(svelte@5.0.0-next.154):
-    resolution: {integrity: sha512-gJF1s0N2nCmdxcKn8HDn0LKrN8poStqAicp6bBcsKFd/zkUBGLP5e7vnxu+g0pjBbDFOscUyI1mtHz+YK2TCDw==}
+  /mdsvex@0.11.2(svelte@5.0.0-next.154):
+    resolution: {integrity: sha512-Y4ab+vLvTJS88196Scb/RFNaHMHVSWw6CwfsgWIQP8f42D57iDII0/qABSu530V4pkv8s6T2nx3ds0MC1VwFLA==}
     peerDependencies:
-      svelte: '>=3 <5'
+      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
     dependencies:
       '@types/unist': 2.0.10
       prism-svelte: 0.4.7
