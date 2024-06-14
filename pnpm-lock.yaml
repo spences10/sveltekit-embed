@@ -121,7 +121,7 @@ importers:
         version: 2.5.10(@sveltejs/vite-plugin-svelte@3.1.1)(svelte@5.0.0-next.154)(vite@5.2.13)
       '@sveltejs/package':
         specifier: ^2.0.0
-        version: 2.3.1(svelte@5.0.0-next.154)(typescript@5.4.5)
+        version: 2.3.2(svelte@5.0.0-next.154)(typescript@5.4.5)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.0.0
         version: 3.1.1(svelte@5.0.0-next.154)(vite@5.2.13)
@@ -1070,8 +1070,8 @@ packages:
       vite: 5.2.13
     dev: true
 
-  /@sveltejs/package@2.3.1(svelte@5.0.0-next.154)(typescript@5.4.5):
-    resolution: {integrity: sha512-JvR2J4ost1oCn1CSdqenYRwGX/1RX+7LN+VZ71aPnz3JAlIFaEKQd1pBxlb+OSQTfeugJO0W39gB9voAbBO5ow==}
+  /@sveltejs/package@2.3.2(svelte@5.0.0-next.154)(typescript@5.4.5):
+    resolution: {integrity: sha512-6M8/Te7iXRG7SiH92wugqfyoJpuepjn78L433LnXicUeMso9M/N4vdL9DPK3MfTkVVY4klhNRptVqme3p4oZWA==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     peerDependencies:
@@ -1082,7 +1082,7 @@ packages:
       sade: 1.8.1
       semver: 7.6.2
       svelte: 5.0.0-next.154
-      svelte2tsx: 0.7.8(svelte@5.0.0-next.154)(typescript@5.4.5)
+      svelte2tsx: 0.7.9(svelte@5.0.0-next.154)(typescript@5.4.5)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -4258,8 +4258,8 @@ packages:
       typescript: 5.4.5
     dev: true
 
-  /svelte2tsx@0.7.8(svelte@5.0.0-next.154)(typescript@5.4.5):
-    resolution: {integrity: sha512-ABK3RDFcy59AqAiU1N5Kxu1RnKrb1GDMrQjLgNgJfE8Q+coCKpjCAPtUVKQM2HnmuqeNWcT3NqfXbE+ZmN5Pow==}
+  /svelte2tsx@0.7.9(svelte@5.0.0-next.154)(typescript@5.4.5):
+    resolution: {integrity: sha512-Rm+0LAwg9wT4H2IsR8EaM9EWErTzi9LmuZKxkH5b1ua94XjQmwHstBP4VabLgA9AE6XmwBg+xK7Cjzwfm6ustQ==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
