@@ -88,7 +88,7 @@ importers:
         version: 5.0.0-next.154
       svelte-check:
         specifier: ^3.7.1
-        version: 3.8.0(postcss-load-config@6.0.1)(postcss@8.4.38)(svelte@5.0.0-next.154)
+        version: 3.8.1(postcss-load-config@6.0.1)(postcss@8.4.38)(svelte@5.0.0-next.154)
       sveltekit-embed:
         specifier: workspace:*
         version: link:../../packages/sveltekit-embed
@@ -166,7 +166,7 @@ importers:
         version: 5.0.0-next.154
       svelte-check:
         specifier: ^3.6.0
-        version: 3.8.0(postcss-load-config@6.0.1)(postcss@8.4.38)(svelte@5.0.0-next.154)
+        version: 3.8.1(postcss-load-config@6.0.1)(postcss@8.4.38)(svelte@5.0.0-next.154)
       tslib:
         specifier: ^2.4.1
         version: 2.6.3
@@ -1588,8 +1588,9 @@ packages:
       update-browserslist-db: 1.0.16(browserslist@4.23.0)
     dev: true
 
-  /buffer-crc32@0.2.13:
-    resolution: {integrity: sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==}
+  /buffer-crc32@1.0.0:
+    resolution: {integrity: sha512-Db1SbgBS/fg/392AblrMJk97KggmvYhr4pB5ZIMTWtaivCPMWLkmb7m21cJvpvgK+J3nsU2CmmixNBZx4vFj/w==}
+    engines: {node: '>=8.0.0'}
     dev: true
 
   /cac@6.7.14:
@@ -4034,12 +4035,12 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /sorcery@0.11.0:
-    resolution: {integrity: sha512-J69LQ22xrQB1cIFJhPfgtLuI6BpWRiWu1Y3vSsIwK/eAScqJxd/+CJlUuHQRdX2C9NGFamq+KqNywGgaThwfHw==}
+  /sorcery@0.11.1:
+    resolution: {integrity: sha512-o7npfeJE6wi6J9l0/5LKshFzZ2rMatRiCDwYeDQaOzqdzRJwALhX7mk/A/ecg6wjMu7wdZbmXfD2S/vpOg0bdQ==}
     hasBin: true
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
-      buffer-crc32: 0.2.13
+      buffer-crc32: 1.0.0
       minimist: 1.2.8
       sander: 0.5.1
     dev: true
@@ -4156,8 +4157,8 @@ packages:
     resolution: {integrity: sha512-BrS8WAvrdUs6nbXyZN/kABjLBcPFqA1QBnbpJQiRzxfdA/8XchNJmiRmcPFTElw5NA5k7AG/eYWjj91V+8+Heg==}
     dev: true
 
-  /svelte-check@3.8.0(postcss-load-config@6.0.1)(postcss@8.4.38)(svelte@5.0.0-next.154):
-    resolution: {integrity: sha512-7Nxn+3X97oIvMzYJ7t27w00qUf1Y52irE2RU2dQAd5PyvfGp4E7NLhFKVhb6PV2fx7dCRMpNKDIuazmGthjpSQ==}
+  /svelte-check@3.8.1(postcss-load-config@6.0.1)(postcss@8.4.38)(svelte@5.0.0-next.154):
+    resolution: {integrity: sha512-KlQ0TRVe01mdvh49Ylkr9FQxO/UWbQOtaIrccl3gjgkvby1TxY41VkT7ijCl6i29FjaJPE4m6YGmhdqov0MfkA==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
@@ -4252,7 +4253,7 @@ packages:
       magic-string: 0.30.10
       postcss: 8.4.38
       postcss-load-config: 6.0.1(postcss@8.4.38)
-      sorcery: 0.11.0
+      sorcery: 0.11.1
       strip-indent: 3.0.0
       svelte: 5.0.0-next.154
       typescript: 5.4.5
