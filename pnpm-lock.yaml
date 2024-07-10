@@ -55,7 +55,7 @@ importers:
         version: 2.41.0(eslint@9.6.0)(svelte@5.0.0-next.179)
       fathom-client:
         specifier: ^3.6.0
-        version: 3.7.0
+        version: 3.7.1
       mdsvex:
         specifier: ^0.11.0
         version: 0.11.2(svelte@5.0.0-next.179)
@@ -148,7 +148,7 @@ importers:
         version: 2.41.0(eslint@9.6.0)(svelte@5.0.0-next.179)
       fathom-client:
         specifier: ^3.6.0
-        version: 3.7.0
+        version: 3.7.1
       jsdom:
         specifier: ^24.1.0
         version: 24.1.0
@@ -2297,8 +2297,8 @@ packages:
       reusify: 1.0.4
     dev: true
 
-  /fathom-client@3.7.0:
-    resolution: {integrity: sha512-lMEyR3lSThlkK69+f/16OEyuii743iJGcZ6aIUKT5qYH9lGi7ENTYwuxh5NWWYSO6qs57we01nLxncW8kegJlw==}
+  /fathom-client@3.7.1:
+    resolution: {integrity: sha512-qpSRH9GuMIKhCsL4QPXYJP5EfO0l1jvLuOVUPR28LSKr+4zyPkpJu+ZEVCQdFgMJlKSP1oPIcptTpyEScdvE3Q==}
     dev: true
 
   /file-entry-cache@8.0.0:
