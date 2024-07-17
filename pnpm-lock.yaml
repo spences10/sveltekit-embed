@@ -70,10 +70,10 @@ importers:
         version: 3.3.3
       prettier-plugin-svelte:
         specifier: ^3.2.3
-        version: 3.2.5(prettier@3.3.3)(svelte@5.0.0-next.184)
+        version: 3.2.6(prettier@3.3.3)(svelte@5.0.0-next.184)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.0
-        version: 0.6.5(prettier-plugin-svelte@3.2.5)(prettier@3.3.3)
+        version: 0.6.5(prettier-plugin-svelte@3.2.6)(prettier@3.3.3)
       rehype-autolink-headings:
         specifier: ^7.1.0
         version: 7.1.0
@@ -157,7 +157,7 @@ importers:
         version: 3.3.3
       prettier-plugin-svelte:
         specifier: ^3.1.2
-        version: 3.2.5(prettier@3.3.3)(svelte@5.0.0-next.184)
+        version: 3.2.6(prettier@3.3.3)(svelte@5.0.0-next.184)
       publint:
         specifier: ^0.2.0
         version: 0.2.8
@@ -3326,8 +3326,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte@3.2.5(prettier@3.3.3)(svelte@5.0.0-next.184):
-    resolution: {integrity: sha512-vP/M/Goc8z4iVIvrwXwbrYVjJgA0Hf8PO1G4LBh/ocSt6vUP6sLvyu9F3ABEGr+dbKyxZjEKLkeFsWy/yYl0HQ==}
+  /prettier-plugin-svelte@3.2.6(prettier@3.3.3)(svelte@5.0.0-next.184):
+    resolution: {integrity: sha512-Y1XWLw7vXUQQZmgv1JAEiLcErqUniAF2wO7QJsw8BVMvpLET2dI5WpEIEJx1r11iHVdSMzQxivyfrH9On9t2IQ==}
     peerDependencies:
       prettier: ^3.0.0
       svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
@@ -3336,7 +3336,7 @@ packages:
       svelte: 5.0.0-next.184
     dev: true
 
-  /prettier-plugin-tailwindcss@0.6.5(prettier-plugin-svelte@3.2.5)(prettier@3.3.3):
+  /prettier-plugin-tailwindcss@0.6.5(prettier-plugin-svelte@3.2.6)(prettier@3.3.3):
     resolution: {integrity: sha512-axfeOArc/RiGHjOIy9HytehlC0ZLeMaqY09mm8YCkMzznKiDkwFzOpBvtuhuv3xG5qB73+Mj7OCe2j/L1ryfuQ==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -3389,7 +3389,7 @@ packages:
         optional: true
     dependencies:
       prettier: 3.3.3
-      prettier-plugin-svelte: 3.2.5(prettier@3.3.3)(svelte@5.0.0-next.184)
+      prettier-plugin-svelte: 3.2.6(prettier@3.3.3)(svelte@5.0.0-next.184)
     dev: true
 
   /prettier@3.3.3:
