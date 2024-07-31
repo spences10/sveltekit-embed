@@ -88,7 +88,7 @@ importers:
         version: 5.0.0-next.203
       svelte-check:
         specifier: ^3.7.1
-        version: 3.8.4(postcss-load-config@6.0.1)(postcss@8.4.40)(svelte@5.0.0-next.203)
+        version: 3.8.5(postcss-load-config@6.0.1)(postcss@8.4.40)(svelte@5.0.0-next.203)
       sveltekit-embed:
         specifier: workspace:*
         version: link:../../packages/sveltekit-embed
@@ -166,7 +166,7 @@ importers:
         version: 5.0.0-next.203
       svelte-check:
         specifier: ^3.6.0
-        version: 3.8.4(postcss-load-config@6.0.1)(postcss@8.4.40)(svelte@5.0.0-next.203)
+        version: 3.8.5(postcss-load-config@6.0.1)(postcss@8.4.40)(svelte@5.0.0-next.203)
       tslib:
         specifier: ^2.4.1
         version: 2.6.3
@@ -2858,6 +2858,12 @@ packages:
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
 
+  /magic-string@0.30.11:
+    resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.0
+    dev: true
+
   /mdsvex@0.11.2(svelte@5.0.0-next.203):
     resolution: {integrity: sha512-Y4ab+vLvTJS88196Scb/RFNaHMHVSWw6CwfsgWIQP8f42D57iDII0/qABSu530V4pkv8s6T2nx3ds0MC1VwFLA==}
     peerDependencies:
@@ -3760,8 +3766,8 @@ packages:
     resolution: {integrity: sha512-BrS8WAvrdUs6nbXyZN/kABjLBcPFqA1QBnbpJQiRzxfdA/8XchNJmiRmcPFTElw5NA5k7AG/eYWjj91V+8+Heg==}
     dev: true
 
-  /svelte-check@3.8.4(postcss-load-config@6.0.1)(postcss@8.4.40)(svelte@5.0.0-next.203):
-    resolution: {integrity: sha512-61aHMkdinWyH8BkkTX9jPLYxYzaAAz/FK/VQqdr2FiCQQ/q04WCwDlpGbHff1GdrMYTmW8chlTFvRWL9k0A8vg==}
+  /svelte-check@3.8.5(postcss-load-config@6.0.1)(postcss@8.4.40)(svelte@5.0.0-next.203):
+    resolution: {integrity: sha512-3OGGgr9+bJ/+1nbPgsvulkLC48xBsqsgtc8Wam281H4G9F5v3mYGa2bHRsPuwHC5brKl4AxJH95QF73kmfihGQ==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
@@ -3851,7 +3857,7 @@ packages:
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
-      magic-string: 0.30.10
+      magic-string: 0.30.11
       postcss: 8.4.40
       postcss-load-config: 6.0.1(postcss@8.4.40)
       sorcery: 0.11.1
