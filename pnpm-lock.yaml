@@ -127,7 +127,7 @@ importers:
         version: 3.1.1(svelte@5.0.0-next.203)(vite@5.4.1)
       '@testing-library/svelte':
         specifier: ^5.1.0
-        version: 5.2.0(svelte@5.0.0-next.203)(vite@5.4.1)(vitest@2.0.5)
+        version: 5.2.1(svelte@5.0.0-next.203)(vite@5.4.1)(vitest@2.0.5)
       '@types/eslint':
         specifier: ^9.0.0
         version: 9.6.0
@@ -218,8 +218,8 @@ packages:
       picocolors: 1.0.1
     dev: true
 
-  /@babel/runtime@7.24.7:
-    resolution: {integrity: sha512-UwgBRMjJP+xv857DCngvqXI3Iq6J4v0wXmwc6sapg+zyhbwmQX67LUEFrkK5tbyJ30jGuG3ZvWpBiB9LCy1kWw==}
+  /@babel/runtime@7.25.0:
+    resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
@@ -1124,12 +1124,12 @@ packages:
       tailwindcss: 3.4.7
     dev: true
 
-  /@testing-library/dom@10.2.0:
-    resolution: {integrity: sha512-CytIvb6tVOADRngTHGWNxH8LPgO/3hi/BdCEHOf7Qd2GvZVClhVP0Wo/QHzWhpki49Bk0b4VT6xpt3fx8HTSIw==}
+  /@testing-library/dom@10.4.0:
+    resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
     engines: {node: '>=18'}
     dependencies:
       '@babel/code-frame': 7.24.7
-      '@babel/runtime': 7.24.7
+      '@babel/runtime': 7.25.0
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -1138,8 +1138,8 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/svelte@5.2.0(svelte@5.0.0-next.203)(vite@5.4.1)(vitest@2.0.5):
-    resolution: {integrity: sha512-oMIFfxMcaPOXp+BQTRVgkeKzfAx7ee9fMrWaiKbMN36tN61kLl4Uj5ZZ/y1w9aL3a0BuBEoErV5iorYwCHqVUA==}
+  /@testing-library/svelte@5.2.1(svelte@5.0.0-next.203)(vite@5.4.1)(vitest@2.0.5):
+    resolution: {integrity: sha512-yXSqBsYaQAeP2xt7gqKu135Q67+NTsBDcpL1akv5MVAQ/amb7AQ0zW5nzrquTIE2lvrc6q58KZhQA61Vc05ZOg==}
     engines: {node: '>= 10'}
     peerDependencies:
       svelte: ^3 || ^4 || ^5 || ^5.0.0-next.0
@@ -1151,7 +1151,7 @@ packages:
       vitest:
         optional: true
     dependencies:
-      '@testing-library/dom': 10.2.0
+      '@testing-library/dom': 10.4.0
       svelte: 5.0.0-next.203
       vite: 5.4.1
       vitest: 2.0.5(jsdom@24.1.1)
