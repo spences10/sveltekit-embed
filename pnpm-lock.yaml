@@ -19,10 +19,10 @@ importers:
         version: 1.46.1
       '@sveltejs/adapter-auto':
         specifier: ^3.2.4
-        version: 3.2.4(@sveltejs/kit@2.5.25)
+        version: 3.2.4(@sveltejs/kit@2.5.26)
       '@sveltejs/kit':
         specifier: ^2.5.25
-        version: 2.5.25(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2)
+        version: 2.5.26(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.1.2
         version: 3.1.2(svelte@5.0.0-next.203)(vite@5.4.2)
@@ -115,10 +115,10 @@ importers:
         version: 1.46.1
       '@sveltejs/adapter-auto':
         specifier: ^3.2.4
-        version: 3.2.4(@sveltejs/kit@2.5.25)
+        version: 3.2.4(@sveltejs/kit@2.5.26)
       '@sveltejs/kit':
         specifier: ^2.5.25
-        version: 2.5.25(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2)
+        version: 2.5.26(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2)
       '@sveltejs/package':
         specifier: ^2.3.4
         version: 2.3.4(svelte@5.0.0-next.203)(typescript@5.5.4)
@@ -1028,17 +1028,17 @@ packages:
     dev: true
     optional: true
 
-  /@sveltejs/adapter-auto@3.2.4(@sveltejs/kit@2.5.25):
+  /@sveltejs/adapter-auto@3.2.4(@sveltejs/kit@2.5.26):
     resolution: {integrity: sha512-a64AKYbfTUrVwU0xslzv1Jf3M8bj0IwhptaXmhgIkjXspBXhD0od9JiItQHchijpLMGdEDcYBlvqySkEawv6mQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
-      '@sveltejs/kit': 2.5.25(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2)
+      '@sveltejs/kit': 2.5.26(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2)
       import-meta-resolve: 4.1.0
     dev: true
 
-  /@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2):
-    resolution: {integrity: sha512-5hBSEN8XEjDZ5+2bHkFh8Z0QyOk0C187cyb12aANe1c8aeKbfu5ZD5XaC2vEH4h0alJFDXPdUkXQBmeeXeMr1A==}
+  /@sveltejs/kit@2.5.26(@sveltejs/vite-plugin-svelte@3.1.2)(svelte@5.0.0-next.203)(vite@5.4.2):
+    resolution: {integrity: sha512-8l1JTIM2L+bS8ebq1E+nGjv/YSKSnD9Q19bYIUkc41vaEG2JjVUx6ikvPIJv2hkQAuqJLzoPrXlKk4KcyWOv3Q==}
     engines: {node: '>=18.13'}
     hasBin: true
     requiresBuild: true
