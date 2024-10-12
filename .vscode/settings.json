@@ -4,5 +4,6 @@
 		"source.organizeImports": "explicit"
 	},
 	"git.enableSmartCommit": true,
-	"git.postCommitCommand": "sync"
+	"git.postCommitCommand": "sync",
+	"cSpell.words": ["tiktok"]
 }

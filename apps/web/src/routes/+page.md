@@ -15,6 +15,7 @@
 		SoundCloud,
 		Spotify,
 		StackBlitz,
+		TikTok,
 		Toot,
 		Tweet,
 		Vimeo,
@@ -142,6 +143,7 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 - [SoundCloud](#soundcloud)
 - [Spotify](#spotify)
 - [StackBlitz](#stackblitz)
+- [TikTok](#tiktok)
 - [Toot](#toot)
 - [Tweet](#tweet)
 - [Vimeo](#vimeo)
@@ -557,6 +559,57 @@ Output:
   disable_observer={$disable_observer_store}
   id="vitejs-vite-yyoood"
   hideNavigation
+/>
+
+## TikTok
+
+Props:
+
+```ts
+tiktokId: string;
+width?: string = '100%';
+height?: string = '600px';
+controls?: boolean = true;
+progress_bar?: boolean = true;
+play_button?: boolean = true;
+volume_control?: boolean = true;
+fullscreen_button?: boolean = true;
+timestamp?: boolean = true;
+loop?: boolean = false;
+autoplay?: boolean = false;
+music_info?: boolean = false;
+description?: boolean = false;
+rel?: boolean = true;
+native_context_menu?: boolean = true;
+closed_caption?: boolean = true;
+disable_observer?: boolean = false;
+```
+
+Usage:
+
+```html
+<TikTok
+	tiktokId="6718335390845095173"
+	width="100%"
+	height="600px"
+	autoplay="{false}"
+	loop="{true}"
+	music_info="{true}"
+	description="{true}"
+/>
+```
+
+Output:
+
+<TikTok
+  disable_observer={$disable_observer_store}
+  tiktokId="6718335390845095173"
+  width="100%"
+  height="600px"
+  autoplay={false}
+  loop={true}
+  music_info={true}
+  description={true}
 />
 
 ## Toot

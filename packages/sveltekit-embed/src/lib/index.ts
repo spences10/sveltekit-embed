@@ -12,6 +12,7 @@ export { default as Slides } from './components/slides.svelte';
 export { default as SoundCloud } from './components/sound-cloud.svelte';
 export { default as Spotify } from './components/spotify.svelte';
 export { default as StackBlitz } from './components/stackblitz.svelte';
+export { default as TikTok } from './components/tiktok.svelte';
 export { default as Toot } from './components/toot.svelte';
 export { default as Tweet } from './components/tweet.svelte';
 export { default as Vimeo } from './components/vimeo.svelte';
