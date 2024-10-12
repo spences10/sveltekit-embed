@@ -21,6 +21,6 @@
 		"contributors:generate": "all-contributors generate"
 	},
 	"devDependencies": {
-		"cspell": "^8.14.2"
+		"cspell": "^8.15.1"
 	}
 }
