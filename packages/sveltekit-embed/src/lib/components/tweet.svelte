@@ -1,9 +1,10 @@
 <script lang="ts">
 	interface Props {
 		tweetLink?: string;
+		isDarkMode?: boolean;
 	}
 
-	let { tweetLink = '' }: Props = $props();
+	let { tweetLink = '', isDarkMode = false }: Props = $props();
 
 	let twitter_widgets_script: HTMLScriptElement | null = null;
 
@@ -32,7 +33,10 @@
 </script>
 
 <div class="tweet-wrapper">
-	<blockquote class="twitter-tweet">
+	<blockquote
+		class="twitter-tweet"
+		data-theme={isDarkMode ? 'dark' : null}
+	>
 		<a href={`https://twitter.com/${tweetLink}`}>Loading Tweet...</a>
 	</blockquote>
 </div>
