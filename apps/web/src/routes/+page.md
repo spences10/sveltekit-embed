@@ -3,6 +3,7 @@
 	import { page } from '$app/stores'
 	import {
 		AnchorFm,
+		Bluesky,
 		Buzzsprout,
 		CodePen,
 		Deezer,
@@ -131,6 +132,7 @@ Your embed not here? Start a
 or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 
 - [AnchorFm](#anchorfm)
+- [Bluesky](#bluesky)
 - [Buzzsprout](#buzzsprout)
 - [CodePen](#codepen)
 - [Deezer](#deezer)
@@ -174,6 +176,38 @@ Output:
 <AnchorFm
   disable_observer={$disable_observer_store}
   episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
+/>
+
+## Bluesky
+
+Get the `did:plc` identifier from the embed post option on Bluesky.
+
+Props:
+
+```ts
+post_id = '',
+width = '100%',
+iframe_styles = '',
+```
+
+Usage:
+
+<!-- cSpell:ignore nlvjelw,pddq,qoglleko,bsky,tnwn2k,bluesky,rgba,tiktok -->
+
+```html
+<Bluesky
+	disable_observer="{$disable_observer_store}"
+	post_id="did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k"
+	iframe_styles="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+/>
+```
+
+Output:
+
+<Bluesky
+  disable_observer={$disable_observer_store}
+  post_id="did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k"
+  iframe_styles="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" 
 />
 
 ## Buzzsprout
