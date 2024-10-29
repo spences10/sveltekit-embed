@@ -1,4 +1,5 @@
 export { default as AnchorFm } from './components/anchor-fm.svelte';
+export { default as Bluesky } from './components/bluesky.svelte';
 export { default as Buzzsprout } from './components/buzzsprout.svelte';
 export { default as CodePen } from './components/code-pen.svelte';
 export { default as Deezer } from './components/deezer.svelte';
