@@ -6,7 +6,9 @@
 
 	let { tweetLink = '', theme = 'light' }: Props = $props();
 
-	let twitter_widgets_script: HTMLScriptElement | null = null;
+	let twitter_widgets_script = $state.raw<HTMLScriptElement | null>(
+		null,
+	);
 
 	const load_twitter_widgets_script = () => {
 		if (twitter_widgets_script) return;
@@ -32,17 +34,34 @@
 	});
 </script>
 
-<div class="tweet-wrapper">
+<div
+	class="tweet-wrapper"
+	data-theme={theme}
+	data-loaded={twitter_widgets_script != null}
+>
 	<blockquote class="twitter-tweet" data-theme={theme}>
 		<a href={`https://twitter.com/${tweetLink}`}>Loading Tweet...</a>
 	</blockquote>
 </div>
 
 <style>
+	:root {
+		--twitter-embed-bg-light: #ffffff;
+		--twitter-embed-bg-dark: #151d26;
+	}
+
 	.tweet-wrapper {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 12px;
+	}
+
+	.tweet-wrapper[data-theme='light'][data-loaded='true'] {
+		background-color: var(--twitter-embed-bg-light);
+	}
+
+	.tweet-wrapper[data-theme='dark'][data-loaded='true'] {
+		background-color: var(--twitter-embed-bg-dark);
 	}
 
 	.twitter-tweet {
