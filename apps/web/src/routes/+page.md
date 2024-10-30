@@ -651,7 +651,10 @@ tweetLink: string = '';
 Usage:
 
 ```html
-<Tweet tweetLink="adamwathan/status/959078631434731521" />
+<Tweet
+	tweetLink="adamwathan/status/959078631434731521"
+	theme="dark"
+/>
 ```
 
 Output:
