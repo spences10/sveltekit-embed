@@ -45,23 +45,16 @@
 </div>
 
 <style>
-	:root {
-		--twitter-embed-bg-light: #ffffff;
-		--twitter-embed-bg-dark: #151d26;
-	}
-
 	.tweet-wrapper {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 12px;
+		border-radius: 13px;
+		overflow: hidden;
 	}
 
-	.tweet-wrapper[data-theme='light'][data-loaded='true'] {
-		background-color: var(--twitter-embed-bg-light);
-	}
-
-	.tweet-wrapper[data-theme='dark'][data-loaded='true'] {
-		background-color: var(--twitter-embed-bg-dark);
+	.tweet-wrapper :global(iframe) {
+		border-radius: 13px !important;
 	}
 
 	.twitter-tweet {
