@@ -646,6 +646,7 @@ Props:
 
 ```ts
 tweetLink: string = '';
+theme: string = 'dark' | 'light' = 'light';
 ```
 
 Usage:
@@ -659,7 +660,10 @@ Usage:
 
 Output:
 
-<Tweet tweetLink="adamwathan/status/959078631434731521" />
+<Tweet 
+  tweetLink="adamwathan/status/959078631434731521" 
+  theme="dark"
+/>
 
 ## Vimeo
 
