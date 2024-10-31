@@ -11,7 +11,16 @@
 	);
 
 	const load_twitter_widgets_script = () => {
+		if (
+			document.querySelector(
+				'script[src*="platform.twitter.com/widgets.js"]',
+			)
+		) {
+			return;
+		}
+
 		if (twitter_widgets_script) return;
+
 		twitter_widgets_script = document.createElement('script');
 		twitter_widgets_script.src =
 			'https://platform.twitter.com/widgets.js';
@@ -20,13 +29,12 @@
 	};
 
 	const remove_twitter_widget_script = () => {
-		if (twitter_widgets_script) {
-			document.head.removeChild(twitter_widgets_script);
-			twitter_widgets_script = null;
-		}
+		if (!twitter_widgets_script) return;
+		document.head.removeChild(twitter_widgets_script);
+		twitter_widgets_script = null;
 	};
 
-	$effect(() => {
+	$effect.root(() => {
 		load_twitter_widgets_script();
 		return () => {
 			remove_twitter_widget_script();
