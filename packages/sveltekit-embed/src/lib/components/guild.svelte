@@ -1,27 +1,27 @@
 <!-- 
   Examples for guilds, users, events and presentations
   Guilds:
-  https://beta.guild.host/embeds/guild/svelte-society-london/card
-  https://beta.guild.host/embeds/guild/svelte-society-london/events/latest
-  https://beta.guild.host/embeds/guild/svelte-society-london/events/upcoming
-  https://beta.guild.host/embeds/guild/svelte-society-london/events/past
-  https://beta.guild.host/embeds/guild/svelte-society-london/presentations/latest
-  https://beta.guild.host/embeds/guild/svelte-society-london/presentations/upcoming
-  https://beta.guild.host/embeds/guild/svelte-society-london/presentations/other 
+  https://guild.host/embeds/guild/svelte-society-london/card
+  https://guild.host/embeds/guild/svelte-society-london/events/latest
+  https://guild.host/embeds/guild/svelte-society-london/events/upcoming
+  https://guild.host/embeds/guild/svelte-society-london/events/past
+  https://guild.host/embeds/guild/svelte-society-london/presentations/latest
+  https://guild.host/embeds/guild/svelte-society-london/presentations/upcoming
+  https://guild.host/embeds/guild/svelte-society-london/presentations/other 
   Users:
-  https://beta.guild.host/embeds/user/spences10/card
-  https://beta.guild.host/embeds/user/spences10/events/latest
-  https://beta.guild.host/embeds/user/spences10/events/upcoming
-  https://beta.guild.host/embeds/user/spences10/events/past
-  https://beta.guild.host/embeds/user/spences10/presentations/latest
-  https://beta.guild.host/embeds/user/spences10/presentations/upcoming
-  https://beta.guild.host/embeds/user/spences10/presentations/other
+  https://guild.host/embeds/user/spences10/card
+  https://guild.host/embeds/user/spences10/events/latest
+  https://guild.host/embeds/user/spences10/events/upcoming
+  https://guild.host/embeds/user/spences10/events/past
+  https://guild.host/embeds/user/spences10/presentations/latest
+  https://guild.host/embeds/user/spences10/presentations/upcoming
+  https://guild.host/embeds/user/spences10/presentations/other
   Events:
-  https://beta.guild.host/embeds/event/svelte-london-february-h0ghig/card
-  https://beta.guild.host/embeds/event/svelte-london-february-h0ghig/item
+  https://guild.host/embeds/event/svelte-london-february-h0ghig/card
+  https://guild.host/embeds/event/svelte-london-february-h0ghig/item
   Presentations:
-  https://beta.guild.host/embeds/presentation/microfrontends-with-e6mtnf/card
-  https://beta.guild.host/embeds/presentation/microfrontends-with-e6mtnf/item
+  https://guild.host/embeds/presentation/microfrontends-with-e6mtnf/card
+  https://guild.host/embeds/presentation/microfrontends-with-e6mtnf/item
 -->
 <script lang="ts">
 	import GeneralObserver from './general-observer.svelte';
@@ -65,7 +65,7 @@
 		<iframe
 			data-testid="guild-card"
 			title={`guild-card-${card_id}`}
-			src={`https://beta.guild.host/embeds/${type}/${card_id}/${display_type}`}
+			src={`https://guild.host/embeds/${type}/${card_id}/${display_type}`}
 			{height}
 			{width}
 			frameborder="0"
