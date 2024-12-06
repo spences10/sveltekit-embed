@@ -19,10 +19,10 @@ importers:
         version: 1.48.2
       '@sveltejs/adapter-auto':
         specifier: ^3.3.1
-        version: 3.3.1(@sveltejs/kit@2.8.1)
+        version: 3.3.1(@sveltejs/kit@2.9.0)
       '@sveltejs/kit':
         specifier: ^2.8.1
-        version: 2.8.1(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11)
+        version: 2.9.0(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^4.0.1
         version: 4.0.1(svelte@5.8.0)(vite@5.4.11)
@@ -115,10 +115,10 @@ importers:
         version: 1.48.2
       '@sveltejs/adapter-auto':
         specifier: ^3.3.1
-        version: 3.3.1(@sveltejs/kit@2.8.1)
+        version: 3.3.1(@sveltejs/kit@2.9.0)
       '@sveltejs/kit':
         specifier: ^2.8.1
-        version: 2.8.1(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11)
+        version: 2.9.0(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11)
       '@sveltejs/package':
         specifier: ^2.3.7
         version: 2.3.7(svelte@5.8.0)(typescript@5.6.3)
@@ -1054,36 +1054,36 @@ packages:
     dev: true
     optional: true
 
-  /@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.8.1):
+  /@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.9.0):
     resolution: {integrity: sha512-5Sc7WAxYdL6q9j/+D0jJKjGREGlfIevDyHSQ2eNETHcB1TKlQWHcAo8AS8H1QdjNvSXpvOwNjykDUHPEAyGgdQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
-      '@sveltejs/kit': 2.8.1(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11)
+      '@sveltejs/kit': 2.9.0(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11)
       import-meta-resolve: 4.1.0
     dev: true
 
-  /@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11):
-    resolution: {integrity: sha512-uuOfFwZ4xvnfPsiTB6a4H1ljjTUksGhWnYq5X/Y9z4x5+3uM2Md8q/YVeHL+7w+mygAwoEFdgKZ8YkUuk+VKww==}
+  /@sveltejs/kit@2.9.0(@sveltejs/vite-plugin-svelte@4.0.1)(svelte@5.8.0)(vite@5.4.11):
+    resolution: {integrity: sha512-W3E7ed3ChB6kPqRs2H7tcHp+Z7oiTFC6m+lLyAQQuyXeqw6LdNuuwEUla+5VM0OGgqQD+cYD6+7Xq80vVm17Vg==}
     engines: {node: '>=18.13'}
     hasBin: true
     requiresBuild: true
     peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^3.0.0 || ^4.0.0-next.1
+      '@sveltejs/vite-plugin-svelte': ^3.0.0 || ^4.0.0-next.1 || ^5.0.0
       svelte: ^4.0.0 || ^5.0.0-next.0
-      vite: ^5.0.3
+      vite: ^5.0.3 || ^6.0.0
     dependencies:
       '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.8.0)(vite@5.4.11)
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       devalue: 5.1.1
-      esm-env: 1.0.0
+      esm-env: 1.2.1
       import-meta-resolve: 4.1.0
       kleur: 4.1.5
-      magic-string: 0.30.12
+      magic-string: 0.30.14
       mrmime: 2.0.0
       sade: 1.8.1
-      set-cookie-parser: 2.7.0
+      set-cookie-parser: 2.7.1
       sirv: 3.0.0
       svelte: 5.8.0
       tiny-glob: 0.2.9
@@ -2167,10 +2167,6 @@ packages:
       - supports-color
     dev: true
 
-  /esm-env@1.0.0:
-    resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}
-    dev: true
-
   /esm-env@1.2.1:
     resolution: {integrity: sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==}
     dev: true
@@ -2806,6 +2802,12 @@ packages:
 
   /magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.0
+    dev: true
+
+  /magic-string@0.30.14:
+    resolution: {integrity: sha512-5c99P1WKTed11ZC0HMJOj6CDIue6F8ySu+bJL+85q1zBEIY8IklrJ1eiKC2NDRh3Ct3FcvmJPyQHb9erXMTJNw==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
@@ -3488,8 +3490,8 @@ packages:
     hasBin: true
     dev: true
 
-  /set-cookie-parser@2.7.0:
-    resolution: {integrity: sha512-lXLOiqpkUumhRdFF3k1osNXCy9akgx/dyPZ5p8qAg9seJzXr5ZrlqZuWIMuY6ejOsVLE6flJ5/h3lsn57fQ/PQ==}
+  /set-cookie-parser@2.7.1:
+    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
     dev: true
 
   /shebang-command@2.0.0:
