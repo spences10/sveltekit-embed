@@ -45,7 +45,7 @@ describe('YouTube', () => {
 			disable_observer: true,
 		});
 		const iframe = getByTitle(`youTube-${listId}`);
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries?list=${listId}`;
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=false&start=0`;
 		expect(iframe.getAttribute('src')).toBe(expectedSrc);
 	});
 
