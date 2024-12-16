@@ -127,7 +127,7 @@ importers:
         version: 4.0.1(svelte@5.14.0)(vite@5.4.11)
       '@testing-library/svelte':
         specifier: ^5.2.4
-        version: 5.2.5(svelte@5.14.0)(vite@5.4.11)(vitest@2.1.5)
+        version: 5.2.6(svelte@5.14.0)(vite@5.4.11)(vitest@2.1.5)
       '@types/eslint':
         specifier: ^9.6.1
         version: 9.6.1
@@ -1198,8 +1198,8 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/svelte@5.2.5(svelte@5.14.0)(vite@5.4.11)(vitest@2.1.5):
-    resolution: {integrity: sha512-WtWAquunZxWKiIxGmye1ylNPi25YPYPdTnzpOxwHJDAVy2KeyLfCrQTRsqeaivFipAXXBI2jZvkalbio0E/rhA==}
+  /@testing-library/svelte@5.2.6(svelte@5.14.0)(vite@5.4.11)(vitest@2.1.5):
+    resolution: {integrity: sha512-1Y8cEg/BtV4J6g9irkY0ksz+ueDFYLiikjTLiqvQPkOUeDzR4gg2zECBf8yrOrCy3e2TAOYMcaysFa0bQMyk1w==}
     engines: {node: '>= 10'}
     peerDependencies:
       svelte: ^3 || ^4 || ^5 || ^5.0.0-next.0
