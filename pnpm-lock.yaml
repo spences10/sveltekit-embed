@@ -70,10 +70,10 @@ importers:
         version: 3.3.3
       prettier-plugin-svelte:
         specifier: ^3.2.8
-        version: 3.2.8(prettier@3.3.3)(svelte@5.14.0)
+        version: 3.3.2(prettier@3.3.3)(svelte@5.14.0)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.8
-        version: 0.6.9(prettier-plugin-svelte@3.2.8)(prettier@3.3.3)
+        version: 0.6.9(prettier-plugin-svelte@3.3.2)(prettier@3.3.3)
       rehype-autolink-headings:
         specifier: ^7.1.0
         version: 7.1.0
@@ -157,7 +157,7 @@ importers:
         version: 3.3.3
       prettier-plugin-svelte:
         specifier: ^3.2.8
-        version: 3.2.8(prettier@3.3.3)(svelte@5.14.0)
+        version: 3.3.2(prettier@3.3.3)(svelte@5.14.0)
       publint:
         specifier: ^0.2.12
         version: 0.2.12
@@ -3277,8 +3277,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte@3.2.8(prettier@3.3.3)(svelte@5.14.0):
-    resolution: {integrity: sha512-PAHmmU5cGZdnhW4mWhmvxuG2PVbbHIxUuPOdUKvfE+d4Qt2d29iU5VWrPdsaW5YqVEE0nqhlvN4eoKmVMpIF3Q==}
+  /prettier-plugin-svelte@3.3.2(prettier@3.3.3)(svelte@5.14.0):
+    resolution: {integrity: sha512-kRPjH8wSj2iu+dO+XaUv4vD8qr5mdDmlak3IT/7AOgGIMRG86z/EHOLauFcClKEnOUf4A4nOA7sre5KrJD4Raw==}
     peerDependencies:
       prettier: ^3.0.0
       svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
@@ -3287,7 +3287,7 @@ packages:
       svelte: 5.14.0
     dev: true
 
-  /prettier-plugin-tailwindcss@0.6.9(prettier-plugin-svelte@3.2.8)(prettier@3.3.3):
+  /prettier-plugin-tailwindcss@0.6.9(prettier-plugin-svelte@3.3.2)(prettier@3.3.3):
     resolution: {integrity: sha512-r0i3uhaZAXYP0At5xGfJH876W3HHGHDp+LCRUJrs57PBeQ6mYHMwr25KH8NPX44F2yGTvdnH7OqCshlQx183Eg==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -3343,7 +3343,7 @@ packages:
         optional: true
     dependencies:
       prettier: 3.3.3
-      prettier-plugin-svelte: 3.2.8(prettier@3.3.3)(svelte@5.14.0)
+      prettier-plugin-svelte: 3.3.2(prettier@3.3.3)(svelte@5.14.0)
     dev: true
 
   /prettier@3.3.3:
