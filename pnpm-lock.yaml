@@ -88,7 +88,7 @@ importers:
         version: 5.14.0
       svelte-check:
         specifier: ^4.0.9
-        version: 4.0.9(svelte@5.14.0)(typescript@5.6.3)
+        version: 4.1.1(svelte@5.14.0)(typescript@5.6.3)
       sveltekit-embed:
         specifier: workspace:*
         version: link:../../packages/sveltekit-embed
@@ -166,7 +166,7 @@ importers:
         version: 5.14.0
       svelte-check:
         specifier: ^4.0.9
-        version: 4.0.9(svelte@5.14.0)(typescript@5.6.3)
+        version: 4.1.1(svelte@5.14.0)(typescript@5.6.3)
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -3639,8 +3639,8 @@ packages:
     resolution: {integrity: sha512-BrS8WAvrdUs6nbXyZN/kABjLBcPFqA1QBnbpJQiRzxfdA/8XchNJmiRmcPFTElw5NA5k7AG/eYWjj91V+8+Heg==}
     dev: true
 
-  /svelte-check@4.0.9(svelte@5.14.0)(typescript@5.6.3):
-    resolution: {integrity: sha512-SVNCz2L+9ZELGli7G0n3B3QE5kdf0u27RtKr2ZivWQhcWIXatZxwM4VrQ6AiA2k9zKp2mk5AxkEhdjbpjv7rEw==}
+  /svelte-check@4.1.1(svelte@5.14.0)(typescript@5.6.3):
+    resolution: {integrity: sha512-NfaX+6Qtc8W/CyVGS/F7/XdiSSyXz+WGYA9ZWV3z8tso14V2vzjfXviKaTFEzB7g8TqfgO2FOzP6XT4ApSTUTw==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
