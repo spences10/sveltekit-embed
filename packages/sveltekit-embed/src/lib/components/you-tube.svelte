@@ -5,6 +5,7 @@
 	interface Props {
 		youTubeId?: string;
 		listId?: string;
+		index?: number;
 		autoPlay?: boolean;
 		aspectRatio?: string;
 		skipTo?: any;
@@ -15,6 +16,7 @@
 	let {
 		youTubeId = '',
 		listId = '',
+		index = 0,
 		autoPlay = false,
 		aspectRatio = '16:9',
 		skipTo = { h: 0, m: 0, s: 0 },
@@ -37,7 +39,7 @@
 	const src = `${baseUrl}${
 		youTubeId.length > 0
 			? `${youTubeId}?autoplay=${autoPlay}&start=${startTime}`
-			: `?videoseries?list=${listId}`
+			: `?videoseries&list=${listId}&index=${index}&autoplay=${autoPlay}&start=${startTime}`
 	}`;
 </script>
 
