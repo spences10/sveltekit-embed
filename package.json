@@ -18,9 +18,13 @@
 		"lint": "pnpm -r --filter=\"./apps/*\" --filter=\"./packages/*\" run lint",
 		"cspell": "cspell '**/*.md' --config cspell.json --wordsOnly",
 		"contributors:add": "all-contributors add",
-		"contributors:generate": "all-contributors generate"
+		"contributors:generate": "all-contributors generate",
+		"changeset": "changeset",
+		"version": "changeset version",
+		"release": "pnpm run build && changeset publish"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.27.12",
 		"cspell": "^8.15.1"
 	}
 }
