@@ -163,7 +163,7 @@ importers:
         version: 3.3.3(prettier@3.4.2)(svelte@5.19.7)
       publint:
         specifier: ^0.3.2
-        version: 0.3.2
+        version: 0.3.4
       svelte:
         specifier: 5.19.7
         version: 5.19.7
@@ -2260,8 +2260,8 @@ packages:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
 
-  publint@0.3.2:
-    resolution: {integrity: sha512-fPs7QUbUvwixxPYUUTn0Kqp0rbH5rbiAOZwQOXMkIj+4Nopby1AngodSQmzTkJWTJ5R4uVV8oYmgVIjj+tgv1w==}
+  publint@0.3.4:
+    resolution: {integrity: sha512-szQCgQXxLgrI2P+3Znv/KUiglp3YA+A2MeI+9Izjs01Ol5KXKCkdbmz69bM/ivPKMYKHhtKOKkib9VJ6JL3H/w==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -4787,7 +4787,7 @@ snapshots:
 
   prismjs@1.29.0: {}
 
-  publint@0.3.2:
+  publint@0.3.4:
     dependencies:
       '@publint/pack': 0.1.1
       package-manager-detector: 0.2.9
@@ -5147,7 +5147,7 @@ snapshots:
     dependencies:
       browserslist: 4.24.0
       escalade: 3.2.0
-      picocolors: 1.1.1
+      picocolors: 1.1.0
 
   uri-js@4.4.1:
     dependencies:
