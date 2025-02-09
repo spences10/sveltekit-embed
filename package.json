@@ -21,7 +21,7 @@
 		"contributors:generate": "all-contributors generate",
 		"changeset": "changeset",
 		"version": "changeset version",
-		"release": "pnpm run build && changeset publish"
+		"release": "pnpm run build:packages && changeset publish"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.27.12",
