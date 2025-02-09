@@ -11,6 +11,11 @@
 		skipTo?: any;
 		disable_observer?: boolean;
 		iframe_styles?: string;
+		mute?: boolean;
+		controls?: boolean;
+		loop?: boolean;
+		modestBranding?: boolean;
+		rel?: boolean;
 	}
 
 	let {
@@ -24,6 +29,11 @@
 		iframe_styles = `
 			border-radius: 0.6rem;
 		`,
+		mute = false,
+		controls = true,
+		loop = false,
+		modestBranding = false,
+		rel = false,
 	}: Props = $props();
 
 	const { h, m, s } = skipTo;
@@ -38,8 +48,8 @@
 	const baseUrl = `https://www.youtube-nocookie.com/embed/`;
 	const src = `${baseUrl}${
 		youTubeId.length > 0
-			? `${youTubeId}?autoplay=${autoPlay}&start=${startTime}`
-			: `?videoseries&list=${listId}&index=${index}&autoplay=${autoPlay}&start=${startTime}`
+			? `${youTubeId}?autoplay=${Number(autoPlay)}&start=${startTime}&mute=${Number(mute)}&controls=${Number(controls)}&loop=${Number(loop)}&modestbranding=${Number(modestBranding)}&rel=${Number(rel)}`
+			: `?videoseries&list=${listId}&index=${index}&autoplay=${Number(autoPlay)}&start=${startTime}&mute=${Number(mute)}&controls=${Number(controls)}&loop=${Number(loop)}&modestbranding=${Number(modestBranding)}&rel=${Number(rel)}`
 	}`;
 </script>
 

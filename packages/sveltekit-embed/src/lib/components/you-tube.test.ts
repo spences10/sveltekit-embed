@@ -18,7 +18,7 @@ describe('YouTube', () => {
 		expect(container).toBeTruthy();
 	});
 
-	it('renders iframe with correct src for video', async () => {
+	it('renders iframe with correct src for video with default options', async () => {
 		const { getByTitle } = render(YouTube, {
 			youTubeId: 'abc123',
 			listId: '',
@@ -29,11 +29,31 @@ describe('YouTube', () => {
 			disable_observer: true,
 		});
 		const iframe = getByTitle('youTube-abc123');
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=false&start=0`;
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		expect(iframe.getAttribute('src')).toBe(expectedSrc);
 	});
 
-	it('renders iframe with correct src for playlist', async () => {
+	it('renders iframe with correct src for video with custom options', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			listId: '',
+			autoPlay: true,
+			mute: true,
+			controls: false,
+			loop: true,
+			modestBranding: true,
+			rel: true,
+			skipTo: { h: 0, m: 0, s: 0 },
+			aspectRatio: '16:9',
+			iframe_styles: '',
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=1&start=0&mute=1&controls=0&loop=1&modestbranding=1&rel=1`;
+		expect(iframe.getAttribute('src')).toBe(expectedSrc);
+	});
+
+	it('renders iframe with correct src for playlist with default options', async () => {
 		const listId = '123abc';
 		const { getByTitle } = render(YouTube, {
 			youTubeId: '',
@@ -45,7 +65,7 @@ describe('YouTube', () => {
 			disable_observer: true,
 		});
 		const iframe = getByTitle(`youTube-${listId}`);
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=false&start=0`;
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		expect(iframe.getAttribute('src')).toBe(expectedSrc);
 	});
 
