@@ -729,29 +729,75 @@ Output:
 Props:
 
 ```ts
-youTubeId: string = ''
-listId: string = ''
-autoPlay: boolean = false
-aspectRatio: string = '16:9'
-skipTo: { h: 0, m: 0, s: 0 }
-disable_observer: boolean = false
-export let iframe_styles: string = `
-  border-radius: 0.6rem;
-`
+youTubeId?: string;
+listId?: string;
+index?: number = 0;
+autoPlay?: boolean = false;
+aspectRatio?: string = '16:9';
+skipTo?: { h: number; m: number; s: number } = { h: 0, m: 0, s: 0 };
+disable_observer?: boolean = false;
+iframe_styles?: string = '';
+mute?: boolean = false;
+controls?: boolean = true;
+loop?: boolean = false;
+modestBranding?: boolean = false;
+rel?: boolean = false;
 ```
 
-Usage:
+Usage with video ID:
 
 ```html
-<YouTube youTubeId="L7_z8rcbFPg" />
+<YouTube youTubeId="dQw4w9WgXcQ" />
+```
+
+Usage with playlist:
+
+```html
+<YouTube
+	listId="PLlrxD0HtieHhS8VzuMCfQD4uJ9yne1mE6"
+	index="{2}"
+	autoPlay="{true}"
+	mute="{true}"
+	controls="{true}"
+	modestBranding="{true}"
+/>
+```
+
+Usage with timestamp:
+
+```html
+<YouTube
+  youTubeId="dQw4w9WgXcQ"
+  skipTo={{ h: 0, m: 1, s: 30 }}
+  loop={true}
+  rel={false}
+/>
 ```
 
 Output:
 
 <YouTube
   disable_observer={$disable_observer_store}
-  youTubeId="L7_z8rcbFPg"
+  youTubeId="dQw4w9WgXcQ"
+  aspectRatio="16:9"
 />
+
+### YouTube Props Explained
+
+- `youTubeId`: The ID of the YouTube video
+- `listId`: The ID of a YouTube playlist
+- `index`: Starting index for playlist playback (default: 0)
+- `autoPlay`: Automatically start playing (default: false)
+- `mute`: Start video muted (default: false)
+- `controls`: Show player controls (default: true)
+- `loop`: Loop the video/playlist (default: false)
+- `modestBranding`: Use minimal YouTube branding (default: false)
+- `rel`: Show related videos at the end (default: false)
+- `aspectRatio`: Set the aspect ratio (default: '16:9')
+- `skipTo`: Start at specific timestamp (default: { h: 0, m: 0, s: 0
+  })
+- `disable_observer`: Disable lazy loading (default: false)
+- `iframe_styles`: Custom CSS styles for the iframe
 
 ## Zencastr
 
