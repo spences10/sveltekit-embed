@@ -21,8 +21,8 @@ importers:
         specifier: ^1.52.0
         version: 1.52.0
       '@sveltejs/adapter-auto':
-        specifier: ^4.0.0
-        version: 4.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))
+        specifier: ^6.0.0
+        version: 6.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))
       '@sveltejs/kit':
         specifier: ^2.20.7
         version: 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0))
@@ -117,8 +117,8 @@ importers:
         specifier: ^1.52.0
         version: 1.52.0
       '@sveltejs/adapter-auto':
-        specifier: ^4.0.0
-        version: 4.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))
+        specifier: ^6.0.0
+        version: 6.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))
       '@sveltejs/kit':
         specifier: ^2.20.7
         version: 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0))
@@ -879,8 +879,8 @@ packages:
     peerDependencies:
       acorn: ^8.9.0
 
-  '@sveltejs/adapter-auto@4.0.0':
-    resolution: {integrity: sha512-kmuYSQdD2AwThymQF0haQhM8rE5rhutQXG4LNbnbShwhMO4qQGnKaaTy+88DuNSuoQDi58+thpq8XpHc1+oEKQ==}
+  '@sveltejs/adapter-auto@6.0.0':
+    resolution: {integrity: sha512-7mR2/G7vlXakaOj6QBSG9dwBfTgWjV+UnEMB5Z6Xu0ZbdXda6c0su1fNkg0ab0zlilSkloMA2NjCna02/DR7sA==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
@@ -3404,7 +3404,7 @@ snapshots:
     dependencies:
       acorn: 8.14.0
 
-  '@sveltejs/adapter-auto@4.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))':
+  '@sveltejs/adapter-auto@6.0.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))':
     dependencies:
       '@sveltejs/kit': 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.28.2)(vite@6.3.3(jiti@1.21.6)(yaml@2.7.0))
       import-meta-resolve: 4.1.0
