@@ -6,16 +6,47 @@
 		"email": "yo@scottspence.dev",
 		"url": "https://scottspence.com"
 	},
-	"description": "This is a collection of embed components I use on a regular basis packaged up for use.",
+	"description": "A collection of embed components for SvelteKit. Easily embed content from YouTube, Spotify, Vimeo, CodePen, and many more with performant, lazy-loaded components.",
 	"keywords": [
 		"svelte",
 		"sveltekit",
+		"embed",
+		"components",
 		"youtube",
 		"spotify",
+		"vimeo",
+		"codepen",
 		"deezer",
-		"vimeo"
+		"soundcloud",
+		"twitter",
+		"mastodon",
+		"github",
+		"gist",
+		"iframe",
+		"lazy-loading",
+		"intersection-observer",
+		"performance",
+		"responsive",
+		"typescript",
+		"ui-components"
 	],
 	"license": "MIT",
+	"homepage": "https://github.com/spences10/sveltekit-embed#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/spences10/sveltekit-embed.git",
+		"directory": "packages/sveltekit-embed"
+	},
+	"bugs": {
+		"url": "https://github.com/spences10/sveltekit-embed/issues"
+	},
+	"funding": {
+		"type": "github",
+		"url": "https://github.com/sponsors/spences10"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
