@@ -1,6 +1,6 @@
 {
 	"name": "sveltekit-embed",
-	"version": "0.0.20",
+	"version": "0.0.21",
 	"author": {
 		"name": "Scott Spence",
 		"email": "yo@scottspence.dev",
@@ -107,10 +107,5 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
-	}
+	"type": "module"
 }

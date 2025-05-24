@@ -1,5 +1,11 @@
 # sveltekit-embed
 
+## 0.0.21
+
+### Patch Changes
+
+- update testing approach on components
+
 ## 0.0.20
 
 ### Patch Changes
