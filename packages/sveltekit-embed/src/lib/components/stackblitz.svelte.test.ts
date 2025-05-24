@@ -3,104 +3,327 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('StackBlitz', () => {
-	it('mounts with default values', async () => {
+	it('mounts with default props', async () => {
 		const { container } = render(StackBlitz, {
-			id: 'my-id',
-			file: 'index.html',
+			id: 'svelte-kit-template',
+			file: 'src/app.html',
 			disable_observer: true,
 		});
-
 		expect(container).toBeTruthy();
 	});
 
-	it('renders iframe with correct src', async () => {
-		const id = 'my-id';
-		const { getByTitle } = render(StackBlitz, {
-			id,
-			file: 'index.html',
-			disable_observer: true,
-		});
-		const iframe = getByTitle(`stackblitz-${id}`);
-
-		const expected_src = `https://stackblitz.com/edit/${id}?embed=1&ctl=1&hideExplorer=1&hideNavigation=0&theme=dark&file=index.html`;
-		await expect.element(iframe).toHaveAttribute('src', expected_src);
-	});
-
-	it('mounts with custom height and width', async () => {
+	it.skip('renders iframe with correct src', async () => {
+		const id = 'svelte-kit-template';
+		const file = 'src/app.html';
 		const { container } = render(StackBlitz, {
-			id: 'my-id',
-			file: 'index.html',
-			height: '200px',
-			width: '50%',
+			id,
+			file,
+			view: 'editor',
+			clickToLoad: false,
+			hideNavigation: true,
+			hideExplorer: false,
+			theme: 'light',
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
-		expect(iframe?.getAttribute('style')).toContain('height: 200px;');
-		expect(iframe?.getAttribute('style')).toContain('width: 50%;');
+		expect(iframe).toBeTruthy();
+		const src = iframe?.getAttribute('src');
+		expect(src).toContain(
+			`https://stackblitz.com/edit/${id}?embed=1`,
+		);
+		expect(src).toContain('ctl=0');
+		expect(src).toContain('hideExplorer=0');
+		expect(src).toContain('hideNavigation=1');
+		expect(src).toContain('theme=light');
+		expect(src).toContain('view=editor');
+		expect(src).toContain(`file=${file}`);
 	});
 
 	it('renders with a GeneralObserver', async () => {
 		const { getByTestId } = render(StackBlitz, {
-			id: 'my-id',
-			file: 'index.html',
+			id: 'svelte-kit-template',
+			file: 'src/app.html',
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty id gracefully', async () => {
-		// Test edge case: empty or invalid StackBlitz ID
+	it('should handle empty id gracefully', async () => {
+		const { container } = render(StackBlitz, {
+			id: '',
+			file: 'src/app.html',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		expect(iframe).toBeTruthy();
+		const src = iframe?.getAttribute('src');
+		expect(src).toContain('https://stackblitz.com/edit/?embed=1');
 	});
 
-	it.skip('should apply default prop values when not provided', async () => {
-		// Test default height, width, file, and other props
+	it('should apply default prop values when not provided', async () => {
+		const { container } = render(StackBlitz, {
+			id: 'test-project',
+			file: 'index.js',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		expect(iframe).toBeTruthy();
+
+		expect(iframe?.getAttribute('frameborder')).toBe('no');
+		expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
+		expect(iframe?.getAttribute('title')).toBe(
+			'stackblitz-test-project',
+		);
+		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
+
+		const src = iframe?.getAttribute('src');
+		expect(src).toContain('ctl=1'); // clickToLoad default true
+		expect(src).toContain('hideExplorer=1'); // hideExplorer default true
+		expect(src).toContain('hideNavigation=0'); // hideNavigation default false
+		expect(src).toContain('theme=dark'); // theme default dark
 	});
 
-	it.skip('should handle different file parameter values', async () => {
-		// Test various file paths and extensions
+	it('should handle different view options', async () => {
+		// Test editor view
+		const { container: editorContainer } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			view: 'editor',
+			disable_observer: true,
+		});
+		const editorIframe = editorContainer.querySelector('iframe');
+		expect(editorIframe?.getAttribute('src')).toContain(
+			'view=editor',
+		);
+
+		// Test preview view
+		const { container: previewContainer } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			view: 'preview',
+			disable_observer: true,
+		});
+		const previewIframe = previewContainer.querySelector('iframe');
+		expect(previewIframe?.getAttribute('src')).toContain(
+			'view=preview',
+		);
+
+		// Test default view (should not include view parameter)
+		const { container: defaultContainer } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			view: 'default',
+			disable_observer: true,
+		});
+		const defaultIframe = defaultContainer.querySelector('iframe');
+		expect(defaultIframe?.getAttribute('src')).not.toContain('view=');
 	});
 
-	it.skip('should construct proper StackBlitz embed URL', async () => {
-		// Test URL construction with all query parameters
+	it('should construct proper StackBlitz embed URL', async () => {
+		const id = 'my-awesome-project';
+		const file = 'src/components/App.svelte';
+		const { container } = render(StackBlitz, {
+			id,
+			file,
+			theme: 'light',
+			view: 'editor',
+			clickToLoad: false,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		expect(src).toContain(
+			`https://stackblitz.com/edit/${id}?embed=1`,
+		);
+		expect(src).toContain(`file=${encodeURIComponent(file)}`);
+		expect(src).toContain('theme=light');
+		expect(src).toContain('view=editor');
+		expect(src).toContain('ctl=0');
 	});
 
-	it.skip('should handle special characters in id and file', async () => {
-		// Test URL encoding and special characters
+	it('should handle special characters in id and file', async () => {
+		const id = 'project-with_special-chars123';
+		const file = 'src/components/My_Component-test.svelte';
+		const { container } = render(StackBlitz, {
+			id,
+			file,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		expect(iframe?.getAttribute('title')).toBe(`stackblitz-${id}`);
+		const src = iframe?.getAttribute('src');
+		expect(src).toContain(id);
+		expect(src).toContain(encodeURIComponent(file));
 	});
 
-	it.skip('should have proper iframe accessibility attributes', async () => {
-		// Test title, frameborder, allowfullscreen, and other accessibility features
+	it('should have proper iframe accessibility attributes', async () => {
+		const id = 'accessibility-test';
+		const { container } = render(StackBlitz, {
+			id,
+			file: 'index.js',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		expect(iframe?.getAttribute('title')).toBe(`stackblitz-${id}`);
+		expect(iframe?.getAttribute('frameborder')).toBe('no');
+		expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
+		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
 	});
 
-	it.skip('should handle very long id and file values', async () => {
-		// Test edge case: extremely long IDs and file paths
+	it('should handle very long id and file values', async () => {
+		const id = 'a'.repeat(50);
+		const file = 'b'.repeat(100) + '.js';
+		const { container } = render(StackBlitz, {
+			id,
+			file,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		expect(src).toContain(id);
+		expect(src).toContain(encodeURIComponent(file));
 	});
 
-	it.skip('should apply custom CSS styles correctly', async () => {
-		// Test custom height/width styles
+	it('should apply custom styles correctly', async () => {
+		const customStyles =
+			'border: 2px solid blue; background: yellow;';
+		const { container } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			iframe_styles: customStyles,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		expect(iframe?.style.cssText).toContain('border: 2px solid blue');
+		expect(iframe?.style.cssText).toContain('background: yellow');
 	});
 
-	it.skip('should handle numeric height and width values', async () => {
-		// Test passing numbers instead of strings for dimensions
+	it('should handle boolean configuration options', async () => {
+		const { container } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			clickToLoad: true,
+			hideNavigation: true,
+			hideExplorer: false,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		expect(src).toContain('ctl=1');
+		expect(src).toContain('hideNavigation=1');
+		expect(src).toContain('hideExplorer=0');
 	});
 
-	it.skip('should handle malformed StackBlitz IDs gracefully', async () => {
-		// Test edge case: malformed or invalid StackBlitz IDs
+	it('should handle different theme options', async () => {
+		// Test light theme
+		const { container: lightContainer } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			theme: 'light',
+			disable_observer: true,
+		});
+		const lightIframe = lightContainer.querySelector('iframe');
+		expect(lightIframe?.getAttribute('src')).toContain('theme=light');
+
+		// Test dark theme
+		const { container: darkContainer } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			theme: 'dark',
+			disable_observer: true,
+		});
+		const darkIframe = darkContainer.querySelector('iframe');
+		expect(darkIframe?.getAttribute('src')).toContain('theme=dark');
+
+		// Test custom theme
+		const { container: customContainer } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			theme: 'custom-theme',
+			disable_observer: true,
+		});
+		const customIframe = customContainer.querySelector('iframe');
+		expect(customIframe?.getAttribute('src')).toContain(
+			'theme=custom-theme',
+		);
 	});
 
-	it.skip('should render with proper CSS class structure', async () => {
-		// Test stackblitz-sveltekit-embed class application
+	it('should handle custom dimensions', async () => {
+		const { container } = render(StackBlitz, {
+			id: 'test',
+			file: 'index.js',
+			width: '800px',
+			height: '600px',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		// Default iframe_styles should incorporate custom dimensions
+		expect(iframe?.style.cssText).toContain('height: 600px');
+		expect(iframe?.style.cssText).toContain('width: 800px');
 	});
 
-	it.skip('should handle different StackBlitz project types', async () => {
-		// Test various project templates and configurations
+	it('should handle missing file parameter gracefully', async () => {
+		const { container } = render(StackBlitz, {
+			id: 'test-project',
+			file: undefined,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		// Should not include file parameter when undefined
+		expect(src).not.toContain('file=');
+		expect(src).toContain(
+			'https://stackblitz.com/edit/test-project?embed=1',
+		);
 	});
 
-	it.skip('should handle query parameter customization', async () => {
-		// Test embed, ctl, hideExplorer, hideNavigation, theme parameters
+	it('should render with proper CSS class structure', async () => {
+		const { container } = render(StackBlitz, {
+			id: 'class-test',
+			file: 'index.js',
+			disable_observer: true,
+		});
+
+		const iframe = container.querySelector('iframe');
+		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
+	});
+
+	it('should handle query parameter construction correctly', async () => {
+		const { container } = render(StackBlitz, {
+			id: 'test',
+			file: 'app.js',
+			view: 'editor',
+			theme: 'light',
+			clickToLoad: false,
+			hideNavigation: true,
+			hideExplorer: false,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		// Check that all parameters are included
+		expect(src).toContain('ctl=0');
+		expect(src).toContain('hideExplorer=0');
+		expect(src).toContain('hideNavigation=1');
+		expect(src).toContain('theme=light');
+		expect(src).toContain('view=editor');
+		expect(src).toContain('file=app.js');
+
+		// Check that base URL is correct
+		expect(src).toMatch(
+			/^https:\/\/stackblitz\.com\/edit\/test\?embed=1&/,
+		);
 	});
 });

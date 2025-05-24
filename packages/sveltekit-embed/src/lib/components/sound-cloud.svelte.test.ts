@@ -52,51 +52,216 @@ describe('SoundCloud', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty soundcloudLink gracefully', async () => {
-		// Test edge case: empty or invalid SoundCloud link
+	it('should handle empty soundcloudLink gracefully', async () => {
+		const { container } = render(SoundCloud, {
+			soundcloudLink: '',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		expect(iframe).toBeTruthy();
+		const src = iframe?.getAttribute('src');
+		expect(src).toBe(
+			'https://w.soundcloud.com/player/?url=&visual=true',
+		);
 	});
 
-	it.skip('should apply default height and width when not provided', async () => {
-		// Test default prop values
+	it('should apply default height and width when not provided', async () => {
+		const { container } = render(SoundCloud, {
+			soundcloudLink: 'https://soundcloud.com/test/track',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		expect(iframe).toBeTruthy();
+
+		expect(iframe?.getAttribute('width')).toBe('100%');
+		expect(iframe?.getAttribute('height')).toBe('300px');
+		expect(iframe?.getAttribute('scrolling')).toBe('false');
+		expect(iframe?.getAttribute('frameborder')).toBe('0');
+		expect(iframe?.getAttribute('allow')).toBe('autoplay');
 	});
 
-	it.skip('should construct proper SoundCloud player URL', async () => {
-		// Test URL construction with w.soundcloud.com/player
+	it('should construct proper SoundCloud player URL', async () => {
+		const soundcloudLink = 'https://soundcloud.com/artist/track-name';
+		const { container } = render(SoundCloud, {
+			soundcloudLink,
+			showVisual: false,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		expect(src).toBe(
+			`https://w.soundcloud.com/player/?url=${soundcloudLink}&visual=false`,
+		);
 	});
 
-	it.skip('should handle special characters in soundcloudLink', async () => {
-		// Test URL encoding and special characters
+	it('should handle special characters in soundcloudLink', async () => {
+		const soundcloudLink =
+			'https://soundcloud.com/artist/track-with-symbols_123';
+		const { getByTitle } = render(SoundCloud, {
+			soundcloudLink,
+			disable_observer: true,
+		});
+		const iframe = getByTitle(`soundcloud-${soundcloudLink}`);
+		const expected_src = `https://w.soundcloud.com/player/?url=${soundcloudLink}&visual=true`;
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it.skip('should have proper iframe accessibility attributes', async () => {
-		// Test title, frameborder, and other accessibility features
+	it('should have proper iframe accessibility attributes', async () => {
+		const soundcloudLink =
+			'https://soundcloud.com/test/accessibility';
+		const { container } = render(SoundCloud, {
+			soundcloudLink,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		expect(iframe?.getAttribute('title')).toBe(
+			`soundcloud-${soundcloudLink}`,
+		);
+		expect(iframe?.getAttribute('frameborder')).toBe('0');
+		expect(iframe?.getAttribute('scrolling')).toBe('false');
+		expect(iframe?.getAttribute('allow')).toBe('autoplay');
 	});
 
-	it.skip('should handle very long soundcloudLink values', async () => {
-		// Test edge case: extremely long SoundCloud links
+	it('should handle very long soundcloudLink values', async () => {
+		const soundcloudLink =
+			'https://soundcloud.com/artist/' + 'a'.repeat(100);
+		const { container } = render(SoundCloud, {
+			soundcloudLink,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+		const src = iframe?.getAttribute('src');
+
+		expect(src).toContain('https://w.soundcloud.com/player/?url=');
+		expect(src).toContain(soundcloudLink);
 	});
 
-	it.skip('should apply visual parameter correctly', async () => {
-		// Test visual=true parameter in URL construction
+	it('should apply visual parameter correctly', async () => {
+		const soundcloudLink = 'https://soundcloud.com/test/track';
+
+		// Test visual=true
+		const { container: visualContainer } = render(SoundCloud, {
+			soundcloudLink,
+			showVisual: true,
+			disable_observer: true,
+		});
+		const visualIframe = visualContainer.querySelector('iframe');
+		expect(visualIframe?.getAttribute('src')).toContain(
+			'visual=true',
+		);
+
+		// Test visual=false
+		const { container: noVisualContainer } = render(SoundCloud, {
+			soundcloudLink,
+			showVisual: false,
+			disable_observer: true,
+		});
+		const noVisualIframe = noVisualContainer.querySelector('iframe');
+		expect(noVisualIframe?.getAttribute('src')).toContain(
+			'visual=false',
+		);
 	});
 
-	it.skip('should handle numeric height and width values', async () => {
-		// Test passing numbers instead of strings for dimensions
+	it('should handle numeric height and width values', async () => {
+		const { container } = render(SoundCloud, {
+			soundcloudLink: 'https://soundcloud.com/test/track',
+			width: '500',
+			height: '400',
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		expect(iframe?.getAttribute('width')).toBe('500');
+		expect(iframe?.getAttribute('height')).toBe('400');
 	});
 
-	it.skip('should handle malformed SoundCloud links gracefully', async () => {
-		// Test edge case: malformed or invalid SoundCloud links
+	it('should handle malformed SoundCloud links gracefully', async () => {
+		const soundcloudLink = 'not-a-valid-url/with/problems';
+		const { container } = render(SoundCloud, {
+			soundcloudLink,
+			disable_observer: true,
+		});
+		const iframe = container.querySelector('iframe');
+
+		// Component should still render, even if URL is malformed
+		expect(iframe).toBeTruthy();
+		const src = iframe?.getAttribute('src');
+		expect(src).toContain(soundcloudLink);
 	});
 
-	it.skip('should render with proper CSS class structure', async () => {
-		// Test soundcloud-sveltekit-embed class application
+	it('should render with proper CSS class structure', async () => {
+		const { container } = render(SoundCloud, {
+			soundcloudLink: 'https://soundcloud.com/test/track',
+			iframe_styles: 'border: 1px solid red;',
+			disable_observer: true,
+		});
+
+		const iframe = container.querySelector('iframe');
+		expect(iframe?.style.cssText).toContain('border: 1px solid red;');
 	});
 
-	it.skip('should handle different SoundCloud content types', async () => {
-		// Test tracks, playlists, and user profiles
+	it('should handle different SoundCloud content types', async () => {
+		// Test track URL
+		const trackLink = 'https://soundcloud.com/artist/track-name';
+		const { container: trackContainer } = render(SoundCloud, {
+			soundcloudLink: trackLink,
+			disable_observer: true,
+		});
+		const trackIframe = trackContainer.querySelector('iframe');
+		expect(trackIframe?.getAttribute('src')).toContain(trackLink);
+
+		// Test playlist URL
+		const playlistLink =
+			'https://soundcloud.com/artist/sets/playlist-name';
+		const { container: playlistContainer } = render(SoundCloud, {
+			soundcloudLink: playlistLink,
+			disable_observer: true,
+		});
+		const playlistIframe = playlistContainer.querySelector('iframe');
+		expect(playlistIframe?.getAttribute('src')).toContain(
+			playlistLink,
+		);
+
+		// Test user profile URL
+		const userLink = 'https://soundcloud.com/username';
+		const { container: userContainer } = render(SoundCloud, {
+			soundcloudLink: userLink,
+			disable_observer: true,
+		});
+		const userIframe = userContainer.querySelector('iframe');
+		expect(userIframe?.getAttribute('src')).toContain(userLink);
 	});
 
-	it.skip('should handle SoundCloud URL variations', async () => {
-		// Test different SoundCloud URL formats and patterns
+	it('should handle SoundCloud URL variations', async () => {
+		// Test short URL
+		const shortLink = 'https://on.soundcloud.com/abc123';
+		const { container: shortContainer } = render(SoundCloud, {
+			soundcloudLink: shortLink,
+			disable_observer: true,
+		});
+		const shortIframe = shortContainer.querySelector('iframe');
+		expect(shortIframe?.getAttribute('src')).toContain(shortLink);
+
+		// Test URL with query parameters
+		const urlWithParams = 'https://soundcloud.com/artist/track?t=30s';
+		const { container: paramsContainer } = render(SoundCloud, {
+			soundcloudLink: urlWithParams,
+			disable_observer: true,
+		});
+		const paramsIframe = paramsContainer.querySelector('iframe');
+		expect(paramsIframe?.getAttribute('src')).toContain(
+			urlWithParams,
+		);
+
+		// Test mobile URL
+		const mobileUrl = 'https://m.soundcloud.com/artist/track';
+		const { container: mobileContainer } = render(SoundCloud, {
+			soundcloudLink: mobileUrl,
+			disable_observer: true,
+		});
+		const mobileIframe = mobileContainer.querySelector('iframe');
+		expect(mobileIframe?.getAttribute('src')).toContain(mobileUrl);
 	});
 });

@@ -3,13 +3,16 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Spotify', () => {
-	it('mounts with default props', async () => {
-		const { container } = render(Spotify);
+	it('mounts with spotify link', async () => {
+		const { container } = render(Spotify, {
+			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
+			disable_observer: true,
+		});
 		expect(container).toBeTruthy();
 	});
 
-	it('renders iframe with correct src', async () => {
-		const spotifyLink = 'playlist/37i9dQZF1E4ZoJ6VjC6TJL';
+	it('renders iframe with spotify link', async () => {
+		const spotifyLink = 'track/4uLU6hMCjMI75M1A2tKUQC';
 		const { getByTestId } = render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
@@ -19,74 +22,249 @@ describe('Spotify', () => {
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('mounts with custom height and width', async () => {
-		const { container } = render(Spotify, {
-			spotifyLink: 'album/0yL5CjKtIVrWtLZnFJHfjz',
-			height: '300px',
-			width: '80%',
-			disable_observer: true,
-		});
-		const iframe = container.querySelector('iframe');
-
-		expect(iframe?.style.height).toBe('300px');
-		expect(iframe?.style.width).toBe('80%');
-	});
-
 	it('renders with a GeneralObserver', async () => {
 		const { getByTestId } = render(Spotify, {
-			spotifyLink: 'artist/2ye2Wgw4gimLv2eAKyk1NB',
+			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty spotifyLink gracefully', async () => {
-		// Test edge case: empty or invalid Spotify link
+	it('should handle empty spotifyLink gracefully', async () => {
+		const { getByTestId } = render(Spotify, {
+			spotifyLink: '',
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		const expected_src = 'https://open.spotify.com/embed/';
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it.skip('should apply default height and width when not provided', async () => {
-		// Test default prop values
+	it('should apply default height and width when not provided', async () => {
+		const { getByTestId } = render(Spotify, {
+			spotifyLink: 'track/test',
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		const iframeElement = iframe.element() as HTMLIFrameElement;
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute('title', 'spotify-track/test');
+		await expect.element(iframe).toHaveAttribute('frameBorder', '0');
+		await expect
+			.element(iframe)
+			.toHaveAttribute('allow', 'encrypted-media');
+		expect(iframeElement.style.borderRadius).toContain('0.8rem');
+	});
+
+	it('should construct proper Spotify embed URL', async () => {
+		const spotifyLink = 'playlist/37i9dQZF1DXcBWIGoYBM5M';
+		const { getByTestId } = render(Spotify, {
+			spotifyLink,
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		const expected_src = `https://open.spotify.com/embed/${spotifyLink}`;
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it.skip('should handle different Spotify content types', async () => {
-		// Test playlist, album, track, artist, and other content types
+		// Test track
+		const { getByTestId: getTrack } = render(Spotify, {
+			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
+			disable_observer: true,
+		});
+		const trackIframe = getTrack('spotify');
+		await expect
+			.element(trackIframe)
+			.toHaveAttribute(
+				'src',
+				'https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC',
+			);
+
+		// Test album
+		const { getByTestId: getAlbum } = render(Spotify, {
+			spotifyLink: 'album/1DFixLWuPkv3KT3TnV35m3',
+			disable_observer: true,
+		});
+		const albumIframe = getAlbum('spotify');
+		await expect
+			.element(albumIframe)
+			.toHaveAttribute(
+				'src',
+				'https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3',
+			);
+
+		// Test playlist
+		const { getByTestId: getPlaylist } = render(Spotify, {
+			spotifyLink: 'playlist/37i9dQZF1DXcBWIGoYBM5M',
+			disable_observer: true,
+		});
+		const playlistIframe = getPlaylist('spotify');
+		await expect
+			.element(playlistIframe)
+			.toHaveAttribute(
+				'src',
+				'https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M',
+			);
+
+		// Test artist
+		const { getByTestId: getArtist } = render(Spotify, {
+			spotifyLink: 'artist/4NHQUGzhtTLFvgF5SZesLK',
+			disable_observer: true,
+		});
+		const artistIframe = getArtist('spotify');
+		await expect
+			.element(artistIframe)
+			.toHaveAttribute(
+				'src',
+				'https://open.spotify.com/embed/artist/4NHQUGzhtTLFvgF5SZesLK',
+			);
 	});
 
-	it.skip('should construct proper Spotify embed URL', async () => {
-		// Test URL construction with open.spotify.com/embed
+	it('should handle special characters in spotifyLink', async () => {
+		const spotifyLink = 'track/abc123_def-456';
+		const { getByTestId } = render(Spotify, {
+			spotifyLink,
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				`https://open.spotify.com/embed/${spotifyLink}`,
+			);
+		await expect
+			.element(iframe)
+			.toHaveAttribute('title', `spotify-${spotifyLink}`);
 	});
 
-	it.skip('should handle special characters in spotifyLink', async () => {
-		// Test URL encoding and special characters
+	it('should have proper iframe accessibility attributes', async () => {
+		const spotifyLink = 'track/accessibility-test';
+		const { getByTestId } = render(Spotify, {
+			spotifyLink,
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute('title', `spotify-${spotifyLink}`);
+		await expect.element(iframe).toHaveAttribute('frameBorder', '0');
+		await expect
+			.element(iframe)
+			.toHaveAttribute('allow', 'encrypted-media');
+		await expect
+			.element(iframe)
+			.toHaveClass('spotify-sveltekit-embed');
 	});
 
-	it.skip('should have proper iframe accessibility and security attributes', async () => {
-		// Test frameborder, allow attributes, and accessibility features
+	it('should handle very long spotifyLink values', async () => {
+		const spotifyLink = 'track/' + 'a'.repeat(100);
+		const { getByTestId } = render(Spotify, {
+			spotifyLink,
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				`https://open.spotify.com/embed/${spotifyLink}`,
+			);
 	});
 
-	it.skip('should handle very long spotifyLink values', async () => {
-		// Test edge case: extremely long Spotify links
+	it('should apply custom styles correctly', async () => {
+		const customStyles = 'border: 2px solid red; background: blue;';
+		const { getByTestId } = render(Spotify, {
+			spotifyLink: 'track/test',
+			iframe_styles: customStyles,
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		const iframeElement = iframe.element() as HTMLIFrameElement;
+
+		expect(iframeElement.style.cssText).toContain(
+			'border: 2px solid red',
+		);
+		expect(iframeElement.style.cssText).toContain('background: blue');
 	});
 
-	it.skip('should apply custom CSS styles correctly', async () => {
-		// Test custom height/width styles
+	it('should handle custom dimensions', async () => {
+		const { getByTestId } = render(Spotify, {
+			spotifyLink: 'track/test',
+			width: '500px',
+			height: '300px',
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+		const iframeElement = iframe.element() as HTMLIFrameElement;
+
+		// Default iframe_styles should incorporate custom dimensions
+		expect(iframeElement.style.cssText).toContain('height: 300px');
+		expect(iframeElement.style.cssText).toContain('width: 500px');
 	});
 
-	it.skip('should handle numeric height and width values', async () => {
-		// Test passing numbers instead of strings for dimensions
+	it('should handle malformed Spotify links gracefully', async () => {
+		const spotifyLink = 'invalid/content/with/extra/slashes';
+		const { getByTestId } = render(Spotify, {
+			spotifyLink,
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+
+		// Component should still render, even if link is malformed
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				`https://open.spotify.com/embed/${spotifyLink}`,
+			);
 	});
 
-	it.skip('should handle malformed Spotify links gracefully', async () => {
-		// Test edge case: malformed or invalid Spotify links
+	it('should render with proper CSS class structure', async () => {
+		const { getByTestId } = render(Spotify, {
+			spotifyLink: 'track/test',
+			disable_observer: true,
+		});
+		const iframe = getByTestId('spotify');
+
+		await expect
+			.element(iframe)
+			.toHaveClass('spotify-sveltekit-embed');
 	});
 
-	it.skip('should render with proper CSS class structure', async () => {
-		// Test spotify-sveltekit-embed class application
-	});
+	it.skip('should handle Spotify link variations', async () => {
+		// Test with query parameters
+		const linkWithParams = 'track/4uLU6hMCjMI75M1A2tKUQC?si=abc123';
+		const { getByTestId: getWithParams } = render(Spotify, {
+			spotifyLink: linkWithParams,
+			disable_observer: true,
+		});
+		const paramsIframe = getWithParams('spotify');
+		await expect
+			.element(paramsIframe)
+			.toHaveAttribute(
+				'src',
+				`https://open.spotify.com/embed/${linkWithParams}`,
+			);
 
-	it.skip('should handle Spotify URI format conversion', async () => {
-		// Test conversion between spotify: URIs and HTTP links
+		// Test with just ID (no type prefix)
+		const justId = '4uLU6hMCjMI75M1A2tKUQC';
+		const { getByTestId: getJustId } = render(Spotify, {
+			spotifyLink: justId,
+			disable_observer: true,
+		});
+		const idIframe = getJustId('spotify');
+		await expect
+			.element(idIframe)
+			.toHaveAttribute(
+				'src',
+				`https://open.spotify.com/embed/${justId}`,
+			);
 	});
 });

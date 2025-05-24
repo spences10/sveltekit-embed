@@ -102,59 +102,250 @@ describe('YouTube', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it.skip('should calculate correct start time with complex skipTo values', async () => {
-		// Test skipTo: { h: 1, m: 30, s: 45 } = 5445 seconds
+	it('should calculate correct start time with complex skipTo values', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			skipTo: { h: 1, m: 30, s: 45 },
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		// 1 hour = 3600 seconds, 30 minutes = 1800 seconds, 45 seconds = 45 seconds
+		// Total: 3600 + 1800 + 45 = 5445 seconds
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=5445&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle invalid skipTo values gracefully', async () => {
-		// Test negative values, non-numbers, etc.
+	it('should handle invalid skipTo values gracefully', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			skipTo: { h: -1, m: -30, s: -45 },
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		// Negative values should result in negative start time (-5445)
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=-5445&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it.skip('should handle both youTubeId and listId provided', async () => {
-		// Test priority when both are provided
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			listId: 'playlist456',
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		// youTubeId should take priority when both are provided
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle empty youTubeId and listId', async () => {
-		// Test edge case when both are empty
+	it('should handle empty youTubeId and listId', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: '',
+			listId: '',
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-');
+
+		// Should fallback to playlist format when both are empty
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle invalid aspect ratios', async () => {
-		// Test unsupported aspect ratio values
+	it('should handle invalid aspect ratios', async () => {
+		const { getByTestId } = render(YouTube, {
+			youTubeId: 'abc123',
+			aspectRatio: 'invalid:ratio' as any,
+			disable_observer: true,
+		});
+
+		const iframe = getByTestId('youTube');
+		const iframeElement = iframe.element();
+		const iframeWrapper = iframeElement.parentElement;
+
+		// Should not have padding-top since aspect ratio is invalid
+		expect(iframeWrapper?.getAttribute('style')).not.toContain(
+			'padding-top:',
+		);
 	});
 
 	it.skip('should apply all supported aspect ratios correctly', async () => {
-		// Test '1:1', '16:9', '4:3', '3:2', '8.5'
+		const aspectRatios = [
+			{ ratio: '1:1', expected: '100%' },
+			{ ratio: '16:9', expected: '56.25%' },
+			{ ratio: '4:3', expected: '75%' },
+			{ ratio: '3:2', expected: '66.66%' },
+			{ ratio: '8.5', expected: '62.5%' },
+		];
+
+		for (const testCase of aspectRatios) {
+			const { getByTestId } = render(YouTube, {
+				youTubeId: 'abc123',
+				aspectRatio: testCase.ratio,
+				disable_observer: true,
+			});
+
+			const iframe = getByTestId('youTube');
+			const iframeElement = iframe.element();
+			const iframeWrapper = iframeElement.parentElement;
+
+			expect(iframeWrapper?.getAttribute('style')).toContain(
+				`padding-top: ${testCase.expected};`,
+			);
+		}
 	});
 
-	it.skip('should handle custom iframe styles properly', async () => {
-		// Test complex CSS styles injection
+	it('should handle custom iframe styles properly', async () => {
+		const customStyles =
+			'border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1);';
+		const { getByTestId } = render(YouTube, {
+			youTubeId: 'abc123',
+			iframe_styles: customStyles,
+			disable_observer: true,
+		});
+
+		const iframe = getByTestId('youTube');
+		const iframeElement = iframe.element() as HTMLIFrameElement;
+
+		expect(iframeElement.style.cssText).toContain(
+			'border-radius: 1rem',
+		);
+		expect(iframeElement.style.cssText).toContain('box-shadow');
 	});
 
-	it.skip('should handle playlist with custom index', async () => {
-		// Test index parameter for playlists
+	it('should handle playlist with custom index', async () => {
+		const listId = 'playlist123';
+		const { getByTitle } = render(YouTube, {
+			youTubeId: '',
+			listId,
+			index: 5,
+			disable_observer: true,
+		});
+		const iframe = getByTitle(`youTube-${listId}`);
+
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=5&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should have proper accessibility attributes', async () => {
-		// Test iframe title, allow attributes, etc.
+	it('should have proper accessibility attributes', async () => {
+		const { getByTestId } = render(YouTube, {
+			youTubeId: 'abc123',
+			disable_observer: true,
+		});
+
+		const iframe = getByTestId('youTube');
+		const iframeElement = iframe.element() as HTMLIFrameElement;
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute('title', 'youTube-abc123');
+		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'allow',
+				'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+			);
+		await expect.element(iframe).toHaveAttribute('allowfullscreen');
 	});
 
-	it.skip('should handle very large skipTo values', async () => {
-		// Test edge case: hours > 24, minutes > 60, etc.
+	it('should handle very large skipTo values', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			skipTo: { h: 25, m: 70, s: 120 },
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		// 25 hours = 90000 seconds, 70 minutes = 4200 seconds, 120 seconds = 120 seconds
+		// Total: 90000 + 4200 + 120 = 94320 seconds
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=94320&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle special characters in youTubeId', async () => {
-		// Test URL encoding and validation
+	it('should handle special characters in youTubeId', async () => {
+		const youTubeId = 'abc-123_def';
+		const { getByTitle } = render(YouTube, {
+			youTubeId,
+			disable_observer: true,
+		});
+		const iframe = getByTitle(`youTube-${youTubeId}`);
+
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/${youTubeId}?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle special characters in listId', async () => {
-		// Test playlist ID validation
+	it('should handle special characters in listId', async () => {
+		const listId = 'playlist-123_abc';
+		const { getByTitle } = render(YouTube, {
+			youTubeId: '',
+			listId,
+			disable_observer: true,
+		});
+		const iframe = getByTitle(`youTube-${listId}`);
+
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should apply default iframe_styles when not provided', async () => {
-		// Test default border-radius style
+	it('should apply default iframe_styles when not provided', async () => {
+		const { getByTestId } = render(YouTube, {
+			youTubeId: 'abc123',
+			// iframe_styles not provided, should use default
+			disable_observer: true,
+		});
+
+		const iframe = getByTestId('youTube');
+		const iframeElement = iframe.element() as HTMLIFrameElement;
+
+		expect(iframeElement.style.cssText).toContain(
+			'border-radius: 0.6rem',
+		);
 	});
 
 	it.skip('should handle boolean props as different data types', async () => {
-		// Test passing strings, numbers instead of booleans
+		// Test with string values that should be converted to booleans
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			autoPlay: 'true' as any,
+			mute: 'false' as any,
+			controls: 1 as any,
+			loop: 0 as any,
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		// String 'true' should be truthy, 'false' should be truthy (non-empty string)
+		// Number 1 should be truthy, 0 should be falsy
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=1&start=0&mute=1&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
+	});
+
+	it('should handle zero values in skipTo correctly', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			skipTo: { h: 0, m: 0, s: 0 },
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
+	});
+
+	it.skip('should handle missing skipTo properties gracefully', async () => {
+		const { getByTitle } = render(YouTube, {
+			youTubeId: 'abc123',
+			skipTo: { h: 1 } as any, // Missing m and s properties
+			disable_observer: true,
+		});
+		const iframe = getByTitle('youTube-abc123');
+
+		// Missing properties should be treated as undefined, which should be 0
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=3600&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 });

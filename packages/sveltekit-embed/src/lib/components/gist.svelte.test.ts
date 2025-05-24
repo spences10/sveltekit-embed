@@ -42,44 +42,160 @@ describe('Gist', () => {
 		expect(general_observer).toBeTruthy();
 	});
 
-	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty gistUri gracefully', async () => {
-		// Test edge case: empty or invalid gist URI
+	describe('Edge Cases', () => {
+		it('should handle empty gistUri gracefully', async () => {
+			const { getByTitle } = render(Gist, {
+				gistUri: '',
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			// Should still construct a valid URL even with empty gistUri
+			expect(element.src).toBe('https://gist.github.com/.pibb');
+		});
+
+		it('should handle special characters in gistUri', async () => {
+			const specialGistUri = 'user-name/gist_id-123';
+			const { getByTitle } = render(Gist, {
+				gistUri: specialGistUri,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			expect(element.src).toContain(specialGistUri);
+			expect(element.src).toBe(
+				`https://gist.github.com/${specialGistUri}.pibb`,
+			);
+		});
+
+		it('should handle very long gistUri values', async () => {
+			const longGistUri = 'user/' + 'a'.repeat(1000);
+			const { getByTitle } = render(Gist, {
+				gistUri: longGistUri,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			expect(element.src).toContain(longGistUri);
+			expect(element.src).toBe(
+				`https://gist.github.com/${longGistUri}.pibb`,
+			);
+		});
+
+		it('should handle malformed gist URIs gracefully', async () => {
+			const malformedUri = 'not/a/valid/gist/uri';
+			const { getByTitle } = render(Gist, {
+				gistUri: malformedUri,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			// Should still render with the malformed URI
+			expect(element.src).toBe(
+				`https://gist.github.com/${malformedUri}.pibb`,
+			);
+		});
 	});
 
-	it.skip('should apply default height and width when not provided', async () => {
-		// Test default prop values
+	describe('Default Props', () => {
+		it('should apply default height and width when not provided', async () => {
+			const { container } = render(Gist, {
+				gistUri,
+				disable_observer: true,
+			});
+			const iframe = container.querySelector('iframe');
+
+			expect(iframe?.style.height).toBe('320px');
+			expect(iframe?.style.width).toBe('100%');
+		});
 	});
 
-	it.skip('should handle special characters in gistUri', async () => {
-		// Test URL encoding and special characters
+	describe('Custom Styling', () => {
+		it('should apply custom iframe styles correctly', async () => {
+			const customStyles = 'border: 2px solid red; background: blue;';
+			const { getByTitle } = render(Gist, {
+				gistUri,
+				iframe_styles: customStyles,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			expect(element.getAttribute('style')).toBe(customStyles);
+		});
+
+		it('should handle numeric height and width values', async () => {
+			const { container } = render(Gist, {
+				gistUri,
+				height: '400px',
+				width: '80%',
+				disable_observer: true,
+			});
+			const iframe = container.querySelector('iframe');
+
+			expect(iframe?.style.height).toBe('400px');
+			expect(iframe?.style.width).toBe('80%');
+		});
 	});
 
-	it.skip('should construct proper GitHub gist URL', async () => {
-		// Test URL construction with .pibb extension
+	describe('URL Construction', () => {
+		it('should construct proper GitHub gist URL', async () => {
+			const testGistUri = 'username/gist123456';
+			const { getByTitle } = render(Gist, {
+				gistUri: testGistUri,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			const expectedUrl = `https://gist.github.com/${testGistUri}.pibb`;
+			expect(element.src).toBe(expectedUrl);
+		});
+
+		it('should handle gist with file parameter', async () => {
+			const gistWithFile = 'username/gist123456?file=example.js';
+			const { getByTitle } = render(Gist, {
+				gistUri: gistWithFile,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			// Note: The file parameter gets included in the URL as part of gistUri
+			expect(element.src).toBe(
+				`https://gist.github.com/${gistWithFile}.pibb`,
+			);
+		});
 	});
 
-	it.skip('should have proper iframe accessibility attributes', async () => {
-		// Test title, frameborder, and other accessibility features
+	describe('Accessibility', () => {
+		it('should have proper iframe accessibility attributes', async () => {
+			const { getByTitle } = render(Gist, {
+				gistUri,
+				disable_observer: true,
+			});
+			const iframe = getByTitle('gist-widget');
+
+			await expect
+				.element(iframe)
+				.toHaveAttribute('title', 'gist-widget');
+		});
 	});
 
-	it.skip('should handle very long gistUri values', async () => {
-		// Test edge case: extremely long URIs
-	});
+	describe('CSS Styling', () => {
+		it('should apply default CSS styles from component', async () => {
+			const { container } = render(Gist, {
+				gistUri,
+				disable_observer: true,
+			});
+			const iframe = container.querySelector('iframe');
 
-	it.skip('should apply custom iframe styles correctly', async () => {
-		// Test custom iframe_styles prop override
-	});
-
-	it.skip('should handle numeric height and width values', async () => {
-		// Test passing numbers instead of strings for dimensions
-	});
-
-	it.skip('should handle gist with file parameter', async () => {
-		// Test gist URI with specific file parameter
-	});
-
-	it.skip('should handle malformed gist URIs gracefully', async () => {
-		// Test edge case: malformed or invalid URIs
+			// The component has CSS rules that should be applied
+			expect(iframe).toBeTruthy();
+		});
 	});
 });

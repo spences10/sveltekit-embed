@@ -1,5 +1,5 @@
 import Tweet from '$lib/components/tweet.svelte';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Tweet', () => {
@@ -25,51 +25,255 @@ describe('Tweet', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty tweetLink gracefully', async () => {
-		// Test edge case: empty or invalid tweet link
+	it('should handle empty tweetLink gracefully', async () => {
+		const tweetLink = '';
+
+		const { getByText } = render(Tweet, {
+			tweetLink,
+		});
+		const tweetElement = getByText('Loading Tweet...');
+
+		await expect
+			.element(tweetElement)
+			.toHaveAttribute('href', 'https://twitter.com/');
 	});
 
-	it.skip('should apply default prop values when not provided', async () => {
-		// Test default height, width, and other props
+	it('should apply default prop values when not provided', async () => {
+		const { container } = render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+		});
+
+		const wrapper = container.querySelector('.tweet-wrapper');
+		const blockquote = container.querySelector('.twitter-tweet');
+
+		expect(wrapper).toBeTruthy();
+		expect(blockquote).toBeTruthy();
+
+		if (wrapper && blockquote) {
+			await expect
+				.element(wrapper)
+				.toHaveAttribute('data-theme', 'light');
+			await expect
+				.element(blockquote)
+				.toHaveAttribute('data-theme', 'light');
+		}
 	});
 
-	it.skip('should handle special characters in tweetLink', async () => {
-		// Test URL encoding and special characters
+	it('should handle special characters in tweetLink', async () => {
+		const tweetLink = 'user.name/status/123_456';
+
+		const { getByText } = render(Tweet, {
+			tweetLink,
+		});
+		const tweetElement = getByText('Loading Tweet...');
+
+		await expect
+			.element(tweetElement)
+			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
 	});
 
-	it.skip('should construct proper Twitter embed URL', async () => {
-		// Test URL construction for Twitter embeds
+	it('should construct proper Twitter embed URL', async () => {
+		const tweetLink = 'username/status/123456789';
+
+		const { getByText } = render(Tweet, {
+			tweetLink,
+		});
+		const tweetElement = getByText('Loading Tweet...');
+
+		const expectedHref = `https://twitter.com/${tweetLink}`;
+		await expect
+			.element(tweetElement)
+			.toHaveAttribute('href', expectedHref);
 	});
 
-	it.skip('should handle very long tweetLink values', async () => {
-		// Test edge case: extremely long tweet links
+	it('should handle very long tweetLink values', async () => {
+		const tweetLink = `${'a'.repeat(50)}/status/${'1'.repeat(20)}`;
+
+		const { getByText } = render(Tweet, {
+			tweetLink,
+		});
+		const tweetElement = getByText('Loading Tweet...');
+
+		await expect
+			.element(tweetElement)
+			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
 	});
 
-	it.skip('should apply custom CSS styles correctly', async () => {
-		// Test custom styling and dimensions
+	it('should apply custom CSS styles correctly', async () => {
+		const { container } = render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+			theme: 'dark',
+		});
+
+		const wrapper = container.querySelector('.tweet-wrapper');
+		const blockquote = container.querySelector('.twitter-tweet');
+
+		expect(wrapper).toBeTruthy();
+		expect(blockquote).toBeTruthy();
+
+		if (wrapper && blockquote) {
+			const wrapperElement = wrapper as HTMLDivElement;
+			const blockquoteElement = blockquote as HTMLElement;
+
+			// Check computed styles
+			const wrapperStyles = window.getComputedStyle(wrapperElement);
+			expect(wrapperStyles.display).toBe('flex');
+			expect(wrapperStyles.justifyContent).toBe('center');
+
+			await expect
+				.element(wrapper)
+				.toHaveAttribute('data-theme', 'dark');
+			await expect
+				.element(blockquote)
+				.toHaveAttribute('data-theme', 'dark');
+		}
 	});
 
-	it.skip('should handle malformed tweet links gracefully', async () => {
-		// Test edge case: malformed or invalid tweet links
+	it('should handle malformed tweet links gracefully', async () => {
+		const tweetLink = 'invalid/format/link';
+
+		const { getByText } = render(Tweet, {
+			tweetLink,
+		});
+		const tweetElement = getByText('Loading Tweet...');
+
+		await expect
+			.element(tweetElement)
+			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
 	});
 
-	it.skip('should render loading state properly', async () => {
-		// Test loading state display and behavior
+	it('should render loading state properly', async () => {
+		const { getByText } = render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+		});
+
+		const loadingText = getByText('Loading Tweet...');
+		await expect.element(loadingText).toBeInTheDocument();
 	});
 
 	it.skip('should handle Twitter script loading', async () => {
-		// Test Twitter widget script loading and initialization
+		const mockScript = document.createElement('script');
+		const createElementSpy = vi
+			.spyOn(document, 'createElement')
+			.mockReturnValue(mockScript);
+		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
+
+		render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+		});
+
+		expect(createElementSpy).toHaveBeenCalledWith('script');
+		expect(mockScript.src).toBe(
+			'https://platform.twitter.com/widgets.js',
+		);
+		expect(mockScript.async).toBe(true);
+		expect(appendChildSpy).toHaveBeenCalledWith(mockScript);
+
+		createElementSpy.mockRestore();
+		appendChildSpy.mockRestore();
 	});
 
 	it.skip('should handle component unmount and cleanup', async () => {
-		// Test proper cleanup when component is destroyed
+		const mockScript = document.createElement('script');
+		const createElementSpy = vi
+			.spyOn(document, 'createElement')
+			.mockReturnValue(mockScript);
+		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
+		const removeChildSpy = vi.spyOn(document.head, 'removeChild');
+
+		const { unmount } = render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+		});
+
+		// Unmount component
+		unmount();
+
+		expect(removeChildSpy).toHaveBeenCalledWith(mockScript);
+
+		createElementSpy.mockRestore();
+		appendChildSpy.mockRestore();
+		removeChildSpy.mockRestore();
 	});
 
 	it.skip('should have proper accessibility attributes', async () => {
-		// Test aria-labels and other accessibility features
+		const { container } = render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+		});
+
+		const link = container.querySelector('a');
+		expect(link).toBeTruthy();
+
+		if (link) {
+			const linkElement = link as HTMLAnchorElement;
+			expect(linkElement.textContent).toBe('Loading Tweet...');
+			expect(linkElement.style.color).toBe('rgb(29, 161, 242)'); // Twitter blue
+			expect(linkElement.style.fontWeight).toBe('bold');
+			expect(linkElement.style.textDecoration).toBe('none');
+		}
 	});
 
 	it.skip('should handle different tweet link formats', async () => {
-		// Test various Twitter URL formats and patterns
+		const testCases = [
+			'username/status/123456789',
+			'user.name/status/987654321',
+			'test_user/status/111222333',
+			'user123/status/456789012',
+		];
+
+		for (const tweetLink of testCases) {
+			const { getByText } = render(Tweet, {
+				tweetLink,
+			});
+			const tweetElement = getByText('Loading Tweet...');
+
+			await expect
+				.element(tweetElement)
+				.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
+		}
+	});
+
+	it.skip('should not load duplicate Twitter scripts', async () => {
+		// Mock existing script detection
+		const existingScript = document.createElement('script');
+		existingScript.src = 'https://platform.twitter.com/widgets.js';
+		document.head.appendChild(existingScript);
+
+		const createElementSpy = vi.spyOn(document, 'createElement');
+		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
+
+		render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+		});
+
+		// Should not create a new script since one already exists
+		expect(createElementSpy).not.toHaveBeenCalled();
+		expect(appendChildSpy).not.toHaveBeenCalled();
+
+		// Cleanup
+		document.head.removeChild(existingScript);
+		createElementSpy.mockRestore();
+		appendChildSpy.mockRestore();
+	});
+
+	it('should handle theme prop correctly', async () => {
+		const { container } = render(Tweet, {
+			tweetLink: 'twitterdev/status/1399879412994844160',
+			theme: 'dark',
+		});
+
+		const wrapper = container.querySelector('.tweet-wrapper');
+		const blockquote = container.querySelector('.twitter-tweet');
+
+		expect(wrapper).toBeTruthy();
+		expect(blockquote).toBeTruthy();
+
+		if (wrapper && blockquote) {
+			await expect
+				.element(wrapper)
+				.toHaveAttribute('data-theme', 'dark');
+			await expect
+				.element(blockquote)
+				.toHaveAttribute('data-theme', 'dark');
+		}
 	});
 });

@@ -62,52 +62,269 @@ describe('CodePen', () => {
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
-	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty codePenId gracefully', async () => {
-		// Test edge case: empty or invalid CodePen ID
+	describe('Edge Cases', () => {
+		it('should handle empty codePenId gracefully', async () => {
+			const { getByTitle } = render(CodePen, {
+				codePenId: '',
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle('codepen-');
+			const element = iframe.element() as HTMLIFrameElement;
+
+			// Should still construct a valid URL even with empty ID
+			expect(element.src).toContain('codepen.io/team/codepen/embed');
+			expect(element.src).toContain('//'); // Double slash where ID would be
+		});
+
+		it('should handle special characters in codePenId', async () => {
+			const specialId = 'abc-123_test';
+			const { getByTitle } = render(CodePen, {
+				codePenId: specialId,
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle(`codepen-${specialId}`);
+			const element = iframe.element() as HTMLIFrameElement;
+
+			expect(element.src).toContain(`/${specialId}/`);
+			expect(element.title).toBe(`codepen-${specialId}`);
+		});
 	});
 
-	it.skip('should apply default prop values when not provided', async () => {
-		// Test default values for all optional props
+	describe('Default Props', () => {
+		it('should apply default prop values when not provided', async () => {
+			const { container } = render(CodePen, {
+				codePenId,
+				disable_observer: true,
+			});
+
+			const iframe = container.querySelector(
+				'iframe',
+			) as HTMLIFrameElement;
+
+			// Check default values are applied
+			expect(iframe.src).toContain('height=500px'); // default height
+			expect(iframe.src).toContain('theme-id=default'); // default theme
+			expect(iframe.src).toContain('default-tab=result'); // default tabs
+			expect(iframe.src).toContain('editable=true'); // default editable
+			expect(iframe.src).toContain('/preview'); // default clickToLoad=true
+			expect(iframe.style.height).toBe('500px');
+			expect(iframe.style.width).toBe('100%');
+		});
 	});
 
-	it.skip('should handle array of tabs configuration', async () => {
-		// Test tabs as array instead of string
+	describe('Tabs Configuration', () => {
+		it('should handle different string tab values', async () => {
+			const tabOptions = ['js', 'css', 'scss', 'less', 'result'];
+
+			for (let i = 0; i < tabOptions.length; i++) {
+				const tab = tabOptions[i];
+				const uniqueId = `${codePenId}-tab-${i}`;
+				const { getByTitle } = render(CodePen, {
+					codePenId: uniqueId,
+					tabs: tab as any,
+					disable_observer: true,
+				});
+
+				const iframe = getByTitle(`codepen-${uniqueId}`);
+				const element = iframe.element() as HTMLIFrameElement;
+
+				expect(element.src).toContain(`default-tab=${tab}`);
+			}
+		});
+
+		it('should handle array of tabs configuration', async () => {
+			const tabsArray = ['js', 'css'];
+			const uniqueId = `${codePenId}-array`;
+			const { getByTitle } = render(CodePen, {
+				codePenId: uniqueId,
+				tabs: tabsArray as any,
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle(`codepen-${uniqueId}`);
+			const element = iframe.element() as HTMLIFrameElement;
+
+			// When tabs is an array, it should be converted to string or handle appropriately
+			expect(element.src).toContain('default-tab=');
+		});
 	});
 
-	it.skip('should handle different theme options', async () => {
-		// Test 'light', 'dark', 'default' theme values
+	describe('Theme Options', () => {
+		it('should handle different theme options', async () => {
+			const themes = ['light', 'dark', 'default'];
+
+			for (let i = 0; i < themes.length; i++) {
+				const theme = themes[i];
+				const uniqueId = `${codePenId}-theme-${i}`;
+				const { getByTitle } = render(CodePen, {
+					codePenId: uniqueId,
+					theme,
+					disable_observer: true,
+				});
+
+				const iframe = getByTitle(`codepen-${uniqueId}`);
+				const element = iframe.element() as HTMLIFrameElement;
+
+				expect(element.src).toContain(`theme-id=${theme}`);
+			}
+		});
 	});
 
-	it.skip('should toggle clickToLoad properly in URL', async () => {
-		// Test URL changes when clickToLoad is false vs true
+	describe('Click to Load', () => {
+		it('should toggle clickToLoad properly in URL', async () => {
+			// Test clickToLoad = false (no /preview in URL)
+			const falseId = `${codePenId}-click-false`;
+			const { getByTitle: getByTitleFalse } = render(CodePen, {
+				codePenId: falseId,
+				clickToLoad: false,
+				disable_observer: true,
+			});
+
+			const iframeFalse = getByTitleFalse(`codepen-${falseId}`);
+			const elementFalse = iframeFalse.element() as HTMLIFrameElement;
+
+			expect(elementFalse.src).not.toContain('/preview');
+			expect(elementFalse.src).toContain(`/${falseId}/`);
+
+			// Test clickToLoad = true (includes /preview in URL)
+			const trueId = `${codePenId}-click-true`;
+			const { getByTitle: getByTitleTrue } = render(CodePen, {
+				codePenId: trueId,
+				clickToLoad: true,
+				disable_observer: true,
+			});
+
+			const iframeTrue = getByTitleTrue(`codepen-${trueId}`);
+			const elementTrue = iframeTrue.element() as HTMLIFrameElement;
+
+			expect(elementTrue.src).toContain('/preview');
+		});
 	});
 
-	it.skip('should handle editable parameter correctly', async () => {
-		// Test editable true/false in URL construction
+	describe('Editable Parameter', () => {
+		it('should handle editable parameter correctly', async () => {
+			// Test editable = false
+			const falseId = `${codePenId}-edit-false`;
+			const { getByTitle: getByTitleFalse } = render(CodePen, {
+				codePenId: falseId,
+				editable: false,
+				disable_observer: true,
+			});
+
+			const iframeFalse = getByTitleFalse(`codepen-${falseId}`);
+			const elementFalse = iframeFalse.element() as HTMLIFrameElement;
+
+			expect(elementFalse.src).toContain('editable=false');
+
+			// Test editable = true
+			const trueId = `${codePenId}-edit-true`;
+			const { getByTitle: getByTitleTrue } = render(CodePen, {
+				codePenId: trueId,
+				editable: true,
+				disable_observer: true,
+			});
+
+			const iframeTrue = getByTitleTrue(`codepen-${trueId}`);
+			const elementTrue = iframeTrue.element() as HTMLIFrameElement;
+
+			expect(elementTrue.src).toContain('editable=true');
+		});
 	});
 
-	it.skip('should apply custom iframe styles correctly', async () => {
-		// Test custom iframe_styles prop override
+	describe('Custom Styling', () => {
+		it('should apply custom iframe styles correctly', async () => {
+			const customStyles =
+				'border: 2px solid red; border-radius: 8px;';
+			const { getByTitle } = render(CodePen, {
+				codePenId,
+				iframe_styles: customStyles,
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle(`codepen-${codePenId}`);
+			const element = iframe.element() as HTMLIFrameElement;
+
+			expect(element.getAttribute('style')).toBe(customStyles);
+		});
+
+		it('should handle custom height and width in iframe styles', async () => {
+			const customHeight = '300px';
+			const customWidth = '80%';
+			const { getByTitle } = render(CodePen, {
+				codePenId,
+				height: customHeight,
+				width: customWidth,
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle(`codepen-${codePenId}`);
+			const element = iframe.element() as HTMLIFrameElement;
+
+			expect(element.style.height).toBe(customHeight);
+			expect(element.style.width).toBe(customWidth);
+			expect(element.src).toContain(`height=${customHeight}`);
+		});
 	});
 
-	it.skip('should handle special characters in codePenId', async () => {
-		// Test URL encoding and special characters
+	describe('URL Construction', () => {
+		it('should construct proper URL for all parameter combinations', async () => {
+			const { getByTitle } = render(CodePen, {
+				codePenId: 'test123',
+				height: '400px',
+				theme: 'dark',
+				tabs: 'js',
+				editable: false,
+				clickToLoad: false,
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle('codepen-test123');
+			const element = iframe.element() as HTMLIFrameElement;
+			const src = element.src;
+
+			expect(src).toContain('codepen.io/team/codepen/embed');
+			expect(src).toContain('/test123/');
+			expect(src).toContain('height=400px');
+			expect(src).toContain('theme-id=dark');
+			expect(src).toContain('default-tab=js');
+			expect(src).toContain('editable=false');
+			expect(src).not.toContain('/preview'); // clickToLoad=false
+		});
 	});
 
-	it.skip('should construct proper URL for all tab combinations', async () => {
-		// Test 'js', 'css', 'scss', 'less', 'result' tab options
-	});
+	describe('Accessibility', () => {
+		it('should have proper iframe accessibility attributes', async () => {
+			const { getByTitle } = render(CodePen, {
+				codePenId,
+				disable_observer: true,
+			});
 
-	it.skip('should handle numeric height and width values', async () => {
-		// Test passing numbers instead of strings for dimensions
-	});
+			const iframe = getByTitle(`codepen-${codePenId}`);
 
-	it.skip('should have proper iframe accessibility attributes', async () => {
-		// Test title, allowfullscreen, and other accessibility features
-	});
+			await expect
+				.element(iframe)
+				.toHaveAttribute('title', `codepen-${codePenId}`);
+			await expect
+				.element(iframe)
+				.toHaveAttribute('frameborder', 'no');
+			await expect
+				.element(iframe)
+				.toHaveAttribute('allowfullscreen', '');
+		});
 
-	it.skip('should render with proper CSS class', async () => {
-		// Test code-pen-sveltekit-embed class application
+		it('should render with proper CSS class', async () => {
+			const { getByTitle } = render(CodePen, {
+				codePenId,
+				disable_observer: true,
+			});
+
+			const iframe = getByTitle(`codepen-${codePenId}`);
+
+			await expect
+				.element(iframe)
+				.toHaveClass('code-pen-sveltekit-embed');
+		});
 	});
 });
