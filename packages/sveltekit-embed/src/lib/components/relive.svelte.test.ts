@@ -1,6 +1,6 @@
 import Relive from '$lib/components/relive.svelte';
-import { render } from 'vitest-browser-svelte';
 import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('Relive', () => {
 	it('mounts with default props', async () => {
@@ -38,5 +38,50 @@ describe('Relive', () => {
 		});
 		const general_observer = getByTestId('general-observer');
 		expect(general_observer).toBeTruthy();
+	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty reliveId gracefully', async () => {
+		// Test edge case: empty or invalid relive ID
+	});
+
+	it.skip('should apply default width when not provided', async () => {
+		// Test default width value
+	});
+
+	it.skip('should construct proper Relive widget URL', async () => {
+		// Test URL construction with reliveId and widget path
+	});
+
+	it.skip('should handle special characters in reliveId', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title, frameborder, and other accessibility features
+	});
+
+	it.skip('should handle very long reliveId values', async () => {
+		// Test edge case: extremely long relive IDs
+	});
+
+	it.skip('should apply custom CSS styles correctly', async () => {
+		// Test custom width styles and container styling
+	});
+
+	it.skip('should handle numeric width values', async () => {
+		// Test passing numbers instead of strings for width
+	});
+
+	it.skip('should handle malformed relive IDs gracefully', async () => {
+		// Test edge case: malformed or invalid relive IDs
+	});
+
+	it.skip('should render with proper CSS class structure', async () => {
+		// Test relive-sveltekit-embed class application
+	});
+
+	it.skip('should maintain proper aspect ratio', async () => {
+		// Test iframe aspect ratio and responsive behavior
 	});
 });

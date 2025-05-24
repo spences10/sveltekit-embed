@@ -46,4 +46,49 @@ describe('Guild', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty card_id gracefully', async () => {
+		// Test edge case: empty or invalid card ID
+	});
+
+	it.skip('should apply default prop values when not provided', async () => {
+		// Test default height, width, type, display_type values
+	});
+
+	it.skip('should handle different type options', async () => {
+		// Test 'user', 'guild', and other type values
+	});
+
+	it.skip('should handle different display_type options', async () => {
+		// Test 'item', 'card', and other display type values
+	});
+
+	it.skip('should construct proper Guild embed URL', async () => {
+		// Test URL construction with type, card_id, and display_type
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title, frameborder, and other accessibility features
+	});
+
+	it.skip('should handle special characters in card_id', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should handle very long card_id values', async () => {
+		// Test edge case: extremely long card IDs
+	});
+
+	it.skip('should apply custom CSS styles correctly', async () => {
+		// Test that custom height/width styles are properly applied
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should render with proper CSS class structure', async () => {
+		// Test guild-sveltekit-embed class application
+	});
 });

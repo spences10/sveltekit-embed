@@ -50,4 +50,53 @@ describe('SoundCloud', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty soundcloudLink gracefully', async () => {
+		// Test edge case: empty or invalid SoundCloud link
+	});
+
+	it.skip('should apply default height and width when not provided', async () => {
+		// Test default prop values
+	});
+
+	it.skip('should construct proper SoundCloud player URL', async () => {
+		// Test URL construction with w.soundcloud.com/player
+	});
+
+	it.skip('should handle special characters in soundcloudLink', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title, frameborder, and other accessibility features
+	});
+
+	it.skip('should handle very long soundcloudLink values', async () => {
+		// Test edge case: extremely long SoundCloud links
+	});
+
+	it.skip('should apply visual parameter correctly', async () => {
+		// Test visual=true parameter in URL construction
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should handle malformed SoundCloud links gracefully', async () => {
+		// Test edge case: malformed or invalid SoundCloud links
+	});
+
+	it.skip('should render with proper CSS class structure', async () => {
+		// Test soundcloud-sveltekit-embed class application
+	});
+
+	it.skip('should handle different SoundCloud content types', async () => {
+		// Test tracks, playlists, and user profiles
+	});
+
+	it.skip('should handle SoundCloud URL variations', async () => {
+		// Test different SoundCloud URL formats and patterns
+	});
 });

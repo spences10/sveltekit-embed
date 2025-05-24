@@ -101,4 +101,45 @@ describe('Bluesky', () => {
 		const element = iframe.element();
 		expect(element.style.height).toBe('100%');
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty post_id gracefully', async () => {
+		// Test edge case: empty or invalid post_id
+	});
+
+	it.skip('should ignore messages from untrusted origins', async () => {
+		// Test security: messages not from embed.bsky.app should be ignored
+	});
+
+	it.skip('should handle message with h property instead of height', async () => {
+		// Test alternative height property in message data
+	});
+
+	it.skip('should fallback to default height for invalid message data', async () => {
+		// Test edge case: malformed message data
+	});
+
+	it.skip('should handle component unmount and cleanup event listeners', async () => {
+		// Test proper cleanup when component is destroyed
+	});
+
+	it.skip('should handle very long post_id values', async () => {
+		// Test edge case: extremely long post IDs
+	});
+
+	it.skip('should apply correct CSS classes and container structure', async () => {
+		// Test CSS class application and DOM structure
+	});
+
+	it.skip('should handle numeric width values', async () => {
+		// Test passing numbers instead of strings for width
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title attribute and accessibility features
+	});
+
+	it.skip('should handle special characters in post_id', async () => {
+		// Test URL encoding and special characters in post ID
+	});
 });

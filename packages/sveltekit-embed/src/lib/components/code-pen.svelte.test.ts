@@ -61,4 +61,53 @@ describe('CodePen', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty codePenId gracefully', async () => {
+		// Test edge case: empty or invalid CodePen ID
+	});
+
+	it.skip('should apply default prop values when not provided', async () => {
+		// Test default values for all optional props
+	});
+
+	it.skip('should handle array of tabs configuration', async () => {
+		// Test tabs as array instead of string
+	});
+
+	it.skip('should handle different theme options', async () => {
+		// Test 'light', 'dark', 'default' theme values
+	});
+
+	it.skip('should toggle clickToLoad properly in URL', async () => {
+		// Test URL changes when clickToLoad is false vs true
+	});
+
+	it.skip('should handle editable parameter correctly', async () => {
+		// Test editable true/false in URL construction
+	});
+
+	it.skip('should apply custom iframe styles correctly', async () => {
+		// Test custom iframe_styles prop override
+	});
+
+	it.skip('should handle special characters in codePenId', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should construct proper URL for all tab combinations', async () => {
+		// Test 'js', 'css', 'scss', 'less', 'result' tab options
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title, allowfullscreen, and other accessibility features
+	});
+
+	it.skip('should render with proper CSS class', async () => {
+		// Test code-pen-sveltekit-embed class application
+	});
 });

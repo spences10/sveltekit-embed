@@ -1,6 +1,6 @@
 import Deezer from '$lib/components/deezer.svelte';
-import { render } from 'vitest-browser-svelte';
 import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 const theme = 'auto';
 const frameSrc = 'track/1366751722';
@@ -48,5 +48,46 @@ describe('Deezer', () => {
 		});
 		const general_observer = getByTestId('general-observer');
 		expect(general_observer).toBeTruthy();
+	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty frameSrc gracefully', async () => {
+		// Test edge case: empty or invalid frame source
+	});
+
+	it.skip('should apply default theme when not provided', async () => {
+		// Test default theme value 'auto'
+	});
+
+	it.skip('should handle different theme options', async () => {
+		// Test various theme values (light, dark, auto, etc.)
+	});
+
+	it.skip('should apply custom iframe styles correctly', async () => {
+		// Test custom iframe_styles prop override
+	});
+
+	it.skip('should handle special characters in frameSrc', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should have proper iframe accessibility and security attributes', async () => {
+		// Test allowtransparency, allow attributes, frameborder
+	});
+
+	it.skip('should construct widget URL correctly', async () => {
+		// Test URL construction with theme and frameSrc
+	});
+
+	it.skip('should apply default border-radius styling', async () => {
+		// Test default iframe_styles with border-radius
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should handle very long frameSrc values', async () => {
+		// Test edge case: extremely long frame source strings
 	});
 });

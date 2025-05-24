@@ -1,6 +1,6 @@
 import Buzzsprout from '$lib/components/buzzsprout.svelte';
-import { render } from 'vitest-browser-svelte';
 import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 let buzzsproutId = '12345';
 
@@ -43,5 +43,42 @@ describe('Buzzsprout', () => {
 		});
 		const general_observer = getByTestId('general-observer');
 		expect(general_observer).toBeTruthy();
+	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty buzzsproutId gracefully', async () => {
+		// Test edge case: empty or invalid buzzsprout ID
+	});
+
+	it.skip('should apply default height and width when not provided', async () => {
+		// Test default prop values (height: '200px', width: '100%')
+	});
+
+	it.skip('should handle special characters in buzzsproutId', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title attribute, frameBorder, scrolling attributes
+	});
+
+	it.skip('should handle very long buzzsproutId values', async () => {
+		// Test edge case: extremely long IDs
+	});
+
+	it.skip('should apply custom CSS styles correctly', async () => {
+		// Test that custom height/width styles are properly applied to container
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should construct iframe src URL correctly with query parameters', async () => {
+		// Test the specific URL construction with client_source and iframe params
+	});
+
+	it.skip('should render with proper CSS class structure', async () => {
+		// Test buzzsprout-sveltekit-embed class application
 	});
 });

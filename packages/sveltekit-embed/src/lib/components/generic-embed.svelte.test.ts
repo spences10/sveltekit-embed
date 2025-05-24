@@ -56,4 +56,45 @@ describe('GenericEmbed', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty src gracefully', async () => {
+		// Test edge case: empty or invalid src URL
+	});
+
+	it.skip('should apply default prop values when not provided', async () => {
+		// Test default height, width, title, and other props
+	});
+
+	it.skip('should handle special characters in src URL', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should handle special characters in title', async () => {
+		// Test title with special characters and HTML entities
+	});
+
+	it.skip('should have proper iframe security attributes', async () => {
+		// Test frameborder, allowfullscreen, and other security attributes
+	});
+
+	it.skip('should handle very long src URLs', async () => {
+		// Test edge case: extremely long URLs
+	});
+
+	it.skip('should handle very long titles', async () => {
+		// Test edge case: extremely long title strings
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should maintain proper iframe structure', async () => {
+		// Test iframe DOM structure and attributes
+	});
+
+	it.skip('should handle malformed URLs gracefully', async () => {
+		// Test edge case: malformed or invalid URLs
+	});
 });

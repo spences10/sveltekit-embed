@@ -100,4 +100,61 @@ describe('YouTube', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should calculate correct start time with complex skipTo values', async () => {
+		// Test skipTo: { h: 1, m: 30, s: 45 } = 5445 seconds
+	});
+
+	it.skip('should handle invalid skipTo values gracefully', async () => {
+		// Test negative values, non-numbers, etc.
+	});
+
+	it.skip('should handle both youTubeId and listId provided', async () => {
+		// Test priority when both are provided
+	});
+
+	it.skip('should handle empty youTubeId and listId', async () => {
+		// Test edge case when both are empty
+	});
+
+	it.skip('should handle invalid aspect ratios', async () => {
+		// Test unsupported aspect ratio values
+	});
+
+	it.skip('should apply all supported aspect ratios correctly', async () => {
+		// Test '1:1', '16:9', '4:3', '3:2', '8.5'
+	});
+
+	it.skip('should handle custom iframe styles properly', async () => {
+		// Test complex CSS styles injection
+	});
+
+	it.skip('should handle playlist with custom index', async () => {
+		// Test index parameter for playlists
+	});
+
+	it.skip('should have proper accessibility attributes', async () => {
+		// Test iframe title, allow attributes, etc.
+	});
+
+	it.skip('should handle very large skipTo values', async () => {
+		// Test edge case: hours > 24, minutes > 60, etc.
+	});
+
+	it.skip('should handle special characters in youTubeId', async () => {
+		// Test URL encoding and validation
+	});
+
+	it.skip('should handle special characters in listId', async () => {
+		// Test playlist ID validation
+	});
+
+	it.skip('should apply default iframe_styles when not provided', async () => {
+		// Test default border-radius style
+	});
+
+	it.skip('should handle boolean props as different data types', async () => {
+		// Test passing strings, numbers instead of booleans
+	});
 });

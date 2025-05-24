@@ -45,4 +45,33 @@ describe('AnchorFm', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty episodeUrl gracefully', async () => {
+		// Test edge case: empty or invalid episode URL
+	});
+
+	it.skip('should apply default height and width when not provided', async () => {
+		// Test default prop values (height: '100px', width: '100%')
+	});
+
+	it.skip('should handle special characters in episodeUrl', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title attribute, aria-labels, etc.
+	});
+
+	it.skip('should handle very long episodeUrl values', async () => {
+		// Test edge case: extremely long URLs
+	});
+
+	it.skip('should apply custom CSS styles correctly', async () => {
+		// Test that custom height/width styles are properly applied
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
 });

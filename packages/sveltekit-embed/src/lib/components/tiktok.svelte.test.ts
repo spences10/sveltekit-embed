@@ -64,4 +64,53 @@ describe('TikTok', () => {
 		const general_observer = getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
+
+	// Coverage gaps - test stubs to implement
+	it.skip('should handle empty tiktokId gracefully', async () => {
+		// Test edge case: empty or invalid TikTok ID
+	});
+
+	it.skip('should apply default prop values when not provided', async () => {
+		// Test default height, width, and all boolean options
+	});
+
+	it.skip('should handle special characters in tiktokId', async () => {
+		// Test URL encoding and special characters
+	});
+
+	it.skip('should construct proper TikTok player URL with all parameters', async () => {
+		// Test URL construction with all query parameters
+	});
+
+	it.skip('should have proper iframe accessibility attributes', async () => {
+		// Test title, frameborder, allowfullscreen, and other accessibility features
+	});
+
+	it.skip('should handle very long tiktokId values', async () => {
+		// Test edge case: extremely long TikTok IDs
+	});
+
+	it.skip('should apply custom CSS styles correctly', async () => {
+		// Test custom height/width styles on container
+	});
+
+	it.skip('should handle numeric height and width values', async () => {
+		// Test passing numbers instead of strings for dimensions
+	});
+
+	it.skip('should handle malformed TikTok IDs gracefully', async () => {
+		// Test edge case: malformed or invalid TikTok IDs
+	});
+
+	it.skip('should render with proper CSS class structure', async () => {
+		// Test tiktok-sveltekit-embed class application
+	});
+
+	it.skip('should handle all boolean parameter combinations', async () => {
+		// Test various combinations of true/false for all boolean options
+	});
+
+	it.skip('should maintain proper iframe aspect ratio', async () => {
+		// Test iframe responsive behavior and aspect ratio
+	});
 });
