@@ -1,12 +1,10 @@
 import Buzzsprout from '$lib/components/buzzsprout.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 let buzzsproutId = '12345';
 
 describe('Buzzsprout', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with buzzsproutId', async () => {
 		const { container } = render(Buzzsprout, {
 			buzzsproutId,
@@ -22,7 +20,7 @@ describe('Buzzsprout', () => {
 		});
 		const iframe = getByTestId('buzzsprout');
 		const expected_src = `https://www.buzzsprout.com/${buzzsproutId}?client_source=admin&amp;iframe=true`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {

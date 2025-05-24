@@ -1,6 +1,6 @@
 import Deezer from '$lib/components/deezer.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 const theme = 'auto';
 const frameSrc = 'track/1366751722';
@@ -8,8 +8,6 @@ const height = '300px';
 const width = '100%';
 
 describe('Deezer', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with default props', async () => {
 		const { container } = render(Deezer);
 		expect(container).toBeTruthy();
@@ -25,7 +23,7 @@ describe('Deezer', () => {
 		});
 		const iframe = getByTitle('deezer-widget');
 		const expected_src = `https://widget.deezer.com/widget/${theme}/${frameSrc}`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {

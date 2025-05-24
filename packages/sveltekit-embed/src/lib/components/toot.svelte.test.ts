@@ -1,10 +1,8 @@
 import Toot from '$lib/components/toot.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 describe('Toot', () => {
-	afterEach(() => cleanup());
-
 	it('renders iframe with correct src', async () => {
 		const instance = 'my-instance';
 		const username = 'my-username';
@@ -18,7 +16,7 @@ describe('Toot', () => {
 		const iframe = getByTitle('');
 
 		const expected_src = `https://${instance}/@${username}/123/embed`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with a default width', async () => {
@@ -34,7 +32,7 @@ describe('Toot', () => {
 		const iframe = container.querySelector('iframe');
 
 		if (iframe) {
-			expect(iframe.getAttribute('width')).toBe('400');
+			await expect.element(iframe).toHaveAttribute('width', '400');
 		}
 	});
 });

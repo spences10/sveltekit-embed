@@ -1,10 +1,8 @@
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 import Bluesky from './bluesky.svelte';
 
 describe('Bluesky', () => {
-	afterEach(() => cleanup());
-
 	const test_post_id =
 		'did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k';
 
@@ -20,7 +18,7 @@ describe('Bluesky', () => {
 
 		const iframe = getByTestId('bluesky-embed');
 		const expected_src = `https://embed.bsky.app/embed/${test_post_id}`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with custom width', async () => {
@@ -30,7 +28,7 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = getByTestId('bluesky-embed');
-		expect(iframe.getAttribute('width')).toBe('50%');
+		await expect.element(iframe).toHaveAttribute('width', '50%');
 	});
 
 	it('applies custom iframe styles', async () => {
@@ -41,7 +39,8 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = getByTestId('bluesky-embed');
-		const style_text = iframe.style.cssText.toLowerCase();
+		const element = iframe.element();
+		const style_text = element.style.cssText.toLowerCase();
 		expect(style_text).toContain('border-radius: 8px');
 		expect(style_text).toContain('background: rgb(240, 240, 240)');
 	});
@@ -52,15 +51,16 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = getByTestId('bluesky-embed');
-		const style_text = iframe.style.cssText.toLowerCase();
+		const element = iframe.element();
+		const style_text = element.style.cssText.toLowerCase();
 		expect(style_text).toContain('position: absolute');
 		expect(style_text).toContain('top: 0px');
 		expect(style_text).toContain('left: 0px');
 		expect(style_text).toContain('width: 100%');
 		expect(style_text).toContain('height: 100%');
 		expect(style_text).toContain('border: 0px');
-		expect(iframe.getAttribute('frameborder')).toBe('0');
-		expect(iframe.getAttribute('scrolling')).toBe('no');
+		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 
 	it('combines default and custom iframe styles correctly', async () => {
@@ -71,7 +71,8 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = getByTestId('bluesky-embed');
-		const style_text = iframe.style.cssText.toLowerCase();
+		const element = iframe.element();
+		const style_text = element.style.cssText.toLowerCase();
 
 		// Check default styles are preserved
 		expect(style_text).toContain('position: absolute');
@@ -84,7 +85,7 @@ describe('Bluesky', () => {
 		expect(style_text).toContain('margin: 10px');
 	});
 
-	it('updates height when receiving message from iframe', () => {
+	it('updates height when receiving message from iframe', async () => {
 		const { getByTestId } = render(Bluesky, {
 			post_id: test_post_id,
 		});
@@ -97,6 +98,7 @@ describe('Bluesky', () => {
 		window.dispatchEvent(message_event);
 
 		const iframe = getByTestId('bluesky-embed');
-		expect(iframe.style.height).toBe('100%');
+		const element = iframe.element();
+		expect(element.style.height).toBe('100%');
 	});
 });

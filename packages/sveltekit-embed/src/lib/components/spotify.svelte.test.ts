@@ -1,10 +1,8 @@
 import Spotify from '$lib/components/spotify.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 describe('Spotify', () => {
-	afterEach(cleanup);
-
 	it('mounts with default props', async () => {
 		const { container } = render(Spotify);
 		expect(container).toBeTruthy();
@@ -18,7 +16,7 @@ describe('Spotify', () => {
 		});
 		const iframe = getByTestId('spotify');
 		const expected_src = `https://open.spotify.com/embed/${spotifyLink}`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {

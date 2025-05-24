@@ -1,12 +1,10 @@
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 import GeneralObserver from './general-observer.svelte';
 
 describe('General Observer', () => {
-	afterEach(() => cleanup());
-
-	it('mounts', () => {
+	it('mounts', async () => {
 		const { container } = render(GeneralObserver);
 		expect(container).toBeTruthy();
 	});

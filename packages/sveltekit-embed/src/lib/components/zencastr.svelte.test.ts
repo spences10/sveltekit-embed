@@ -1,10 +1,8 @@
 import Zencastr from '$lib/components/zencastr.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('Zencastr', () => {
-	afterEach(() => cleanup());
-
 	it('mounts', async () => {
 		const { container } = render(Zencastr, {
 			zencastrId: 'abc123',
@@ -20,9 +18,12 @@ describe('Zencastr', () => {
 
 		const player = container.querySelector('blockquote');
 
-		expect(player?.getAttribute('data-episode-href')).toBe(
-			'https://zencastr.com/embed/abc123',
-		);
+		expect(player).toBeTruthy();
+		if (player) {
+			expect(player.getAttribute('data-episode-href')).toBe(
+				'https://zencastr.com/embed/abc123'
+			);
+		}
 	});
 
 	it('sets href for Zencastr player link', async () => {
@@ -32,8 +33,11 @@ describe('Zencastr', () => {
 
 		const link = container.querySelector('a');
 
-		expect(link?.getAttribute('href')).toBe(
-			'https://zencastr.com/embed/abc123',
-		);
+		expect(link).toBeTruthy();
+		if (link) {
+			expect(link.getAttribute('href')).toBe(
+				'https://zencastr.com/embed/abc123'
+			);
+		}
 	});
 });

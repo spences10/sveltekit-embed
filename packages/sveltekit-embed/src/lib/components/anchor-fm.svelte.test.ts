@@ -1,13 +1,11 @@
 import AnchorFm from '$lib/components/anchor-fm.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 let episodeUrl =
 	'purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a';
 
 describe('AnchorFm', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with episode url', async () => {
 		const { container } = render(AnchorFm, {
 			episodeUrl,
@@ -23,7 +21,7 @@ describe('AnchorFm', () => {
 		});
 		const iframe = getByTestId('anchor-fm-episode');
 		const expected_src = `https://anchor.fm/${episodeUrl}`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
@@ -45,6 +43,6 @@ describe('AnchorFm', () => {
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 });

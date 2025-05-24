@@ -1,10 +1,8 @@
 import Guild from '$lib/components/guild.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('Guild', () => {
-	afterEach(cleanup);
-
 	it('mounts with default props', async () => {
 		const { container } = render(Guild, { card_id: '1234' });
 		expect(container).toBeTruthy();
@@ -21,8 +19,8 @@ describe('Guild', () => {
 			disable_observer: true,
 		});
 		const iframe = getByTestId('guild-card');
-		const expected_src = `https://beta.guild.host/embeds/user/${card_id}/item`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		const expected_src = `https://guild.host/embeds/user/${card_id}/item`;
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
@@ -46,6 +44,6 @@ describe('Guild', () => {
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 });

@@ -1,10 +1,8 @@
 import StackBlitz from '$lib/components/stackblitz.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 describe('StackBlitz', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with default values', async () => {
 		const { container } = render(StackBlitz, {
 			id: 'my-id',
@@ -25,7 +23,7 @@ describe('StackBlitz', () => {
 		const iframe = getByTitle(`stackblitz-${id}`);
 
 		const expected_src = `https://stackblitz.com/edit/${id}?embed=1&ctl=1&hideExplorer=1&hideNavigation=0&theme=dark&file=index.html`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {

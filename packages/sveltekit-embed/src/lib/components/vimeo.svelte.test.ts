@@ -1,10 +1,8 @@
 import Vimeo from '$lib/components/vimeo.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 describe('Vimeo', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with default values', async () => {
 		const { container } = render(Vimeo, {
 			vimeoId: '123456789',
@@ -26,7 +24,7 @@ describe('Vimeo', () => {
 		const iframe = getByTitle(`vimeo-${vimeoId}`);
 
 		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=true#t=1h23m45s`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom aspect ratio', async () => {

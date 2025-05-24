@@ -1,10 +1,8 @@
 import SimpleCast from '$lib/components/simple-cast.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 describe('SimpleCast', () => {
-	afterEach(cleanup);
-
 	it('mounts with default props', async () => {
 		const { container } = render(SimpleCast);
 		expect(container).toBeTruthy();
@@ -19,7 +17,7 @@ describe('SimpleCast', () => {
 		});
 		const iframe = getByTestId('simplecast-episode');
 		const expected_src = `https://player.simplecast.com/${episodeId}?dark=true`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with a GeneralObserver', async () => {

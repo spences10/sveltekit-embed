@@ -1,12 +1,10 @@
 import Gist from '$lib/components/gist.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { describe, expect, it } from 'vitest';
 
 const gistUri = 'gauravchl';
 
 describe('Gist', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with default props', async () => {
 		const { container } = render(Gist);
 		expect(container).toBeTruthy();
@@ -19,7 +17,7 @@ describe('Gist', () => {
 		});
 		const iframe = getByTitle('gist-widget');
 		const expected_src = `https://gist.github.com/${gistUri}.pibb`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {

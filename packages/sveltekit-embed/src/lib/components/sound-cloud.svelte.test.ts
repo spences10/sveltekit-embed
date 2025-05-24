@@ -1,10 +1,8 @@
 import SoundCloud from '$lib/components/sound-cloud.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('SoundCloud', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with soundcloud link', async () => {
 		const { container } = render(SoundCloud, {
 			soundcloudLink:
@@ -23,7 +21,7 @@ describe('SoundCloud', () => {
 		});
 		const iframe = getByTitle(`soundcloud-${soundcloudLink}`);
 		const expected_src = `https://w.soundcloud.com/player/?url=${soundcloudLink}&visual=true`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
@@ -36,8 +34,11 @@ describe('SoundCloud', () => {
 		});
 		const iframe = container.querySelector('iframe');
 
-		expect(iframe?.getAttribute('height')).toBe('200px');
-		expect(iframe?.getAttribute('width')).toBe('50%');
+		expect(iframe).toBeTruthy();
+		if (iframe) {
+			expect(iframe.getAttribute('height')).toBe('200px');
+			expect(iframe.getAttribute('width')).toBe('50%');
+		}
 	});
 
 	it('renders with a GeneralObserver', async () => {
@@ -47,6 +48,6 @@ describe('SoundCloud', () => {
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 });

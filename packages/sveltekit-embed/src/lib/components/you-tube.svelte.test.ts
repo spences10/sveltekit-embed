@@ -1,10 +1,8 @@
 import YouTube from '$lib/components/you-tube.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('YouTube', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with video id', async () => {
 		const { container } = render(YouTube, {
 			youTubeId: 'abc123',
@@ -30,7 +28,7 @@ describe('YouTube', () => {
 		});
 		const iframe = getByTitle('youTube-abc123');
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
-		expect(iframe.getAttribute('src')).toBe(expectedSrc);
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it('renders iframe with correct src for video with custom options', async () => {
@@ -50,7 +48,7 @@ describe('YouTube', () => {
 		});
 		const iframe = getByTitle('youTube-abc123');
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=1&start=0&mute=1&controls=0&loop=1&modestbranding=1&rel=1`;
-		expect(iframe.getAttribute('src')).toBe(expectedSrc);
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it('renders iframe with correct src for playlist with default options', async () => {
@@ -66,7 +64,7 @@ describe('YouTube', () => {
 		});
 		const iframe = getByTitle(`youTube-${listId}`);
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
-		expect(iframe.getAttribute('src')).toBe(expectedSrc);
+		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it('sets aspect ratio using padding-top style', async () => {
@@ -81,7 +79,8 @@ describe('YouTube', () => {
 		});
 
 		const iframe = getByTestId('youTube');
-		const iframeWrapper = iframe.parentElement;
+		const iframeElement = iframe.element();
+		const iframeWrapper = iframeElement.parentElement;
 
 		expect(iframeWrapper?.getAttribute('style')).toContain(
 			'padding-top: 75%;',
@@ -99,6 +98,6 @@ describe('YouTube', () => {
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 });

@@ -1,10 +1,8 @@
 import Slides from '$lib/components/slides.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('Slides', () => {
-	afterEach(cleanup);
-
 	it('mounts with default props', async () => {
 		const { container } = render(Slides);
 		expect(container).toBeTruthy();
@@ -25,7 +23,7 @@ describe('Slides', () => {
 
 		const iframe = getByTitle(title, { exact: false });
 		const expected_src = `https://slides.com/${username}/${title}/embed?&style=light&byline=visible&share=visible`;
-		expect(iframe.getAttribute('src')).toBe(expected_src);
+		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
@@ -38,8 +36,11 @@ describe('Slides', () => {
 		});
 		const iframe = container.querySelector('iframe');
 
-		expect(iframe?.getAttribute('width')).toBe('80%');
-		expect(iframe?.getAttribute('height')).toBe('300px');
+		expect(iframe).toBeTruthy();
+		if (iframe) {
+			expect(iframe.getAttribute('width')).toBe('80%');
+			expect(iframe.getAttribute('height')).toBe('300px');
+		}
 	});
 
 	it('renders with a GeneralObserver', async () => {
@@ -49,6 +50,6 @@ describe('Slides', () => {
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 });

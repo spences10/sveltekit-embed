@@ -1,10 +1,8 @@
 import GenericEmbed from '$lib/components/generic-embed.svelte';
-import { cleanup, render } from '@testing-library/svelte/svelte5';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
 
 describe('GenericEmbed', () => {
-	afterEach(() => cleanup());
-
 	it('mounts with default props', async () => {
 		const { container } = render(GenericEmbed);
 		expect(container).toBeTruthy();
@@ -25,9 +23,9 @@ describe('GenericEmbed', () => {
 		});
 		const iframe = getByTitle(title);
 
-		expect(iframe.getAttribute('src')).toBe(src);
-		expect(iframe.getAttribute('height')).toBe(height);
-		expect(iframe.getAttribute('width')).toBe(width);
+		await expect.element(iframe).toHaveAttribute('src', src);
+		await expect.element(iframe).toHaveAttribute('height', height);
+		await expect.element(iframe).toHaveAttribute('width', width);
 	});
 
 	it('mounts with custom height and width', async () => {
@@ -41,8 +39,11 @@ describe('GenericEmbed', () => {
 		});
 		const iframe = container.querySelector('iframe');
 
-		expect(iframe?.getAttribute('height')).toBe('200px');
-		expect(iframe?.getAttribute('width')).toBe('50%');
+		expect(iframe).toBeTruthy();
+		if (iframe) {
+			expect(iframe.getAttribute('height')).toBe('200px');
+			expect(iframe.getAttribute('width')).toBe('50%');
+		}
 	});
 
 	it('renders with a GeneralObserver', async () => {
@@ -53,6 +54,6 @@ describe('GenericEmbed', () => {
 			disable_observer: false,
 		});
 		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 });
