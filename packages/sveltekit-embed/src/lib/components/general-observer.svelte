@@ -56,11 +56,11 @@
 <div bind:this={root} data-testid="general-observer">
 	{#if disable_observer}
 		<div transition:fade>
-			{@render children()}
+			{@render children?.()}
 		</div>
 	{:else if loaded}
 		<div transition:fade>
-			{@render children()}
+			{@render children?.()}
 		</div>
 	{/if}
 </div>
