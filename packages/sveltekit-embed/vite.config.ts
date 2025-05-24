@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [sveltekit()],
@@ -35,5 +36,23 @@ export default defineConfig({
 				},
 			},
 		],
+		coverage: {
+			all: true,
+			reporter: ['text-summary', 'html'],
+			exclude: [
+				...coverageConfigDefaults.exclude,
+				'**/config.{js,ts,cjs}',
+				'**/*.config.{js,ts,cjs}',
+				'**/e2e/**',
+				'**/lib/index.ts',
+				'**/routes/page.svelte',
+			],
+			thresholds: {
+				statements: 80,
+				branches: 65,
+				functions: 80,
+				lines: 80,
+			},
+		},
 	},
 });
