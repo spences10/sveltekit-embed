@@ -39,7 +39,7 @@
 		"rehype-autolink-headings": "^7.1.0",
 		"rehype-slug": "^6.0.0",
 		"svead": "^0.0.4",
-		"svelte": "5.28.2",
+		"svelte": "5.33.1",
 		"svelte-check": "^4.1.6",
 		"sveltekit-embed": "workspace:*",
 		"tailwindcss": "^3.4.17",
