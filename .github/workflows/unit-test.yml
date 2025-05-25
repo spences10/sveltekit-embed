@@ -28,6 +28,9 @@ jobs:
           version: '^8.0.0'
       - name: Install dependencies
         run: pnpm recursive install
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install chromium --with-deps
+        working-directory: packages/sveltekit-embed
       - name: Run unit tests
         run: pnpm run test:ci
         working-directory: packages/sveltekit-embed
