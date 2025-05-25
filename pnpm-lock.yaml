@@ -30,8 +30,8 @@ importers:
         specifier: ^1.52.0
         version: 1.52.0
       '@sveltejs/adapter-auto':
-        specifier: ^4.0.0
-        version: 4.0.0(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))
+        specifier: ^6.0.0
+        version: 6.0.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))
       '@sveltejs/kit':
         specifier: ^2.20.7
         version: 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0))
@@ -926,11 +926,6 @@ packages:
     resolution: {integrity: sha512-IwQk4yfwLdibDlrXVE04jTZYlLnwsTT2PIOQQGNLWfjavGifnk1JD1LcZjZaBTRcxZu2FfPfNLOE04DSu9lqtQ==}
     peerDependencies:
       acorn: ^8.9.0
-
-  '@sveltejs/adapter-auto@4.0.0':
-    resolution: {integrity: sha512-kmuYSQdD2AwThymQF0haQhM8rE5rhutQXG4LNbnbShwhMO4qQGnKaaTy+88DuNSuoQDi58+thpq8XpHc1+oEKQ==}
-    peerDependencies:
-      '@sveltejs/kit': ^2.0.0
 
   '@sveltejs/adapter-auto@6.0.1':
     resolution: {integrity: sha512-mcWud3pYGPWM2Pphdj8G9Qiq24nZ8L4LB7coCUckUEy5Y7wOWGJ/enaZ4AtJTcSm5dNK1rIkBRoqt+ae4zlxcQ==}
@@ -3557,11 +3552,6 @@ snapshots:
   '@sveltejs/acorn-typescript@1.0.5(acorn@8.14.1)':
     dependencies:
       acorn: 8.14.1
-
-  '@sveltejs/adapter-auto@4.0.0(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))':
-    dependencies:
-      '@sveltejs/kit': 2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0))
-      import-meta-resolve: 4.1.0
 
   '@sveltejs/adapter-auto@6.0.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))(svelte@5.33.1)(vite@6.3.5(jiti@1.21.7)(yaml@2.8.0)))':
     dependencies:
