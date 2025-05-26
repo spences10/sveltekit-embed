@@ -1,5 +1,4 @@
 name: 'Tests: Unit'
-
 on:
   push:
     branches: [main]
@@ -9,31 +8,27 @@ on:
 
 jobs:
   unit_tests:
-    name: Run unit tests for Package
+    name: Run unit tests
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      options: --user 1001
 
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+        with:
+          version: 8.12.1
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
-      - uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          # prettier-ignore
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
-      - uses: pnpm/action-setup@v4.0.0
-        with:
-          version: '^8.0.0'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm recursive install
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install chromium --with-deps
-        working-directory: packages/sveltekit-embed
-      - name: Run unit tests
-        run: pnpm run test:ci
-        working-directory: packages/sveltekit-embed
+        run: pnpm install
+      - name: Build
+        run: pnpm run build
         env:
           PUBLIC_FATHOM_ID: ${{ secrets.PUBLIC_FATHOM_ID }}
           PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
+      - name: Test
+        run: pnpm run test:ci
