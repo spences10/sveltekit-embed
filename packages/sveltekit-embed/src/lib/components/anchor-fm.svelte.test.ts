@@ -1,4 +1,5 @@
 import AnchorFm from '$lib/components/anchor-fm.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -15,11 +16,11 @@ describe('AnchorFm', () => {
 	});
 
 	it('renders iframe with episode url', async () => {
-		const { getByTestId } = render(AnchorFm, {
+		render(AnchorFm, {
 			episodeUrl,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('anchor-fm-episode');
+		const iframe = page.getByTestId('anchor-fm-episode');
 		const expected_src = `https://anchor.fm/${episodeUrl}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -38,22 +39,22 @@ describe('AnchorFm', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(AnchorFm, {
+		render(AnchorFm, {
 			episodeUrl,
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty episodeUrl gracefully', async () => {
 		// Test edge case: empty or invalid episode URL
-		const { getByTestId } = render(AnchorFm, {
+		render(AnchorFm, {
 			episodeUrl: '',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('anchor-fm-episode');
+		const iframe = page.getByTestId('anchor-fm-episode');
 		await expect
 			.element(iframe)
 			.toHaveAttribute('src', 'https://anchor.fm/');
@@ -78,11 +79,11 @@ describe('AnchorFm', () => {
 		// Test URL encoding and special characters
 		const specialUrl =
 			'test-podcast/episodes/episode-with-special-chars-!@#$%^&*()';
-		const { getByTestId } = render(AnchorFm, {
+		render(AnchorFm, {
 			episodeUrl: specialUrl,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('anchor-fm-episode');
+		const iframe = page.getByTestId('anchor-fm-episode');
 		const expectedSrc = `https://anchor.fm/${specialUrl}`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 		await expect
@@ -92,11 +93,11 @@ describe('AnchorFm', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		// Test title attribute, aria-labels, etc.
-		const { getByTestId } = render(AnchorFm, {
+		render(AnchorFm, {
 			episodeUrl,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('anchor-fm-episode');
+		const iframe = page.getByTestId('anchor-fm-episode');
 
 		await expect
 			.element(iframe)
@@ -108,11 +109,11 @@ describe('AnchorFm', () => {
 	it('should handle very long episodeUrl values', async () => {
 		// Test edge case: extremely long URLs
 		const longUrl = 'a'.repeat(1000) + '/episodes/' + 'b'.repeat(500);
-		const { getByTestId } = render(AnchorFm, {
+		render(AnchorFm, {
 			episodeUrl: longUrl,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('anchor-fm-episode');
+		const iframe = page.getByTestId('anchor-fm-episode');
 		const expectedSrc = `https://anchor.fm/${longUrl}`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});

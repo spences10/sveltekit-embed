@@ -1,6 +1,7 @@
 import Slides from '$lib/components/slides.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 
 describe('Slides', () => {
 	it('mounts with default props', async () => {
@@ -12,7 +13,7 @@ describe('Slides', () => {
 		const username = 'my-username';
 		const title = 'my-slides';
 
-		const { getByTitle } = render(Slides, {
+		render(Slides, {
 			username,
 			title,
 			byline: 'visible',
@@ -21,7 +22,7 @@ describe('Slides', () => {
 			disable_observer: true,
 		});
 
-		const iframe = getByTitle(title, { exact: false });
+		const iframe = page.getByTitle(title, { exact: false });
 		const expected_src = `https://slides.com/${username}/${title}/embed?&style=light&byline=visible&share=visible`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -44,12 +45,12 @@ describe('Slides', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(Slides, {
+		render(Slides, {
 			username: 'my-username',
 			title: 'my-slides',
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 

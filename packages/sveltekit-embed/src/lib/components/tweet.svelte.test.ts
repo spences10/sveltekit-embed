@@ -1,4 +1,5 @@
 import Tweet from '$lib/components/tweet.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -14,10 +15,10 @@ describe('Tweet', () => {
 	it('renders tweet with correct link', async () => {
 		const tweetLink = 'twitterdev/status/1399879412994844160';
 
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink,
 		});
-		const tweetElement = getByText('Loading Tweet...');
+		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
@@ -28,10 +29,10 @@ describe('Tweet', () => {
 	it('should handle empty tweetLink gracefully', async () => {
 		const tweetLink = '';
 
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink,
 		});
-		const tweetElement = getByText('Loading Tweet...');
+		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
@@ -62,10 +63,10 @@ describe('Tweet', () => {
 	it('should handle special characters in tweetLink', async () => {
 		const tweetLink = 'user.name/status/123_456';
 
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink,
 		});
-		const tweetElement = getByText('Loading Tweet...');
+		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
@@ -75,10 +76,10 @@ describe('Tweet', () => {
 	it('should construct proper Twitter embed URL', async () => {
 		const tweetLink = 'username/status/123456789';
 
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink,
 		});
-		const tweetElement = getByText('Loading Tweet...');
+		const tweetElement = page.getByText('Loading Tweet...');
 
 		const expectedHref = `https://twitter.com/${tweetLink}`;
 		await expect
@@ -89,10 +90,10 @@ describe('Tweet', () => {
 	it('should handle very long tweetLink values', async () => {
 		const tweetLink = `${'a'.repeat(50)}/status/${'1'.repeat(20)}`;
 
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink,
 		});
-		const tweetElement = getByText('Loading Tweet...');
+		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
@@ -132,10 +133,10 @@ describe('Tweet', () => {
 	it('should handle malformed tweet links gracefully', async () => {
 		const tweetLink = 'invalid/format/link';
 
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink,
 		});
-		const tweetElement = getByText('Loading Tweet...');
+		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
@@ -143,11 +144,11 @@ describe('Tweet', () => {
 	});
 
 	it('should render loading state properly', async () => {
-		const { getByText } = render(Tweet, {
+		render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
-		const loadingText = getByText('Loading Tweet...');
+		const loadingText = page.getByText('Loading Tweet...');
 		await expect.element(loadingText).toBeInTheDocument();
 	});
 
@@ -221,10 +222,10 @@ describe('Tweet', () => {
 		];
 
 		for (const tweetLink of testCases) {
-			const { getByText } = render(Tweet, {
+			render(Tweet, {
 				tweetLink,
 			});
-			const tweetElement = getByText('Loading Tweet...');
+			const tweetElement = page.getByText('Loading Tweet...');
 
 			await expect
 				.element(tweetElement)

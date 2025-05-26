@@ -1,4 +1,5 @@
 import SoundCloud from '$lib/components/sound-cloud.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -15,11 +16,11 @@ describe('SoundCloud', () => {
 	it('renders iframe with soundcloud link', async () => {
 		const soundcloudLink =
 			'https://soundcloud.com/mau5trap/deadmau5-bad-at-titles-episode-001';
-		const { getByTitle } = render(SoundCloud, {
+		render(SoundCloud, {
 			soundcloudLink,
 			disable_observer: true,
 		});
-		const iframe = getByTitle(`soundcloud-${soundcloudLink}`);
+		const iframe = page.getByTitle(`soundcloud-${soundcloudLink}`);
 		const expected_src = `https://w.soundcloud.com/player/?url=${soundcloudLink}&visual=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -42,12 +43,12 @@ describe('SoundCloud', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(SoundCloud, {
+		render(SoundCloud, {
 			soundcloudLink:
 				'https://soundcloud.com/mau5trap/deadmau5-bad-at-titles-episode-001',
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
@@ -98,11 +99,11 @@ describe('SoundCloud', () => {
 	it('should handle special characters in soundcloudLink', async () => {
 		const soundcloudLink =
 			'https://soundcloud.com/artist/track-with-symbols_123';
-		const { getByTitle } = render(SoundCloud, {
+		render(SoundCloud, {
 			soundcloudLink,
 			disable_observer: true,
 		});
-		const iframe = getByTitle(`soundcloud-${soundcloudLink}`);
+		const iframe = page.getByTitle(`soundcloud-${soundcloudLink}`);
 		const expected_src = `https://w.soundcloud.com/player/?url=${soundcloudLink}&visual=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});

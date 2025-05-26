@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 import Bluesky from './bluesky.svelte';
 
 describe('Bluesky', () => {
@@ -12,33 +13,33 @@ describe('Bluesky', () => {
 	});
 
 	it('renders iframe with correct embed url', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const expected_src = `https://embed.bsky.app/embed/${test_post_id}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with custom width', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 			width: '50%',
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		await expect.element(iframe).toHaveAttribute('width', '50%');
 	});
 
 	it('applies custom iframe styles', async () => {
 		const custom_styles = 'border-radius: 8px; background: #f0f0f0;';
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 			iframe_styles: custom_styles,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const element = iframe.element();
 		const style_text = element.style.cssText.toLowerCase();
 		expect(style_text).toContain('border-radius: 8px');
@@ -46,11 +47,11 @@ describe('Bluesky', () => {
 	});
 
 	it('has correct default styles', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const element = iframe.element();
 		const style_text = element.style.cssText.toLowerCase();
 		expect(style_text).toContain('position: absolute');
@@ -65,12 +66,12 @@ describe('Bluesky', () => {
 
 	it('combines default and custom iframe styles correctly', async () => {
 		const custom_styles = 'border-radius: 8px; margin: 10px;';
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 			iframe_styles: custom_styles,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const element = iframe.element();
 		const style_text = element.style.cssText.toLowerCase();
 
@@ -86,7 +87,7 @@ describe('Bluesky', () => {
 	});
 
 	it('updates height when receiving message from iframe', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -97,18 +98,18 @@ describe('Bluesky', () => {
 
 		window.dispatchEvent(message_event);
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const element = iframe.element();
 		expect(element.style.height).toBe('100%');
 	});
 
 	// Edge Cases and Comprehensive Coverage
 	it('should handle empty post_id gracefully', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: '',
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const expected_src = 'https://embed.bsky.app/embed/';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -219,11 +220,11 @@ describe('Bluesky', () => {
 			'a'.repeat(100) +
 			'/app.bsky.feed.post/' +
 			'b'.repeat(100);
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: long_post_id,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const expected_src = `https://embed.bsky.app/embed/${long_post_id}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -248,7 +249,7 @@ describe('Bluesky', () => {
 		expect(wrapper?.classList.contains('bluesky-wrapper')).toBe(true);
 
 		// Check iframe is within the correct structure
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		expect(
 			iframe
 				.element()
@@ -258,21 +259,21 @@ describe('Bluesky', () => {
 
 	it('should handle numeric width values', async () => {
 		// Even though TypeScript interface expects string, test component robustness
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 			width: '500px', // Using string as per interface
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		await expect.element(iframe).toHaveAttribute('width', '500px');
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 
 		// Test accessibility attributes
 		await expect
@@ -290,22 +291,22 @@ describe('Bluesky', () => {
 	it('should handle special characters in post_id', async () => {
 		const special_post_id =
 			'did:plc:user-with_special.chars@example/app.bsky.feed.post/post-with-special_chars.123';
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: special_post_id,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		const expected_src = `https://embed.bsky.app/embed/${special_post_id}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	// Additional comprehensive tests for edge cases
 	it('should handle default width when not specified', async () => {
-		const { getByTestId } = render(Bluesky, {
+		render(Bluesky, {
 			post_id: test_post_id,
 		});
 
-		const iframe = getByTestId('bluesky-embed');
+		const iframe = page.getByTestId('bluesky-embed');
 		await expect.element(iframe).toHaveAttribute('width', '100%');
 	});
 

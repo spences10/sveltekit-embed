@@ -7,6 +7,7 @@ import {
 	vi,
 } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 
 import GeneralObserver from './general-observer.svelte';
 
@@ -40,12 +41,12 @@ describe('General Observer', () => {
 	describe('Observer Disabled', () => {
 		it.skip('should render children when disable_observer is true', async () => {
 			const testContent = 'Test content for disabled observer';
-			const { getByText } = render(GeneralObserver, {
+			render(GeneralObserver, {
 				disable_observer: true,
 				children: (() => testContent) as any,
 			});
 
-			const content = getByText(testContent);
+			const content = page.getByText(testContent);
 			await expect.element(content).toBeInTheDocument();
 		});
 	});
@@ -78,12 +79,12 @@ describe('General Observer', () => {
 		});
 
 		it('should observe root element when observer is created', async () => {
-			const { getByTestId } = render(GeneralObserver, {
+			render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});
 
-			const rootElement = getByTestId('general-observer');
+			const rootElement = page.getByTestId('general-observer');
 
 			expect(mockObserve).toHaveBeenCalledWith(rootElement.element());
 		});
@@ -271,12 +272,12 @@ describe('General Observer', () => {
 		});
 
 		it('should maintain proper data-testid on root element', async () => {
-			const { getByTestId } = render(GeneralObserver, {
+			render(GeneralObserver, {
 				disable_observer: true,
 				children: (() => 'Test content') as any,
 			});
 
-			const rootElement = getByTestId('general-observer');
+			const rootElement = page.getByTestId('general-observer');
 			await expect.element(rootElement).toBeInTheDocument();
 		});
 	});

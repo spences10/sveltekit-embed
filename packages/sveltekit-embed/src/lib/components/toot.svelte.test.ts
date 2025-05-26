@@ -1,4 +1,5 @@
 import Toot from '$lib/components/toot.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -8,12 +9,12 @@ describe('Toot', () => {
 		const username = 'my-username';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@${username}/123/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -42,12 +43,12 @@ describe('Toot', () => {
 		const username = '@testuser';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		// Should not become @@testuser
 		const expected_src = `https://${instance}/@testuser/123/embed`;
@@ -59,12 +60,12 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		// Should become @testuser
 		const expected_src = `https://${instance}/@testuser/123/embed`;
@@ -76,12 +77,12 @@ describe('Toot', () => {
 		const username = '  testuser  ';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		// Should trim whitespace
 		const expected_src = `https://${instance}/@testuser/123/embed`;
@@ -210,12 +211,12 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https:///@testuser/123/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -226,12 +227,12 @@ describe('Toot', () => {
 		const username = '';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@/123/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -242,12 +243,12 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@testuser//embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -258,12 +259,12 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@testuser/123/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -274,12 +275,12 @@ describe('Toot', () => {
 		const username = 'test.user_123';
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@test.user_123/123/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -290,12 +291,12 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123456789012345';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@testuser/123456789012345/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -358,12 +359,12 @@ describe('Toot', () => {
 		const username = 'a'.repeat(100);
 		const tootId = '123';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@${'a'.repeat(100)}/123/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
@@ -374,12 +375,12 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123456789';
 
-		const { getByTitle } = render(Toot, {
+		render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
-		const iframe = getByTitle('');
+		const iframe = page.getByTitle('');
 
 		const expected_src = `https://${instance}/@testuser/123456789/embed`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);

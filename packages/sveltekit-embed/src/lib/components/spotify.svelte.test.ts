@@ -1,4 +1,5 @@
 import Spotify from '$lib/components/spotify.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -13,41 +14,41 @@ describe('Spotify', () => {
 
 	it('renders iframe with spotify link', async () => {
 		const spotifyLink = 'track/4uLU6hMCjMI75M1A2tKUQC';
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		const expected_src = `https://open.spotify.com/embed/${spotifyLink}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty spotifyLink gracefully', async () => {
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: '',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		const expected_src = 'https://open.spotify.com/embed/';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should apply default height and width when not provided', async () => {
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'track/test',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
 
 		await expect
@@ -62,11 +63,11 @@ describe('Spotify', () => {
 
 	it('should construct proper Spotify embed URL', async () => {
 		const spotifyLink = 'playlist/37i9dQZF1DXcBWIGoYBM5M';
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		const expected_src = `https://open.spotify.com/embed/${spotifyLink}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -127,11 +128,11 @@ describe('Spotify', () => {
 
 	it('should handle special characters in spotifyLink', async () => {
 		const spotifyLink = 'track/abc123_def-456';
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		await expect
 			.element(iframe)
 			.toHaveAttribute(
@@ -145,11 +146,11 @@ describe('Spotify', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const spotifyLink = 'track/accessibility-test';
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 
 		await expect
 			.element(iframe)
@@ -165,11 +166,11 @@ describe('Spotify', () => {
 
 	it('should handle very long spotifyLink values', async () => {
 		const spotifyLink = 'track/' + 'a'.repeat(100);
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		await expect
 			.element(iframe)
 			.toHaveAttribute(
@@ -180,12 +181,12 @@ describe('Spotify', () => {
 
 	it('should apply custom styles correctly', async () => {
 		const customStyles = 'border: 2px solid red; background: blue;';
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'track/test',
 			iframe_styles: customStyles,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
 
 		expect(iframeElement.style.cssText).toContain(
@@ -195,13 +196,13 @@ describe('Spotify', () => {
 	});
 
 	it('should handle custom dimensions', async () => {
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'track/test',
 			width: '500px',
 			height: '300px',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
 
 		// Default iframe_styles should incorporate custom dimensions
@@ -211,11 +212,11 @@ describe('Spotify', () => {
 
 	it('should handle malformed Spotify links gracefully', async () => {
 		const spotifyLink = 'invalid/content/with/extra/slashes';
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 
 		// Component should still render, even if link is malformed
 		await expect
@@ -227,11 +228,11 @@ describe('Spotify', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { getByTestId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'track/test',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('spotify');
+		const iframe = page.getByTestId('spotify');
 
 		await expect
 			.element(iframe)

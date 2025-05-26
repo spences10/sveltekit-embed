@@ -1,6 +1,7 @@
 import GenericEmbed from '$lib/components/generic-embed.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 
 describe('GenericEmbed', () => {
 	it('mounts with default props', async () => {
@@ -21,7 +22,7 @@ describe('GenericEmbed', () => {
 			'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)';
 		const height = '500px';
 		const width = '100%';
-		const { getByTitle } = render(GenericEmbed, {
+		render(GenericEmbed, {
 			src,
 			title,
 			height,
@@ -29,7 +30,7 @@ describe('GenericEmbed', () => {
 			disable_observer: true,
 			children: (() => {}) as any,
 		});
-		const iframe = getByTitle(title);
+		const iframe = page.getByTitle(title);
 
 		await expect.element(iframe).toHaveAttribute('src', src);
 		await expect.element(iframe).toHaveAttribute('height', height);
@@ -56,7 +57,7 @@ describe('GenericEmbed', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(GenericEmbed, {
+		render(GenericEmbed, {
 			src: 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
 			title:
 				'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)',
@@ -65,7 +66,7 @@ describe('GenericEmbed', () => {
 			disable_observer: false,
 			children: (() => {}) as any,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
@@ -88,7 +89,7 @@ describe('GenericEmbed', () => {
 		it('should handle special characters in src URL', async () => {
 			const specialSrc =
 				'https://example.com/video?id=test&param=value%20with%20spaces';
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: specialSrc,
 				title: 'Special URL Test',
 				height: '152px',
@@ -96,14 +97,14 @@ describe('GenericEmbed', () => {
 				disable_observer: true,
 				children: (() => {}) as any,
 			});
-			const iframe = getByTitle('Special URL Test');
+			const iframe = page.getByTitle('Special URL Test');
 
 			await expect.element(iframe).toHaveAttribute('src', specialSrc);
 		});
 
 		it('should handle special characters in title', async () => {
 			const specialTitle = 'Test "Title" with <tags> & symbols!';
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: specialTitle,
 				height: '152px',
@@ -111,7 +112,7 @@ describe('GenericEmbed', () => {
 				disable_observer: true,
 				children: (() => {}) as any,
 			});
-			const iframe = getByTitle(specialTitle);
+			const iframe = page.getByTitle(specialTitle);
 
 			await expect
 				.element(iframe)
@@ -120,7 +121,7 @@ describe('GenericEmbed', () => {
 
 		it('should handle very long src URLs', async () => {
 			const longSrc = 'https://example.com/' + 'a'.repeat(1000);
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: longSrc,
 				title: 'Long URL Test',
 				height: '152px',
@@ -128,14 +129,14 @@ describe('GenericEmbed', () => {
 				disable_observer: true,
 				children: (() => {}) as any,
 			});
-			const iframe = getByTitle('Long URL Test');
+			const iframe = page.getByTitle('Long URL Test');
 
 			await expect.element(iframe).toHaveAttribute('src', longSrc);
 		});
 
 		it('should handle very long titles', async () => {
 			const longTitle = 'Long Title '.repeat(100);
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: longTitle,
 				height: '152px',
@@ -143,7 +144,7 @@ describe('GenericEmbed', () => {
 				disable_observer: true,
 				children: (() => {}) as any,
 			});
-			const iframe = getByTitle(longTitle);
+			const iframe = page.getByTitle(longTitle);
 
 			await expect
 				.element(iframe)
@@ -152,7 +153,7 @@ describe('GenericEmbed', () => {
 
 		it('should handle malformed URLs gracefully', async () => {
 			const malformedUrl = 'not-a-valid-url';
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: malformedUrl,
 				title: 'Malformed URL Test',
 				height: '152px',
@@ -160,7 +161,7 @@ describe('GenericEmbed', () => {
 				disable_observer: true,
 				children: (() => {}) as any,
 			});
-			const iframe = getByTitle('Malformed URL Test');
+			const iframe = page.getByTitle('Malformed URL Test');
 
 			// Should still render with the malformed URL
 			await expect
@@ -212,7 +213,7 @@ describe('GenericEmbed', () => {
 
 	describe('Security', () => {
 		it('should have proper iframe security attributes', async () => {
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Security Test',
 				height: '152px',
@@ -220,7 +221,7 @@ describe('GenericEmbed', () => {
 				disable_observer: true,
 				children: (() => {}) as any,
 			});
-			const iframe = getByTitle('Security Test');
+			const iframe = page.getByTitle('Security Test');
 
 			await expect
 				.element(iframe)
@@ -250,7 +251,7 @@ describe('GenericEmbed', () => {
 
 	describe('Additional Attributes', () => {
 		it('should pass through additional attributes via rest props', async () => {
-			const { getByTitle } = render(GenericEmbed, {
+			render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Rest Props Test',
 				height: '152px',
@@ -260,7 +261,7 @@ describe('GenericEmbed', () => {
 				frameborder: '0',
 				allowfullscreen: true,
 			} as any);
-			const iframe = getByTitle('Rest Props Test');
+			const iframe = page.getByTitle('Rest Props Test');
 
 			await expect
 				.element(iframe)

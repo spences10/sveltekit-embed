@@ -1,4 +1,5 @@
 import CodePen from '$lib/components/code-pen.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -14,12 +15,12 @@ describe('CodePen', () => {
 	});
 
 	it('renders iframe with correct attributes', async () => {
-		const { getByTitle } = render(CodePen, {
+		render(CodePen, {
 			codePenId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTitle(`codepen-${codePenId}`);
+		const iframe = page.getByTitle(`codepen-${codePenId}`);
 		const element = iframe.element();
 
 		expect(element.getAttribute('src')).toContain(
@@ -54,22 +55,22 @@ describe('CodePen', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(CodePen, {
+		render(CodePen, {
 			codePenId,
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	describe('Edge Cases', () => {
 		it('should handle empty codePenId gracefully', async () => {
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId: '',
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle('codepen-');
+			const iframe = page.getByTitle('codepen-');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			// Should still construct a valid URL even with empty ID
@@ -79,12 +80,12 @@ describe('CodePen', () => {
 
 		it('should handle special characters in codePenId', async () => {
 			const specialId = 'abc-123_test';
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId: specialId,
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle(`codepen-${specialId}`);
+			const iframe = page.getByTitle(`codepen-${specialId}`);
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.src).toContain(`/${specialId}/`);
@@ -121,13 +122,13 @@ describe('CodePen', () => {
 			for (let i = 0; i < tabOptions.length; i++) {
 				const tab = tabOptions[i];
 				const uniqueId = `${codePenId}-tab-${i}`;
-				const { getByTitle } = render(CodePen, {
+				render(CodePen, {
 					codePenId: uniqueId,
 					tabs: tab as any,
 					disable_observer: true,
 				});
 
-				const iframe = getByTitle(`codepen-${uniqueId}`);
+				const iframe = page.getByTitle(`codepen-${uniqueId}`);
 				const element = iframe.element() as HTMLIFrameElement;
 
 				expect(element.src).toContain(`default-tab=${tab}`);
@@ -137,13 +138,13 @@ describe('CodePen', () => {
 		it('should handle array of tabs configuration', async () => {
 			const tabsArray = ['js', 'css'];
 			const uniqueId = `${codePenId}-array`;
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId: uniqueId,
 				tabs: tabsArray as any,
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle(`codepen-${uniqueId}`);
+			const iframe = page.getByTitle(`codepen-${uniqueId}`);
 			const element = iframe.element() as HTMLIFrameElement;
 
 			// When tabs is an array, it should be converted to string or handle appropriately
@@ -158,13 +159,13 @@ describe('CodePen', () => {
 			for (let i = 0; i < themes.length; i++) {
 				const theme = themes[i];
 				const uniqueId = `${codePenId}-theme-${i}`;
-				const { getByTitle } = render(CodePen, {
+				render(CodePen, {
 					codePenId: uniqueId,
 					theme,
 					disable_observer: true,
 				});
 
-				const iframe = getByTitle(`codepen-${uniqueId}`);
+				const iframe = page.getByTitle(`codepen-${uniqueId}`);
 				const element = iframe.element() as HTMLIFrameElement;
 
 				expect(element.src).toContain(`theme-id=${theme}`);
@@ -176,13 +177,13 @@ describe('CodePen', () => {
 		it('should toggle clickToLoad properly in URL', async () => {
 			// Test clickToLoad = false (no /preview in URL)
 			const falseId = `${codePenId}-click-false`;
-			const { getByTitle: getByTitleFalse } = render(CodePen, {
+			render(CodePen, {
 				codePenId: falseId,
 				clickToLoad: false,
 				disable_observer: true,
 			});
 
-			const iframeFalse = getByTitleFalse(`codepen-${falseId}`);
+			const iframeFalse = page.getByTitle(`codepen-${falseId}`);
 			const elementFalse = iframeFalse.element() as HTMLIFrameElement;
 
 			expect(elementFalse.src).not.toContain('/preview');
@@ -190,13 +191,13 @@ describe('CodePen', () => {
 
 			// Test clickToLoad = true (includes /preview in URL)
 			const trueId = `${codePenId}-click-true`;
-			const { getByTitle: getByTitleTrue } = render(CodePen, {
+			render(CodePen, {
 				codePenId: trueId,
 				clickToLoad: true,
 				disable_observer: true,
 			});
 
-			const iframeTrue = getByTitleTrue(`codepen-${trueId}`);
+			const iframeTrue = page.getByTitle(`codepen-${trueId}`);
 			const elementTrue = iframeTrue.element() as HTMLIFrameElement;
 
 			expect(elementTrue.src).toContain('/preview');
@@ -207,26 +208,26 @@ describe('CodePen', () => {
 		it('should handle editable parameter correctly', async () => {
 			// Test editable = false
 			const falseId = `${codePenId}-edit-false`;
-			const { getByTitle: getByTitleFalse } = render(CodePen, {
+			render(CodePen, {
 				codePenId: falseId,
 				editable: false,
 				disable_observer: true,
 			});
 
-			const iframeFalse = getByTitleFalse(`codepen-${falseId}`);
+			const iframeFalse = page.getByTitle(`codepen-${falseId}`);
 			const elementFalse = iframeFalse.element() as HTMLIFrameElement;
 
 			expect(elementFalse.src).toContain('editable=false');
 
 			// Test editable = true
 			const trueId = `${codePenId}-edit-true`;
-			const { getByTitle: getByTitleTrue } = render(CodePen, {
+			render(CodePen, {
 				codePenId: trueId,
 				editable: true,
 				disable_observer: true,
 			});
 
-			const iframeTrue = getByTitleTrue(`codepen-${trueId}`);
+			const iframeTrue = page.getByTitle(`codepen-${trueId}`);
 			const elementTrue = iframeTrue.element() as HTMLIFrameElement;
 
 			expect(elementTrue.src).toContain('editable=true');
@@ -237,13 +238,13 @@ describe('CodePen', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles =
 				'border: 2px solid red; border-radius: 8px;';
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId,
 				iframe_styles: customStyles,
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codePenId}`);
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.getAttribute('style')).toBe(customStyles);
@@ -252,14 +253,14 @@ describe('CodePen', () => {
 		it('should handle custom height and width in iframe styles', async () => {
 			const customHeight = '300px';
 			const customWidth = '80%';
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId,
 				height: customHeight,
 				width: customWidth,
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codePenId}`);
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.style.height).toBe(customHeight);
@@ -270,7 +271,7 @@ describe('CodePen', () => {
 
 	describe('URL Construction', () => {
 		it('should construct proper URL for all parameter combinations', async () => {
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId: 'test123',
 				height: '400px',
 				theme: 'dark',
@@ -280,7 +281,7 @@ describe('CodePen', () => {
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle('codepen-test123');
+			const iframe = page.getByTitle('codepen-test123');
 			const element = iframe.element() as HTMLIFrameElement;
 			const src = element.src;
 
@@ -296,12 +297,12 @@ describe('CodePen', () => {
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility attributes', async () => {
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId,
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codePenId}`);
 
 			await expect
 				.element(iframe)
@@ -315,12 +316,12 @@ describe('CodePen', () => {
 		});
 
 		it('should render with proper CSS class', async () => {
-			const { getByTitle } = render(CodePen, {
+			render(CodePen, {
 				codePenId,
 				disable_observer: true,
 			});
 
-			const iframe = getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codePenId}`);
 
 			await expect
 				.element(iframe)

@@ -1,6 +1,7 @@
 import Guild from '$lib/components/guild.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 
 describe('Guild', () => {
 	it('mounts with default props', async () => {
@@ -10,7 +11,7 @@ describe('Guild', () => {
 
 	it('renders iframe with correct src', async () => {
 		const card_id = '12345';
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			height: '420px',
 			width: '500px',
 			card_id,
@@ -18,7 +19,7 @@ describe('Guild', () => {
 			display_type: 'item',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const expected_src = `https://guild.host/embeds/user/${card_id}/item`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -37,22 +38,22 @@ describe('Guild', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			height: '400px',
 			width: '600px',
 			card_id: 'abcde',
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	it('should handle empty card_id gracefully', async () => {
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id: '',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const expected_src = 'https://guild.host/embeds/guild//card';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -63,7 +64,7 @@ describe('Guild', () => {
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const parent = iframe.element().parentElement;
 
 		// Test default values: height='380px', width='100%', type='guild', display_type='card'
@@ -167,14 +168,14 @@ describe('Guild', () => {
 	});
 
 	it('should construct proper Guild embed URL', async () => {
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id: 'svelte-society-london',
 			type: 'guild',
 			display_type: 'events/upcoming',
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const expected_url =
 			'https://guild.host/embeds/guild/svelte-society-london/events/upcoming';
 		await expect.element(iframe).toHaveAttribute('src', expected_url);
@@ -182,12 +183,12 @@ describe('Guild', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const card_id = 'accessibility-test';
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 
 		// Test accessibility attributes
 		await expect
@@ -200,24 +201,24 @@ describe('Guild', () => {
 	it('should handle special characters in card_id', async () => {
 		const specialCardId =
 			'user-name-with-dashes_and_underscores.dots';
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id: specialCardId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const expected_src = `https://guild.host/embeds/guild/${specialCardId}/card`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should handle very long card_id values', async () => {
 		const longCardId = 'a'.repeat(100); // 100 character card ID
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id: longCardId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const expected_src = `https://guild.host/embeds/guild/${longCardId}/card`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 		await expect
@@ -226,14 +227,14 @@ describe('Guild', () => {
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id: 'style-test',
 			height: '500px',
 			width: '300px',
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const parent = iframe.element().parentElement;
 
 		// Test that parent container has correct dimensions
@@ -266,14 +267,14 @@ describe('Guild', () => {
 
 	it('should handle numeric height and width values', async () => {
 		// Note: In Svelte, numeric values are typically converted to strings
-		const { getByTestId } = render(Guild, {
+		render(Guild, {
 			card_id: 'numeric-test',
 			height: '400px', // Already as string since TypeScript interface expects string
 			width: '250px', // Already as string since TypeScript interface expects string
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('guild-card');
+		const iframe = page.getByTestId('guild-card');
 		const parent = iframe.element().parentElement;
 
 		expect(parent?.style.height).toBe('400px');

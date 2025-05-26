@@ -1,4 +1,5 @@
 import Buzzsprout from '$lib/components/buzzsprout.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -14,11 +15,11 @@ describe('Buzzsprout', () => {
 	});
 
 	it('renders iframe with buzzsproutId', async () => {
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const expected_src = `https://www.buzzsprout.com/${buzzsproutId}?client_source=admin&amp;iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -37,33 +38,33 @@ describe('Buzzsprout', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId,
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		const general_observer = page.getByTestId('general-observer');
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty buzzsproutId gracefully', async () => {
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: '',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const expected_src =
 			'https://www.buzzsprout.com/?client_source=admin&amp;iframe=true';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should apply default height and width when not provided', async () => {
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: 'test123',
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const parent = iframe.element().parentElement;
 
 		// Test default values: height='200px', width='100%'
@@ -73,24 +74,24 @@ describe('Buzzsprout', () => {
 
 	it('should handle special characters in buzzsproutId', async () => {
 		const specialBuzzsproutId = 'show-123_with-dashes.and.dots';
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: specialBuzzsproutId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const expected_src = `https://www.buzzsprout.com/${specialBuzzsproutId}?client_source=admin&amp;iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const testBuzzsproutId = 'accessibility-test';
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: testBuzzsproutId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 
 		// Test accessibility attributes
 		await expect
@@ -102,12 +103,12 @@ describe('Buzzsprout', () => {
 
 	it('should handle very long buzzsproutId values', async () => {
 		const longBuzzsproutId = 'a'.repeat(100); // 100 character buzzsprout ID
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: longBuzzsproutId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const expected_src = `https://www.buzzsprout.com/${longBuzzsproutId}?client_source=admin&amp;iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 		await expect
@@ -116,14 +117,14 @@ describe('Buzzsprout', () => {
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: 'style-test',
 			height: '300px',
 			width: '400px',
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const parent = iframe.element().parentElement;
 
 		// Test that parent container has correct dimensions
@@ -142,14 +143,14 @@ describe('Buzzsprout', () => {
 
 	it('should handle numeric height and width values', async () => {
 		// Note: TypeScript interface expects string values
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: 'numeric-test',
 			height: '250px',
 			width: '80%',
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const parent = iframe.element().parentElement;
 
 		expect(parent?.style.height).toBe('250px');
@@ -158,12 +159,12 @@ describe('Buzzsprout', () => {
 
 	it('should construct iframe src URL correctly with query parameters', async () => {
 		const testId = 'url-construction-test';
-		const { getByTestId } = render(Buzzsprout, {
+		render(Buzzsprout, {
 			buzzsproutId: testId,
 			disable_observer: true,
 		});
 
-		const iframe = getByTestId('buzzsprout');
+		const iframe = page.getByTestId('buzzsprout');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
 
 		// Verify exact URL construction with specific query parameters

@@ -1,6 +1,7 @@
 import TikTok from '$lib/components/tiktok.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 
 describe('TikTok', () => {
 	it('mounts with default props', async () => {
@@ -13,11 +14,11 @@ describe('TikTok', () => {
 
 	it('renders iframe with correct src', async () => {
 		const tiktokId = '7234660647688875814';
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain(
@@ -29,7 +30,7 @@ describe('TikTok', () => {
 
 	it('renders with custom configurations', async () => {
 		const tiktokId = '7234660647688875814';
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			controls: false,
 			autoplay: true,
@@ -38,7 +39,7 @@ describe('TikTok', () => {
 			description: true,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain('controls=0');
@@ -49,21 +50,21 @@ describe('TikTok', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty tiktokId gracefully', async () => {
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 		expect(src).toContain('https://www.tiktok.com/player/v1/?');
 	});
@@ -73,7 +74,7 @@ describe('TikTok', () => {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 
 		await expect.element(iframe).toHaveAttribute('frameborder', '0');
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
@@ -95,13 +96,13 @@ describe('TikTok', () => {
 
 	it('should construct proper TikTok player URL', async () => {
 		const tiktokId = '1234567890123456789';
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			controls: true,
 			autoplay: false,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain(
@@ -113,11 +114,11 @@ describe('TikTok', () => {
 
 	it('should handle special characters in tiktokId', async () => {
 		const tiktokId = 'abc123_def-456';
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 
 		await expect
 			.element(iframe)
@@ -128,11 +129,11 @@ describe('TikTok', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const tiktokId = 'accessibility-test';
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 
 		await expect
 			.element(iframe)
@@ -149,11 +150,11 @@ describe('TikTok', () => {
 
 	it('should handle very long tiktokId values', async () => {
 		const tiktokId = '1'.repeat(50);
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain(tiktokId);
@@ -177,7 +178,7 @@ describe('TikTok', () => {
 	});
 
 	it('should handle boolean control options correctly', async () => {
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '7234660647688875814',
 			controls: false,
 			progress_bar: false,
@@ -194,7 +195,7 @@ describe('TikTok', () => {
 			closed_caption: false,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain('controls=0');
@@ -214,11 +215,11 @@ describe('TikTok', () => {
 
 	it('should handle malformed tiktokId gracefully', async () => {
 		const tiktokId = 'invalid/id/with/slashes';
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 
 		// Component should still render, even if ID is malformed
 		const src = iframe.element().getAttribute('src');
@@ -261,7 +262,7 @@ describe('TikTok', () => {
 	});
 
 	it.skip('should handle query parameter construction correctly', async () => {
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '7234660647688875814',
 			controls: true,
 			progress_bar: false,
@@ -269,7 +270,7 @@ describe('TikTok', () => {
 			loop: false,
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		// Check that all parameters are included with correct values
@@ -285,11 +286,11 @@ describe('TikTok', () => {
 	});
 
 	it('should apply iframe positioning styles correctly', async () => {
-		const { getByTestId } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
-		const iframe = getByTestId('tiktok-embed');
+		const iframe = page.getByTestId('tiktok-embed');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
 		const styles = iframeElement.style;
 

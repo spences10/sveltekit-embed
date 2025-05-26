@@ -1,4 +1,5 @@
 import Deezer from '$lib/components/deezer.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -14,14 +15,14 @@ describe('Deezer', () => {
 	});
 
 	it('renders iframe with correct src', async () => {
-		const { getByTitle } = render(Deezer, {
+		render(Deezer, {
 			theme,
 			frameSrc,
 			height,
 			width,
 			disable_observer: true,
 		});
-		const iframe = getByTitle('deezer-widget');
+		const iframe = page.getByTitle('deezer-widget');
 		const expected_src = `https://widget.deezer.com/widget/${theme}/${frameSrc}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -41,23 +42,23 @@ describe('Deezer', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(Deezer, {
+		render(Deezer, {
 			theme,
 			frameSrc,
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		const general_observer = page.getByTestId('general-observer');
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	describe('Edge Cases', () => {
 		it('should handle empty frameSrc gracefully', async () => {
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme,
 				frameSrc: '',
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			// Should still construct a valid URL even with empty frameSrc

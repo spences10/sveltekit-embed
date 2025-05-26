@@ -1,6 +1,7 @@
 import StackBlitz from '$lib/components/stackblitz.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
 
 describe('StackBlitz', () => {
 	it('mounts with default props', async () => {
@@ -41,12 +42,12 @@ describe('StackBlitz', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(StackBlitz, {
+		render(StackBlitz, {
 			id: 'svelte-kit-template',
 			file: 'src/app.html',
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
+		const general_observer = page.getByTestId('general-observer');
 		await expect.element(general_observer).toBeInTheDocument();
 	});
 

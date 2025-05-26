@@ -1,4 +1,5 @@
 import Gist from '$lib/components/gist.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
@@ -11,11 +12,11 @@ describe('Gist', () => {
 	});
 
 	it('renders iframe with correct src', async () => {
-		const { getByTitle } = render(Gist, {
+		render(Gist, {
 			gistUri,
 			disable_observer: true,
 		});
-		const iframe = getByTitle('gist-widget');
+		const iframe = page.getByTitle('gist-widget');
 		const expected_src = `https://gist.github.com/${gistUri}.pibb`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
@@ -34,21 +35,21 @@ describe('Gist', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		const { getByTestId } = render(Gist, {
+		render(Gist, {
 			gistUri,
 			disable_observer: false,
 		});
-		const general_observer = getByTestId('general-observer');
-		expect(general_observer).toBeTruthy();
+		const general_observer = page.getByTestId('general-observer');
+		await expect.element(general_observer).toBeInTheDocument();
 	});
 
 	describe('Edge Cases', () => {
 		it('should handle empty gistUri gracefully', async () => {
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri: '',
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			// Should still construct a valid URL even with empty gistUri
@@ -57,11 +58,11 @@ describe('Gist', () => {
 
 		it('should handle special characters in gistUri', async () => {
 			const specialGistUri = 'user-name/gist_id-123';
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri: specialGistUri,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.src).toContain(specialGistUri);
@@ -72,11 +73,11 @@ describe('Gist', () => {
 
 		it('should handle very long gistUri values', async () => {
 			const longGistUri = 'user/' + 'a'.repeat(1000);
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri: longGistUri,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.src).toContain(longGistUri);
@@ -87,11 +88,11 @@ describe('Gist', () => {
 
 		it('should handle malformed gist URIs gracefully', async () => {
 			const malformedUri = 'not/a/valid/gist/uri';
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri: malformedUri,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			// Should still render with the malformed URI
@@ -117,12 +118,12 @@ describe('Gist', () => {
 	describe('Custom Styling', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles = 'border: 2px solid red; background: blue;';
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri,
 				iframe_styles: customStyles,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.getAttribute('style')).toBe(customStyles);
@@ -145,11 +146,11 @@ describe('Gist', () => {
 	describe('URL Construction', () => {
 		it('should construct proper GitHub gist URL', async () => {
 			const testGistUri = 'username/gist123456';
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri: testGistUri,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			const expectedUrl = `https://gist.github.com/${testGistUri}.pibb`;
@@ -158,11 +159,11 @@ describe('Gist', () => {
 
 		it('should handle gist with file parameter', async () => {
 			const gistWithFile = 'username/gist123456?file=example.js';
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri: gistWithFile,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			// Note: The file parameter gets included in the URL as part of gistUri
@@ -174,11 +175,11 @@ describe('Gist', () => {
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility attributes', async () => {
-			const { getByTitle } = render(Gist, {
+			render(Gist, {
 				gistUri,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('gist-widget');
+			const iframe = page.getByTitle('gist-widget');
 
 			await expect
 				.element(iframe)
