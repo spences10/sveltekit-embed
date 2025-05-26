@@ -14,17 +14,32 @@
 	}: Props = $props();
 
 	let wrapper_height = $state('174.5px');
+	let iframe_id = $state('');
 
 	const get_embed_url = (post_id: string) => {
 		return `https://embed.bsky.app/embed/${post_id}`;
 	};
 
 	onMount(() => {
+		// Generate a unique ID for this iframe instance
+		iframe_id = `bluesky-iframe-${Math.random().toString(36).substr(2, 9)}`;
+
 		const handle_message = (event: MessageEvent) => {
 			if (event.origin !== 'https://embed.bsky.app') return;
 
 			if (typeof event.data === 'object') {
-				wrapper_height = `${event.data.height || event.data.h || 500}px`;
+				// Check if this message is for this specific iframe
+				// Bluesky embeds don't send iframe IDs, so we need to use event.source
+				// to identify which iframe sent the message
+				const iframe_element = document.getElementById(
+					iframe_id,
+				) as HTMLIFrameElement;
+				if (
+					iframe_element &&
+					event.source === iframe_element.contentWindow
+				) {
+					wrapper_height = `${event.data.height || event.data.h || 500}px`;
+				}
 			}
 		};
 
@@ -38,6 +53,7 @@
 <div class="bluesky-wrapper-container">
 	<div class="bluesky-wrapper" style={`height: ${wrapper_height}`}>
 		<iframe
+			id={iframe_id}
 			data-testid="bluesky-embed"
 			title="Bluesky Post Embed"
 			src={get_embed_url(post_id)}
