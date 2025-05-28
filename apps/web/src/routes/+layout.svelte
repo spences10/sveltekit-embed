@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import {
 		PUBLIC_FATHOM_ID,
 		PUBLIC_FATHOM_URL,
@@ -12,7 +12,7 @@
 	import '../app.css';
 	import '../prism.css';
 
-	export let data;
+	let { data, children } = $props();
 
 	onMount(() => {
 		Fathom.load(PUBLIC_FATHOM_ID, {
@@ -20,7 +20,9 @@
 		});
 	});
 
-	$: $page.url.pathname, browser && Fathom.trackPageview();
+	$effect(() => {
+		page.url.pathname, browser && Fathom.trackPageview();
+	});
 </script>
 
 <header class="text-right">
@@ -31,8 +33,7 @@
 		<div class="flex-none items-center">
 			<a
 				aria-label="Github"
-				on:click={() =>
-					Fathom.trackEvent(`GitHub project link click`)}
+				onclick={() => Fathom.trackEvent(`GitHub project link click`)}
 				target="_blank"
 				href="https://github.com/spences10/sveltekit-embed"
 				rel="noopener noreferrer"
@@ -71,11 +72,11 @@
 {/if}
 
 <main class="prose prose-xl container mx-auto mb-20 max-w-3xl px-4">
-	<slot />
+	{@render children?.()}
 </main>
 
 <footer
-	class="footer footer-center bg-primary text-primary-content p-10"
+	class="footer footer-horizontal footer-center bg-primary text-primary-content p-10"
 >
 	<div class="text-xl">
 		<img
@@ -87,7 +88,7 @@
 			Made with <span role="img" aria-label="red heart">❤️</span> by
 			<a
 				class="link hover:text-secondary transition"
-				on:click={() => Fathom.trackEvent(`scottspence.com click`)}
+				onclick={() => Fathom.trackEvent(`scottspence.com click`)}
 				href="https://scottspence.com"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -105,7 +106,7 @@
 		<div class="grid grid-flow-col gap-4">
 			<a
 				aria-label="Twitter"
-				on:click={() => Fathom.trackEvent(`spences10 Twitter click`)}
+				onclick={() => Fathom.trackEvent(`spences10 Twitter click`)}
 				target="_blank"
 				rel="noopener noreferrer"
 				href="https://twitter.com/spences10"
@@ -114,7 +115,7 @@
 			</a>
 			<a
 				aria-label="GitHub"
-				on:click={() =>
+				onclick={() =>
 					Fathom.trackEvent(`spences10 GitHub link click`)}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -124,7 +125,7 @@
 			</a>
 			<a
 				aria-label="YouTube"
-				on:click={() => Fathom.trackEvent(`spences10 YouTube click`)}
+				onclick={() => Fathom.trackEvent(`spences10 YouTube click`)}
 				target="_blank"
 				rel="noopener noreferrer"
 				href="https://ss10/yt"
