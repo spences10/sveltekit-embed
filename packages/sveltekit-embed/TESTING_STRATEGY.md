@@ -133,19 +133,19 @@ Svelte component tests use the `.svelte.test.ts` extension:
 ### Basic Component Test Structure
 
 ```typescript
-import { describe, expect, test } from 'vitest'
-import { render } from 'vitest-browser-svelte'
-import { page } from '@vitest/browser/context'
-import { flushSync } from 'svelte'
-import MyComponent from './MyComponent.svelte'
+import { describe, expect, test } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { page } from '@vitest/browser/context';
+import { flushSync } from 'svelte';
+import MyComponent from './MyComponent.svelte';
 
 describe('MyComponent', () => {
 	test('renders with default props', async () => {
-		render(MyComponent)
-		const element = page.getByTestId('my-element')
-		await expect.element(element).toHaveTextContent('Expected Text')
-	})
-})
+		render(MyComponent);
+		const element = page.getByTestId('my-element');
+		await expect.element(element).toHaveTextContent('Expected Text');
+	});
+});
 ```
 
 ### Testing Component Props
@@ -157,43 +157,43 @@ test('renders with custom props', async () => {
 			title: 'Custom Title',
 			isVisible: true,
 		},
-	})
+	});
 
-	const titleElement = page.getByText('Custom Title')
-	await expect.element(titleElement).toBeInTheDocument()
-})
+	const titleElement = page.getByText('Custom Title');
+	await expect.element(titleElement).toBeInTheDocument();
+});
 ```
 
 ### Testing User Interactions
 
 ```typescript
 test('handles click events', async () => {
-	render(MyComponent)
-	const button = page.getByRole('button')
+	render(MyComponent);
+	const button = page.getByRole('button');
 
-	await button.click()
+	await button.click();
 	// No flushSync() needed - locators automatically retry!
 
-	const result = page.getByText('Clicked')
-	await expect.element(result).toBeInTheDocument()
-})
+	const result = page.getByText('Clicked');
+	await expect.element(result).toBeInTheDocument();
+});
 ```
 
 ### Testing Reactive State (Svelte 5 Runes)
 
 ```typescript
 test('reactive state updates', async () => {
-	const props = $state({ count: 0 })
-	render(Counter, { props })
+	const props = $state({ count: 0 });
+	render(Counter, { props });
 
-	const counter = page.getByTestId('counter')
-	await expect.element(counter).toHaveTextContent('0')
+	const counter = page.getByTestId('counter');
+	await expect.element(counter).toHaveTextContent('0');
 
-	props.count = 5
+	props.count = 5;
 	// No flushSync() needed - locators automatically wait for updates!
 
-	await expect.element(counter).toHaveTextContent('5')
-})
+	await expect.element(counter).toHaveTextContent('5');
+});
 ```
 
 #### Testing $derived Runes and Avoiding Warnings
@@ -203,30 +203,30 @@ warnings about "state referenced locally". To resolve these warnings,
 use the `untrack` function from Svelte:
 
 ```typescript
-import { flushSync, untrack } from 'svelte'
+import { flushSync, untrack } from 'svelte';
 
 test('derived state logic', async () => {
 	let scrollState = $state({
 		current: 0,
 		previous: 0,
-	})
+	});
 
 	// Derived state that mimics component logic
 	let shouldShowButton = $derived(
 		scrollState.current > scrollState.previous &&
 			scrollState.current > 0,
-	)
+	);
 
 	// Use untrack to access derived values without warnings
-	expect(untrack(() => shouldShowButton)).toBe(false)
+	expect(untrack(() => shouldShowButton)).toBe(false);
 
 	// Update state
-	scrollState.previous = scrollState.current
-	scrollState.current = 100
-	flushSync()
+	scrollState.previous = scrollState.current;
+	scrollState.current = 100;
+	flushSync();
 
-	expect(untrack(() => shouldShowButton)).toBe(true)
-})
+	expect(untrack(() => shouldShowButton)).toBe(true);
+});
 ```
 
 **Why use `untrack`?**
@@ -250,11 +250,11 @@ test('derived state logic', async () => {
 test('applies custom CSS classes', async () => {
 	render(MyComponent, {
 		props: { styles: 'custom-class' },
-	})
+	});
 
-	const element = page.getByTestId('styled-element')
-	await expect.element(element).toHaveClass('custom-class')
-})
+	const element = page.getByTestId('styled-element');
+	await expect.element(element).toHaveClass('custom-class');
+});
 ```
 
 ### Comprehensive Component Testing Patterns
@@ -268,64 +268,64 @@ patterns for testing Svelte components:
 describe('Component Name', () => {
 	describe('Initial Rendering', () => {
 		// Test all component variants and default states
-		it('should render with default props', async () => {})
-		it('should render with custom props', async () => {})
-		it('should handle missing props gracefully', async () => {})
-	})
+		it('should render with default props', async () => {});
+		it('should render with custom props', async () => {});
+		it('should handle missing props gracefully', async () => {});
+	});
 
 	describe('Rune State Management', () => {
 		// Test reactive state patterns with Svelte 5 runes
-		it('should manage state with $state rune', async () => {})
-		it('should test state transitions', async () => {})
-		it('should handle derived state correctly', async () => {})
-	})
+		it('should manage state with $state rune', async () => {});
+		it('should test state transitions', async () => {});
+		it('should handle derived state correctly', async () => {});
+	});
 
 	describe('CSS Classes and Styling', () => {
 		// Test styling logic and conditional classes
-		it('should apply correct CSS classes for each variant', async () => {})
-		it('should test CSS class derivation logic', async () => {})
-	})
+		it('should apply correct CSS classes for each variant', async () => {});
+		it('should test CSS class derivation logic', async () => {});
+	});
 
 	describe('User Interactions', () => {
 		// Test click, hover, keyboard interactions
-		it('should handle click events', async () => {})
-		it('should respond to keyboard input', async () => {})
-	})
+		it('should handle click events', async () => {});
+		it('should respond to keyboard input', async () => {});
+	});
 
 	describe('Content Rendering', () => {
 		// Test different content types and edge cases
-		it('should render HTML content', async () => {})
-		it('should handle plain text', async () => {})
-		it('should handle empty content', async () => {})
-		it('should handle special characters', async () => {})
-	})
+		it('should render HTML content', async () => {});
+		it('should handle plain text', async () => {});
+		it('should handle empty content', async () => {});
+		it('should handle special characters', async () => {});
+	});
 
 	describe('Edge Cases', () => {
 		// Test boundary conditions and error states
-		it('should handle empty props', async () => {})
-		it('should handle very long content', async () => {})
-		it('should handle invalid data gracefully', async () => {})
-	})
+		it('should handle empty props', async () => {});
+		it('should handle very long content', async () => {});
+		it('should handle invalid data gracefully', async () => {});
+	});
 
 	describe('Accessibility', () => {
 		// Test ARIA attributes, semantic structure
-		it('should have proper ARIA roles', async () => {})
-		it('should be keyboard accessible', async () => {})
-		it('should maintain semantic structure', async () => {})
-	})
+		it('should have proper ARIA roles', async () => {});
+		it('should be keyboard accessible', async () => {});
+		it('should maintain semantic structure', async () => {});
+	});
 
 	describe('Component Structure', () => {
 		// Test DOM structure and layout
-		it('should have correct DOM structure', async () => {})
-		it('should maintain consistent spacing', async () => {})
-	})
+		it('should have correct DOM structure', async () => {});
+		it('should maintain consistent spacing', async () => {});
+	});
 
 	describe('Advanced Patterns', () => {
 		// Test complex reactive patterns and lifecycle
-		it('should handle complex state interactions', async () => {})
-		it('should manage component lifecycle correctly', async () => {})
-	})
-})
+		it('should handle complex state interactions', async () => {});
+		it('should manage component lifecycle correctly', async () => {});
+	});
+});
 ```
 
 #### 2. Rune Testing Best Practices
@@ -338,32 +338,32 @@ test('should test complex reactive logic', async () => {
 		currentValue: 'initial',
 		previousValue: null,
 		changeCount: 0,
-	})
+	});
 
 	// Create derived state that mimics component logic
 	let hasChanged = $derived(
 		componentState.currentValue !== componentState.previousValue,
-	)
+	);
 
 	let isValid = $derived(
 		componentState.currentValue.length > 0 &&
 			componentState.changeCount >= 0,
-	)
+	);
 
 	// Test initial state
-	expect(untrack(() => hasChanged)).toBe(true) // null !== 'initial'
-	expect(untrack(() => isValid)).toBe(true)
+	expect(untrack(() => hasChanged)).toBe(true); // null !== 'initial'
+	expect(untrack(() => isValid)).toBe(true);
 
 	// Test state transitions
-	componentState.previousValue = componentState.currentValue
-	componentState.currentValue = 'updated'
-	componentState.changeCount++
-	flushSync() // Still needed for immediate derived state evaluation
+	componentState.previousValue = componentState.currentValue;
+	componentState.currentValue = 'updated';
+	componentState.changeCount++;
+	flushSync(); // Still needed for immediate derived state evaluation
 
-	expect(untrack(() => hasChanged)).toBe(true)
-	expect(untrack(() => isValid)).toBe(true)
-	expect(componentState.changeCount).toBe(1)
-})
+	expect(untrack(() => hasChanged)).toBe(true);
+	expect(untrack(() => isValid)).toBe(true);
+	expect(componentState.changeCount).toBe(1);
+});
 ```
 
 #### 3. Testing Component Variants
@@ -375,16 +375,16 @@ const componentVariants = [
 	{ type: 'warning', expectedClass: 'bg-warning' },
 	{ type: 'success', expectedClass: 'bg-success' },
 	{ type: 'error', expectedClass: 'bg-error' },
-]
+];
 
 componentVariants.forEach(({ type, expectedClass }) => {
 	test(`should render ${type} variant correctly`, async () => {
-		render(Component, { props: { type } })
+		render(Component, { props: { type } });
 
-		const element = page.getByRole('alert')
-		await expect.element(element).toHaveClass(expectedClass)
-	})
-})
+		const element = page.getByRole('alert');
+		await expect.element(element).toHaveClass(expectedClass);
+	});
+});
 ```
 
 #### 4. Testing HTML Content Safely
@@ -397,16 +397,16 @@ test('should render HTML content correctly', async () => {
 			message:
 				'Text with <strong>bold</strong> and <a href="#">link</a>',
 		},
-	})
+	});
 
 	// Test semantic elements rather than exact HTML structure
-	const strongElement = page.getByText('bold')
-	const linkElement = page.getByRole('link')
+	const strongElement = page.getByText('bold');
+	const linkElement = page.getByRole('link');
 
-	await expect.element(strongElement).toBeInTheDocument()
-	await expect.element(linkElement).toBeInTheDocument()
-	await expect.element(linkElement).toHaveAttribute('href', '#')
-})
+	await expect.element(strongElement).toBeInTheDocument();
+	await expect.element(linkElement).toBeInTheDocument();
+	await expect.element(linkElement).toHaveAttribute('href', '#');
+});
 ```
 
 ### Using Locators vs Container Queries
@@ -430,18 +430,18 @@ the assertion."
 
 ```typescript
 // Semantic queries (preferred)
-page.getByRole('button') // Find by ARIA role
-page.getByRole('button', { name: 'Submit' }) // Find by role and accessible name
-page.getByLabel('Email address') // Find by associated label
-page.getByPlaceholder('Enter your email') // Find by placeholder text
-page.getByText('Welcome') // Find by text content
+page.getByRole('button'); // Find by ARIA role
+page.getByRole('button', { name: 'Submit' }); // Find by role and accessible name
+page.getByLabel('Email address'); // Find by associated label
+page.getByPlaceholder('Enter your email'); // Find by placeholder text
+page.getByText('Welcome'); // Find by text content
 
 // Test ID queries (when semantic queries aren't possible)
-page.getByTestId('submit-button') // Find by data-testid attribute
+page.getByTestId('submit-button'); // Find by data-testid attribute
 
 // Other useful queries
-page.getByTitle('Close dialog') // Find by title attribute
-page.getByAltText('Profile picture') // Find by alt text (images)
+page.getByTitle('Close dialog'); // Find by title attribute
+page.getByAltText('Profile picture'); // Find by alt text (images)
 ```
 
 #### Locator Best Practices
@@ -462,17 +462,17 @@ page.getByAltText('Profile picture') // Find by alt text (images)
 ```typescript
 // ❌ Old approach (container queries)
 test('finds button', () => {
-	const { container } = render(MyComponent)
-	const button = container.querySelector('[data-testid="submit"]')
-	expect(button?.textContent).toBe('Submit')
-})
+	const { container } = render(MyComponent);
+	const button = container.querySelector('[data-testid="submit"]');
+	expect(button?.textContent).toBe('Submit');
+});
 
 // ✅ New approach (locators)
 test('finds button', async () => {
-	render(MyComponent)
-	const button = page.getByTestId('submit')
-	await expect.element(button).toHaveTextContent('Submit')
-})
+	render(MyComponent);
+	const button = page.getByTestId('submit');
+	await expect.element(button).toHaveTextContent('Submit');
+});
 ```
 
 #### When to Use Container Queries
@@ -486,11 +486,11 @@ While locators are preferred, container queries are still useful for:
 
 ```typescript
 test('maintains proper DOM structure', () => {
-	const { container } = render(MyComponent)
-	const wrapper = container.firstElementChild
-	expect(wrapper?.tagName).toBe('DIV')
-	expect(wrapper?.children.length).toBe(2)
-})
+	const { container } = render(MyComponent);
+	const wrapper = container.firstElementChild;
+	expect(wrapper?.tagName).toBe('DIV');
+	expect(wrapper?.children.length).toBe(2);
+});
 ```
 
 #### When `flushSync()` Is Still Needed
@@ -508,29 +508,29 @@ may still need it when:
 ```typescript
 // ✅ Still need flushSync for testing derived state directly
 test('derived state logic', async () => {
-	let scrollState = $state({ current: 0, previous: 0 })
+	let scrollState = $state({ current: 0, previous: 0 });
 	let shouldShow = $derived(
 		scrollState.current > scrollState.previous,
-	)
+	);
 
-	expect(untrack(() => shouldShow)).toBe(false)
+	expect(untrack(() => shouldShow)).toBe(false);
 
-	scrollState.current = 100
-	flushSync() // Needed for immediate derived state evaluation
+	scrollState.current = 100;
+	flushSync(); // Needed for immediate derived state evaluation
 
-	expect(untrack(() => shouldShow)).toBe(true)
-})
+	expect(untrack(() => shouldShow)).toBe(true);
+});
 
 // ✅ No flushSync needed when testing DOM updates with locators
 test('component updates DOM', async () => {
-	render(MyComponent)
-	const button = page.getByRole('button')
+	render(MyComponent);
+	const button = page.getByRole('button');
 
-	await button.click()
+	await button.click();
 	// Locators automatically wait for DOM updates
 
-	await expect.element(page.getByText('Updated')).toBeInTheDocument()
-})
+	await expect.element(page.getByText('Updated')).toBeInTheDocument();
+});
 ```
 
 ### Testing Server-Side Rendering (SSR)
@@ -540,29 +540,29 @@ Svelte's built-in `render` function from `svelte/server`:
 
 ```typescript
 // Component.ssr.test.ts
-import { describe, expect, test } from 'vitest'
-import { render } from 'svelte/server'
-import MyComponent from './MyComponent.svelte'
+import { describe, expect, test } from 'vitest';
+import { render } from 'svelte/server';
+import MyComponent from './MyComponent.svelte';
 
 describe('MyComponent SSR', () => {
 	test('renders correctly on server', () => {
 		const { body } = render(MyComponent, {
 			props: { name: 'World' },
-		})
+		});
 
-		expect(body).toContain('Hello, World!')
-	})
+		expect(body).toContain('Hello, World!');
+	});
 
 	test('generates proper HTML structure', () => {
 		const { body, head, css } = render(MyComponent, {
 			props: { title: 'Test Page' },
-		})
+		});
 
-		expect(body).toContain('<h1>Test Page</h1>')
-		expect(head).toContain('<title>Test Page</title>')
-		expect(css.code).toContain('.my-component')
-	})
-})
+		expect(body).toContain('<h1>Test Page</h1>');
+		expect(head).toContain('<title>Test Page</title>');
+		expect(css.code).toContain('.my-component');
+	});
+});
 ```
 
 **Key differences from client-side testing:**
@@ -579,38 +579,38 @@ describe('MyComponent SSR', () => {
 ```typescript
 // doubler.svelte.ts
 export class Doubler {
-	#getNumber
-	#double = $derived(this.#getNumber() * 2)
+	#getNumber;
+	#double = $derived(this.#getNumber() * 2);
 
 	constructor(getNumber: () => number) {
-		this.#getNumber = getNumber
+		this.#getNumber = getNumber;
 	}
 
 	get value() {
-		return this.#double
+		return this.#double;
 	}
 }
 
 // doubler.svelte.test.ts
-import { describe, expect, it } from 'vitest'
-import { Doubler } from './doubler.svelte.ts'
+import { describe, expect, it } from 'vitest';
+import { Doubler } from './doubler.svelte.ts';
 
 describe('doubler.svelte.ts', () => {
 	it('should double initial value', () => {
-		let value = $state(1)
-		let doubler = new Doubler(() => value)
-		expect(doubler.value).toBe(2)
-	})
+		let value = $state(1);
+		let doubler = new Doubler(() => value);
+		expect(doubler.value).toBe(2);
+	});
 
 	it('should be reactive', () => {
-		let value = $state(0)
-		let doubler = new Doubler(() => value)
-		expect(doubler.value).toBe(0)
+		let value = $state(0);
+		let doubler = new Doubler(() => value);
+		expect(doubler.value).toBe(0);
 
-		value = 2
-		expect(doubler.value).toBe(4)
-	})
-})
+		value = 2;
+		expect(doubler.value).toBe(4);
+	});
+});
 ```
 
 ## Testing Server-Side Rendering (SSR)
@@ -628,19 +628,19 @@ SSR tests use the `.ssr.test.ts` extension:
 ### Basic SSR Test Structure
 
 ```typescript
-import { describe, expect, test } from 'vitest'
-import { render } from 'svelte/server'
-import MyComponent from './MyComponent.svelte'
+import { describe, expect, test } from 'vitest';
+import { render } from 'svelte/server';
+import MyComponent from './MyComponent.svelte';
 
 describe('MyComponent SSR', () => {
 	test('renders with props', () => {
 		const { body } = render(MyComponent, {
 			props: { name: 'World' },
-		})
+		});
 
-		expect(body).toContain('Hello, World!')
-	})
-})
+		expect(body).toContain('Hello, World!');
+	});
+});
 ```
 
 ### Testing HTML Output
@@ -653,13 +653,13 @@ test('generates correct HTML structure', () => {
 			price: 29.99,
 			inStock: true,
 		},
-	})
+	});
 
-	expect(body).toContain('<h2>Test Product</h2>')
-	expect(body).toContain('$29.99')
-	expect(body).toContain('In Stock')
-	expect(body).not.toContain('Out of Stock')
-})
+	expect(body).toContain('<h2>Test Product</h2>');
+	expect(body).toContain('$29.99');
+	expect(body).toContain('In Stock');
+	expect(body).not.toContain('Out of Stock');
+});
 ```
 
 ### Testing Head Content
@@ -671,13 +671,13 @@ test('generates proper head content', () => {
 			title: 'My Page Title',
 			description: 'Page description',
 		},
-	})
+	});
 
-	expect(head).toContain('<title>My Page Title</title>')
+	expect(head).toContain('<title>My Page Title</title>');
 	expect(head).toContain(
 		'<meta name="description" content="Page description">',
-	)
-})
+	);
+});
 ```
 
 ### Testing CSS Generation
@@ -686,11 +686,11 @@ test('generates proper head content', () => {
 test('generates component styles', () => {
 	const { css } = render(StyledComponent, {
 		props: { theme: 'dark' },
-	})
+	});
 
-	expect(css.code).toContain('.component')
-	expect(css.code).toContain('background-color')
-})
+	expect(css.code).toContain('.component');
+	expect(css.code).toContain('background-color');
+});
 ```
 
 ### Testing Conditional Rendering
@@ -700,19 +700,19 @@ test('conditionally renders content based on props', () => {
 	// Test when user is logged in
 	const { body: loggedInBody } = render(UserProfile, {
 		props: { user: { name: 'John', isLoggedIn: true } },
-	})
+	});
 
-	expect(loggedInBody).toContain('Welcome, John!')
-	expect(loggedInBody).not.toContain('Please log in')
+	expect(loggedInBody).toContain('Welcome, John!');
+	expect(loggedInBody).not.toContain('Please log in');
 
 	// Test when user is not logged in
 	const { body: loggedOutBody } = render(UserProfile, {
 		props: { user: { isLoggedIn: false } },
-	})
+	});
 
-	expect(loggedOutBody).toContain('Please log in')
-	expect(loggedOutBody).not.toContain('Welcome')
-})
+	expect(loggedOutBody).toContain('Please log in');
+	expect(loggedOutBody).not.toContain('Welcome');
+});
 ```
 
 ### Testing with Context
@@ -722,16 +722,16 @@ test('renders with context', () => {
 	const context = new Map([
 		['theme', 'dark'],
 		['user', { id: 1, name: 'Alice' }],
-	])
+	]);
 
 	const { body } = render(ContextAwareComponent, {
 		props: {},
 		context,
-	})
+	});
 
-	expect(body).toContain('dark-theme')
-	expect(body).toContain('Hello, Alice')
-})
+	expect(body).toContain('dark-theme');
+	expect(body).toContain('Hello, Alice');
+});
 ```
 
 ### SSR vs Client-Side Testing
@@ -775,37 +775,37 @@ Server-side tests use the `.test.ts` extension:
 ### Basic Server Test Structure
 
 ```typescript
-import { describe, expect, test } from 'vitest'
-import { myUtilFunction } from './utils'
+import { describe, expect, test } from 'vitest';
+import { myUtilFunction } from './utils';
 
 describe('myUtilFunction', () => {
 	test('returns expected result', () => {
-		const result = myUtilFunction('input')
-		expect(result).toBe('expected output')
-	})
-})
+		const result = myUtilFunction('input');
+		expect(result).toBe('expected output');
+	});
+});
 ```
 
 ### Testing with Mocks
 
 ```typescript
-import { describe, expect, test, vi } from 'vitest'
-import { formatDistanceStrict } from 'date-fns'
+import { describe, expect, test, vi } from 'vitest';
+import { formatDistanceStrict } from 'date-fns';
 
 // Mock external dependencies
 vi.mock('date-fns', () => ({
 	formatDistanceStrict: vi.fn(),
-}))
+}));
 
 test('formats date correctly', () => {
-	const mockDate = '2023-01-01'
-	const mockResult = '2 months ago'
+	const mockDate = '2023-01-01';
+	const mockResult = '2 months ago';
 
-	vi.mocked(formatDistanceStrict).mockReturnValue(mockResult)
+	vi.mocked(formatDistanceStrict).mockReturnValue(mockResult);
 
-	const result = formatDate(mockDate)
-	expect(result).toBe(mockResult)
-})
+	const result = formatDate(mockDate);
+	expect(result).toBe(mockResult);
+});
 ```
 
 ### Testing Window/Browser APIs in Node Environment
@@ -818,11 +818,11 @@ test('handles window.scrollY', () => {
 	Object.defineProperty(window, 'scrollY', {
 		value: 100,
 		writable: true,
-	})
+	});
 
-	const result = checkScrollPosition()
-	expect(result).toBe(true)
-})
+	const result = checkScrollPosition();
+	expect(result).toBe(true);
+});
 ```
 
 ## Testing Utilities
@@ -838,22 +838,22 @@ function renderWithDefaults(Component: any, props = {}) {
 			theme: 'light',
 			...props,
 		},
-	})
+	});
 }
 
 // Test helper for waiting for async operations
 async function waitForElement(container: Element, selector: string) {
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		const observer = new MutationObserver(() => {
-			const element = container.querySelector(selector)
+			const element = container.querySelector(selector);
 			if (element) {
-				observer.disconnect()
-				resolve(element)
+				observer.disconnect();
+				resolve(element);
 			}
-		})
+		});
 
-		observer.observe(container, { childList: true, subtree: true })
-	})
+		observer.observe(container, { childList: true, subtree: true });
+	});
 }
 ```
 
@@ -866,7 +866,7 @@ async function waitForElement(container: Element, selector: string) {
 <script>
 	const button = container.querySelector(
 		'[data-testid="submit-button"]',
-	)
+	);
 </script>
 
 <!-- Component.svelte -->
@@ -878,29 +878,29 @@ async function waitForElement(container: Element, selector: string) {
 ```typescript
 // ❌ Testing implementation details
 test('calls internal method', () => {
-	const component = render(MyComponent)
-	expect(component.internalMethod).toHaveBeenCalled()
-})
+	const component = render(MyComponent);
+	expect(component.internalMethod).toHaveBeenCalled();
+});
 
 // ✅ Testing user behavior
 test('shows success message after form submission', async () => {
-	const { container } = render(ContactForm)
+	const { container } = render(ContactForm);
 
-	await container.querySelector('[data-testid="submit"]').click()
+	await container.querySelector('[data-testid="submit"]').click();
 
-	expect(container.textContent?.includes('Success!')).toBe(true)
-})
+	expect(container.textContent?.includes('Success!')).toBe(true);
+});
 ```
 
 ### 3. Use Descriptive Test Names
 
 ```typescript
 // ❌ Vague test names
-test('button works', () => {})
+test('button works', () => {});
 
 // ✅ Descriptive test names
-test('shows loading state when form is submitting', () => {})
-test('displays error message when email is invalid', () => {})
+test('shows loading state when form is submitting', () => {});
+test('displays error message when email is invalid', () => {});
 ```
 
 ### 4. Group Related Tests
@@ -908,26 +908,26 @@ test('displays error message when email is invalid', () => {})
 ```typescript
 describe('ContactForm', () => {
 	describe('validation', () => {
-		test('shows error for invalid email', () => {})
-		test('shows error for empty required fields', () => {})
-	})
+		test('shows error for invalid email', () => {});
+		test('shows error for empty required fields', () => {});
+	});
 
 	describe('submission', () => {
-		test('shows loading state during submission', () => {})
-		test('shows success message on successful submission', () => {})
-	})
-})
+		test('shows loading state during submission', () => {});
+		test('shows success message on successful submission', () => {});
+	});
+});
 ```
 
 ### 5. Clean Up After Tests
 
 ```typescript
-import { afterEach, vi } from 'vitest'
+import { afterEach, vi } from 'vitest';
 
 afterEach(() => {
-	vi.resetAllMocks()
+	vi.resetAllMocks();
 	// Reset any global state
-})
+});
 ```
 
 ### 6. Use `untrack` for Derived Values in Tests
@@ -936,20 +936,20 @@ When testing `$derived` runes, always use `untrack` to avoid warnings
 and ensure you're testing the current value:
 
 ```typescript
-import { untrack } from 'svelte'
+import { untrack } from 'svelte';
 
 // ✅ Proper way to test derived values
 test('derived state updates correctly', () => {
-	let count = $state(0)
-	let doubled = $derived(count * 2)
+	let count = $state(0);
+	let doubled = $derived(count * 2);
 
-	expect(untrack(() => doubled)).toBe(0)
+	expect(untrack(() => doubled)).toBe(0);
 
-	count = 5
-	flushSync()
+	count = 5;
+	flushSync();
 
-	expect(untrack(() => doubled)).toBe(10)
-})
+	expect(untrack(() => doubled)).toBe(10);
+});
 ```
 
 ### 7. Avoid Over-Mocking in Browser Environment
@@ -964,13 +964,13 @@ beforeEach(() => {
 		observe: vi.fn(),
 		unobserve: vi.fn(),
 		disconnect: vi.fn(),
-	}))
-})
+	}));
+});
 
 // ✅ Let real browser APIs work
 beforeEach(() => {
 	// No mocking needed - real browser environment
-})
+});
 ```
 
 **When to mock**:
@@ -995,25 +995,25 @@ the need for manual synchronization in most cases.
 ```typescript
 // ❌ Old pattern with manual synchronization
 test('updates after click', async () => {
-	render(MyComponent)
-	const button = page.getByRole('button')
+	render(MyComponent);
+	const button = page.getByRole('button');
 
-	await button.click()
-	flushSync() // Usually not needed!
+	await button.click();
+	flushSync(); // Usually not needed!
 
-	await expect.element(page.getByText('Updated')).toBeInTheDocument()
-})
+	await expect.element(page.getByText('Updated')).toBeInTheDocument();
+});
 
 // ✅ New pattern - let locators handle waiting
 test('updates after click', async () => {
-	render(MyComponent)
-	const button = page.getByRole('button')
+	render(MyComponent);
+	const button = page.getByRole('button');
 
-	await button.click()
+	await button.click();
 	// Locators automatically wait for DOM updates
 
-	await expect.element(page.getByText('Updated')).toBeInTheDocument()
-})
+	await expect.element(page.getByText('Updated')).toBeInTheDocument();
+});
 ```
 
 **When you still need `flushSync()`**:
@@ -1028,19 +1028,19 @@ test('updates after click', async () => {
 
 ```typescript
 test('validates form input', async () => {
-	render(ContactForm)
+	render(ContactForm);
 
-	const emailInput = page.getByLabel('Email address')
-	const submitButton = page.getByRole('button', { name: 'Submit' })
+	const emailInput = page.getByLabel('Email address');
+	const submitButton = page.getByRole('button', { name: 'Submit' });
 
 	// Test invalid email
-	await emailInput.fill('invalid-email')
-	await submitButton.click()
-	flushSync()
+	await emailInput.fill('invalid-email');
+	await submitButton.click();
+	flushSync();
 
-	const errorMessage = page.getByText('Invalid email')
-	await expect.element(errorMessage).toBeInTheDocument()
-})
+	const errorMessage = page.getByText('Invalid email');
+	await expect.element(errorMessage).toBeInTheDocument();
+});
 ```
 
 ### Testing Conditional Rendering
@@ -1049,35 +1049,35 @@ test('validates form input', async () => {
 test('shows content when condition is met', async () => {
 	render(ConditionalComponent, {
 		props: { showContent: true },
-	})
+	});
 
-	const content = page.getByTestId('content')
-	await expect.element(content).toBeInTheDocument()
-})
+	const content = page.getByTestId('content');
+	await expect.element(content).toBeInTheDocument();
+});
 
 test('hides content when condition is not met', async () => {
 	render(ConditionalComponent, {
 		props: { showContent: false },
-	})
+	});
 
-	const content = page.getByTestId('content')
-	await expect.element(content).not.toBeInTheDocument()
-})
+	const content = page.getByTestId('content');
+	await expect.element(content).not.toBeInTheDocument();
+});
 ```
 
 ### Testing Async Operations
 
 ```typescript
 test('loads data asynchronously', async () => {
-	const { container } = render(AsyncComponent)
+	const { container } = render(AsyncComponent);
 
 	// Wait for loading to complete
 	await vi.waitFor(() => {
-		expect(container.textContent?.includes('Loading...')).toBe(false)
-	})
+		expect(container.textContent?.includes('Loading...')).toBe(false);
+	});
 
-	expect(container.textContent?.includes('Data loaded')).toBe(true)
-})
+	expect(container.textContent?.includes('Data loaded')).toBe(true);
+});
 ```
 
 ## CI/CD Integration
@@ -1220,7 +1220,7 @@ vi.mock('IntersectionObserver', () => ({
 	observe: vi.fn(),
 	unobserve: vi.fn(),
 	disconnect: vi.fn(),
-}))
+}));
 
 // ✅ Let real browser APIs work
 // No mocking needed - IntersectionObserver works natively in Playwright
@@ -1237,13 +1237,13 @@ and provides more accurate test results.
 
 ```typescript
 // ❌ Don't use global in browser tests
-global.window.scrollY = 100
+global.window.scrollY = 100;
 
 // ✅ Use window directly or Object.defineProperty
 Object.defineProperty(window, 'scrollY', {
 	value: 100,
 	writable: true,
-})
+});
 ```
 
 #### 2. Tests Not Finding Elements
@@ -1255,13 +1255,15 @@ automatically retry:
 
 ```typescript
 // ❌ Old approach - manual DOM queries need flushSync
-button.click()
-flushSync() // Ensure DOM updates are applied
-expect(container.querySelector('[data-testid="result"]')).toBeTruthy()
+button.click();
+flushSync(); // Ensure DOM updates are applied
+expect(
+	container.querySelector('[data-testid="result"]'),
+).toBeTruthy();
 
 // ✅ New approach - locators automatically wait
-await button.click()
-await expect.element(page.getByTestId('result')).toBeInTheDocument()
+await button.click();
+await expect.element(page.getByTestId('result')).toBeInTheDocument();
 ```
 
 #### 3. Async Test Issues
@@ -1272,8 +1274,8 @@ await expect.element(page.getByTestId('result')).toBeInTheDocument()
 
 ```typescript
 await vi.waitFor(() => {
-	expect(container.textContent?.includes('Expected text')).toBe(true)
-})
+	expect(container.textContent?.includes('Expected text')).toBe(true);
+});
 ```
 
 #### 4. Mock Not Working
@@ -1284,14 +1286,14 @@ await vi.waitFor(() => {
 
 ```typescript
 // ❌ Mock after import
-import { myFunction } from './module'
-vi.mock('./module')
+import { myFunction } from './module';
+vi.mock('./module');
 
 // ✅ Mock before import
 vi.mock('./module', () => ({
 	myFunction: vi.fn(),
-}))
-import { myFunction } from './module'
+}));
+import { myFunction } from './module';
 ```
 
 #### 5. Svelte 5 Rune Warnings in Tests
@@ -1302,13 +1304,13 @@ import { myFunction } from './module'
 **Solution**: Use `untrack` to access derived values:
 
 ```typescript
-import { untrack } from 'svelte'
+import { untrack } from 'svelte';
 
 // ❌ Direct access causes warnings
-expect(derivedValue).toBe(expectedValue)
+expect(derivedValue).toBe(expectedValue);
 
 // ✅ Use untrack to avoid warnings
-expect(untrack(() => derivedValue)).toBe(expectedValue)
+expect(untrack(() => derivedValue)).toBe(expectedValue);
 ```
 
 **Why this happens**: `$derived` values accessed outside of Svelte's
@@ -1326,20 +1328,20 @@ element:
 
 ```typescript
 // ❌ Matches multiple elements
-const element = page.getByText(/common-word/)
+const element = page.getByText(/common-word/);
 
 // ✅ Specify which element you want
-const element = page.getByText(/common-word/).first()
-const element = page.getByText(/common-word/).last()
-const element = page.getByText(/common-word/).nth(1)
+const element = page.getByText(/common-word/).first();
+const element = page.getByText(/common-word/).last();
+const element = page.getByText(/common-word/).nth(1);
 ```
 
 **Alternative**: Use more specific locators:
 
 ```typescript
 // ✅ More specific selector
-const element = page.getByTestId('specific-element')
-const element = page.getByRole('button', { name: 'Specific Button' })
+const element = page.getByTestId('specific-element');
+const element = page.getByRole('button', { name: 'Specific Button' });
 ```
 
 #### 7. Locator Chaining Not Supported
@@ -1351,18 +1353,18 @@ locators causes TypeScript errors.
 
 ```typescript
 // ❌ Chaining locators (not supported in vitest-browser-svelte)
-const banner = page.getByRole('banner')
-const link = banner.locator('a') // Error: Property 'locator' does not exist
+const banner = page.getByRole('banner');
+const link = banner.locator('a'); // Error: Property 'locator' does not exist
 
 // ✅ Use semantic queries from page object
-const banner = page.getByRole('banner')
-const link = page.getByRole('link') // Find link anywhere on page
+const banner = page.getByRole('banner');
+const link = page.getByRole('link'); // Find link anywhere on page
 
 // ✅ Use more specific selectors
-const link = page.getByRole('link', { name: 'specific link text' })
+const link = page.getByRole('link', { name: 'specific link text' });
 
 // ✅ Use test IDs for complex nested structures
-const link = page.getByTestId('banner-link')
+const link = page.getByTestId('banner-link');
 ```
 
 **Why this happens**: The vitest-browser-svelte API doesn't support
@@ -1385,18 +1387,18 @@ locators causes TypeScript errors.
 
 ```typescript
 // ❌ Chaining locators (not supported in vitest-browser-svelte)
-const banner = page.getByRole('banner')
-const link = banner.locator('a') // Error: Property 'locator' does not exist
+const banner = page.getByRole('banner');
+const link = banner.locator('a'); // Error: Property 'locator' does not exist
 
 // ✅ Use semantic queries from page object
-const banner = page.getByRole('banner')
-const link = page.getByRole('link') // Find link anywhere on page
+const banner = page.getByRole('banner');
+const link = page.getByRole('link'); // Find link anywhere on page
 
 // ✅ Use more specific selectors
-const link = page.getByRole('link', { name: 'specific link text' })
+const link = page.getByRole('link', { name: 'specific link text' });
 
 // ✅ Use test IDs for complex nested structures
-const link = page.getByTestId('banner-link')
+const link = page.getByTestId('banner-link');
 ```
 
 **Why this happens**: The vitest-browser-svelte API doesn't support
@@ -1424,41 +1426,41 @@ test('should test banner type state transitions', async () => {
 		currentType: 'info' as BannerOptions['type'],
 		previousType: null as BannerOptions['type'] | null,
 		changeCount: 0,
-	})
+	});
 
 	// Derived state for tracking changes
 	let hasTypeChanged = $derived(
 		bannerState.currentType !== bannerState.previousType,
-	)
+	);
 
 	// Test initial state
-	expect(untrack(() => hasTypeChanged)).toBe(true)
+	expect(untrack(() => hasTypeChanged)).toBe(true);
 
 	// Simulate state change
-	bannerState.previousType = bannerState.currentType
-	bannerState.currentType = 'warning'
-	bannerState.changeCount++
-	flushSync()
+	bannerState.previousType = bannerState.currentType;
+	bannerState.currentType = 'warning';
+	bannerState.changeCount++;
+	flushSync();
 
-	expect(untrack(() => hasTypeChanged)).toBe(true)
-})
+	expect(untrack(() => hasTypeChanged)).toBe(true);
+});
 
 // ✅ Test derived state that doesn't update properly
 test('should re-derive classes after state change', async () => {
-	let styleState = $state({ bannerType: 'info' })
-	let currentColors = $derived(COLORS[styleState.bannerType])
+	let styleState = $state({ bannerType: 'info' });
+	let currentColors = $derived(COLORS[styleState.bannerType]);
 
 	// Test type changes - create new derived after state change
-	styleState.bannerType = 'warning'
-	flushSync()
+	styleState.bannerType = 'warning';
+	flushSync();
 
 	// Re-derive the classes after state change for testing
 	let updatedClasses = $derived(
 		`${untrack(() => currentColors).bg} ${untrack(() => currentColors).text}`,
-	)
+	);
 
-	expect(untrack(() => updatedClasses)).toContain('bg-warning')
-})
+	expect(untrack(() => updatedClasses)).toContain('bg-warning');
+});
 ```
 
 **Key insights**:
