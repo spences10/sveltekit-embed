@@ -794,8 +794,8 @@ Output:
 - `modestBranding`: Use minimal YouTube branding (default: false)
 - `rel`: Show related videos at the end (default: false)
 - `aspectRatio`: Set the aspect ratio (default: '16:9')
-- `skipTo`: Start at specific timestamp (default: { h: 0, m: 0, s: 0
-  })
+- `skipTo`: Start at specific timestamp (default:
+  `{ h: 0, m: 0, s: 0 }`)
 - `disable_observer`: Disable lazy loading (default: false)
 - `iframe_styles`: Custom CSS styles for the iframe
 

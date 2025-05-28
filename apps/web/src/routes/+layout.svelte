@@ -9,7 +9,7 @@
 	import spencee_img from '$lib/images/spencee.png';
 	import * as Fathom from 'fathom-client';
 	import { onMount } from 'svelte';
-	import '../app.pcss';
+	import '../app.css';
 	import '../prism.css';
 
 	export let data;

@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let width: string = '25'
-	export let height: string = '25'
-	export let fill: string = 'fill-current'
+	export let width: string = '25';
+	export let height: string = '25';
+	export let fill: string = 'fill-current';
 
-	let svgClass: string = `${fill} text-primary-content transition hover:text-secondary-focus`
+	let svgClass: string = `${fill} text-primary-content transition hover:text-secondary-focus`;
 </script>
 
 <svg
