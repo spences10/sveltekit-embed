@@ -58,7 +58,7 @@ importers:
         version: 5.2.8(svelte@5.33.4)(vite@6.3.5(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0))(vitest@3.1.4)
       daisyui:
         specifier: ^5.0.38
-        version: 5.0.38
+        version: 5.0.54
       eslint:
         specifier: ^9.27.0
         version: 9.27.0(jiti@2.4.2)
@@ -1455,8 +1455,8 @@ packages:
     resolution: {integrity: sha512-ZgW+Jgdd7i52AaLYCriF8Mxqft0gD/R9i9wi6RWBhs1pqdPEzPjym7rvRKi397WmQFf3SlyUsszhw+VVCbx79Q==}
     engines: {node: '>=18'}
 
-  daisyui@5.0.38:
-    resolution: {integrity: sha512-RsLsdePT/4ZU0N+vWivR/zJyAL9U9EeRtbis3K3VDvewrqY0NOFYBh6ib3n9GfN3Wb+FHwP80ae1qOA6ONWvyw==}
+  daisyui@5.0.54:
+    resolution: {integrity: sha512-03iuq06+lLq/VczY/+YpADgLXVC1HYO63PNiH6A9hn/+f6IkVoONVc+Jh08xizkLQQCVVMMUBp+KeIdcWSBLcg==}
 
   data-urls@5.0.0:
     resolution: {integrity: sha512-ZYP5VBHshaDAiVZxjbRVcFJpc+4xGgT0bK3vzy1HLN8jTO975HEbuYzZJcHoQEY5K1a0z8YayJkyVETa08eNTg==}
@@ -4205,7 +4205,7 @@ snapshots:
       '@asamuzakjp/css-color': 3.2.0
       rrweb-cssom: 0.8.0
 
-  daisyui@5.0.38: {}
+  daisyui@5.0.54: {}
 
   data-urls@5.0.0:
     dependencies:
