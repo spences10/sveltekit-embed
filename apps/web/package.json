@@ -16,12 +16,12 @@
 		"build:packages": "pnpm -r --filter=\"../../packages/*\" run build"
 	},
 	"devDependencies": {
-		"@eslint/compat": "^1.2.9",
+		"@eslint/compat": "^2.0.0",
 		"@eslint/js": "^9.39.1",
 		"@playwright/test": "^1.57.0",
-		"@sveltejs/adapter-auto": "^6.0.1",
+		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/kit": "^2.49.1",
-		"@sveltejs/vite-plugin-svelte": "^5.0.3",
+		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.17",
 		"@testing-library/jest-dom": "^6.9.1",
@@ -45,8 +45,8 @@
 		"tailwindcss": "^4.1.17",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.48.1",
-		"vite": "^6.3.5",
-		"vitest": "^3.1.4"
+		"vite": "^7.2.6",
+		"vitest": "^4.0.15"
 	},
 	"type": "module"
 }
