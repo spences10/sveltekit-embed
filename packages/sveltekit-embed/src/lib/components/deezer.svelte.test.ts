@@ -69,12 +69,12 @@ describe('Deezer', () => {
 
 		it('should handle special characters in frameSrc', async () => {
 			const specialFrameSrc = 'track/123-test_track';
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme,
 				frameSrc: specialFrameSrc,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.src).toContain(specialFrameSrc);
@@ -82,12 +82,12 @@ describe('Deezer', () => {
 
 		it('should handle very long frameSrc values', async () => {
 			const longFrameSrc = 'track/' + 'a'.repeat(1000);
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme,
 				frameSrc: longFrameSrc,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.src).toContain(longFrameSrc);
@@ -96,23 +96,23 @@ describe('Deezer', () => {
 
 	describe('Default Props', () => {
 		it('should apply default theme when not provided', async () => {
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				frameSrc,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.src).toContain('widget/auto/');
 		});
 
 		it('should apply default border-radius styling', async () => {
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme,
 				frameSrc,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.style.borderRadius).toBe('0.6rem');

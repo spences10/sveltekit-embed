@@ -1,11 +1,12 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { playwright } from '@vitest/browser/playwright';
 import { defineConfig } from 'vite';
 import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
-		workspace: [
+		projects: [
 			{
 				extends: './vite.config.ts',
 				test: {
@@ -13,7 +14,7 @@ export default defineConfig({
 					environment: 'browser',
 					browser: {
 						enabled: true,
-						provider: 'playwright',
+						provider: playwright(),
 						instances: [
 							{
 								browser: 'chromium',
@@ -37,7 +38,7 @@ export default defineConfig({
 			},
 		],
 		coverage: {
-			all: true,
+			include: ['src/**/*.{ts,svelte}'],
 			reporter: ['text-summary', 'html'],
 			exclude: [
 				...coverageConfigDefaults.exclude,
