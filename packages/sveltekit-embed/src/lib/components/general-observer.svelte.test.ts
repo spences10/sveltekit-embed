@@ -7,7 +7,7 @@ import {
 	vi,
 } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 
 import GeneralObserver from './general-observer.svelte';
 

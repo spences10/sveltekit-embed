@@ -1,5 +1,5 @@
 import AnchorFm from '$lib/components/anchor-fm.svelte';
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 

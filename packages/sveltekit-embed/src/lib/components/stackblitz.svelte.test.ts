@@ -1,7 +1,7 @@
 import StackBlitz from '$lib/components/stackblitz.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 
 describe('StackBlitz', () => {
 	it('mounts with default props', async () => {
