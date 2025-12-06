@@ -12,16 +12,36 @@ import { page } from 'vitest/browser';
 import GeneralObserver from './general-observer.svelte';
 
 // Mock IntersectionObserver
-const mockIntersectionObserver = vi.fn();
 const mockObserve = vi.fn();
 const mockDisconnect = vi.fn();
+let lastObserverInstance: MockIntersectionObserver | null = null;
+let lastObserverCallback: IntersectionObserverCallback | null = null;
+let lastObserverOptions: IntersectionObserverInit | undefined =
+	undefined;
+
+class MockIntersectionObserver {
+	constructor(
+		public callback: IntersectionObserverCallback,
+		public options?: IntersectionObserverInit,
+	) {
+		lastObserverInstance = this;
+		lastObserverCallback = callback;
+		lastObserverOptions = options;
+	}
+	observe = mockObserve;
+	disconnect = mockDisconnect;
+	unobserve = vi.fn();
+	takeRecords = vi.fn(() => []);
+	root = null;
+	rootMargin = '0px';
+	thresholds = [0];
+}
 
 beforeEach(() => {
-	mockIntersectionObserver.mockReturnValue({
-		observe: mockObserve,
-		disconnect: mockDisconnect,
-	});
-	vi.stubGlobal('IntersectionObserver', mockIntersectionObserver);
+	lastObserverInstance = null;
+	lastObserverCallback = null;
+	lastObserverOptions = undefined;
+	vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
 });
 
 afterEach(() => {
@@ -69,13 +89,11 @@ describe('General Observer', () => {
 				children: (() => 'Test content') as any,
 			});
 
-			expect(mockIntersectionObserver).toHaveBeenCalledWith(
-				expect.any(Function),
-				{
-					rootMargin: '0px',
-					threshold: 0.5,
-				},
-			);
+			expect(lastObserverCallback).toBeTypeOf('function');
+			expect(lastObserverOptions).toEqual({
+				rootMargin: '0px',
+				threshold: 0.5,
+			});
 		});
 
 		it('should observe root element when observer is created', async () => {
@@ -97,13 +115,10 @@ describe('General Observer', () => {
 				children: (() => 'Test content') as any,
 			});
 
-			expect(mockIntersectionObserver).toHaveBeenCalledWith(
-				expect.any(Function),
-				{
-					rootMargin: '0px',
-					threshold: customThreshold,
-				},
-			);
+			expect(lastObserverOptions).toEqual({
+				rootMargin: '0px',
+				threshold: customThreshold,
+			});
 		});
 
 		it('should handle threshold edge cases (0, 1)', async () => {
@@ -116,33 +131,16 @@ describe('General Observer', () => {
 					children: (() => 'Test content') as any,
 				});
 
-				expect(mockIntersectionObserver).toHaveBeenCalledWith(
-					expect.any(Function),
-					{
-						rootMargin: '0px',
-						threshold,
-					},
-				);
+				expect(lastObserverOptions).toEqual({
+					rootMargin: '0px',
+					threshold,
+				});
 			}
 		});
 	});
 
 	describe('IntersectionObserver Behavior', () => {
 		it.skip('should render children when intersection threshold is met', async () => {
-			let intersectionCallback:
-				| ((entries: any[]) => void)
-				| undefined;
-
-			mockIntersectionObserver.mockImplementation(
-				(callback, options) => {
-					intersectionCallback = callback;
-					return {
-						observe: mockObserve,
-						disconnect: mockDisconnect,
-					};
-				},
-			);
-
 			const testContent = 'Content to show after intersection';
 			const { container } = render(GeneralObserver, {
 				disable_observer: false,
@@ -153,12 +151,11 @@ describe('General Observer', () => {
 			// Initially, content should not be visible
 			expect(container.textContent).not.toContain(testContent);
 
-			// Simulate intersection
-			intersectionCallback?.([
-				{
-					intersectionRatio: 0.6, // Above threshold
-				},
-			]);
+			// Simulate intersection using captured callback
+			lastObserverCallback?.(
+				[{ intersectionRatio: 0.6 }] as IntersectionObserverEntry[],
+				lastObserverInstance as unknown as IntersectionObserver,
+			);
 
 			// Wait for reactivity
 			await new Promise(resolve => setTimeout(resolve, 10));
@@ -168,31 +165,16 @@ describe('General Observer', () => {
 		});
 
 		it('should disconnect observer after successful intersection', async () => {
-			let intersectionCallback:
-				| ((entries: any[]) => void)
-				| undefined;
-
-			mockIntersectionObserver.mockImplementation(
-				(callback, options) => {
-					intersectionCallback = callback;
-					return {
-						observe: mockObserve,
-						disconnect: mockDisconnect,
-					};
-				},
-			);
-
 			render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});
 
-			// Simulate intersection
-			intersectionCallback?.([
-				{
-					intersectionRatio: 0.6,
-				},
-			]);
+			// Simulate intersection using the captured callback
+			lastObserverCallback?.(
+				[{ intersectionRatio: 0.6 }] as IntersectionObserverEntry[],
+				lastObserverInstance as unknown as IntersectionObserver,
+			);
 
 			expect(mockDisconnect).toHaveBeenCalled();
 		});
@@ -289,13 +271,10 @@ describe('General Observer', () => {
 				children: (() => 'Test content') as any,
 			});
 
-			expect(mockIntersectionObserver).toHaveBeenCalledWith(
-				expect.any(Function),
-				{
-					rootMargin: '0px',
-					threshold: 0.5,
-				},
-			);
+			expect(lastObserverOptions).toEqual({
+				rootMargin: '0px',
+				threshold: 0.5,
+			});
 		});
 	});
 });
