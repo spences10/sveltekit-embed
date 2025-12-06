@@ -5,12 +5,13 @@ import { page } from 'vitest/browser';
 
 describe('Toot', () => {
 	afterEach(() => {
-		// Clean up any mastodon embed scripts before vitest-browser-svelte cleanup
+		// Cleanup component first (which removes its script)
+		cleanup();
+		// Then remove any leftover scripts
 		const scripts = document.head.querySelectorAll(
 			'script[src*="embed.js"]',
 		);
 		scripts.forEach(script => script.remove());
-		cleanup();
 	});
 	it('renders iframe with correct src', async () => {
 		const instance = 'my-instance';
@@ -102,11 +103,6 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		// Mock document.createElement and appendChild
-		const mockScript = document.createElement('script');
-		const createElementSpy = vi
-			.spyOn(document, 'createElement')
-			.mockReturnValue(mockScript);
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
 		render(Toot, {
@@ -115,12 +111,17 @@ describe('Toot', () => {
 			tootId,
 		});
 
-		expect(createElementSpy).toHaveBeenCalledWith('script');
-		expect(mockScript.src).toBe(`https://${instance}/embed.js`);
-		expect(mockScript.async).toBe(true);
-		expect(appendChildSpy).toHaveBeenCalledWith(mockScript);
+		// Verify script was appended
+		const appendedScript = appendChildSpy.mock.calls.find(
+			call =>
+				call[0] instanceof HTMLScriptElement &&
+				(call[0] as HTMLScriptElement).src.includes('embed.js'),
+		)?.[0] as HTMLScriptElement;
 
-		createElementSpy.mockRestore();
+		expect(appendedScript).toBeTruthy();
+		expect(appendedScript.src).toBe(`https://${instance}/embed.js`);
+		expect(appendedScript.async).toBe(true);
+
 		appendChildSpy.mockRestore();
 	});
 

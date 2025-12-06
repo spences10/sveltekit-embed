@@ -180,20 +180,6 @@ describe('General Observer', () => {
 		});
 
 		it.skip('should handle multiple intersection entries correctly', async () => {
-			let intersectionCallback:
-				| ((entries: any[]) => void)
-				| undefined;
-
-			mockIntersectionObserver.mockImplementation(
-				(callback, options) => {
-					intersectionCallback = callback;
-					return {
-						observe: mockObserve,
-						disconnect: mockDisconnect,
-					};
-				},
-			);
-
 			const testContent = 'Multiple entries test';
 			const { container } = render(GeneralObserver, {
 				disable_observer: false,
@@ -202,11 +188,14 @@ describe('General Observer', () => {
 			});
 
 			// Simulate multiple entries where one meets threshold
-			intersectionCallback?.([
-				{ intersectionRatio: 0.3 }, // Below threshold
-				{ intersectionRatio: 0.7 }, // Above threshold
-				{ intersectionRatio: 0.1 }, // Below threshold
-			]);
+			lastObserverCallback?.(
+				[
+					{ intersectionRatio: 0.3 }, // Below threshold
+					{ intersectionRatio: 0.7 }, // Above threshold
+					{ intersectionRatio: 0.1 }, // Below threshold
+				] as IntersectionObserverEntry[],
+				lastObserverInstance as unknown as IntersectionObserver,
+			);
 
 			await new Promise(resolve => setTimeout(resolve, 10));
 
