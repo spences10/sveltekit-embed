@@ -28,7 +28,7 @@ importers:
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.9
-        version: 1.2.9(eslint@9.39.1(jiti@2.6.1))
+        version: 1.4.1(eslint@9.39.1(jiti@2.6.1))
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.1
@@ -124,7 +124,7 @@ importers:
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.9
-        version: 1.2.9(eslint@9.27.0(jiti@2.6.1))
+        version: 1.4.1(eslint@9.27.0(jiti@2.6.1))
       '@eslint/js':
         specifier: ^9.27.0
         version: 9.27.0
@@ -713,11 +713,11 @@ packages:
     resolution: {integrity: sha512-CCZCDJuduB9OUkFkY2IgppNZMi2lBQgD2qzwXkEia16cge2pijY/aXi96CJMquDMn3nJdlPV1A5KrJEXwfLNzQ==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  '@eslint/compat@1.2.9':
-    resolution: {integrity: sha512-gCdSY54n7k+driCadyMNv8JSPzYLeDVM/ikZRtvtROBpRdFSkS8W9A82MqsaY7lZuwL0wiapgD0NT1xT0hyJsA==}
+  '@eslint/compat@1.4.1':
+    resolution: {integrity: sha512-cfO82V9zxxGBxcQDr1lfaYB7wykTa0b00mGa36FrJl7iTFd0Z2cHfEYuxcBRP/iNijCsWsEkA+jzT8hGYmv33w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      eslint: ^9.10.0
+      eslint: ^8.40 || 9
     peerDependenciesMeta:
       eslint:
         optional: true
@@ -3634,11 +3634,15 @@ snapshots:
 
   '@eslint-community/regexpp@4.12.1': {}
 
-  '@eslint/compat@1.2.9(eslint@9.27.0(jiti@2.6.1))':
+  '@eslint/compat@1.4.1(eslint@9.27.0(jiti@2.6.1))':
+    dependencies:
+      '@eslint/core': 0.17.0
     optionalDependencies:
       eslint: 9.27.0(jiti@2.6.1)
 
-  '@eslint/compat@1.2.9(eslint@9.39.1(jiti@2.6.1))':
+  '@eslint/compat@1.4.1(eslint@9.39.1(jiti@2.6.1))':
+    dependencies:
+      '@eslint/core': 0.17.0
     optionalDependencies:
       eslint: 9.39.1(jiti@2.6.1)
 
