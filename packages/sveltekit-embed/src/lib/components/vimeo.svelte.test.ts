@@ -68,7 +68,7 @@ describe('Vimeo', () => {
 	it('should apply default prop values when not provided', async () => {
 		const vimeoId = '123456789';
 
-		const { getByTitle, container } = render(Vimeo, {
+		const { container } = render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -142,12 +142,12 @@ describe('Vimeo', () => {
 		const vimeoId = '123456789';
 
 		// Test autoPlay true
-		const { getByTitle: getByTitleTrue } = render(Vimeo, {
+		render(Vimeo, {
 			vimeoId,
 			autoPlay: true,
 			disable_observer: true,
 		});
-		const iframeTrue = getByTitleTrue(`vimeo-${vimeoId}`);
+		const iframeTrue = page.getByTitle(`vimeo-${vimeoId}`);
 
 		const expected_src_true = `https://player.vimeo.com/video/${vimeoId}?autoplay=true#t=0h0m0s`;
 		await expect
@@ -155,12 +155,12 @@ describe('Vimeo', () => {
 			.toHaveAttribute('src', expected_src_true);
 
 		// Test autoPlay false
-		const { getByTitle: getByTitleFalse } = render(Vimeo, {
+		render(Vimeo, {
 			vimeoId,
 			autoPlay: false,
 			disable_observer: true,
 		});
-		const iframeFalse = getByTitleFalse(`vimeo-${vimeoId}`);
+		const iframeFalse = page.getByTitle(`vimeo-${vimeoId}`);
 
 		const expected_src_false = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
 		await expect

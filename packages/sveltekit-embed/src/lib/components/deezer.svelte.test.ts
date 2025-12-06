@@ -126,12 +126,12 @@ describe('Deezer', () => {
 			for (let i = 0; i < themes.length; i++) {
 				const testTheme = themes[i];
 				const uniqueFrameSrc = `track/${i}`;
-				const { getByTitle } = render(Deezer, {
+				render(Deezer, {
 					theme: testTheme,
 					frameSrc: uniqueFrameSrc,
 					disable_observer: true,
 				});
-				const iframe = getByTitle('deezer-widget');
+				const iframe = page.getByTitle('deezer-widget');
 				const element = iframe.element() as HTMLIFrameElement;
 
 				expect(element.src).toBe(
@@ -144,13 +144,13 @@ describe('Deezer', () => {
 	describe('Custom Styling', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles = 'border: 2px solid red; background: blue;';
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme,
 				frameSrc,
 				iframe_styles: customStyles,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.getAttribute('style')).toBe(customStyles);
@@ -175,12 +175,12 @@ describe('Deezer', () => {
 		it('should construct widget URL correctly', async () => {
 			const testTheme = 'dark';
 			const testFrameSrc = 'playlist/123456';
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme: testTheme,
 				frameSrc: testFrameSrc,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
 			const expectedUrl = `https://widget.deezer.com/widget/${testTheme}/${testFrameSrc}`;
@@ -190,12 +190,12 @@ describe('Deezer', () => {
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility and security attributes', async () => {
-			const { getByTitle } = render(Deezer, {
+			render(Deezer, {
 				theme,
 				frameSrc,
 				disable_observer: true,
 			});
-			const iframe = getByTitle('deezer-widget');
+			const iframe = page.getByTitle('deezer-widget');
 
 			await expect
 				.element(iframe)

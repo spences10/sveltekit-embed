@@ -52,10 +52,10 @@ describe('Tweet', () => {
 
 		if (wrapper && blockquote) {
 			await expect
-				.element(wrapper)
+				.element(wrapper as HTMLElement)
 				.toHaveAttribute('data-theme', 'light');
 			await expect
-				.element(blockquote)
+				.element(blockquote as HTMLElement)
 				.toHaveAttribute('data-theme', 'light');
 		}
 	});
@@ -122,10 +122,10 @@ describe('Tweet', () => {
 			expect(wrapperStyles.justifyContent).toBe('center');
 
 			await expect
-				.element(wrapper)
+				.element(wrapper as HTMLElement)
 				.toHaveAttribute('data-theme', 'dark');
 			await expect
-				.element(blockquote)
+				.element(blockquote as HTMLElement)
 				.toHaveAttribute('data-theme', 'dark');
 		}
 	});
@@ -270,10 +270,10 @@ describe('Tweet', () => {
 
 		if (wrapper && blockquote) {
 			await expect
-				.element(wrapper)
+				.element(wrapper as HTMLElement)
 				.toHaveAttribute('data-theme', 'dark');
 			await expect
-				.element(blockquote)
+				.element(blockquote as HTMLElement)
 				.toHaveAttribute('data-theme', 'dark');
 		}
 	});

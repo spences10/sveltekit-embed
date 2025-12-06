@@ -1,7 +1,7 @@
 import TikTok from '$lib/components/tiktok.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { page } from '@vitest/browser/context';
 
 describe('TikTok', () => {
 	it('mounts with default props', async () => {
@@ -70,7 +70,7 @@ describe('TikTok', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { getByTestId, container } = render(TikTok, {
+		const { container } = render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
@@ -241,21 +241,21 @@ describe('TikTok', () => {
 
 	it.skip('should handle different TikTok content formats', async () => {
 		// Test standard video ID
-		const { getByTestId: getStandard } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
-		const standardIframe = getStandard('tiktok-embed');
+		const standardIframe = page.getByTestId('tiktok-embed');
 		expect(standardIframe.element().getAttribute('src')).toContain(
 			'7234660647688875814',
 		);
 
 		// Test different ID format
-		const { getByTestId: getDifferent } = render(TikTok, {
+		render(TikTok, {
 			tiktokId: '6982674499405171973',
 			disable_observer: true,
 		});
-		const differentIframe = getDifferent('tiktok-embed');
+		const differentIframe = page.getByTestId('tiktok-embed');
 		expect(differentIframe.element().getAttribute('src')).toContain(
 			'6982674499405171973',
 		);

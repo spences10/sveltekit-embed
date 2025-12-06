@@ -1,7 +1,7 @@
 import Guild from '$lib/components/guild.svelte';
+import { page } from '@vitest/browser/context';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { page } from '@vitest/browser/context';
 
 describe('Guild', () => {
 	it('mounts with default props', async () => {
@@ -59,7 +59,7 @@ describe('Guild', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { getByTestId, container } = render(Guild, {
+		render(Guild, {
 			card_id: 'test123',
 			disable_observer: true,
 		});
@@ -82,39 +82,39 @@ describe('Guild', () => {
 		const card_id = 'test456';
 
 		// Test 'user' type
-		const { getByTestId: getUserIframe } = render(Guild, {
+		render(Guild, {
 			card_id,
 			type: 'user',
 			disable_observer: true,
 		});
 		await expect
-			.element(getUserIframe('guild-card'))
+			.element(page.getByTestId('guild-card'))
 			.toHaveAttribute(
 				'src',
 				`https://guild.host/embeds/user/${card_id}/card`,
 			);
 
 		// Test 'event' type
-		const { getByTestId: getEventIframe } = render(Guild, {
+		render(Guild, {
 			card_id,
 			type: 'event',
 			disable_observer: true,
 		});
 		await expect
-			.element(getEventIframe('guild-card'))
+			.element(page.getByTestId('guild-card'))
 			.toHaveAttribute(
 				'src',
 				`https://guild.host/embeds/event/${card_id}/card`,
 			);
 
 		// Test 'presentation' type
-		const { getByTestId: getPresentationIframe } = render(Guild, {
+		render(Guild, {
 			card_id,
 			type: 'presentation',
 			disable_observer: true,
 		});
 		await expect
-			.element(getPresentationIframe('guild-card'))
+			.element(page.getByTestId('guild-card'))
 			.toHaveAttribute(
 				'src',
 				`https://guild.host/embeds/presentation/${card_id}/card`,
@@ -125,42 +125,39 @@ describe('Guild', () => {
 		const card_id = 'test789';
 
 		// Test 'item' display type
-		const { getByTestId: getItemIframe } = render(Guild, {
+		render(Guild, {
 			card_id,
 			display_type: 'item',
 			disable_observer: true,
 		});
 		await expect
-			.element(getItemIframe('guild-card'))
+			.element(page.getByTestId('guild-card'))
 			.toHaveAttribute(
 				'src',
 				`https://guild.host/embeds/guild/${card_id}/item`,
 			);
 
 		// Test 'events/latest' display type
-		const { getByTestId: getEventsLatestIframe } = render(Guild, {
+		render(Guild, {
 			card_id,
 			display_type: 'events/latest',
 			disable_observer: true,
 		});
 		await expect
-			.element(getEventsLatestIframe('guild-card'))
+			.element(page.getByTestId('guild-card'))
 			.toHaveAttribute(
 				'src',
 				`https://guild.host/embeds/guild/${card_id}/events/latest`,
 			);
 
 		// Test 'presentations/upcoming' display type
-		const { getByTestId: getPresentationsUpcomingIframe } = render(
-			Guild,
-			{
-				card_id,
-				display_type: 'presentations/upcoming',
-				disable_observer: true,
-			},
-		);
+		render(Guild, {
+			card_id,
+			display_type: 'presentations/upcoming',
+			disable_observer: true,
+		});
 		await expect
-			.element(getPresentationsUpcomingIframe('guild-card'))
+			.element(page.getByTestId('guild-card'))
 			.toHaveAttribute(
 				'src',
 				`https://guild.host/embeds/guild/${card_id}/presentations/upcoming`,

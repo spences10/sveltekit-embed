@@ -474,7 +474,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should apply correct CSS classes and container structure', async () => {
-		const { container, getByTestId } = render(Bluesky, {
+		const { container } = render(Bluesky, {
 			post_id: test_post_id,
 		});
 

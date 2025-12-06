@@ -74,52 +74,48 @@ describe('Spotify', () => {
 
 	it.skip('should handle different Spotify content types', async () => {
 		// Test track
-		const { getByTestId: getTrack } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: true,
 		});
-		const trackIframe = getTrack('spotify');
 		await expect
-			.element(trackIframe)
+			.element(page.getByTestId('spotify'))
 			.toHaveAttribute(
 				'src',
 				'https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC',
 			);
 
 		// Test album
-		const { getByTestId: getAlbum } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'album/1DFixLWuPkv3KT3TnV35m3',
 			disable_observer: true,
 		});
-		const albumIframe = getAlbum('spotify');
 		await expect
-			.element(albumIframe)
+			.element(page.getByTestId('spotify'))
 			.toHaveAttribute(
 				'src',
 				'https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3',
 			);
 
 		// Test playlist
-		const { getByTestId: getPlaylist } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'playlist/37i9dQZF1DXcBWIGoYBM5M',
 			disable_observer: true,
 		});
-		const playlistIframe = getPlaylist('spotify');
 		await expect
-			.element(playlistIframe)
+			.element(page.getByTestId('spotify'))
 			.toHaveAttribute(
 				'src',
 				'https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M',
 			);
 
 		// Test artist
-		const { getByTestId: getArtist } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: 'artist/4NHQUGzhtTLFvgF5SZesLK',
 			disable_observer: true,
 		});
-		const artistIframe = getArtist('spotify');
 		await expect
-			.element(artistIframe)
+			.element(page.getByTestId('spotify'))
 			.toHaveAttribute(
 				'src',
 				'https://open.spotify.com/embed/artist/4NHQUGzhtTLFvgF5SZesLK',
@@ -242,13 +238,12 @@ describe('Spotify', () => {
 	it.skip('should handle Spotify link variations', async () => {
 		// Test with query parameters
 		const linkWithParams = 'track/4uLU6hMCjMI75M1A2tKUQC?si=abc123';
-		const { getByTestId: getWithParams } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: linkWithParams,
 			disable_observer: true,
 		});
-		const paramsIframe = getWithParams('spotify');
 		await expect
-			.element(paramsIframe)
+			.element(page.getByTestId('spotify'))
 			.toHaveAttribute(
 				'src',
 				`https://open.spotify.com/embed/${linkWithParams}`,
@@ -256,13 +251,12 @@ describe('Spotify', () => {
 
 		// Test with just ID (no type prefix)
 		const justId = '4uLU6hMCjMI75M1A2tKUQC';
-		const { getByTestId: getJustId } = render(Spotify, {
+		render(Spotify, {
 			spotifyLink: justId,
 			disable_observer: true,
 		});
-		const idIframe = getJustId('spotify');
 		await expect
-			.element(idIframe)
+			.element(page.getByTestId('spotify'))
 			.toHaveAttribute(
 				'src',
 				`https://open.spotify.com/embed/${justId}`,
