@@ -16,7 +16,7 @@ CodePen, and many more with performant, lazy-loaded components.
 - 📱 **Responsive**: Mobile-friendly designs that adapt to different
   screen sizes
 - 🎨 **Customizable**: Flexible props to customize appearance and
-  behavior
+  behaviour
 - 🔒 **TypeScript**: Full TypeScript support with proper type
   definitions
 - ⚡ **SvelteKit Optimized**: Built specifically for SvelteKit

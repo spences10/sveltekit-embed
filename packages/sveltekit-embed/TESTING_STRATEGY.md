@@ -36,69 +36,70 @@ testing strategy is split into three main environments:
 
 ## Testing Architecture
 
-### Workspace Configuration
+### Project Configuration
 
-The project uses Vitest workspaces to separate client and server
-testing:
+The project uses Vitest projects to separate client and server
+testing. Vitest comes from Vite+, so the config imports from
+`vite-plus`:
 
 ```typescript
 // vite.config.ts
-test: {
-  workspace: [
-    {
-      // Client-side tests (Svelte components)
-      extends: './vite.config.ts',
-      test: {
-        name: 'client',
-        environment: 'browser',
-        browser: {
-          enabled: true,
-          provider: 'playwright',
-          instances: [{ browser: 'chromium' }]
-        },
-        include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
-        exclude: ['src/lib/server/**', 'src/**/*.ssr.{test,spec}.{js,ts}'],
-        setupFiles: ['./vitest-setup-client.ts'],
-      },
-    },
-    {
-      // SSR tests (Server-side rendering)
-      extends: './vite.config.ts',
-      test: {
-        name: 'ssr',
-        environment: 'node',
-        include: ['src/**/*.ssr.{test,spec}.{js,ts}'],
-      },
-    },
-    {
-      // Server-side tests (Node.js utilities)
-      extends: './vite.config.ts',
-      test: {
-        name: 'server',
-        environment: 'node',
-        include: ['src/**/*.{test,spec}.{js,ts}'],
-        exclude: [
-          'src/**/*.svelte.{test,spec}.{js,ts}',
-          'src/**/*.ssr.{test,spec}.{js,ts}'
-        ],
-      },
-    },
-  ],
-}
+import adapter from '@sveltejs/adapter-auto';
+import { sveltekit } from '@sveltejs/kit/vite';
+import { coverageConfigDefaults, defineConfig } from 'vite-plus';
+import { playwright } from 'vite-plus/test/browser-playwright';
+
+export default defineConfig({
+	plugins: [sveltekit({ adapter: adapter() })],
+	test: {
+		projects: [
+			{
+				// Client-side tests (Svelte components and attachments)
+				extends: './vite.config.ts',
+				test: {
+					name: 'client',
+					browser: {
+						enabled: true,
+						provider: playwright(),
+						instances: [{ browser: 'chromium' }],
+					},
+					clearMocks: true,
+					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+					exclude: ['src/lib/server/**'],
+				},
+			},
+			{
+				// Server-side tests (Node.js utilities)
+				extends: './vite.config.ts',
+				test: {
+					name: 'server',
+					environment: 'node',
+					include: ['src/**/*.{test,spec}.{js,ts}'],
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+				},
+			},
+		],
+	},
+});
 ```
+
+This package has no SSR test project. The SSR sections below describe
+the pattern for projects that add one.
 
 ## Dependencies
 
 ### Core Testing Dependencies
 
-```json
-{
-	"vitest": "^3.1.4",
-	"@vitest/browser": "^3.1.4",
-	"vitest-browser-svelte": "^0.1.0",
-	"playwright": "^1.52.0",
-	"@playwright/test": "^1.52.0"
-}
+Versions are pinned in the `catalog` in `pnpm-workspace.yaml`:
+
+```yaml
+vite-plus: 1.0.0
+vitest: 5.0.1
+'@vitest/browser-playwright': 5.0.1
+'@vitest/coverage-v8': 5.0.1
+vitest-browser-svelte: ^3.1.0
+playwright: 1.63.0
+'@playwright/test': 1.63.0
 ```
 
 ### Key Features
@@ -112,15 +113,21 @@ test: {
 
 ## Configuration
 
-### Client Setup (`vitest-setup-client.ts`)
+### Client Setup
 
-```typescript
-/// <reference types="@vitest/browser/matchers" />
-/// <reference types="@vitest/browser/providers/playwright" />
+There is no setup file. The browser matcher types come from
+`tsconfig.json`:
+
+```json
+{
+	"compilerOptions": {
+		"types": ["vitest-browser-svelte", "$app/types"]
+	}
+}
 ```
 
-The setup is minimal because we use real browser APIs instead of
-mocks.
+`render` and `unmount` from `vitest-browser-svelte` are async, so
+always `await` them.
 
 ## Testing Svelte Components
 
@@ -135,13 +142,13 @@ Svelte component tests use the `.svelte.test.ts` extension:
 ```typescript
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { flushSync } from 'svelte';
 import MyComponent from './MyComponent.svelte';
 
 describe('MyComponent', () => {
 	test('renders with default props', async () => {
-		render(MyComponent);
+		await render(MyComponent);
 		const element = page.getByTestId('my-element');
 		await expect.element(element).toHaveTextContent('Expected Text');
 	});
@@ -152,7 +159,7 @@ describe('MyComponent', () => {
 
 ```typescript
 test('renders with custom props', async () => {
-	render(MyComponent, {
+	await render(MyComponent, {
 		props: {
 			title: 'Custom Title',
 			isVisible: true,
@@ -168,7 +175,7 @@ test('renders with custom props', async () => {
 
 ```typescript
 test('handles click events', async () => {
-	render(MyComponent);
+	await render(MyComponent);
 	const button = page.getByRole('button');
 
 	await button.click();
@@ -184,7 +191,7 @@ test('handles click events', async () => {
 ```typescript
 test('reactive state updates', async () => {
 	const props = $state({ count: 0 });
-	render(Counter, { props });
+	await render(Counter, { props });
 
 	const counter = page.getByTestId('counter');
 	await expect.element(counter).toHaveTextContent('0');
@@ -248,7 +255,7 @@ test('derived state logic', async () => {
 
 ```typescript
 test('applies custom CSS classes', async () => {
-	render(MyComponent, {
+	await render(MyComponent, {
 		props: { styles: 'custom-class' },
 	});
 
@@ -379,7 +386,7 @@ const componentVariants = [
 
 componentVariants.forEach(({ type, expectedClass }) => {
 	test(`should render ${type} variant correctly`, async () => {
-		render(Component, { props: { type } });
+		await render(Component, { props: { type } });
 
 		const element = page.getByRole('alert');
 		await expect.element(element).toHaveClass(expectedClass);
@@ -392,7 +399,7 @@ componentVariants.forEach(({ type, expectedClass }) => {
 ```typescript
 // ✅ Test HTML content rendering with proper expectations
 test('should render HTML content correctly', async () => {
-	render(Component, {
+	await render(Component, {
 		props: {
 			message:
 				'Text with <strong>bold</strong> and <a href="#">link</a>',
@@ -462,14 +469,14 @@ page.getByAltText('Profile picture'); // Find by alt text (images)
 ```typescript
 // ❌ Old approach (container queries)
 test('finds button', () => {
-	const { container } = render(MyComponent);
+	const { container } = await render(MyComponent);
 	const button = container.querySelector('[data-testid="submit"]');
 	expect(button?.textContent).toBe('Submit');
 });
 
 // ✅ New approach (locators)
 test('finds button', async () => {
-	render(MyComponent);
+	await render(MyComponent);
 	const button = page.getByTestId('submit');
 	await expect.element(button).toHaveTextContent('Submit');
 });
@@ -486,7 +493,7 @@ While locators are preferred, container queries are still useful for:
 
 ```typescript
 test('maintains proper DOM structure', () => {
-	const { container } = render(MyComponent);
+	const { container } = await render(MyComponent);
 	const wrapper = container.firstElementChild;
 	expect(wrapper?.tagName).toBe('DIV');
 	expect(wrapper?.children.length).toBe(2);
@@ -523,7 +530,7 @@ test('derived state logic', async () => {
 
 // ✅ No flushSync needed when testing DOM updates with locators
 test('component updates DOM', async () => {
-	render(MyComponent);
+	await render(MyComponent);
 	const button = page.getByRole('button');
 
 	await button.click();
@@ -873,18 +880,18 @@ async function waitForElement(container: Element, selector: string) {
 <button data-testid="submit-button">Submit</button>
 ```
 
-### 2. Test User Behavior, Not Implementation
+### 2. Test User Behaviour, Not Implementation
 
 ```typescript
 // ❌ Testing implementation details
 test('calls internal method', () => {
-	const component = render(MyComponent);
+	const component = await render(MyComponent);
 	expect(component.internalMethod).toHaveBeenCalled();
 });
 
-// ✅ Testing user behavior
+// ✅ Testing user behaviour
 test('shows success message after form submission', async () => {
-	const { container } = render(ContactForm);
+	const { container } = await render(ContactForm);
 
 	await container.querySelector('[data-testid="submit"]').click();
 
@@ -985,9 +992,9 @@ beforeEach(() => {
 - Browser APIs (IntersectionObserver, ResizeObserver, etc.)
 - DOM manipulation
 - CSS animations and transitions
-- Viewport and scroll behavior
+- Viewport and scroll behaviour
 
-### 8. Embrace Locator Auto-Retry Behavior
+### 8. Embrace Locator Auto-Retry Behaviour
 
 **Key Insight**: Locators automatically retry assertions, eliminating
 the need for manual synchronization in most cases.
@@ -995,7 +1002,7 @@ the need for manual synchronization in most cases.
 ```typescript
 // ❌ Old pattern with manual synchronization
 test('updates after click', async () => {
-	render(MyComponent);
+	await render(MyComponent);
 	const button = page.getByRole('button');
 
 	await button.click();
@@ -1006,7 +1013,7 @@ test('updates after click', async () => {
 
 // ✅ New pattern - let locators handle waiting
 test('updates after click', async () => {
-	render(MyComponent);
+	await render(MyComponent);
 	const button = page.getByRole('button');
 
 	await button.click();
@@ -1028,7 +1035,7 @@ test('updates after click', async () => {
 
 ```typescript
 test('validates form input', async () => {
-	render(ContactForm);
+	await render(ContactForm);
 
 	const emailInput = page.getByLabel('Email address');
 	const submitButton = page.getByRole('button', { name: 'Submit' });
@@ -1047,7 +1054,7 @@ test('validates form input', async () => {
 
 ```typescript
 test('shows content when condition is met', async () => {
-	render(ConditionalComponent, {
+	await render(ConditionalComponent, {
 		props: { showContent: true },
 	});
 
@@ -1056,7 +1063,7 @@ test('shows content when condition is met', async () => {
 });
 
 test('hides content when condition is not met', async () => {
-	render(ConditionalComponent, {
+	await render(ConditionalComponent, {
 		props: { showContent: false },
 	});
 
@@ -1069,7 +1076,7 @@ test('hides content when condition is not met', async () => {
 
 ```typescript
 test('loads data asynchronously', async () => {
-	const { container } = render(AsyncComponent);
+	const { container } = await render(AsyncComponent);
 
 	// Wait for loading to complete
 	await vi.waitFor(() => {
@@ -1097,18 +1104,22 @@ jobs:
     name: Run unit tests
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
       options: --user 1001
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4.1.0
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22.x
+          node-version: '24'
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
+      - name: Build
+        run: pnpm run build
+      - name: Check
+        run: pnpm run check
       - name: Test
         run: pnpm run test:ci
 ```
@@ -1137,7 +1148,7 @@ For other CI providers, similar container approaches can be used:
 ```yaml
 # GitLab CI
 test:
-  image: mcr.microsoft.com/playwright:v1.52.0-noble
+  image: mcr.microsoft.com/playwright:v1.63.0-noble
   script:
     - npm ci
     - npm run test:ci
@@ -1146,7 +1157,7 @@ test:
 jobs:
   test:
     docker:
-      - image: mcr.microsoft.com/playwright:v1.52.0-noble
+      - image: mcr.microsoft.com/playwright:v1.63.0-noble
     steps:
       - checkout
       - run: npm ci
@@ -1157,332 +1168,51 @@ jobs:
 
 ### Available Commands
 
+From the repo root:
+
 ```bash
-# Run all tests
-pnpm test
+# Build the library and the docs site
+pnpm build
 
-# Run only unit tests (both client and server)
+# Lint, format check and type check
+pnpm check
+
+# Fix formatting and lint issues
+pnpm format
+
+# Run every unit test once (library and docs site)
+pnpm test:ci
+```
+
+From `packages/sveltekit-embed`:
+
+```bash
+# Run unit tests in watch mode
 pnpm test:unit
 
-# Run only client-side tests (Svelte components)
-pnpm test:client
-
-# Run only SSR tests (Server-side rendering)
-pnpm test:ssr
-
-# Run only server-side tests (Node.js utilities)
-pnpm test:server
-
-# Run tests in watch mode
-pnpm test:unit
-
-# Run tests with UI
-pnpm test:ui
-
-# Run tests for CI
+# Run unit tests once
 pnpm test:ci
 
 # Run with coverage
 pnpm coverage
 
-# Run E2E tests
-pnpm test:e2e
+# Run only one project
+pnpm exec vp test --project=client
+pnpm exec vp test --project=server
 ```
 
 ### Running Specific Tests
 
 ```bash
 # Run specific test file
-pnpm vitest src/lib/components/Button.svelte.test.ts
+pnpm exec vp test --run src/lib/components/you-tube.svelte.test.ts
 
 # Run tests matching pattern
-pnpm vitest --grep "Button component"
+pnpm exec vp test --run -t "YouTube"
 
 # Run tests in specific directory
-pnpm vitest src/lib/utils/
+pnpm exec vp test --run src/lib/attachments
 ```
-
-## Troubleshooting
-
-### Common Issues
-
-#### 1. Over-Mocking in Browser Environment
-
-**Problem**: Mocking browser APIs like `IntersectionObserver` when
-using real browser testing.
-
-**Solution**: In `vitest-browser-svelte` with Playwright, use real
-browser APIs instead of mocks:
-
-```typescript
-// ❌ Don't mock in real browser environment
-vi.mock('IntersectionObserver', () => ({
-	observe: vi.fn(),
-	unobserve: vi.fn(),
-	disconnect: vi.fn(),
-}));
-
-// ✅ Let real browser APIs work
-// No mocking needed - IntersectionObserver works natively in Playwright
-```
-
-**Why**: Real browser testing eliminates the need for complex mocks
-and provides more accurate test results.
-
-#### 2. "global is not defined" Error
-
-**Problem**: Using `global.window` in browser environment tests.
-
-**Solution**: Use `window` directly or `Object.defineProperty`:
-
-```typescript
-// ❌ Don't use global in browser tests
-global.window.scrollY = 100;
-
-// ✅ Use window directly or Object.defineProperty
-Object.defineProperty(window, 'scrollY', {
-	value: 100,
-	writable: true,
-});
-```
-
-#### 2. Tests Not Finding Elements
-
-**Problem**: Elements not found after interactions.
-
-**Solution**: Use locators instead of manual DOM queries - they
-automatically retry:
-
-```typescript
-// ❌ Old approach - manual DOM queries need flushSync
-button.click();
-flushSync(); // Ensure DOM updates are applied
-expect(
-	container.querySelector('[data-testid="result"]'),
-).toBeTruthy();
-
-// ✅ New approach - locators automatically wait
-await button.click();
-await expect.element(page.getByTestId('result')).toBeInTheDocument();
-```
-
-#### 3. Async Test Issues
-
-**Problem**: Tests failing due to timing issues.
-
-**Solution**: Use `vi.waitFor()` for async operations:
-
-```typescript
-await vi.waitFor(() => {
-	expect(container.textContent?.includes('Expected text')).toBe(true);
-});
-```
-
-#### 4. Mock Not Working
-
-**Problem**: Mocks not being applied correctly.
-
-**Solution**: Ensure mocks are set up before imports:
-
-```typescript
-// ❌ Mock after import
-import { myFunction } from './module';
-vi.mock('./module');
-
-// ✅ Mock before import
-vi.mock('./module', () => ({
-	myFunction: vi.fn(),
-}));
-import { myFunction } from './module';
-```
-
-#### 5. Svelte 5 Rune Warnings in Tests
-
-**Problem**: Getting "state referenced locally" warnings when using
-`$derived` in test files.
-
-**Solution**: Use `untrack` to access derived values:
-
-```typescript
-import { untrack } from 'svelte';
-
-// ❌ Direct access causes warnings
-expect(derivedValue).toBe(expectedValue);
-
-// ✅ Use untrack to avoid warnings
-expect(untrack(() => derivedValue)).toBe(expectedValue);
-```
-
-**Why this happens**: `$derived` values accessed outside of Svelte's
-reactive context (like in test assertions) only capture their initial
-values and generate warnings. `untrack` allows you to access the
-current value without creating reactive dependencies.
-
-#### 6. Multiple Element Matches in Locators
-
-**Problem**: Locators matching multiple elements causing "strict mode
-violation" errors.
-
-**Solution**: Use `.first()`, `.last()`, or `.nth()` to specify which
-element:
-
-```typescript
-// ❌ Matches multiple elements
-const element = page.getByText(/common-word/);
-
-// ✅ Specify which element you want
-const element = page.getByText(/common-word/).first();
-const element = page.getByText(/common-word/).last();
-const element = page.getByText(/common-word/).nth(1);
-```
-
-**Alternative**: Use more specific locators:
-
-```typescript
-// ✅ More specific selector
-const element = page.getByTestId('specific-element');
-const element = page.getByRole('button', { name: 'Specific Button' });
-```
-
-#### 7. Locator Chaining Not Supported
-
-**Problem**: Attempting to chain `.locator()` method on existing
-locators causes TypeScript errors.
-
-**Solution**: Use alternative approaches for finding nested elements:
-
-```typescript
-// ❌ Chaining locators (not supported in vitest-browser-svelte)
-const banner = page.getByRole('banner');
-const link = banner.locator('a'); // Error: Property 'locator' does not exist
-
-// ✅ Use semantic queries from page object
-const banner = page.getByRole('banner');
-const link = page.getByRole('link'); // Find link anywhere on page
-
-// ✅ Use more specific selectors
-const link = page.getByRole('link', { name: 'specific link text' });
-
-// ✅ Use test IDs for complex nested structures
-const link = page.getByTestId('banner-link');
-```
-
-**Why this happens**: The vitest-browser-svelte API doesn't support
-Playwright's `.locator()` chaining method. Instead, it provides
-semantic query methods that work globally on the page.
-
-**Best practices for nested elements**:
-
-1. Use semantic queries with specific names/text
-2. Add test IDs to complex nested structures
-3. Test the overall behavior rather than specific DOM hierarchy
-4. Focus on user-facing functionality over implementation details
-
-#### 7. Locator Chaining Not Supported
-
-**Problem**: Attempting to chain `.locator()` method on existing
-locators causes TypeScript errors.
-
-**Solution**: Use alternative approaches for finding nested elements:
-
-```typescript
-// ❌ Chaining locators (not supported in vitest-browser-svelte)
-const banner = page.getByRole('banner');
-const link = banner.locator('a'); // Error: Property 'locator' does not exist
-
-// ✅ Use semantic queries from page object
-const banner = page.getByRole('banner');
-const link = page.getByRole('link'); // Find link anywhere on page
-
-// ✅ Use more specific selectors
-const link = page.getByRole('link', { name: 'specific link text' });
-
-// ✅ Use test IDs for complex nested structures
-const link = page.getByTestId('banner-link');
-```
-
-**Why this happens**: The vitest-browser-svelte API doesn't support
-Playwright's `.locator()` chaining method. Instead, it provides
-semantic query methods that work globally on the page.
-
-**Best practices for nested elements**:
-
-1. Use semantic queries with specific names/text
-2. Add test IDs to complex nested structures
-3. Test the overall behavior rather than specific DOM hierarchy
-4. Focus on user-facing functionality over implementation details
-
-#### 8. Reactive State Testing with Runes
-
-**Problem**: Testing complex reactive state logic with `$derived` and
-`$state` runes can be challenging.
-
-**Solution**: Use comprehensive rune testing patterns:
-
-```typescript
-// ✅ Test reactive state transitions
-test('should test banner type state transitions', async () => {
-	let bannerState = $state({
-		currentType: 'info' as BannerOptions['type'],
-		previousType: null as BannerOptions['type'] | null,
-		changeCount: 0,
-	});
-
-	// Derived state for tracking changes
-	let hasTypeChanged = $derived(
-		bannerState.currentType !== bannerState.previousType,
-	);
-
-	// Test initial state
-	expect(untrack(() => hasTypeChanged)).toBe(true);
-
-	// Simulate state change
-	bannerState.previousType = bannerState.currentType;
-	bannerState.currentType = 'warning';
-	bannerState.changeCount++;
-	flushSync();
-
-	expect(untrack(() => hasTypeChanged)).toBe(true);
-});
-
-// ✅ Test derived state that doesn't update properly
-test('should re-derive classes after state change', async () => {
-	let styleState = $state({ bannerType: 'info' });
-	let currentColors = $derived(COLORS[styleState.bannerType]);
-
-	// Test type changes - create new derived after state change
-	styleState.bannerType = 'warning';
-	flushSync();
-
-	// Re-derive the classes after state change for testing
-	let updatedClasses = $derived(
-		`${untrack(() => currentColors).bg} ${untrack(() => currentColors).text}`,
-	);
-
-	expect(untrack(() => updatedClasses)).toContain('bg-warning');
-});
-```
-
-**Key insights**:
-
-- Always use `untrack()` when accessing `$derived` values in tests
-- Use `flushSync()` after state changes to ensure updates are applied
-- For complex derived state, sometimes you need to re-derive after
-  state changes in tests
-- Test the reactive logic patterns, not just the component rendering
-
-### Debugging Tips
-
-1. **Use `console.log(container.innerHTML)`** to inspect rendered HTML
-2. **Use `screen.debug()`** equivalent:
-   `console.log(container.outerHTML)`
-3. **Check browser dev tools** when running tests with `--ui` flag
-4. **Use `test.only()`** to run single tests during debugging
-5. **Use `vi.waitFor()`** for timing-sensitive assertions
-6. **Test string lengths carefully** - HTML content may have different
-   character counts than expected
-7. **Use semantic queries over DOM structure** - focus on user-facing
-   elements rather than implementation details
 
 ## Migration Notes
 
@@ -1496,6 +1226,10 @@ This project was migrated from `@testing-library/svelte` to
    window/document mocks
 4. **Better Svelte 5 support**: Native support for runes and reactive
    state
+5. **Async render**: `render` and `unmount` return promises in
+   `vitest-browser-svelte` 3, so `await` them
+6. **Vite+**: tests run through `vp test`, and `page` is imported from
+   `vitest/browser`
 
 ## Resources
 
