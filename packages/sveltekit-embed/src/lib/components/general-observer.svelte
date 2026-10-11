@@ -8,7 +8,7 @@
 
 	interface Props {
 		threshold?: number;
-		disable_observer: boolean;
+		disable_observer?: boolean;
 		children: Snippet;
 	}
 
