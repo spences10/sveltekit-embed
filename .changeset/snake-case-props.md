@@ -65,6 +65,11 @@ directly with `loading="lazy"`:
   page.
 - Bluesky has a `theme` prop (`'light' | 'dark' | 'system'`) and no
   longer shows white corners on dark pages.
-- Tweet removes its widget script when the component is destroyed.
+- Tweet removes its widget script when the component is destroyed, and
+  a tweet mounted after the script has already run now renders instead
+  of staying as a link.
+- Bluesky's iframe `id` is now stable between server and client
+  (`bluesky-iframe-` plus a Svelte-generated id).
+- Zencastr removes its player script when the component is destroyed.
 - GenericEmbed types the extra props it passes to the iframe, and
   `skip_to` is typed on Vimeo and YouTube.
