@@ -48,7 +48,7 @@ Import and use any component in your Svelte/SvelteKit application:
 </script>
 
 <!-- YouTube Video -->
-<YouTube youTubeId="dQw4w9WgXcQ" />
+<YouTube youtube_id="dQw4w9WgXcQ" />
 
 <!-- Spotify Track -->
 <Spotify
@@ -93,7 +93,7 @@ Import and use any component in your Svelte/SvelteKit application:
 	import { YouTube } from 'sveltekit-embed';
 </script>
 
-<YouTube youTubeId="dQw4w9WgXcQ" aspectRatio="16:9" width="100%" />
+<YouTube youtube_id="dQw4w9WgXcQ" aspect_ratio="16:9" />
 ```
 
 ### Spotify

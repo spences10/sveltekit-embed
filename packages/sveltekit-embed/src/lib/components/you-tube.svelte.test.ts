@@ -6,11 +6,11 @@ import { render } from 'vitest-browser-svelte';
 describe('YouTube', () => {
 	it('mounts with video id', async () => {
 		const { container } = await render(YouTube, {
-			youTubeId: 'abc123',
-			listId: '',
-			autoPlay: false,
-			skipTo: { h: 0, m: 0, s: 0 },
-			aspectRatio: '16:9',
+			youtube_id: 'abc123',
+			list_id: '',
+			autoplay: false,
+			skip_to: { h: 0, m: 0, s: 0 },
+			aspect_ratio: '16:9',
 			iframe_styles: '',
 			disable_observer: true,
 		});
@@ -19,11 +19,11 @@ describe('YouTube', () => {
 
 	it('renders iframe with correct src for video with default options', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			listId: '',
-			autoPlay: false,
-			skipTo: { h: 0, m: 0, s: 0 },
-			aspectRatio: '16:9',
+			youtube_id: 'abc123',
+			list_id: '',
+			autoplay: false,
+			skip_to: { h: 0, m: 0, s: 0 },
+			aspect_ratio: '16:9',
 			iframe_styles: '',
 			disable_observer: true,
 		});
@@ -34,16 +34,16 @@ describe('YouTube', () => {
 
 	it('renders iframe with correct src for video with custom options', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			listId: '',
-			autoPlay: true,
+			youtube_id: 'abc123',
+			list_id: '',
+			autoplay: true,
 			mute: true,
 			controls: false,
 			loop: true,
-			modestBranding: true,
+			modest_branding: true,
 			rel: true,
-			skipTo: { h: 0, m: 0, s: 0 },
-			aspectRatio: '16:9',
+			skip_to: { h: 0, m: 0, s: 0 },
+			aspect_ratio: '16:9',
 			iframe_styles: '',
 			disable_observer: true,
 		});
@@ -53,28 +53,28 @@ describe('YouTube', () => {
 	});
 
 	it('renders iframe with correct src for playlist with default options', async () => {
-		const listId = '123abc';
+		const list_id = '123abc';
 		await render(YouTube, {
-			youTubeId: '',
-			listId,
-			autoPlay: false,
-			skipTo: { h: 0, m: 0, s: 0 },
-			aspectRatio: '16:9',
+			youtube_id: '',
+			list_id,
+			autoplay: false,
+			skip_to: { h: 0, m: 0, s: 0 },
+			aspect_ratio: '16:9',
 			iframe_styles: '',
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`youTube-${listId}`);
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		const iframe = page.getByTitle(`youTube-${list_id}`);
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${list_id}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it('sets aspect ratio using padding-top style', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			listId: '',
-			autoPlay: false,
-			skipTo: { h: 0, m: 0, s: 0 },
-			aspectRatio: '4:3',
+			youtube_id: 'abc123',
+			list_id: '',
+			autoplay: false,
+			skip_to: { h: 0, m: 0, s: 0 },
+			aspect_ratio: '4:3',
 			iframe_styles: 'border-radius: 0.8rem;',
 			disable_observer: true,
 		});
@@ -90,11 +90,11 @@ describe('YouTube', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			listId: '',
-			autoPlay: false,
-			skipTo: { h: 0, m: 0, s: 0 },
-			aspectRatio: '16:9',
+			youtube_id: 'abc123',
+			list_id: '',
+			autoplay: false,
+			skip_to: { h: 0, m: 0, s: 0 },
+			aspect_ratio: '16:9',
 			iframe_styles: '',
 			disable_observer: false,
 		});
@@ -103,10 +103,10 @@ describe('YouTube', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should calculate correct start time with complex skipTo values', async () => {
+	it('should calculate correct start time with complex skip_to values', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			skipTo: { h: 1, m: 30, s: 45 },
+			youtube_id: 'abc123',
+			skip_to: { h: 1, m: 30, s: 45 },
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
@@ -117,10 +117,10 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it('should handle invalid skipTo values gracefully', async () => {
+	it('should handle invalid skip_to values gracefully', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			skipTo: { h: -1, m: -30, s: -45 },
+			youtube_id: 'abc123',
+			skip_to: { h: -1, m: -30, s: -45 },
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
@@ -130,23 +130,23 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle both youTubeId and listId provided', async () => {
+	it.skip('should handle both youtube_id and list_id provided', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			listId: 'playlist456',
+			youtube_id: 'abc123',
+			list_id: 'playlist456',
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
-		// youTubeId should take priority when both are provided
+		// youtube_id should take priority when both are provided
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it('should handle empty youTubeId and listId', async () => {
+	it('should handle empty youtube_id and list_id', async () => {
 		await render(YouTube, {
-			youTubeId: '',
-			listId: '',
+			youtube_id: '',
+			list_id: '',
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-');
@@ -158,8 +158,8 @@ describe('YouTube', () => {
 
 	it('should handle invalid aspect ratios', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			aspectRatio: 'invalid:ratio' as any,
+			youtube_id: 'abc123',
+			aspect_ratio: 'invalid:ratio' as any,
 			disable_observer: true,
 		});
 
@@ -174,7 +174,7 @@ describe('YouTube', () => {
 	});
 
 	it.skip('should apply all supported aspect ratios correctly', async () => {
-		const aspectRatios = [
+		const aspect_ratios = [
 			{ ratio: '1:1', expected: '100%' },
 			{ ratio: '16:9', expected: '56.25%' },
 			{ ratio: '4:3', expected: '75%' },
@@ -182,10 +182,10 @@ describe('YouTube', () => {
 			{ ratio: '8.5', expected: '62.5%' },
 		];
 
-		for (const testCase of aspectRatios) {
+		for (const testCase of aspect_ratios) {
 			await render(YouTube, {
-				youTubeId: 'abc123',
-				aspectRatio: testCase.ratio,
+				youtube_id: 'abc123',
+				aspect_ratio: testCase.ratio,
 				disable_observer: true,
 			});
 
@@ -203,7 +203,7 @@ describe('YouTube', () => {
 		const customStyles =
 			'border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1);';
 		await render(YouTube, {
-			youTubeId: 'abc123',
+			youtube_id: 'abc123',
 			iframe_styles: customStyles,
 			disable_observer: true,
 		});
@@ -218,22 +218,22 @@ describe('YouTube', () => {
 	});
 
 	it('should handle playlist with custom index', async () => {
-		const listId = 'playlist123';
+		const list_id = 'playlist123';
 		await render(YouTube, {
-			youTubeId: '',
-			listId,
+			youtube_id: '',
+			list_id,
 			index: 5,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`youTube-${listId}`);
+		const iframe = page.getByTitle(`youTube-${list_id}`);
 
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=5&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${list_id}&index=5&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it('should have proper accessibility attributes', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
+			youtube_id: 'abc123',
 			disable_observer: true,
 		});
 
@@ -253,10 +253,10 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('allowfullscreen');
 	});
 
-	it('should handle very large skipTo values', async () => {
+	it('should handle very large skip_to values', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			skipTo: { h: 25, m: 70, s: 120 },
+			youtube_id: 'abc123',
+			skip_to: { h: 25, m: 70, s: 120 },
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
@@ -267,34 +267,34 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it('should handle special characters in youTubeId', async () => {
-		const youTubeId = 'abc-123_def';
+	it('should handle special characters in youtube_id', async () => {
+		const youtube_id = 'abc-123_def';
 		await render(YouTube, {
-			youTubeId,
+			youtube_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`youTube-${youTubeId}`);
+		const iframe = page.getByTitle(`youTube-${youtube_id}`);
 
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/${youTubeId}?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/${youtube_id}?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it('should handle special characters in listId', async () => {
-		const listId = 'playlist-123_abc';
+	it('should handle special characters in list_id', async () => {
+		const list_id = 'playlist-123_abc';
 		await render(YouTube, {
-			youTubeId: '',
-			listId,
+			youtube_id: '',
+			list_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`youTube-${listId}`);
+		const iframe = page.getByTitle(`youTube-${list_id}`);
 
-		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${listId}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
+		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${list_id}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
 	it('should apply default iframe_styles when not provided', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
+			youtube_id: 'abc123',
 			// iframe_styles not provided, should use default
 			disable_observer: true,
 		});
@@ -310,8 +310,8 @@ describe('YouTube', () => {
 	it.skip('should handle boolean props as different data types', async () => {
 		// Test with string values that should be converted to booleans
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			autoPlay: 'true' as any,
+			youtube_id: 'abc123',
+			autoplay: 'true' as any,
 			mute: 'false' as any,
 			controls: 1 as any,
 			loop: 0 as any,
@@ -325,10 +325,10 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it('should handle zero values in skipTo correctly', async () => {
+	it('should handle zero values in skip_to correctly', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			skipTo: { h: 0, m: 0, s: 0 },
+			youtube_id: 'abc123',
+			skip_to: { h: 0, m: 0, s: 0 },
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
@@ -337,10 +337,10 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it.skip('should handle missing skipTo properties gracefully', async () => {
+	it.skip('should handle missing skip_to properties gracefully', async () => {
 		await render(YouTube, {
-			youTubeId: 'abc123',
-			skipTo: { h: 1 } as any, // Missing m and s properties
+			youtube_id: 'abc123',
+			skip_to: { h: 1 } as any, // Missing m and s properties
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
@@ -348,5 +348,39 @@ describe('YouTube', () => {
 		// Missing properties should be treated as undefined, which should be 0
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=3600&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
+	});
+
+	it('should update the iframe when props change', async () => {
+		const { rerender } = await render(YouTube, {
+			youtube_id: 'reactive111',
+			disable_observer: true,
+		});
+		const iframe = page.getByTestId('youTube');
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/embed/reactive111?'),
+			);
+
+		await rerender({
+			youtube_id: 'reactive222',
+			skip_to: { m: 1, s: 30 },
+			mute: true,
+		});
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/embed/reactive222?'),
+			);
+		await expect
+			.element(iframe)
+			.toHaveAttribute('src', expect.stringContaining('start=90'));
+		await expect
+			.element(iframe)
+			.toHaveAttribute('src', expect.stringContaining('mute=1'));
 	});
 });

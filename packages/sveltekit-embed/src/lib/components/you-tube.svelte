@@ -3,28 +3,28 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		youTubeId?: string;
-		listId?: string;
+		youtube_id?: string;
+		list_id?: string;
 		index?: number;
-		autoPlay?: boolean;
-		aspectRatio?: string;
-		skipTo?: any;
+		autoplay?: boolean;
+		aspect_ratio?: string;
+		skip_to?: { h?: number; m?: number; s?: number };
 		disable_observer?: boolean;
 		iframe_styles?: string;
 		mute?: boolean;
 		controls?: boolean;
 		loop?: boolean;
-		modestBranding?: boolean;
+		modest_branding?: boolean;
 		rel?: boolean;
 	}
 
 	let {
-		youTubeId = '',
-		listId = '',
+		youtube_id = '',
+		list_id = '',
 		index = 0,
-		autoPlay = false,
-		aspectRatio = '16:9',
-		skipTo = { h: 0, m: 0, s: 0 },
+		autoplay = false,
+		aspect_ratio = '16:9',
+		skip_to = { h: 0, m: 0, s: 0 },
 		disable_observer = false,
 		iframe_styles = `
 			border-radius: 0.6rem;
@@ -32,25 +32,26 @@
 		mute = false,
 		controls = true,
 		loop = false,
-		modestBranding = false,
+		modest_branding = false,
 		rel = false,
 	}: Props = $props();
 
-	const { h, m, s } = skipTo;
-
-	const tH = h * 60 * 60;
-	const tM = m * 60;
-
-	const startTime = tH + tM + s;
+	const startTime = $derived(
+		(skip_to.h ?? 0) * 60 * 60 +
+			(skip_to.m ?? 0) * 60 +
+			(skip_to.s ?? 0),
+	);
 
 	// cspell:ignore videoseries
 
 	const baseUrl = `https://www.youtube-nocookie.com/embed/`;
-	const src = `${baseUrl}${
-		youTubeId.length > 0
-			? `${youTubeId}?autoplay=${Number(autoPlay)}&start=${startTime}&mute=${Number(mute)}&controls=${Number(controls)}&loop=${Number(loop)}&modestbranding=${Number(modestBranding)}&rel=${Number(rel)}`
-			: `?videoseries&list=${listId}&index=${index}&autoplay=${Number(autoPlay)}&start=${startTime}&mute=${Number(mute)}&controls=${Number(controls)}&loop=${Number(loop)}&modestbranding=${Number(modestBranding)}&rel=${Number(rel)}`
-	}`;
+	const src = $derived(
+		`${baseUrl}${
+			youtube_id.length > 0
+				? `${youtube_id}?autoplay=${Number(autoplay)}&start=${startTime}&mute=${Number(mute)}&controls=${Number(controls)}&loop=${Number(loop)}&modestbranding=${Number(modest_branding)}&rel=${Number(rel)}`
+				: `?videoseries&list=${list_id}&index=${index}&autoplay=${Number(autoplay)}&start=${startTime}&mute=${Number(mute)}&controls=${Number(controls)}&loop=${Number(loop)}&modestbranding=${Number(modest_branding)}&rel=${Number(rel)}`
+		}`,
+	);
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -58,12 +59,12 @@
 		style={`
     	position: relative;
     	width: 100%;
-  	  ${getPadding(aspectRatio)}
+  	  ${getPadding(aspect_ratio)}
   `}
 	>
 		<iframe
 			data-testid="youTube"
-			title={`youTube-${listId.length > 0 ? listId : youTubeId}`}
+			title={`youTube-${list_id.length > 0 ? list_id : youtube_id}`}
 			{src}
 			frameborder="0"
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
