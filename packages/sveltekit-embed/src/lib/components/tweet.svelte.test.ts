@@ -6,31 +6,31 @@ import { render } from 'vitest-browser-svelte';
 describe('Tweet', () => {
 	it('mounts with default values', async () => {
 		const { container } = await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		expect(container).toBeTruthy();
 	});
 
 	it('renders tweet with correct link', async () => {
-		const tweetLink = 'twitterdev/status/1399879412994844160';
+		const tweet_link = 'twitterdev/status/1399879412994844160';
 
 		await render(Tweet, {
-			tweetLink,
+			tweet_link,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
-			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
+			.toHaveAttribute('href', `https://twitter.com/${tweet_link}`);
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty tweetLink gracefully', async () => {
-		const tweetLink = '';
+	it('should handle empty tweet_link gracefully', async () => {
+		const tweet_link = '';
 
 		await render(Tweet, {
-			tweetLink,
+			tweet_link,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
 
@@ -41,7 +41,7 @@ describe('Tweet', () => {
 
 	it('should apply default prop values when not provided', async () => {
 		const { container } = await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		const wrapper = container.querySelector('.tweet-wrapper');
@@ -60,49 +60,49 @@ describe('Tweet', () => {
 		}
 	});
 
-	it('should handle special characters in tweetLink', async () => {
-		const tweetLink = 'user.name/status/123_456';
+	it('should handle special characters in tweet_link', async () => {
+		const tweet_link = 'user.name/status/123_456';
 
 		await render(Tweet, {
-			tweetLink,
+			tweet_link,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
-			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
+			.toHaveAttribute('href', `https://twitter.com/${tweet_link}`);
 	});
 
 	it('should construct proper Twitter embed URL', async () => {
-		const tweetLink = 'username/status/123456789';
+		const tweet_link = 'username/status/123456789';
 
 		await render(Tweet, {
-			tweetLink,
+			tweet_link,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
 
-		const expectedHref = `https://twitter.com/${tweetLink}`;
+		const expectedHref = `https://twitter.com/${tweet_link}`;
 		await expect
 			.element(tweetElement)
 			.toHaveAttribute('href', expectedHref);
 	});
 
-	it('should handle very long tweetLink values', async () => {
-		const tweetLink = `${'a'.repeat(50)}/status/${'1'.repeat(20)}`;
+	it('should handle very long tweet_link values', async () => {
+		const tweet_link = `${'a'.repeat(50)}/status/${'1'.repeat(20)}`;
 
 		await render(Tweet, {
-			tweetLink,
+			tweet_link,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
-			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
+			.toHaveAttribute('href', `https://twitter.com/${tweet_link}`);
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
 		const { container } = await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 			theme: 'dark',
 		});
 
@@ -131,21 +131,21 @@ describe('Tweet', () => {
 	});
 
 	it('should handle malformed tweet links gracefully', async () => {
-		const tweetLink = 'invalid/format/link';
+		const tweet_link = 'invalid/format/link';
 
 		await render(Tweet, {
-			tweetLink,
+			tweet_link,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
 
 		await expect
 			.element(tweetElement)
-			.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
+			.toHaveAttribute('href', `https://twitter.com/${tweet_link}`);
 	});
 
 	it('should render loading state properly', async () => {
 		await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		const loadingText = page.getByText('Loading Tweet...');
@@ -160,7 +160,7 @@ describe('Tweet', () => {
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
 		await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		expect(createElementSpy).toHaveBeenCalledWith('script');
@@ -183,7 +183,7 @@ describe('Tweet', () => {
 		const removeChildSpy = vi.spyOn(document.head, 'removeChild');
 
 		const { unmount } = await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		// Unmount component
@@ -198,7 +198,7 @@ describe('Tweet', () => {
 
 	it.skip('should have proper accessibility attributes', async () => {
 		const { container } = await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		const link = container.querySelector('a');
@@ -221,15 +221,15 @@ describe('Tweet', () => {
 			'user123/status/456789012',
 		];
 
-		for (const tweetLink of testCases) {
+		for (const tweet_link of testCases) {
 			await render(Tweet, {
-				tweetLink,
+				tweet_link,
 			});
 			const tweetElement = page.getByText('Loading Tweet...');
 
 			await expect
 				.element(tweetElement)
-				.toHaveAttribute('href', `https://twitter.com/${tweetLink}`);
+				.toHaveAttribute('href', `https://twitter.com/${tweet_link}`);
 		}
 	});
 
@@ -243,7 +243,7 @@ describe('Tweet', () => {
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
 		await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 		});
 
 		// Should not create a new script since one already exists
@@ -258,7 +258,7 @@ describe('Tweet', () => {
 
 	it('should handle theme prop correctly', async () => {
 		const { container } = await render(Tweet, {
-			tweetLink: 'twitterdev/status/1399879412994844160',
+			tweet_link: 'twitterdev/status/1399879412994844160',
 			theme: 'dark',
 		});
 

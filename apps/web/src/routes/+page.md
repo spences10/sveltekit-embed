@@ -702,7 +702,7 @@ Output:
 Props:
 
 ```ts
-tweetLink: string = '';
+tweet_link: string = '';
 theme: string = 'dark' | 'light' = 'light';
 ```
 
@@ -710,7 +710,7 @@ Usage:
 
 ```html
 <Tweet
-	tweetLink="adamwathan/status/959078631434731521"
+	tweet_link="adamwathan/status/959078631434731521"
 	theme="dark"
 />
 ```
@@ -718,7 +718,7 @@ Usage:
 Output:
 
 <Tweet 
-  tweetLink="adamwathan/status/959078631434731521" 
+  tweet_link="adamwathan/status/959078631434731521" 
   theme="dark"
 />
 

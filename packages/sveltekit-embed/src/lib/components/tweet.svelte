@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	interface Props {
-		tweetLink?: string;
+		tweet_link?: string;
 		theme?: 'light' | 'dark';
 	}
 
-	let { tweetLink = '', theme = 'light' }: Props = $props();
+	let { tweet_link = '', theme = 'light' }: Props = $props();
 
 	let twitter_widgets_script = $state.raw<HTMLScriptElement | null>(
 		null,
@@ -34,7 +36,7 @@
 		twitter_widgets_script = null;
 	};
 
-	$effect.root(() => {
+	onMount(() => {
 		load_twitter_widgets_script();
 		return () => {
 			remove_twitter_widget_script();
@@ -48,7 +50,7 @@
 	data-loaded={twitter_widgets_script != null}
 >
 	<blockquote class="twitter-tweet" data-theme={theme}>
-		<a href={`https://twitter.com/${tweetLink}`}>Loading Tweet...</a>
+		<a href={`https://twitter.com/${tweet_link}`}>Loading Tweet...</a>
 	</blockquote>
 </div>
 
