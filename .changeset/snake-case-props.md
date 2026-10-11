@@ -71,5 +71,10 @@ directly with `loading="lazy"`:
 - Bluesky's iframe `id` is now stable between server and client
   (`bluesky-iframe-` plus a Svelte-generated id).
 - Zencastr removes its player script when the component is destroyed.
+- YouTube and Vimeo size themselves with CSS `aspect-ratio`, so
+  `aspect_ratio` accepts any `width:height` value (for example
+  `21:9`). A value that can't be read falls back to `16:9`.
+- The deprecated `frameborder` attribute is replaced by a CSS border
+  reset on every embed.
 - GenericEmbed types the extra props it passes to the iframe, and
   `skip_to` is typed on Vimeo and YouTube.
