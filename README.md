@@ -15,9 +15,9 @@ packaged up for use.
 
 ![sveltekit embed cover](.github/sveltekit-embed.jpg)
 
-Each component with the exception of `Toot` and `Tweet` is wrapped in
-an intersection observer `GeneralObserver` which will load up the
-component when it scrolls into the viewport.
+Every iframe embed sets `loading="lazy"`, so the browser only loads it
+when it is close to the viewport. Pass `loading="eager"` to load one
+straight away.
 
 ## Use it
 

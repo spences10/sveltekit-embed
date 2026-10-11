@@ -11,8 +11,8 @@ CodePen, and many more with performant, lazy-loaded components.
 
 ## ✨ Features
 
-- 🚀 **Lazy Loading**: All components (except `Toot` and `Tweet`) use
-  intersection observer for performance
+- 🚀 **Lazy Loading**: Every iframe embed uses the browser's native
+  `loading="lazy"`
 - 📱 **Responsive**: Mobile-friendly designs that adapt to different
   screen sizes
 - 🎨 **Customizable**: Flexible props to customize appearance and
@@ -143,13 +143,23 @@ Import and use any component in your Svelte/SvelteKit application:
 
 ## ⚡ Performance Features
 
-All embed components (except `Toot` and `Tweet`) are automatically
-wrapped with an intersection observer that:
+Every iframe embed sets `loading="lazy"`, so the browser:
 
 - Only loads the embed when it's about to enter the viewport
-- Reduces initial page load time
-- Improves Core Web Vitals scores
-- Saves bandwidth for users
+- Renders the iframe on the server, so it holds its space and the page
+  doesn't jump as embeds load
+- Reduces initial page load time and saves bandwidth for users
+
+Pass `loading="eager"` to load an embed straight away. `Bluesky`,
+`Tweet`, `Toot` and `Zencastr` load in their own way and do not take a
+`loading` prop.
+
+To lazy load your own markup, the package also exports an `in_view`
+attachment:
+
+```svelte
+<div {@attach in_view({ on_enter: () => (visible = true) })}>
+```
 
 ## 🔧 TypeScript Support
 

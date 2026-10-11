@@ -7,7 +7,6 @@ describe('Spotify', () => {
 	it('mounts with spotify link', async () => {
 		const { container } = await render(Spotify, {
 			spotify_link: 'track/4uLU6hMCjMI75M1A2tKUQC',
-			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
@@ -16,27 +15,25 @@ describe('Spotify', () => {
 		const spotify_link = 'track/4uLU6hMCjMI75M1A2tKUQC';
 		await render(Spotify, {
 			spotify_link,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		const expected_src = `https://open.spotify.com/embed/${spotify_link}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Spotify, {
 			spotify_link: 'track/4uLU6hMCjMI75M1A2tKUQC',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty spotify_link gracefully', async () => {
 		await render(Spotify, {
 			spotify_link: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		const expected_src = 'https://open.spotify.com/embed/';
@@ -46,7 +43,6 @@ describe('Spotify', () => {
 	it('should apply default height and width when not provided', async () => {
 		await render(Spotify, {
 			spotify_link: 'track/test',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
@@ -65,7 +61,6 @@ describe('Spotify', () => {
 		const spotify_link = 'playlist/37i9dQZF1DXcBWIGoYBM5M';
 		await render(Spotify, {
 			spotify_link,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		const expected_src = `https://open.spotify.com/embed/${spotify_link}`;
@@ -76,7 +71,6 @@ describe('Spotify', () => {
 		// Test track
 		await render(Spotify, {
 			spotify_link: 'track/4uLU6hMCjMI75M1A2tKUQC',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('spotify'))
@@ -88,7 +82,6 @@ describe('Spotify', () => {
 		// Test album
 		await render(Spotify, {
 			spotify_link: 'album/1DFixLWuPkv3KT3TnV35m3',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('spotify'))
@@ -100,7 +93,6 @@ describe('Spotify', () => {
 		// Test playlist
 		await render(Spotify, {
 			spotify_link: 'playlist/37i9dQZF1DXcBWIGoYBM5M',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('spotify'))
@@ -112,7 +104,6 @@ describe('Spotify', () => {
 		// Test artist
 		await render(Spotify, {
 			spotify_link: 'artist/4NHQUGzhtTLFvgF5SZesLK',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('spotify'))
@@ -126,7 +117,6 @@ describe('Spotify', () => {
 		const spotify_link = 'track/abc123_def-456';
 		await render(Spotify, {
 			spotify_link,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		await expect
@@ -144,7 +134,6 @@ describe('Spotify', () => {
 		const spotify_link = 'track/accessibility-test';
 		await render(Spotify, {
 			spotify_link,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 
@@ -164,7 +153,6 @@ describe('Spotify', () => {
 		const spotify_link = 'track/' + 'a'.repeat(100);
 		await render(Spotify, {
 			spotify_link,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		await expect
@@ -180,7 +168,6 @@ describe('Spotify', () => {
 		await render(Spotify, {
 			spotify_link: 'track/test',
 			iframe_styles: customStyles,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
@@ -196,7 +183,6 @@ describe('Spotify', () => {
 			spotify_link: 'track/test',
 			width: '500px',
 			height: '300px',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
@@ -210,7 +196,6 @@ describe('Spotify', () => {
 		const spotify_link = 'invalid/content/with/extra/slashes';
 		await render(Spotify, {
 			spotify_link,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 
@@ -226,7 +211,6 @@ describe('Spotify', () => {
 	it('should render with proper CSS class structure', async () => {
 		await render(Spotify, {
 			spotify_link: 'track/test',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 
@@ -240,7 +224,6 @@ describe('Spotify', () => {
 		const linkWithParams = 'track/4uLU6hMCjMI75M1A2tKUQC?si=abc123';
 		await render(Spotify, {
 			spotify_link: linkWithParams,
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('spotify'))
@@ -253,7 +236,6 @@ describe('Spotify', () => {
 		const justId = '4uLU6hMCjMI75M1A2tKUQC';
 		await render(Spotify, {
 			spotify_link: justId,
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('spotify'))

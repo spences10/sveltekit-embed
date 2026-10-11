@@ -24,8 +24,6 @@
   https://guild.host/embeds/presentation/microfrontends-with-e6mtnf/item
 -->
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		height?: string;
 		width?: string;
@@ -40,7 +38,7 @@
 			| 'presentations/latest'
 			| 'presentations/upcoming'
 			| 'presentations/other';
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 	}
 
 	let {
@@ -49,28 +47,28 @@
 		card_id,
 		type = 'guild',
 		display_type = 'card',
-		disable_observer = false,
+		loading = 'lazy',
 	}: Props = $props();
 </script>
 
-<GeneralObserver {disable_observer}>
-	<div
-		class="guild-card"
-		style={`
+<div
+	class="guild-card"
+	style={`
       position: relative;
       height: ${height};
       width: ${width};
     `}
-	>
-		<iframe
-			data-testid="guild-card"
-			title={`guild-card-${card_id}`}
-			src={`https://guild.host/embeds/${type}/${card_id}/${display_type}`}
-			{height}
-			{width}
-			frameborder="0"
-			scrolling="no"
-			style={`
+>
+	<iframe
+		data-testid="guild-card"
+		title={`guild-card-${card_id}`}
+		{loading}
+		src={`https://guild.host/embeds/${type}/${card_id}/${display_type}`}
+		{height}
+		{width}
+		frameborder="0"
+		scrolling="no"
+		style={`
         position: absolute;
         top: 0;
         left: 0;
@@ -78,6 +76,5 @@
         height: 100%;
         border-radius: 0.5rem;
       `}
-		></iframe>
-	</div>
-</GeneralObserver>
+	></iframe>
+</div>

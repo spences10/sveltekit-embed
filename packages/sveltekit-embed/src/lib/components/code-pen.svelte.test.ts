@@ -9,7 +9,6 @@ describe('CodePen', () => {
 	it('mounts', async () => {
 		const { container } = await render(CodePen, {
 			codepen_id,
-			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
@@ -17,7 +16,6 @@ describe('CodePen', () => {
 	it('renders iframe with correct attributes', async () => {
 		await render(CodePen, {
 			codepen_id,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTitle(`codepen-${codepen_id}`);
@@ -47,27 +45,25 @@ describe('CodePen', () => {
 			codepen_id,
 			height: '200px',
 			width: '50%',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		expect(iframe?.getAttribute('style')).toContain('height: 200px');
 		expect(iframe?.getAttribute('style')).toContain('width: 50%');
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(CodePen, {
 			codepen_id,
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	describe('Edge Cases', () => {
 		it('should handle empty codepen_id gracefully', async () => {
 			await render(CodePen, {
 				codepen_id: '',
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle('codepen-');
@@ -82,7 +78,6 @@ describe('CodePen', () => {
 			const specialId = 'abc-123_test';
 			await render(CodePen, {
 				codepen_id: specialId,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle(`codepen-${specialId}`);
@@ -97,7 +92,6 @@ describe('CodePen', () => {
 		it('should apply default prop values when not provided', async () => {
 			const { container } = await render(CodePen, {
 				codepen_id,
-				disable_observer: true,
 			});
 
 			const iframe = container.querySelector(
@@ -125,7 +119,6 @@ describe('CodePen', () => {
 				await render(CodePen, {
 					codepen_id: uniqueId,
 					tabs: tab as any,
-					disable_observer: true,
 				});
 
 				const iframe = page.getByTitle(`codepen-${uniqueId}`);
@@ -141,7 +134,6 @@ describe('CodePen', () => {
 			await render(CodePen, {
 				codepen_id: uniqueId,
 				tabs: tabsArray as any,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle(`codepen-${uniqueId}`);
@@ -162,7 +154,6 @@ describe('CodePen', () => {
 				await render(CodePen, {
 					codepen_id: uniqueId,
 					theme,
-					disable_observer: true,
 				});
 
 				const iframe = page.getByTitle(`codepen-${uniqueId}`);
@@ -180,7 +171,6 @@ describe('CodePen', () => {
 			await render(CodePen, {
 				codepen_id: falseId,
 				click_to_load: false,
-				disable_observer: true,
 			});
 
 			const iframeFalse = page.getByTitle(`codepen-${falseId}`);
@@ -194,7 +184,6 @@ describe('CodePen', () => {
 			await render(CodePen, {
 				codepen_id: trueId,
 				click_to_load: true,
-				disable_observer: true,
 			});
 
 			const iframeTrue = page.getByTitle(`codepen-${trueId}`);
@@ -211,7 +200,6 @@ describe('CodePen', () => {
 			await render(CodePen, {
 				codepen_id: falseId,
 				editable: false,
-				disable_observer: true,
 			});
 
 			const iframeFalse = page.getByTitle(`codepen-${falseId}`);
@@ -224,7 +212,6 @@ describe('CodePen', () => {
 			await render(CodePen, {
 				codepen_id: trueId,
 				editable: true,
-				disable_observer: true,
 			});
 
 			const iframeTrue = page.getByTitle(`codepen-${trueId}`);
@@ -241,7 +228,6 @@ describe('CodePen', () => {
 			await render(CodePen, {
 				codepen_id,
 				iframe_styles: customStyles,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle(`codepen-${codepen_id}`);
@@ -257,7 +243,6 @@ describe('CodePen', () => {
 				codepen_id,
 				height: customHeight,
 				width: customWidth,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle(`codepen-${codepen_id}`);
@@ -278,7 +263,6 @@ describe('CodePen', () => {
 				tabs: 'js',
 				editable: false,
 				click_to_load: false,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle('codepen-test123');
@@ -299,7 +283,6 @@ describe('CodePen', () => {
 		it('should have proper iframe accessibility attributes', async () => {
 			await render(CodePen, {
 				codepen_id,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle(`codepen-${codepen_id}`);
@@ -318,7 +301,6 @@ describe('CodePen', () => {
 		it('should render with proper CSS class', async () => {
 			await render(CodePen, {
 				codepen_id,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTitle(`codepen-${codepen_id}`);
@@ -335,7 +317,6 @@ describe('CodePen', () => {
 			const second_id = `${codepen_id}-reactive-b`;
 			const { rerender } = await render(CodePen, {
 				codepen_id: first_id,
-				disable_observer: true,
 			});
 
 			await expect

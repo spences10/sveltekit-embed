@@ -19,7 +19,6 @@ describe('Slides', () => {
 			byline: 'visible',
 			share: 'visible',
 			style: 'light',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTitle(title, { exact: false });
@@ -33,7 +32,6 @@ describe('Slides', () => {
 			height: '300px',
 			username: 'my-username',
 			title: 'my-slides',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -44,14 +42,14 @@ describe('Slides', () => {
 		}
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Slides, {
 			username: 'my-username',
 			title: 'my-slides',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
@@ -59,7 +57,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username: '',
 			title: 'test-slides',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		expect(iframe).toBeTruthy();
@@ -71,7 +68,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username: 'test-user',
 			title: '',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		expect(iframe).toBeTruthy();
@@ -80,9 +76,7 @@ describe('Slides', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { container } = await render(Slides, {
-			disable_observer: true,
-		});
+		const { container } = await render(Slides, {});
 		const iframe = container.querySelector('iframe');
 		expect(iframe).toBeTruthy();
 
@@ -108,7 +102,6 @@ describe('Slides', () => {
 			username,
 			title,
 			style: 'light',
-			disable_observer: true,
 		});
 		const lightIframe = lightContainer.querySelector('iframe');
 		expect(lightIframe?.getAttribute('src')).toContain('style=light');
@@ -118,7 +111,6 @@ describe('Slides', () => {
 			username,
 			title,
 			style: 'dark',
-			disable_observer: true,
 		});
 		const darkIframe = darkContainer.querySelector('iframe');
 		expect(darkIframe?.getAttribute('src')).toContain('style=dark');
@@ -128,7 +120,6 @@ describe('Slides', () => {
 			username,
 			title,
 			style: 'transparent',
-			disable_observer: true,
 		});
 		const transparentIframe =
 			transparentContainer.querySelector('iframe');
@@ -146,7 +137,6 @@ describe('Slides', () => {
 			username,
 			title,
 			byline: 'visible',
-			disable_observer: true,
 		});
 		const visibleIframe = visibleContainer.querySelector('iframe');
 		expect(visibleIframe?.getAttribute('src')).toContain(
@@ -158,7 +148,6 @@ describe('Slides', () => {
 			username,
 			title,
 			byline: 'hidden',
-			disable_observer: true,
 		});
 		const hiddenIframe = hiddenContainer.querySelector('iframe');
 		expect(hiddenIframe?.getAttribute('src')).toContain(
@@ -175,7 +164,6 @@ describe('Slides', () => {
 			username,
 			title,
 			share: 'visible',
-			disable_observer: true,
 		});
 		const visibleIframe = visibleContainer.querySelector('iframe');
 		expect(visibleIframe?.getAttribute('src')).toContain(
@@ -187,7 +175,6 @@ describe('Slides', () => {
 			username,
 			title,
 			share: 'hidden',
-			disable_observer: true,
 		});
 		const hiddenIframe = hiddenContainer.querySelector('iframe');
 		expect(hiddenIframe?.getAttribute('src')).toContain(
@@ -204,7 +191,6 @@ describe('Slides', () => {
 			style: 'light',
 			byline: 'visible',
 			share: 'visible',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -223,7 +209,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username,
 			title,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -239,7 +224,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username: 'test-user',
 			title,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -256,7 +240,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username,
 			title,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -272,7 +255,6 @@ describe('Slides', () => {
 			title: 'test-slides',
 			width: '500',
 			height: '300',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -286,7 +268,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username,
 			title,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -301,7 +282,6 @@ describe('Slides', () => {
 		const { container } = await render(Slides, {
 			username: 'test-user',
 			title: 'test-slides',
-			disable_observer: true,
 		});
 
 		// Check that iframe has proper styling
@@ -316,7 +296,6 @@ describe('Slides', () => {
 			style: 'light',
 			byline: 'visible',
 			share: 'hidden',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -334,7 +313,6 @@ describe('Slides', () => {
 		const { rerender } = await render(Slides, {
 			username: 'reactive-user',
 			title: 'deck-one',
-			disable_observer: true,
 		});
 
 		await expect

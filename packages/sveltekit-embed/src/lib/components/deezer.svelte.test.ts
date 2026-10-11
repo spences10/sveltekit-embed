@@ -20,7 +20,6 @@ describe('Deezer', () => {
 			frame_src,
 			height,
 			width,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('deezer-widget');
 		const expected_src = `https://widget.deezer.com/widget/${theme}/${frame_src}`;
@@ -33,7 +32,6 @@ describe('Deezer', () => {
 			frame_src,
 			height: '200px',
 			width: '50%',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -41,14 +39,14 @@ describe('Deezer', () => {
 		expect(iframe?.getAttribute('style')).toContain(`width: 50%`);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Deezer, {
 			theme,
 			frame_src,
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	describe('Edge Cases', () => {
@@ -56,7 +54,6 @@ describe('Deezer', () => {
 			await render(Deezer, {
 				theme,
 				frame_src: '',
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -72,7 +69,6 @@ describe('Deezer', () => {
 			await render(Deezer, {
 				theme,
 				frame_src: specialFrameSrc,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -85,7 +81,6 @@ describe('Deezer', () => {
 			await render(Deezer, {
 				theme,
 				frame_src: longFrameSrc,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -98,7 +93,6 @@ describe('Deezer', () => {
 		it('should apply default theme when not provided', async () => {
 			await render(Deezer, {
 				frame_src,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -110,7 +104,6 @@ describe('Deezer', () => {
 			await render(Deezer, {
 				theme,
 				frame_src,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -129,7 +122,6 @@ describe('Deezer', () => {
 				await render(Deezer, {
 					theme: testTheme,
 					frame_src: uniqueFrameSrc,
-					disable_observer: true,
 				});
 				const iframe = page.getByTitle('deezer-widget');
 				const element = iframe.element() as HTMLIFrameElement;
@@ -148,7 +140,6 @@ describe('Deezer', () => {
 				theme,
 				frame_src,
 				iframe_styles: customStyles,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -162,7 +153,6 @@ describe('Deezer', () => {
 				frame_src,
 				height: '400px',
 				width: '80%',
-				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 
@@ -178,7 +168,6 @@ describe('Deezer', () => {
 			await render(Deezer, {
 				theme: testTheme,
 				frame_src: testFrameSrc,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -193,7 +182,6 @@ describe('Deezer', () => {
 			await render(Deezer, {
 				theme,
 				frame_src,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 
@@ -216,7 +204,6 @@ describe('Deezer', () => {
 		it('should update the iframe when props change', async () => {
 			const { rerender } = await render(Deezer, {
 				frame_src: 'show/111',
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 

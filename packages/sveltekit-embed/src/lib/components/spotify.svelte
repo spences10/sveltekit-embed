@@ -1,11 +1,9 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		spotify_link?: string;
 		width?: string;
 		height?: string;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		iframe_styles?: string;
 	}
 
@@ -13,7 +11,7 @@
 		spotify_link = '',
 		width = '100%',
 		height = '152px',
-		disable_observer = false,
+		loading = 'lazy',
 		iframe_styles,
 	}: Props = $props();
 
@@ -27,14 +25,13 @@
 	);
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe
-		data-testid="spotify"
-		title={`spotify-${spotify_link}`}
-		class="spotify-sveltekit-embed"
-		src={`https://open.spotify.com/embed/${spotify_link}`}
-		frameBorder="0"
-		allow="encrypted-media"
-		style={styles}
-	></iframe>
-</GeneralObserver>
+<iframe
+	data-testid="spotify"
+	title={`spotify-${spotify_link}`}
+	class="spotify-sveltekit-embed"
+	{loading}
+	src={`https://open.spotify.com/embed/${spotify_link}`}
+	frameBorder="0"
+	allow="encrypted-media"
+	style={styles}
+></iframe>

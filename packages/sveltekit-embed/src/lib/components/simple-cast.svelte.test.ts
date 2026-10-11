@@ -14,27 +14,25 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'dark',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const expected_src = `https://player.simplecast.com/${episode_id}?dark=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(SimpleCast, {
 			episode_id: '67890',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
 	it.skip('should handle empty episode_id gracefully', async () => {
 		await render(SimpleCast, {
 			episode_id: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const expected_src = 'https://player.simplecast.com/';
@@ -42,9 +40,7 @@ describe('SimpleCast', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		await render(SimpleCast, {
-			disable_observer: true,
-		});
+		await render(SimpleCast, {});
 		const iframe = page.getByTestId('simplecast-episode');
 		// Default episode_id is '', theme is 'dark'
 		const expected_src = 'https://player.simplecast.com/?dark=true';
@@ -61,7 +57,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'light',
-			disable_observer: true,
 		});
 		const lightIframe = page.getByTestId('simplecast-episode');
 		await expect
@@ -75,7 +70,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'dark',
-			disable_observer: true,
 		});
 		const darkIframe = page.getByTestId('simplecast-episode');
 		await expect
@@ -91,7 +85,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'dark',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const expected_src = `https://player.simplecast.com/${episode_id}?dark=true`;
@@ -103,7 +96,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'light',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const expected_src = `https://player.simplecast.com/${episode_id}`;
@@ -117,7 +109,6 @@ describe('SimpleCast', () => {
 		const episode_id = 'accessibility-test';
 		await render(SimpleCast, {
 			episode_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		await expect
@@ -133,7 +124,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'light',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const expected_src = `https://player.simplecast.com/${episode_id}`;
@@ -143,7 +133,6 @@ describe('SimpleCast', () => {
 	it('should apply custom CSS styles correctly', async () => {
 		await render(SimpleCast, {
 			episode_id: 'style-test',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const iframeElement = iframe.element() as HTMLIFrameElement;
@@ -159,7 +148,6 @@ describe('SimpleCast', () => {
 	it('should handle numeric height and width values', async () => {
 		const { container } = await render(SimpleCast, {
 			episode_id: 'numeric-test',
-			disable_observer: true,
 		});
 
 		const embedDiv = container.querySelector(
@@ -176,7 +164,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'dark',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		const expected_src = `https://player.simplecast.com/${episode_id}?dark=true`;
@@ -186,7 +173,6 @@ describe('SimpleCast', () => {
 	it('should render with proper CSS class structure', async () => {
 		const { container } = await render(SimpleCast, {
 			episode_id: 'class-test',
-			disable_observer: true,
 		});
 
 		const embedDiv = container.querySelector(
@@ -205,7 +191,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'light',
-			disable_observer: true,
 		});
 		const lightIframe = page.getByTestId('simplecast-episode');
 		await expect
@@ -219,7 +204,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'dark',
-			disable_observer: true,
 		});
 		const darkIframe = page.getByTestId('simplecast-episode');
 		await expect
@@ -233,7 +217,6 @@ describe('SimpleCast', () => {
 		await render(SimpleCast, {
 			episode_id,
 			theme: 'custom',
-			disable_observer: true,
 		});
 		const customIframe = page.getByTestId('simplecast-episode');
 		await expect

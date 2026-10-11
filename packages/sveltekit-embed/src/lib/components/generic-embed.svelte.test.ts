@@ -10,7 +10,6 @@ describe('GenericEmbed', () => {
 			title: 'Test Title',
 			height: '152px',
 			width: '100%',
-			disable_observer: true,
 			children: (() => {}) as any,
 		});
 		expect(container).toBeTruthy();
@@ -27,7 +26,6 @@ describe('GenericEmbed', () => {
 			title,
 			height,
 			width,
-			disable_observer: true,
 			children: (() => {}) as any,
 		});
 		const iframe = page.getByTitle(title);
@@ -44,7 +42,6 @@ describe('GenericEmbed', () => {
 				'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)',
 			height: '200px',
 			width: '50%',
-			disable_observer: true,
 			children: (() => {}) as any,
 		});
 		const iframe = container.querySelector('iframe');
@@ -56,18 +53,18 @@ describe('GenericEmbed', () => {
 		}
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(GenericEmbed, {
 			src: 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
 			title:
 				'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)',
 			height: '152px',
 			width: '100%',
-			disable_observer: false,
 			children: (() => {}) as any,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	describe('Edge Cases', () => {
@@ -77,7 +74,6 @@ describe('GenericEmbed', () => {
 				title: 'Test Title',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = container.querySelector('iframe');
@@ -94,7 +90,6 @@ describe('GenericEmbed', () => {
 				title: 'Special URL Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = page.getByTitle('Special URL Test');
@@ -109,7 +104,6 @@ describe('GenericEmbed', () => {
 				title: specialTitle,
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = page.getByTitle(specialTitle);
@@ -126,7 +120,6 @@ describe('GenericEmbed', () => {
 				title: 'Long URL Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = page.getByTitle('Long URL Test');
@@ -141,7 +134,6 @@ describe('GenericEmbed', () => {
 				title: longTitle,
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = page.getByTitle(longTitle);
@@ -158,7 +150,6 @@ describe('GenericEmbed', () => {
 				title: 'Malformed URL Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = page.getByTitle('Malformed URL Test');
@@ -177,7 +168,6 @@ describe('GenericEmbed', () => {
 				title: 'Default Props Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = container.querySelector('iframe');
@@ -198,7 +188,6 @@ describe('GenericEmbed', () => {
 				title: 'Numeric Dimensions Test',
 				height: '300px',
 				width: '80%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = container.querySelector('iframe');
@@ -218,7 +207,6 @@ describe('GenericEmbed', () => {
 				title: 'Security Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 			const iframe = page.getByTitle('Security Test');
@@ -239,7 +227,6 @@ describe('GenericEmbed', () => {
 				title: 'Structure Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 			});
 
@@ -256,7 +243,6 @@ describe('GenericEmbed', () => {
 				title: 'Rest Props Test',
 				height: '152px',
 				width: '100%',
-				disable_observer: true,
 				children: (() => {}) as any,
 				frameborder: '0',
 				allowfullscreen: true,

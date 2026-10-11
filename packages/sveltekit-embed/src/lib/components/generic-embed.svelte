@@ -1,14 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLIframeAttributes } from 'svelte/elements';
-	import GeneralObserver from './general-observer.svelte';
 
 	interface Props extends HTMLIframeAttributes {
 		src?: string;
 		title?: string;
 		height?: string;
 		width?: string;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		children?: Snippet;
 	}
 
@@ -17,13 +16,11 @@
 		title = '',
 		height = '152px',
 		width = '100%',
-		disable_observer = false,
+		loading = 'lazy',
 		children,
 		...rest
 	}: Props = $props();
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe {src} {width} {height} {title} {...rest}></iframe>
-	{@render children?.()}
-</GeneralObserver>
+<iframe {loading} {src} {width} {height} {title} {...rest}></iframe>
+{@render children?.()}

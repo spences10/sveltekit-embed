@@ -1,6 +1,4 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		height?: string;
 		width?: string;
@@ -9,7 +7,7 @@
 		click_to_load?: boolean;
 		editable?: boolean;
 		theme?: string | 'light' | 'dark' | 'default';
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		iframe_styles?: string;
 	}
 
@@ -21,7 +19,7 @@
 		click_to_load = true,
 		editable = true,
 		theme = 'default',
-		disable_observer = false,
+		loading = 'lazy',
 		iframe_styles,
 	}: Props = $props();
 
@@ -41,13 +39,12 @@
 	);
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe
-		class="code-pen-sveltekit-embed"
-		title={`codepen-${codepen_id}`}
-		{src}
-		frameborder="no"
-		allowfullscreen
-		style={styles}
-	></iframe>
-</GeneralObserver>
+<iframe
+	class="code-pen-sveltekit-embed"
+	title={`codepen-${codepen_id}`}
+	{loading}
+	{src}
+	frameborder="no"
+	allowfullscreen
+	style={styles}
+></iframe>

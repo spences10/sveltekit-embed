@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/env'
 	import { page } from '$app/state'
 	import {
 		AnchorFm,
@@ -24,8 +23,6 @@
 		Zencastr,
 	} from 'sveltekit-embed'
 	import { Head } from 'svead'
-	import { onMount } from 'svelte'
-	import { writable } from 'svelte/store'
   import BackToTop from './back-to-top.svelte'
 
 	// Head variables
@@ -35,37 +32,6 @@
 	let image = `https://og.tailgraph.com/og?fontFamily=Roboto&title=SvelteKit%20Embed&titleTailwind=text-gray-800+font-bold+text-6xl&text=Embed%203rd%20part%20media%20in%20your%20SvelteKit%20projects%20with%20SvelteKit%20Embed.&textTailwind=text-gray-700+text-2xl+mt-4&logoTailwind=h-8&bgTailwind=bg-white&footer=sveltekit-embed.vercel.app&footerTailwind=text-teal-600`
 	let website = 'https://sveltekit-embed.vercel.app'
 	let url = page.url.toString()
-
-	const default_value = true
-	const stored_value = browser
-		? window.localStorage.getItem('disable_observer')
-		: null
-	const disable_observer_store = writable(
-		stored_value !== null ? JSON.parse(stored_value) : default_value
-	)
-
-	disable_observer_store.subscribe(value => {
-		if (browser) {
-			window.localStorage.setItem(
-				'disable_observer',
-				JSON.stringify(value)
-			)
-		}
-	})
-
-	let disable_observer: boolean = true
-	disable_observer_store.subscribe(value => {
-		disable_observer = value
-	})
-
-	onMount(() => {
-		disable_observer_store.update(() => {
-			return disable_observer
-		})
-	})
-	$: enabled_state = $disable_observer_store
-		? 'enabled so all the components are loaded on page load'
-		: 'disabled so components are only loaded when they scroll into viewport'
 </script>
 
 <Head
@@ -87,30 +53,29 @@
 This is a collection of embed components I use on a regular basis
 packaged up for use.
 
-Each component (except `Tweet`, `Toot` and `Zencastr`) is wrapped in
-an intersection observer `GeneralObserver` which will load up the
-component when it scrolls into the viewport.
+Every iframe embed sets `loading="lazy"`, so the browser only loads it
+when it is close to the viewport. The iframe is still in the page from
+the first render, so it holds its space while you scroll. Pass
+`loading="eager"` to any of them to load it straight away.
 
-**Currently the GeneralObserver is {enabled_state}.**
+`Bluesky`, `Tweet`, `Toot` and `Zencastr` load in their own way and do
+not take a `loading` prop.
 
-You can toggle the GeneralObserver on and off from here, just bear in
-mind that if this is the first time you've loaded this page then the
-default is to load all the components.
+To lazy load your own markup, use the `in_view` attachment:
 
-If you want to see the intersection observer in action then you'll
-need to toggle it off, reload the page and scroll down the page.
+```svelte
+<script>
+	import { in_view } from 'sveltekit-embed';
 
-<div class="flex items-center">
-  <label for="general-observer-toggle" class="mr-2">
-    Toggle the GeneralObserver:
-  </label>
-  <input
-    id="general-observer-toggle"
-    class="toggle toggle-sm"
-    type="checkbox"
-    bind:checked={$disable_observer_store}
-  />
+	let visible = $state(false);
+</script>
+
+<div {@attach in_view({ on_enter: () => (visible = true) })}>
+	{#if visible}
+		<!-- your content -->
+	{/if}
 </div>
+```
 
 All props listed are the defaults for the component.
 
@@ -168,7 +133,7 @@ Props:
 episode_url: string;
 height: string = '100px';
 width: string = '100%';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 ```
 
 Usage:
@@ -182,7 +147,6 @@ Usage:
 Output:
 
 <AnchorFm
-  disable_observer={$disable_observer_store}
   episode_url="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 
@@ -240,7 +204,7 @@ Props:
 buzzsprout_id: string;
 width: string = '100%';
 height: string = '200px';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 ```
 
 Usage:
@@ -254,7 +218,6 @@ Usage:
 Output:
 
 <Buzzsprout
-  disable_observer={$disable_observer_store}
   buzzsprout_id="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
 />
 
@@ -276,7 +239,7 @@ tabs:
 click_to_load: boolean = true
 editable: boolean = true
 theme: string | 'light' | 'dark' | 'default' = 'default'
-disable_observer: boolean = false
+loading: 'lazy' | 'eager' = 'lazy'
 iframe_styles: string = `
   height: ${height};
   width: ${width};
@@ -295,7 +258,6 @@ take the `codepen_id` this `WNMvXpa` and add it to the component.
 Output:
 
 <CodePen
-  disable_observer={$disable_observer_store}
   codepen_id="WNMvXpa"
 />
 
@@ -308,11 +270,11 @@ theme: string = 'auto';
 frame_src: string = '';
 height: string = '300px';
 width: string = '100%';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 iframe_styles: string = `
   border-radius: 0.6rem;
   height: ${height};
-  width: ${width};	
+  width: ${width};
 `;
 ```
 
@@ -325,7 +287,6 @@ Usage:
 Output:
 
 <Deezer
-  disable_observer={$disable_observer_store}
   frame_src="show/496882"
 />
 
@@ -342,7 +303,7 @@ src: string = '';
 title: string = '';
 height: string = '152px';
 width: string = '100%';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 ```
 
 Usage:
@@ -383,7 +344,7 @@ Props:
 width = '100%';
 height = '320px';
 gist_uri = '';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 iframe_styles: string = `
   height: ${height};
   width: ${width};
@@ -399,7 +360,6 @@ Usage:
 Output:
 
 <Gist
-  disable_observer={$disable_observer_store}
   gist_uri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" 
 />
 
@@ -422,7 +382,7 @@ display_type:
   | 'presentations/latest'
   | 'presentations/upcoming'
   | 'presentations/other' = 'card'
-disable_observer: boolean = false
+loading: 'lazy' | 'eager' = 'lazy'
 ```
 
 Usage:
@@ -438,7 +398,6 @@ Usage:
 Output:
 
 <Guild
-  disable_observer={$disable_observer_store}
   type="guild"
   card_id="svelte-society-london"
   display_type="card"
@@ -451,7 +410,7 @@ Props:
 ```ts
 relive_id: string = '';
 width: string = '100%';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 ```
 
 Usage:
@@ -463,7 +422,6 @@ Usage:
 Output:
 
 <Relive
-  disable_observer={$disable_observer_store}
   relive_id="vAOZokmYVo6" 
 />
 
@@ -474,7 +432,7 @@ Props:
 ```ts
 episode_id: string = '';
 theme: string = `dark`;
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 ```
 
 Usage:
@@ -486,7 +444,6 @@ Usage:
 Output:
 
 <SimpleCast 
-  disable_observer={$disable_observer_store}
   episode_id="1c254f66-5d75-48ef-b960-4cfec94baa0b" 
 />
 
@@ -507,7 +464,7 @@ style:
   | 'hidden'
   | 'transparent'
   | 'default' = 'dark'
-disable_observer: boolean = false
+loading: 'lazy' | 'eager' = 'lazy'
 ```
 
 Usage:
@@ -522,7 +479,6 @@ Usage:
 Output:
 
 <Slides 
-  disable_observer={$disable_observer_store}
   username="spences10"
   title="building-with-sveltekit-and-graphql"
 />
@@ -536,7 +492,7 @@ soundcloud_link: string = '';
 width: string = '100%';
 height: string = '300px';
 show_visual: boolean = true;
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 iframe_styles: string = '';
 ```
 
@@ -551,7 +507,6 @@ Usage:
 Output:
 
 <SoundCloud
-  disable_observer={$disable_observer_store}
   soundcloud_link="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
 />
 
@@ -563,7 +518,7 @@ Props:
 spotify_link: string = '';
 width: string = '100%';
 height: string = '152px';
-disable_observer: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 iframe_styles: string = `
   border-radius: 0.8rem;
   height: ${height};
@@ -580,7 +535,6 @@ Usage:
 Output:
 
 <Spotify
-  disable_observer={$disable_observer_store}
   spotify_link="show/4XPl3uEEL9hvqMkoZrzbx5" 
 />
 
@@ -598,7 +552,7 @@ hide_navigation: boolean = false //hideNavigation
 hide_explorer: boolean = true
 theme: string | 'light' | 'dark' | 'default' = 'dark'
 file: string | undefined
-disable_observer: boolean = false
+loading: 'lazy' | 'eager' = 'lazy'
 iframe_styles: string = `
   height: ${height};
   width: ${width};
@@ -613,7 +567,6 @@ Usage:
 Output:
 
 <StackBlitz
-  disable_observer={$disable_observer_store}
   id="vitejs-vite-yyoood"
   hide_navigation
 />
@@ -639,7 +592,7 @@ description?: boolean = false;
 rel?: boolean = true;
 native_context_menu?: boolean = true;
 closed_caption?: boolean = true;
-disable_observer?: boolean = false;
+loading: 'lazy' | 'eager' = 'lazy';
 ```
 
 Usage:
@@ -659,7 +612,6 @@ Usage:
 Output:
 
 <TikTok
-  disable_observer={$disable_observer_store}
   tiktok_id="6718335390845095173"
   width="100%"
   height="600px"
@@ -731,7 +683,7 @@ vimeo_id: string = ''
 autoplay: boolean = false
 aspect_ratio: string = '16:9'
 skip_to: { h: 0, m: 0, s: 0 }
-disable_observer: boolean = false
+loading: 'lazy' | 'eager' = 'lazy'
 ```
 
 Usage:
@@ -743,7 +695,6 @@ Usage:
 Output:
 
 <Vimeo
-  disable_observer={$disable_observer_store}
   vimeo_id="246846978" 
 />
 

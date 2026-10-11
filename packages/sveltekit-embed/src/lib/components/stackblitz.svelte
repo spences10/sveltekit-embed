@@ -1,6 +1,4 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	type Config = {
 		[key: string]: string;
 	};
@@ -15,7 +13,7 @@
 		hide_explorer?: boolean;
 		theme?: string | 'light' | 'dark' | 'default';
 		file?: string;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		iframe_styles?: string;
 	}
 
@@ -29,7 +27,7 @@
 		hide_explorer = true,
 		theme = 'dark',
 		file,
-		disable_observer = false,
+		loading = 'lazy',
 		iframe_styles,
 	}: Props = $props();
 
@@ -59,13 +57,12 @@
 	});
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe
-		class="stackblitz-sveltekit-embed"
-		title={`stackblitz-${id}`}
-		{src}
-		frameborder="no"
-		allowfullscreen
-		style={styles}
-	></iframe>
-</GeneralObserver>
+<iframe
+	class="stackblitz-sveltekit-embed"
+	title={`stackblitz-${id}`}
+	{loading}
+	{src}
+	frameborder="no"
+	allowfullscreen
+	style={styles}
+></iframe>

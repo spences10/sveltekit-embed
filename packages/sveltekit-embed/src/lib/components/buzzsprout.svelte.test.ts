@@ -9,7 +9,6 @@ describe('Buzzsprout', () => {
 	it('mounts with buzzsprout_id', async () => {
 		const { container } = await render(Buzzsprout, {
 			buzzsprout_id,
-			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
@@ -17,7 +16,6 @@ describe('Buzzsprout', () => {
 	it('renders iframe with buzzsprout_id', async () => {
 		await render(Buzzsprout, {
 			buzzsprout_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('buzzsprout');
 		const expected_src = `https://www.buzzsprout.com/${buzzsprout_id}?client_source=admin&iframe=true`;
@@ -29,7 +27,6 @@ describe('Buzzsprout', () => {
 			buzzsprout_id,
 			height: '200px',
 			width: '50%',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -37,20 +34,19 @@ describe('Buzzsprout', () => {
 		expect(iframe?.parentElement?.style.width).toBe('50%');
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Buzzsprout, {
 			buzzsprout_id,
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty buzzsprout_id gracefully', async () => {
 		await render(Buzzsprout, {
 			buzzsprout_id: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('buzzsprout');
 		const expected_src =
@@ -61,7 +57,6 @@ describe('Buzzsprout', () => {
 	it('should apply default height and width when not provided', async () => {
 		await render(Buzzsprout, {
 			buzzsprout_id: 'test123',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -76,7 +71,6 @@ describe('Buzzsprout', () => {
 		const specialBuzzsproutId = 'show-123_with-dashes.and.dots';
 		await render(Buzzsprout, {
 			buzzsprout_id: specialBuzzsproutId,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -88,7 +82,6 @@ describe('Buzzsprout', () => {
 		const testBuzzsproutId = 'accessibility-test';
 		await render(Buzzsprout, {
 			buzzsprout_id: testBuzzsproutId,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -105,7 +98,6 @@ describe('Buzzsprout', () => {
 		const longBuzzsproutId = 'a'.repeat(100); // 100 character buzzsprout ID
 		await render(Buzzsprout, {
 			buzzsprout_id: longBuzzsproutId,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -121,7 +113,6 @@ describe('Buzzsprout', () => {
 			buzzsprout_id: 'style-test',
 			height: '300px',
 			width: '400px',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -147,7 +138,6 @@ describe('Buzzsprout', () => {
 			buzzsprout_id: 'numeric-test',
 			height: '250px',
 			width: '80%',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -161,7 +151,6 @@ describe('Buzzsprout', () => {
 		const testId = 'url-construction-test';
 		await render(Buzzsprout, {
 			buzzsprout_id: testId,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
@@ -182,7 +171,6 @@ describe('Buzzsprout', () => {
 	it('should render with proper CSS class structure', async () => {
 		const { container } = await render(Buzzsprout, {
 			buzzsprout_id: 'class-test',
-			disable_observer: true,
 		});
 
 		// Check for buzzsprout-sveltekit-embed class on the container div
@@ -193,11 +181,5 @@ describe('Buzzsprout', () => {
 		expect(
 			buzzsproutDiv?.classList.contains('buzzsprout-sveltekit-embed'),
 		).toBe(true);
-
-		// Check for general-observer test id
-		const observerDiv = container.querySelector(
-			'[data-testid="general-observer"]',
-		);
-		expect(observerDiv).toBeTruthy();
 	});
 });

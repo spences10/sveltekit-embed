@@ -1,11 +1,9 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		width?: string;
 		height?: string;
 		gist_uri?: string;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		iframe_styles?: string;
 	}
 
@@ -13,7 +11,7 @@
 		width = '100%',
 		height = '320px',
 		gist_uri = '',
-		disable_observer = false,
+		loading = 'lazy',
 		iframe_styles,
 	}: Props = $props();
 
@@ -26,13 +24,12 @@
 	);
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe
-		title="gist-widget"
-		src="https://gist.github.com/{gist_uri}.pibb"
-		style={styles}
-	></iframe>
-</GeneralObserver>
+<iframe
+	title="gist-widget"
+	{loading}
+	src="https://gist.github.com/{gist_uri}.pibb"
+	style={styles}
+></iframe>
 
 <style>
 	iframe {

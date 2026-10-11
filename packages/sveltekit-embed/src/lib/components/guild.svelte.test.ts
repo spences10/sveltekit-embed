@@ -17,7 +17,6 @@ describe('Guild', () => {
 			card_id,
 			type: 'user',
 			display_type: 'item',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('guild-card');
 		const expected_src = `https://guild.host/embeds/user/${card_id}/item`;
@@ -29,7 +28,6 @@ describe('Guild', () => {
 			height: '350px',
 			width: '80%',
 			card_id: '67890',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -37,21 +35,20 @@ describe('Guild', () => {
 		expect(iframe?.parentElement?.style.width).toBe('80%');
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Guild, {
 			height: '400px',
 			width: '600px',
 			card_id: 'abcde',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	it('should handle empty card_id gracefully', async () => {
 		await render(Guild, {
 			card_id: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('guild-card');
 		const expected_src = 'https://guild.host/embeds/guild//card';
@@ -61,7 +58,6 @@ describe('Guild', () => {
 	it('should apply default prop values when not provided', async () => {
 		await render(Guild, {
 			card_id: 'test123',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -85,7 +81,6 @@ describe('Guild', () => {
 		await render(Guild, {
 			card_id,
 			type: 'user',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('guild-card'))
@@ -98,7 +93,6 @@ describe('Guild', () => {
 		await render(Guild, {
 			card_id,
 			type: 'event',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('guild-card'))
@@ -111,7 +105,6 @@ describe('Guild', () => {
 		await render(Guild, {
 			card_id,
 			type: 'presentation',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('guild-card'))
@@ -128,7 +121,6 @@ describe('Guild', () => {
 		await render(Guild, {
 			card_id,
 			display_type: 'item',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('guild-card'))
@@ -141,7 +133,6 @@ describe('Guild', () => {
 		await render(Guild, {
 			card_id,
 			display_type: 'events/latest',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('guild-card'))
@@ -154,7 +145,6 @@ describe('Guild', () => {
 		await render(Guild, {
 			card_id,
 			display_type: 'presentations/upcoming',
-			disable_observer: true,
 		});
 		await expect
 			.element(page.getByTestId('guild-card'))
@@ -169,7 +159,6 @@ describe('Guild', () => {
 			card_id: 'svelte-society-london',
 			type: 'guild',
 			display_type: 'events/upcoming',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -182,7 +171,6 @@ describe('Guild', () => {
 		const card_id = 'accessibility-test';
 		await render(Guild, {
 			card_id,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -200,7 +188,6 @@ describe('Guild', () => {
 			'user-name-with-dashes_and_underscores.dots';
 		await render(Guild, {
 			card_id: specialCardId,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -212,7 +199,6 @@ describe('Guild', () => {
 		const longCardId = 'a'.repeat(100); // 100 character card ID
 		await render(Guild, {
 			card_id: longCardId,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -228,7 +214,6 @@ describe('Guild', () => {
 			card_id: 'style-test',
 			height: '500px',
 			width: '300px',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -268,7 +253,6 @@ describe('Guild', () => {
 			card_id: 'numeric-test',
 			height: '400px', // Already as string since TypeScript interface expects string
 			width: '250px', // Already as string since TypeScript interface expects string
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('guild-card');
@@ -281,18 +265,11 @@ describe('Guild', () => {
 	it('should render with proper CSS class structure', async () => {
 		const { container } = await render(Guild, {
 			card_id: 'class-test',
-			disable_observer: true,
 		});
 
 		// Check for guild-card class on the container div
 		const guildCardDiv = container.querySelector('.guild-card');
 		expect(guildCardDiv).toBeTruthy();
 		expect(guildCardDiv?.classList.contains('guild-card')).toBe(true);
-
-		// Check for general-observer test id
-		const observerDiv = container.querySelector(
-			'[data-testid="general-observer"]',
-		);
-		expect(observerDiv).toBeTruthy();
 	});
 });

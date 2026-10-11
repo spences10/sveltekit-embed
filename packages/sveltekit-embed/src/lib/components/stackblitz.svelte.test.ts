@@ -8,7 +8,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id: 'svelte-kit-template',
 			file: 'src/app.html',
-			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
@@ -24,7 +23,6 @@ describe('StackBlitz', () => {
 			hide_navigation: true,
 			hide_explorer: false,
 			theme: 'light',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -41,14 +39,14 @@ describe('StackBlitz', () => {
 		expect(src).toContain(`file=${file}`);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(StackBlitz, {
 			id: 'svelte-kit-template',
 			file: 'src/app.html',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
@@ -56,7 +54,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id: '',
 			file: 'src/app.html',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		expect(iframe).toBeTruthy();
@@ -68,7 +65,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id: 'test-project',
 			file: 'index.js',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		expect(iframe).toBeTruthy();
@@ -93,7 +89,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			view: 'editor',
-			disable_observer: true,
 		});
 		const editorIframe = editorContainer.querySelector('iframe');
 		expect(editorIframe?.getAttribute('src')).toContain(
@@ -105,7 +100,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			view: 'preview',
-			disable_observer: true,
 		});
 		const previewIframe = previewContainer.querySelector('iframe');
 		expect(previewIframe?.getAttribute('src')).toContain(
@@ -117,7 +111,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			view: 'default',
-			disable_observer: true,
 		});
 		const defaultIframe = defaultContainer.querySelector('iframe');
 		expect(defaultIframe?.getAttribute('src')).not.toContain('view=');
@@ -132,7 +125,6 @@ describe('StackBlitz', () => {
 			theme: 'light',
 			view: 'editor',
 			click_to_load: false,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -152,7 +144,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id,
 			file,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -167,7 +158,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id,
 			file: 'index.js',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -183,7 +173,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id,
 			file,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -199,7 +188,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			iframe_styles: customStyles,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -214,7 +202,6 @@ describe('StackBlitz', () => {
 			click_to_load: true,
 			hide_navigation: true,
 			hide_explorer: false,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -230,7 +217,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			theme: 'light',
-			disable_observer: true,
 		});
 		const lightIframe = lightContainer.querySelector('iframe');
 		expect(lightIframe?.getAttribute('src')).toContain('theme=light');
@@ -240,7 +226,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			theme: 'dark',
-			disable_observer: true,
 		});
 		const darkIframe = darkContainer.querySelector('iframe');
 		expect(darkIframe?.getAttribute('src')).toContain('theme=dark');
@@ -250,7 +235,6 @@ describe('StackBlitz', () => {
 			id: 'test',
 			file: 'index.js',
 			theme: 'custom-theme',
-			disable_observer: true,
 		});
 		const customIframe = customContainer.querySelector('iframe');
 		expect(customIframe?.getAttribute('src')).toContain(
@@ -264,7 +248,6 @@ describe('StackBlitz', () => {
 			file: 'index.js',
 			width: '800px',
 			height: '600px',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -277,7 +260,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id: 'test-project',
 			file: undefined,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -293,7 +275,6 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id: 'class-test',
 			file: 'index.js',
-			disable_observer: true,
 		});
 
 		const iframe = container.querySelector('iframe');
@@ -309,7 +290,6 @@ describe('StackBlitz', () => {
 			click_to_load: false,
 			hide_navigation: true,
 			hide_explorer: false,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const src = iframe?.getAttribute('src');
@@ -331,7 +311,6 @@ describe('StackBlitz', () => {
 	it('should update the iframe when props change', async () => {
 		const { rerender } = await render(StackBlitz, {
 			id: 'reactive-one',
-			disable_observer: true,
 		});
 
 		await expect

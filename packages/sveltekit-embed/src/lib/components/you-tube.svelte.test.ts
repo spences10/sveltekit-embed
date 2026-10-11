@@ -83,7 +83,7 @@ describe('YouTube', () => {
 		);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			list_id: '',

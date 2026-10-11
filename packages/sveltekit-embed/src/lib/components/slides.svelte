@@ -1,6 +1,4 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		width?: string;
 		height?: string;
@@ -9,7 +7,7 @@
 		byline?: 'hidden' | 'visible' | 'default';
 		share?: 'hidden' | 'visible' | 'default';
 		style?: 'light' | 'dark' | 'hidden' | 'transparent' | 'default';
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 	}
 
 	let {
@@ -20,7 +18,7 @@
 		byline = 'hidden',
 		share = 'hidden',
 		style = 'dark',
-		disable_observer = false,
+		loading = 'lazy',
 	}: Props = $props();
 
 	const src = $derived.by(() => {
@@ -29,15 +27,14 @@
 	});
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe
-		{src}
-		{width}
-		{height}
-		{title}
-		scrolling="no"
-		frameborder="0"
-		allowfullscreen
-		style="width: 100%;"
-	></iframe>
-</GeneralObserver>
+<iframe
+	{loading}
+	{src}
+	{width}
+	{height}
+	{title}
+	scrolling="no"
+	frameborder="0"
+	allowfullscreen
+	style="width: 100%;"
+></iframe>

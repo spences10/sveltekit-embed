@@ -14,7 +14,6 @@ describe('Relive', () => {
 	it('renders iframe with correct src', async () => {
 		await render(Relive, {
 			relive_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`relive-${relive_id}`);
 		const expected_src = `https://www.relive.cc/view/${relive_id}/widget`;
@@ -26,7 +25,6 @@ describe('Relive', () => {
 		const { container } = await render(Relive, {
 			relive_id,
 			width: customWidth,
-			disable_observer: true,
 		});
 		const wrapper = container.querySelector('div');
 
@@ -35,20 +33,19 @@ describe('Relive', () => {
 		);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Relive, {
 			relive_id,
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	describe('Edge Cases', () => {
 		it('should handle empty relive_id gracefully', async () => {
 			const { container } = await render(Relive, {
 				relive_id: '',
-				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 
@@ -62,7 +59,6 @@ describe('Relive', () => {
 			const specialReliveId = 'test-id_123';
 			await render(Relive, {
 				relive_id: specialReliveId,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${specialReliveId}`);
 			const element = iframe.element() as HTMLIFrameElement;
@@ -76,7 +72,6 @@ describe('Relive', () => {
 			const longReliveId = 'a'.repeat(1000);
 			await render(Relive, {
 				relive_id: longReliveId,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${longReliveId}`);
 			const element = iframe.element() as HTMLIFrameElement;
@@ -88,7 +83,6 @@ describe('Relive', () => {
 			const malformedId = 'not/a/valid/id';
 			await render(Relive, {
 				relive_id: malformedId,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${malformedId}`);
 			const element = iframe.element() as HTMLIFrameElement;
@@ -104,7 +98,6 @@ describe('Relive', () => {
 		it.skip('should apply default width when not provided', async () => {
 			const { container } = await render(Relive, {
 				relive_id,
-				disable_observer: true,
 			});
 			const wrapper = container.querySelector('div');
 
@@ -116,7 +109,6 @@ describe('Relive', () => {
 		it.skip('should apply proper aspect ratio and positioning', async () => {
 			const { container } = await render(Relive, {
 				relive_id,
-				disable_observer: true,
 			});
 			const wrapper = container.querySelector('div');
 			const iframe = container.querySelector('iframe');
@@ -143,7 +135,6 @@ describe('Relive', () => {
 				const { container } = await render(Relive, {
 					relive_id: `${relive_id}-${width}`,
 					width,
-					disable_observer: true,
 				});
 				const wrapper = container.querySelector('div');
 
@@ -159,7 +150,6 @@ describe('Relive', () => {
 			const testReliveId = 'test-123-abc';
 			await render(Relive, {
 				relive_id: testReliveId,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${testReliveId}`);
 			const element = iframe.element() as HTMLIFrameElement;
@@ -173,7 +163,6 @@ describe('Relive', () => {
 		it('should have proper iframe accessibility and security attributes', async () => {
 			await render(Relive, {
 				relive_id,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${relive_id}`);
 
@@ -194,7 +183,6 @@ describe('Relive', () => {
 		it('should maintain proper wrapper and iframe structure', async () => {
 			const { container } = await render(Relive, {
 				relive_id,
-				disable_observer: true,
 			});
 
 			const wrapper = container.querySelector('div');
@@ -210,7 +198,6 @@ describe('Relive', () => {
 		it('should use correct default margin value', async () => {
 			const { container } = await render(Relive, {
 				relive_id,
-				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 

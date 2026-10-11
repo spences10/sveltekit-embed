@@ -1,12 +1,10 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		theme?: string;
 		frame_src?: string;
 		height?: string;
 		width?: string;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		iframe_styles?: string;
 	}
 
@@ -15,7 +13,7 @@
 		frame_src = '',
 		height = '300px',
 		width = '100%',
-		disable_observer = false,
+		loading = 'lazy',
 		iframe_styles,
 	}: Props = $props();
 
@@ -29,13 +27,12 @@
 	);
 </script>
 
-<GeneralObserver {disable_observer}>
-	<iframe
-		title="deezer-widget"
-		src={`https://widget.deezer.com/widget/${theme}/${frame_src}`}
-		frameborder="0"
-		allowtransparency
-		allow="encrypted-media; clipboard-write"
-		style={styles}
-	></iframe>
-</GeneralObserver>
+<iframe
+	title="deezer-widget"
+	{loading}
+	src={`https://widget.deezer.com/widget/${theme}/${frame_src}`}
+	frameborder="0"
+	allowtransparency
+	allow="encrypted-media; clipboard-write"
+	style={styles}
+></iframe>

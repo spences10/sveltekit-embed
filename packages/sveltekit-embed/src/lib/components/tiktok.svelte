@@ -1,6 +1,4 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		tiktok_id: string;
 		width?: string;
@@ -18,7 +16,7 @@
 		rel?: boolean;
 		native_context_menu?: boolean;
 		closed_caption?: boolean;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 	}
 
 	let {
@@ -38,7 +36,7 @@
 		rel = true,
 		native_context_menu = true,
 		closed_caption = true,
-		disable_observer = false,
+		loading = 'lazy',
 	}: Props = $props();
 
 	const src = $derived.by(() => {
@@ -62,29 +60,28 @@
 	});
 </script>
 
-<GeneralObserver {disable_observer}>
-	<div
-		class="tiktok-sveltekit-embed"
-		style={`
+<div
+	class="tiktok-sveltekit-embed"
+	style={`
       position: relative;
       width: ${width};
       height: ${height};
     `}
-	>
-		<iframe
-			data-testid="tiktok-embed"
-			title={`tiktok-${tiktok_id}`}
-			{src}
-			frameborder="0"
-			scrolling="no"
-			allow="encrypted-media; picture-in-picture; fullscreen"
-			style={`
+>
+	<iframe
+		data-testid="tiktok-embed"
+		title={`tiktok-${tiktok_id}`}
+		{loading}
+		{src}
+		frameborder="0"
+		scrolling="no"
+		allow="encrypted-media; picture-in-picture; fullscreen"
+		style={`
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
       `}
-		></iframe>
-	</div>
-</GeneralObserver>
+	></iframe>
+</div>

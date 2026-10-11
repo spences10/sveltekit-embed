@@ -14,7 +14,6 @@ describe('Gist', () => {
 	it('renders iframe with correct src', async () => {
 		await render(Gist, {
 			gist_uri,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('gist-widget');
 		const expected_src = `https://gist.github.com/${gist_uri}.pibb`;
@@ -26,7 +25,6 @@ describe('Gist', () => {
 			gist_uri,
 			height: '200px',
 			width: '50%',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -34,20 +32,19 @@ describe('Gist', () => {
 		expect(iframe?.getAttribute('style')).toContain(`width: 50%`);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Gist, {
 			gist_uri,
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	describe('Edge Cases', () => {
 		it('should handle empty gist_uri gracefully', async () => {
 			await render(Gist, {
 				gist_uri: '',
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -60,7 +57,6 @@ describe('Gist', () => {
 			const specialGistUri = 'user-name/gist_id-123';
 			await render(Gist, {
 				gist_uri: specialGistUri,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -75,7 +71,6 @@ describe('Gist', () => {
 			const longGistUri = 'user/' + 'a'.repeat(1000);
 			await render(Gist, {
 				gist_uri: longGistUri,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -90,7 +85,6 @@ describe('Gist', () => {
 			const malformedUri = 'not/a/valid/gist/uri';
 			await render(Gist, {
 				gist_uri: malformedUri,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -106,7 +100,6 @@ describe('Gist', () => {
 		it('should apply default height and width when not provided', async () => {
 			const { container } = await render(Gist, {
 				gist_uri,
-				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 
@@ -121,7 +114,6 @@ describe('Gist', () => {
 			await render(Gist, {
 				gist_uri,
 				iframe_styles: customStyles,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -134,7 +126,6 @@ describe('Gist', () => {
 				gist_uri,
 				height: '400px',
 				width: '80%',
-				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 
@@ -148,7 +139,6 @@ describe('Gist', () => {
 			const testGistUri = 'username/gist123456';
 			await render(Gist, {
 				gist_uri: testGistUri,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -161,7 +151,6 @@ describe('Gist', () => {
 			const gistWithFile = 'username/gist123456?file=example.js';
 			await render(Gist, {
 				gist_uri: gistWithFile,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
@@ -177,7 +166,6 @@ describe('Gist', () => {
 		it('should have proper iframe accessibility attributes', async () => {
 			await render(Gist, {
 				gist_uri,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 
@@ -191,7 +179,6 @@ describe('Gist', () => {
 		it('should apply default CSS styles from component', async () => {
 			const { container } = await render(Gist, {
 				gist_uri,
-				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 
@@ -204,7 +191,6 @@ describe('Gist', () => {
 		it('should update the iframe when props change', async () => {
 			const { rerender } = await render(Gist, {
 				gist_uri: 'user/aaa111',
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 

@@ -1,44 +1,41 @@
 <script lang="ts">
-	import GeneralObserver from './general-observer.svelte';
-
 	interface Props {
 		episode_id?: string;
 		theme?: string;
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 	}
 
 	let {
 		episode_id = '',
 		theme = `dark`,
-		disable_observer = false,
+		loading = 'lazy',
 	}: Props = $props();
 </script>
 
-<GeneralObserver {disable_observer}>
-	<div
-		class="simplecast-episode-svelte-embed"
-		style={`
+<div
+	class="simplecast-episode-svelte-embed"
+	style={`
       position: relative;
       height: 200px;
       width: 100%;
     `}
-	>
-		<iframe
-			data-testid="simplecast-episode"
-			title={`simplecast-${episode_id}`}
-			src={`https://player.simplecast.com/${episode_id}${
-				theme === `dark` ? `?dark=true` : ``
-			}`}
-			frameBorder="no"
-			scrolling="no"
-			seamless
-			style={`
+>
+	<iframe
+		data-testid="simplecast-episode"
+		title={`simplecast-${episode_id}`}
+		{loading}
+		src={`https://player.simplecast.com/${episode_id}${
+			theme === `dark` ? `?dark=true` : ``
+		}`}
+		frameBorder="no"
+		scrolling="no"
+		seamless
+		style={`
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
       `}
-		></iframe>
-	</div>
-</GeneralObserver>
+	></iframe>
+</div>

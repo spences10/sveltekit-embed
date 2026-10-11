@@ -10,7 +10,6 @@ describe('AnchorFm', () => {
 	it('mounts with episode url', async () => {
 		const { container } = await render(AnchorFm, {
 			episode_url,
-			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
@@ -18,7 +17,6 @@ describe('AnchorFm', () => {
 	it('renders iframe with episode url', async () => {
 		await render(AnchorFm, {
 			episode_url,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
 		const expected_src = `https://anchor.fm/${episode_url}`;
@@ -30,7 +28,6 @@ describe('AnchorFm', () => {
 			episode_url,
 			height: '200px',
 			width: '50%',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -38,13 +35,13 @@ describe('AnchorFm', () => {
 		expect(iframe?.parentElement?.style.width).toBe('50%');
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(AnchorFm, {
 			episode_url,
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
@@ -52,7 +49,6 @@ describe('AnchorFm', () => {
 		// Test edge case: empty or invalid episode URL
 		await render(AnchorFm, {
 			episode_url: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
 		await expect
@@ -67,7 +63,6 @@ describe('AnchorFm', () => {
 		// Test default prop values (height: '100px', width: '100%')
 		const { container } = await render(AnchorFm, {
 			episode_url,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -81,7 +76,6 @@ describe('AnchorFm', () => {
 			'test-podcast/episodes/episode-with-special-chars-!@#$%^&*()';
 		await render(AnchorFm, {
 			episode_url: specialUrl,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
 		const expectedSrc = `https://anchor.fm/${specialUrl}`;
@@ -95,7 +89,6 @@ describe('AnchorFm', () => {
 		// Test title attribute, aria-labels, etc.
 		await render(AnchorFm, {
 			episode_url,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
 
@@ -111,7 +104,6 @@ describe('AnchorFm', () => {
 		const longUrl = 'a'.repeat(1000) + '/episodes/' + 'b'.repeat(500);
 		await render(AnchorFm, {
 			episode_url: longUrl,
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
 		const expectedSrc = `https://anchor.fm/${longUrl}`;
@@ -126,7 +118,6 @@ describe('AnchorFm', () => {
 			episode_url,
 			height: customHeight,
 			width: customWidth,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 		const wrapperDiv = iframe?.parentElement;
@@ -149,7 +140,6 @@ describe('AnchorFm', () => {
 			episode_url,
 			height: '250px',
 			width: '80%',
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 

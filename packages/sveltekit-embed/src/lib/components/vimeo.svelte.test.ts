@@ -7,7 +7,6 @@ describe('Vimeo', () => {
 	it('mounts with default values', async () => {
 		const { container } = await render(Vimeo, {
 			vimeo_id: '123456789',
-			disable_observer: true,
 		});
 
 		expect(container).toBeTruthy();
@@ -20,7 +19,6 @@ describe('Vimeo', () => {
 			autoplay: true,
 			aspect_ratio: '4:3',
 			skip_to: { h: 1, m: 23, s: 45 },
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -32,7 +30,6 @@ describe('Vimeo', () => {
 		const { container } = await render(Vimeo, {
 			vimeo_id: '123456789',
 			aspect_ratio: '1:1',
-			disable_observer: true,
 		});
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
 
@@ -41,14 +38,13 @@ describe('Vimeo', () => {
 		);
 	});
 
-	it('renders with a GeneralObserver', async () => {
+	it('lazy loads the iframe by default', async () => {
 		await render(Vimeo, {
 			vimeo_id: '123456789',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-
-		await expect.element(general_observer).toBeInTheDocument();
+		expect(
+			document.querySelector('iframe')?.getAttribute('loading'),
+		).toBe('lazy');
 	});
 
 	// Coverage gaps - test stubs to implement
@@ -57,7 +53,6 @@ describe('Vimeo', () => {
 
 		await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -70,7 +65,6 @@ describe('Vimeo', () => {
 
 		const { container } = await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
@@ -99,7 +93,6 @@ describe('Vimeo', () => {
 			const { container } = await render(Vimeo, {
 				vimeo_id: '123456789',
 				aspect_ratio: aspect_ratios[i],
-				disable_observer: true,
 			});
 			const wrapper = container.querySelector('.vimeo-svelte-embed');
 
@@ -115,7 +108,6 @@ describe('Vimeo', () => {
 		await render(Vimeo, {
 			vimeo_id,
 			autoplay: false,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -130,7 +122,6 @@ describe('Vimeo', () => {
 		await render(Vimeo, {
 			vimeo_id,
 			skip_to,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -145,7 +136,6 @@ describe('Vimeo', () => {
 		await render(Vimeo, {
 			vimeo_id,
 			autoplay: true,
-			disable_observer: true,
 		});
 		const iframeTrue = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -158,7 +148,6 @@ describe('Vimeo', () => {
 		await render(Vimeo, {
 			vimeo_id,
 			autoplay: false,
-			disable_observer: true,
 		});
 		const iframeFalse = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -173,7 +162,6 @@ describe('Vimeo', () => {
 
 		await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -186,7 +174,6 @@ describe('Vimeo', () => {
 
 		const { container } = await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -214,7 +201,6 @@ describe('Vimeo', () => {
 
 		await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -235,7 +221,6 @@ describe('Vimeo', () => {
 			const { container } = await render(Vimeo, {
 				vimeo_id: '123456789',
 				aspect_ratio: testCase.ratio,
-				disable_observer: true,
 			});
 			const wrapper = container.querySelector('.vimeo-svelte-embed');
 
@@ -250,7 +235,6 @@ describe('Vimeo', () => {
 
 		await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -263,7 +247,6 @@ describe('Vimeo', () => {
 
 		await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const wrapper = page.getByTestId('vimeo');
 
@@ -285,7 +268,6 @@ describe('Vimeo', () => {
 			await render(Vimeo, {
 				vimeo_id,
 				skip_to: testCase.skip_to,
-				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -301,7 +283,6 @@ describe('Vimeo', () => {
 
 		await render(Vimeo, {
 			vimeo_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
@@ -316,7 +297,6 @@ describe('Vimeo', () => {
 		const { container } = await render(Vimeo, {
 			vimeo_id,
 			aspect_ratio: 'invalid:ratio' as any,
-			disable_observer: true,
 		});
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
 
@@ -329,7 +309,6 @@ describe('Vimeo', () => {
 	it('should update the iframe when props change', async () => {
 		const { rerender } = await render(Vimeo, {
 			vimeo_id: '111111',
-			disable_observer: true,
 		});
 
 		await expect
