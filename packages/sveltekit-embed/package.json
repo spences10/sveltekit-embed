@@ -94,7 +94,7 @@
 		"vitest-browser-svelte": "catalog:"
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.29.0"
 	},
 	"engines": {
 		"node": ">=24.15.0"
