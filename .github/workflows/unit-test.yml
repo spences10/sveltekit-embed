@@ -13,6 +13,11 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
       options: --user 1001
+    # SvelteKit validates these whenever the web app starts, which
+    # includes its tests as well as the build and check
+    env:
+      PUBLIC_FATHOM_ID: ${{ secrets.PUBLIC_FATHOM_ID }}
+      PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
 
     steps:
       - uses: actions/checkout@v7
@@ -25,13 +30,7 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm run build
-        env:
-          PUBLIC_FATHOM_ID: ${{ secrets.PUBLIC_FATHOM_ID }}
-          PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
       - name: Check
         run: pnpm run check
-        env:
-          PUBLIC_FATHOM_ID: ${{ secrets.PUBLIC_FATHOM_ID }}
-          PUBLIC_FATHOM_URL: ${{ secrets.PUBLIC_FATHOM_URL }}
       - name: Test
         run: pnpm run test:ci
