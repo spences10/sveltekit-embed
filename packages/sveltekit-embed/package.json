@@ -1,6 +1,6 @@
 {
 	"name": "sveltekit-embed",
-	"version": "0.0.22",
+	"version": "0.1.0",
 	"description": "A collection of embed components for SvelteKit. Easily embed content from YouTube, Spotify, Vimeo, CodePen, and many more with performant, lazy-loaded components.",
 	"keywords": [
 		"codepen",
