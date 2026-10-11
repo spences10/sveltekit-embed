@@ -53,6 +53,7 @@ Use like a normal Svelte component:
 - SoundCloud
 - Spotify
 - StackBlitz
+- Threads
 - Toot
 - Tweet
 - Vimeo

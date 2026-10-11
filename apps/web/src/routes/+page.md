@@ -15,6 +15,7 @@
 		SoundCloud,
 		Spotify,
 		StackBlitz,
+		Threads,
 		TikTok,
 		Toot,
 		Tweet,
@@ -58,8 +59,8 @@ when it is close to the viewport. The iframe is still in the page from
 the first render, so it holds its space while you scroll. Pass
 `loading="eager"` to any of them to load it straight away.
 
-`Bluesky`, `Tweet`, `Toot` and `Zencastr` load in their own way and do
-not take a `loading` prop.
+`Bluesky`, `Threads`, `Tweet`, `Toot` and `Zencastr` load in their own
+way and do not take a `loading` prop.
 
 To lazy load your own markup, use the `in_view` attachment:
 
@@ -118,6 +119,7 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 - [SoundCloud](#soundcloud)
 - [Spotify](#spotify)
 - [StackBlitz](#stackblitz)
+- [Threads](#threads)
 - [TikTok](#tiktok)
 - [Toot](#toot)
 - [Tweet](#tweet)
@@ -570,6 +572,44 @@ Output:
   id="vitejs-vite-yyoood"
   hide_navigation
 />
+
+## Threads
+
+Get the post ID from the end of the post's link, for
+`https://www.threads.com/@threads/post/DePOFVxEe_o` it's
+`DePOFVxEe_o`.
+
+Props:
+
+```ts
+post_id = '',
+theme: 'light' | 'dark' | 'auto' = 'light',
+width = '100%',
+iframe_styles = '',
+```
+
+Usage:
+
+<!-- cSpell:ignore DePOFVxEe_o,Vx,Ee -->
+
+```html
+<Threads post_id="DePOFVxEe_o" />
+```
+
+Output:
+
+<Threads post_id="DePOFVxEe_o" />
+
+Set `theme` to `dark`, or to `auto` to follow the visitor's
+preference:
+
+```html
+<Threads theme="dark" post_id="DePOFVxEe_o" />
+```
+
+Output:
+
+<Threads theme="dark" post_id="DePOFVxEe_o" />
 
 ## TikTok
 

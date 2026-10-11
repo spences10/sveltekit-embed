@@ -78,6 +78,7 @@ Import and use any component in your Svelte/SvelteKit application:
 | **SoundCloud**   | `<SoundCloud />`   | Audio tracks from SoundCloud        |
 | **Spotify**      | `<Spotify />`      | Music tracks, albums, and playlists |
 | **StackBlitz**   | `<StackBlitz />`   | Live coding environments            |
+| **Threads**      | `<Threads />`      | Threads posts                       |
 | **Toot**         | `<Toot />`         | Mastodon posts                      |
 | **Tweet**        | `<Tweet />`        | Twitter/X posts                     |
 | **Vimeo**        | `<Vimeo />`        | Vimeo videos                        |
@@ -151,8 +152,8 @@ Every iframe embed sets `loading="lazy"`, so the browser:
 - Reduces initial page load time and saves bandwidth for users
 
 Pass `loading="eager"` to load an embed straight away. `Bluesky`,
-`Tweet`, `Toot` and `Zencastr` load in their own way and do not take a
-`loading` prop.
+`Threads`, `Tweet`, `Toot` and `Zencastr` load in their own way and do
+not take a `loading` prop.
 
 To lazy load your own markup, the package also exports an `in_view`
 attachment:
