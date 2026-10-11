@@ -8,12 +8,12 @@ describe('Bluesky', () => {
 		'did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k';
 
 	it('mounts with default props', async () => {
-		const { container } = render(Bluesky);
+		const { container } = await render(Bluesky);
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with correct embed url', async () => {
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -23,7 +23,7 @@ describe('Bluesky', () => {
 	});
 
 	it('renders with custom width', async () => {
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 			width: '50%',
 		});
@@ -34,7 +34,7 @@ describe('Bluesky', () => {
 
 	it('applies custom iframe styles', async () => {
 		const custom_styles = 'border-radius: 8px; background: #f0f0f0;';
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 			iframe_styles: custom_styles,
 		});
@@ -47,7 +47,7 @@ describe('Bluesky', () => {
 	});
 
 	it('has correct default styles', async () => {
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -66,7 +66,7 @@ describe('Bluesky', () => {
 
 	it('combines default and custom iframe styles correctly', async () => {
 		const custom_styles = 'border-radius: 8px; margin: 10px;';
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 			iframe_styles: custom_styles,
 		});
@@ -87,7 +87,7 @@ describe('Bluesky', () => {
 	});
 
 	it('updates height when receiving message from iframe', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -99,7 +99,7 @@ describe('Bluesky', () => {
 		) as HTMLIFrameElement;
 
 		// Wait for component to mount and event listener to be added
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Create a simple message event without the problematic source property
 		// The component logic will still work since it checks event.origin first
@@ -124,7 +124,7 @@ describe('Bluesky', () => {
 		window.dispatchEvent(message_event);
 
 		// Wait for DOM update
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Check that the wrapper height was updated
 		expect(wrapper?.style.height).toBe('500px');
@@ -132,7 +132,7 @@ describe('Bluesky', () => {
 
 	// Edge Cases and Comprehensive Coverage
 	it('should handle empty post_id gracefully', async () => {
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: '',
 		});
 
@@ -142,7 +142,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should ignore messages from untrusted origins', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -165,7 +165,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should handle message with h property instead of height', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -177,7 +177,7 @@ describe('Bluesky', () => {
 		) as HTMLIFrameElement;
 
 		// Wait for component to mount and event listener to be added
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Create a simple message event
 		const message_event = new MessageEvent('message', {
@@ -201,14 +201,14 @@ describe('Bluesky', () => {
 		window.dispatchEvent(message_event);
 
 		// Wait for DOM update
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Should update to new height
 		expect(wrapper?.style.height).toBe('350px');
 	});
 
 	it('should fallback to default height for invalid message data', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -220,7 +220,7 @@ describe('Bluesky', () => {
 		) as HTMLIFrameElement;
 
 		// Wait for component to mount and event listener to be added
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Create a simple message event
 		const invalid_message = new MessageEvent('message', {
@@ -244,14 +244,14 @@ describe('Bluesky', () => {
 		window.dispatchEvent(invalid_message);
 
 		// Wait for DOM update
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Should fallback to 500px default
 		expect(wrapper?.style.height).toBe('500px');
 	});
 
 	it('should handle component unmount and cleanup event listeners', async () => {
-		const { unmount } = render(Bluesky, {
+		const { unmount } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -262,7 +262,7 @@ describe('Bluesky', () => {
 		);
 
 		// Unmount the component
-		unmount();
+		await unmount();
 
 		// Verify cleanup was called
 		expect(removeEventListenerSpy).toHaveBeenCalledWith(
@@ -274,11 +274,11 @@ describe('Bluesky', () => {
 	});
 
 	it('should generate unique iframe IDs for multiple instances', async () => {
-		const { container: container1 } = render(Bluesky, {
+		const { container: container1 } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
-		const { container: container2 } = render(Bluesky, {
+		const { container: container2 } = await render(Bluesky, {
 			post_id: 'did:plc:different/app.bsky.feed.post/different',
 		});
 
@@ -297,11 +297,11 @@ describe('Bluesky', () => {
 	});
 
 	it('should only update height for the specific iframe that sent the message', async () => {
-		const { container: container1 } = render(Bluesky, {
+		const { container: container1 } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
-		const { container: container2 } = render(Bluesky, {
+		const { container: container2 } = await render(Bluesky, {
 			post_id: 'did:plc:different/app.bsky.feed.post/different',
 		});
 
@@ -319,7 +319,7 @@ describe('Bluesky', () => {
 		) as HTMLIFrameElement;
 
 		// Wait for components to mount and event listeners to be added
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Create mock window objects for both iframes
 		const mockContentWindow1 = {} as Window;
@@ -350,7 +350,7 @@ describe('Bluesky', () => {
 		window.dispatchEvent(message_event_1);
 
 		// Wait for DOM update
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Only wrapper1 should update, wrapper2 should remain unchanged
 		expect(wrapper1.style.height).toBe('300px');
@@ -371,7 +371,7 @@ describe('Bluesky', () => {
 		window.dispatchEvent(message_event_2);
 
 		// Wait for DOM update
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// wrapper1 should remain at 300px, wrapper2 should update to 450px
 		expect(wrapper1.style.height).toBe('300px');
@@ -379,7 +379,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should ignore messages from unknown iframe sources', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -392,7 +392,7 @@ describe('Bluesky', () => {
 		const initial_height = wrapper.style.height;
 
 		// Wait for component to mount and event listener to be added
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Mock the iframe's contentWindow
 		const mockContentWindow = {} as Window;
@@ -418,7 +418,7 @@ describe('Bluesky', () => {
 		window.dispatchEvent(message_event);
 
 		// Wait for DOM update
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Height should remain unchanged
 		expect(wrapper.style.height).toBe(initial_height);
@@ -431,12 +431,12 @@ describe('Bluesky', () => {
 			'did:plc:x7cbjcbvndpjb3vyndsqgpsi/app.bsky.feed.post/3lq2yv3uzjc2p',
 		];
 
-		const instances = post_ids.map(post_id =>
-			render(Bluesky, { post_id }),
+		const instances = await Promise.all(
+			post_ids.map((post_id) => render(Bluesky, { post_id })),
 		);
 
 		// Wait for all components to mount
-		await new Promise(resolve => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, 0));
 
 		// Verify each instance has unique iframe ID and correct src
 		instances.forEach(({ container }, index) => {
@@ -464,7 +464,7 @@ describe('Bluesky', () => {
 			'a'.repeat(100) +
 			'/app.bsky.feed.post/' +
 			'b'.repeat(100);
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: long_post_id,
 		});
 
@@ -474,7 +474,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should apply correct CSS classes and container structure', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -503,7 +503,7 @@ describe('Bluesky', () => {
 
 	it('should handle numeric width values', async () => {
 		// Even though TypeScript interface expects string, test component robustness
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 			width: '500px', // Using string as per interface
 		});
@@ -513,7 +513,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -535,7 +535,7 @@ describe('Bluesky', () => {
 	it('should handle special characters in post_id', async () => {
 		const special_post_id =
 			'did:plc:user-with_special.chars@example/app.bsky.feed.post/post-with-special_chars.123';
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: special_post_id,
 		});
 
@@ -546,7 +546,7 @@ describe('Bluesky', () => {
 
 	// Additional comprehensive tests for edge cases
 	it('should handle default width when not specified', async () => {
-		render(Bluesky, {
+		await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -555,7 +555,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should apply default wrapper height', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -566,7 +566,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should handle non-object message data gracefully', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 
@@ -588,7 +588,7 @@ describe('Bluesky', () => {
 	});
 
 	it('should handle wrapper styling and responsive behavior', async () => {
-		const { container } = render(Bluesky, {
+		const { container } = await render(Bluesky, {
 			post_id: test_post_id,
 		});
 

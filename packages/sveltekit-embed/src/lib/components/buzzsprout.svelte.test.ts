@@ -1,4 +1,4 @@
-import Buzzsprout from '$lib/components/buzzsprout.svelte';
+import Buzzsprout from './buzzsprout.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
@@ -7,7 +7,7 @@ let buzzsproutId = '12345';
 
 describe('Buzzsprout', () => {
 	it('mounts with buzzsproutId', async () => {
-		const { container } = render(Buzzsprout, {
+		const { container } = await render(Buzzsprout, {
 			buzzsproutId,
 			disable_observer: true,
 		});
@@ -15,7 +15,7 @@ describe('Buzzsprout', () => {
 	});
 
 	it('renders iframe with buzzsproutId', async () => {
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId,
 			disable_observer: true,
 		});
@@ -25,7 +25,7 @@ describe('Buzzsprout', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(Buzzsprout, {
+		const { container } = await render(Buzzsprout, {
 			buzzsproutId,
 			height: '200px',
 			width: '50%',
@@ -38,7 +38,7 @@ describe('Buzzsprout', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId,
 			disable_observer: false,
 		});
@@ -48,7 +48,7 @@ describe('Buzzsprout', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty buzzsproutId gracefully', async () => {
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: '',
 			disable_observer: true,
 		});
@@ -59,7 +59,7 @@ describe('Buzzsprout', () => {
 	});
 
 	it('should apply default height and width when not provided', async () => {
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: 'test123',
 			disable_observer: true,
 		});
@@ -74,7 +74,7 @@ describe('Buzzsprout', () => {
 
 	it('should handle special characters in buzzsproutId', async () => {
 		const specialBuzzsproutId = 'show-123_with-dashes.and.dots';
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: specialBuzzsproutId,
 			disable_observer: true,
 		});
@@ -86,7 +86,7 @@ describe('Buzzsprout', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const testBuzzsproutId = 'accessibility-test';
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: testBuzzsproutId,
 			disable_observer: true,
 		});
@@ -103,7 +103,7 @@ describe('Buzzsprout', () => {
 
 	it('should handle very long buzzsproutId values', async () => {
 		const longBuzzsproutId = 'a'.repeat(100); // 100 character buzzsprout ID
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: longBuzzsproutId,
 			disable_observer: true,
 		});
@@ -117,7 +117,7 @@ describe('Buzzsprout', () => {
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: 'style-test',
 			height: '300px',
 			width: '400px',
@@ -143,7 +143,7 @@ describe('Buzzsprout', () => {
 
 	it('should handle numeric height and width values', async () => {
 		// Note: TypeScript interface expects string values
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: 'numeric-test',
 			height: '250px',
 			width: '80%',
@@ -159,7 +159,7 @@ describe('Buzzsprout', () => {
 
 	it('should construct iframe src URL correctly with query parameters', async () => {
 		const testId = 'url-construction-test';
-		render(Buzzsprout, {
+		await render(Buzzsprout, {
 			buzzsproutId: testId,
 			disable_observer: true,
 		});
@@ -180,7 +180,7 @@ describe('Buzzsprout', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { container } = render(Buzzsprout, {
+		const { container } = await render(Buzzsprout, {
 			buzzsproutId: 'class-test',
 			disable_observer: true,
 		});

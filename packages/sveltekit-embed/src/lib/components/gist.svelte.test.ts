@@ -1,4 +1,4 @@
-import Gist from '$lib/components/gist.svelte';
+import Gist from './gist.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
@@ -7,12 +7,12 @@ const gistUri = 'gauravchl';
 
 describe('Gist', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(Gist);
+		const { container } = await render(Gist);
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with correct src', async () => {
-		render(Gist, {
+		await render(Gist, {
 			gistUri,
 			disable_observer: true,
 		});
@@ -22,7 +22,7 @@ describe('Gist', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(Gist, {
+		const { container } = await render(Gist, {
 			gistUri,
 			height: '200px',
 			width: '50%',
@@ -35,7 +35,7 @@ describe('Gist', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Gist, {
+		await render(Gist, {
 			gistUri,
 			disable_observer: false,
 		});
@@ -45,7 +45,7 @@ describe('Gist', () => {
 
 	describe('Edge Cases', () => {
 		it('should handle empty gistUri gracefully', async () => {
-			render(Gist, {
+			await render(Gist, {
 				gistUri: '',
 				disable_observer: true,
 			});
@@ -58,7 +58,7 @@ describe('Gist', () => {
 
 		it('should handle special characters in gistUri', async () => {
 			const specialGistUri = 'user-name/gist_id-123';
-			render(Gist, {
+			await render(Gist, {
 				gistUri: specialGistUri,
 				disable_observer: true,
 			});
@@ -73,7 +73,7 @@ describe('Gist', () => {
 
 		it('should handle very long gistUri values', async () => {
 			const longGistUri = 'user/' + 'a'.repeat(1000);
-			render(Gist, {
+			await render(Gist, {
 				gistUri: longGistUri,
 				disable_observer: true,
 			});
@@ -88,7 +88,7 @@ describe('Gist', () => {
 
 		it('should handle malformed gist URIs gracefully', async () => {
 			const malformedUri = 'not/a/valid/gist/uri';
-			render(Gist, {
+			await render(Gist, {
 				gistUri: malformedUri,
 				disable_observer: true,
 			});
@@ -104,7 +104,7 @@ describe('Gist', () => {
 
 	describe('Default Props', () => {
 		it('should apply default height and width when not provided', async () => {
-			const { container } = render(Gist, {
+			const { container } = await render(Gist, {
 				gistUri,
 				disable_observer: true,
 			});
@@ -118,7 +118,7 @@ describe('Gist', () => {
 	describe('Custom Styling', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles = 'border: 2px solid red; background: blue;';
-			render(Gist, {
+			await render(Gist, {
 				gistUri,
 				iframe_styles: customStyles,
 				disable_observer: true,
@@ -130,7 +130,7 @@ describe('Gist', () => {
 		});
 
 		it('should handle numeric height and width values', async () => {
-			const { container } = render(Gist, {
+			const { container } = await render(Gist, {
 				gistUri,
 				height: '400px',
 				width: '80%',
@@ -146,7 +146,7 @@ describe('Gist', () => {
 	describe('URL Construction', () => {
 		it('should construct proper GitHub gist URL', async () => {
 			const testGistUri = 'username/gist123456';
-			render(Gist, {
+			await render(Gist, {
 				gistUri: testGistUri,
 				disable_observer: true,
 			});
@@ -159,7 +159,7 @@ describe('Gist', () => {
 
 		it('should handle gist with file parameter', async () => {
 			const gistWithFile = 'username/gist123456?file=example.js';
-			render(Gist, {
+			await render(Gist, {
 				gistUri: gistWithFile,
 				disable_observer: true,
 			});
@@ -175,7 +175,7 @@ describe('Gist', () => {
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility attributes', async () => {
-			render(Gist, {
+			await render(Gist, {
 				gistUri,
 				disable_observer: true,
 			});
@@ -189,7 +189,7 @@ describe('Gist', () => {
 
 	describe('CSS Styling', () => {
 		it('should apply default CSS styles from component', async () => {
-			const { container } = render(Gist, {
+			const { container } = await render(Gist, {
 				gistUri,
 				disable_observer: true,
 			});

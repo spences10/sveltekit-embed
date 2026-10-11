@@ -1,10 +1,10 @@
-import Zencastr from '$lib/components/zencastr.svelte';
+import Zencastr from './zencastr.svelte';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Zencastr', () => {
 	it('mounts', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -12,7 +12,7 @@ describe('Zencastr', () => {
 	});
 
 	it('sets data-episode-href for Zencastr player', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -27,7 +27,7 @@ describe('Zencastr', () => {
 	});
 
 	it('sets href for Zencastr player link', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -43,7 +43,7 @@ describe('Zencastr', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty zencastrId gracefully', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: '',
 		});
 
@@ -64,7 +64,7 @@ describe('Zencastr', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			// zencastrId not provided - should use default empty string
 		});
 
@@ -86,7 +86,7 @@ describe('Zencastr', () => {
 
 	it('should construct proper Zencastr embed URL', async () => {
 		const zencastrId = 'test-episode-123';
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId,
 		});
 
@@ -107,7 +107,7 @@ describe('Zencastr', () => {
 
 	it('should handle special characters in zencastrId', async () => {
 		const zencastrId = 'test-episode_123.special';
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId,
 		});
 
@@ -124,7 +124,7 @@ describe('Zencastr', () => {
 	});
 
 	it('should have proper blockquote structure and attributes', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -154,7 +154,7 @@ describe('Zencastr', () => {
 
 	it('should handle very long zencastrId values', async () => {
 		const zencastrId = 'a'.repeat(100);
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId,
 		});
 
@@ -171,7 +171,7 @@ describe('Zencastr', () => {
 	});
 
 	it('should render proper link text and structure', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -199,7 +199,7 @@ describe('Zencastr', () => {
 
 	it('should handle malformed zencastr IDs gracefully', async () => {
 		const zencastrId = 'invalid/id/with/slashes';
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId,
 		});
 
@@ -222,7 +222,7 @@ describe('Zencastr', () => {
 			.mockReturnValue(mockScript);
 		const appendChildSpy = vi.spyOn(document.body, 'appendChild');
 
-		render(Zencastr, {
+		await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -244,7 +244,7 @@ describe('Zencastr', () => {
 			.mockReturnValue(mockScript);
 		const appendChildSpy = vi.spyOn(document.body, 'appendChild');
 
-		const { unmount } = render(Zencastr, {
+		const { unmount } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -252,7 +252,7 @@ describe('Zencastr', () => {
 		expect(appendChildSpy).toHaveBeenCalledWith(mockScript);
 
 		// Unmount component - script should remain (no cleanup in onMount)
-		unmount();
+		await unmount();
 
 		// Zencastr component doesn't implement cleanup, so script remains
 		expect(mockScript.parentNode).toBe(document.body);
@@ -262,7 +262,7 @@ describe('Zencastr', () => {
 	});
 
 	it('should have proper accessibility attributes', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -294,7 +294,7 @@ describe('Zencastr', () => {
 			.mockReturnValue(mockScript);
 		const appendChildSpy = vi.spyOn(document.body, 'appendChild');
 
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -313,7 +313,7 @@ describe('Zencastr', () => {
 	});
 
 	it('should render with proper section wrapper and centering', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 
@@ -329,7 +329,7 @@ describe('Zencastr', () => {
 	});
 
 	it('should handle img element structure correctly', async () => {
-		const { container } = render(Zencastr, {
+		const { container } = await render(Zencastr, {
 			zencastrId: 'abc123',
 		});
 

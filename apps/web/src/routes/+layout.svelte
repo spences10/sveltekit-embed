@@ -21,7 +21,7 @@
 	});
 
 	$effect(() => {
-		page.url.pathname, browser && Fathom.trackPageview();
+		(page.url.pathname, browser && Fathom.trackPageview());
 	});
 </script>
 
@@ -37,7 +37,7 @@
 				target="_blank"
 				href="https://github.com/spences10/sveltekit-embed"
 				rel="noopener noreferrer"
-				class="btn btn-square btn-ghost drawer-button normal-case"
+				class="drawer-button btn btn-square normal-case btn-ghost"
 			>
 				<GitHub
 					height="30"
@@ -52,14 +52,14 @@
 {#if !data.is_cloudflare}
 	<div
 		role="banner"
-		class="rounded-box prose-a:text-info-content bg-primary relative mb-8 text-center shadow-lg lg:mx-20"
+		class="relative mb-8 rounded-box bg-primary text-center shadow-lg lg:mx-20 prose-a:text-info-content"
 	>
 		<h2
-			class="text-primary-content p-4 text-3xl font-bold tracking-wide"
+			class="p-4 text-3xl font-bold tracking-wide text-primary-content"
 		>
 			We've moved to Cloudflare!
 		</h2>
-		<p class="text-primary-content px-4 pb-6 text-xl">
+		<p class="px-4 pb-6 text-xl text-primary-content">
 			This is now being hosted on Cloudflare Pages. You can check it
 			out on <a
 				href="https://sveltekit-embed.pages.dev"
@@ -71,12 +71,12 @@
 	</div>
 {/if}
 
-<main class="prose prose-xl container mx-auto mb-20 max-w-3xl px-4">
+<main class="container mx-auto prose prose-xl mb-20 max-w-3xl px-4">
 	{@render children?.()}
 </main>
 
 <footer
-	class="footer footer-horizontal footer-center bg-primary text-primary-content p-10"
+	class="footer-center footer footer-horizontal bg-primary p-10 text-primary-content"
 >
 	<div class="text-xl">
 		<img
@@ -87,7 +87,7 @@
 		<p class="font-bold">
 			Made with <span role="img" aria-label="red heart">❤️</span> by
 			<a
-				class="link hover:text-secondary transition"
+				class="link transition hover:text-secondary"
 				onclick={() => Fathom.trackEvent(`scottspence.com click`)}
 				href="https://scottspence.com"
 				target="_blank"

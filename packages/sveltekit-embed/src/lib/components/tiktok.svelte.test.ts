@@ -1,11 +1,11 @@
-import TikTok from '$lib/components/tiktok.svelte';
+import TikTok from './tiktok.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('TikTok', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(TikTok, {
+		const { container } = await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
@@ -14,7 +14,7 @@ describe('TikTok', () => {
 
 	it('renders iframe with correct src', async () => {
 		const tiktokId = '7234660647688875814';
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
@@ -30,7 +30,7 @@ describe('TikTok', () => {
 
 	it('renders with custom configurations', async () => {
 		const tiktokId = '7234660647688875814';
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			controls: false,
 			autoplay: true,
@@ -50,7 +50,7 @@ describe('TikTok', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: false,
 		});
@@ -60,7 +60,7 @@ describe('TikTok', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty tiktokId gracefully', async () => {
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '',
 			disable_observer: true,
 		});
@@ -70,7 +70,7 @@ describe('TikTok', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { container } = render(TikTok, {
+		const { container } = await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
@@ -96,7 +96,7 @@ describe('TikTok', () => {
 
 	it('should construct proper TikTok player URL', async () => {
 		const tiktokId = '1234567890123456789';
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			controls: true,
 			autoplay: false,
@@ -114,7 +114,7 @@ describe('TikTok', () => {
 
 	it('should handle special characters in tiktokId', async () => {
 		const tiktokId = 'abc123_def-456';
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
@@ -129,7 +129,7 @@ describe('TikTok', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const tiktokId = 'accessibility-test';
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
@@ -150,7 +150,7 @@ describe('TikTok', () => {
 
 	it('should handle very long tiktokId values', async () => {
 		const tiktokId = '1'.repeat(50);
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
@@ -161,7 +161,7 @@ describe('TikTok', () => {
 	});
 
 	it('should apply custom dimensions correctly', async () => {
-		const { container } = render(TikTok, {
+		const { container } = await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			width: '500px',
 			height: '400px',
@@ -178,7 +178,7 @@ describe('TikTok', () => {
 	});
 
 	it('should handle boolean control options correctly', async () => {
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			controls: false,
 			progress_bar: false,
@@ -215,7 +215,7 @@ describe('TikTok', () => {
 
 	it('should handle malformed tiktokId gracefully', async () => {
 		const tiktokId = 'invalid/id/with/slashes';
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId,
 			disable_observer: true,
 		});
@@ -227,7 +227,7 @@ describe('TikTok', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { container } = render(TikTok, {
+		const { container } = await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
@@ -241,7 +241,7 @@ describe('TikTok', () => {
 
 	it.skip('should handle different TikTok content formats', async () => {
 		// Test standard video ID
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});
@@ -251,7 +251,7 @@ describe('TikTok', () => {
 		);
 
 		// Test different ID format
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '6982674499405171973',
 			disable_observer: true,
 		});
@@ -262,7 +262,7 @@ describe('TikTok', () => {
 	});
 
 	it.skip('should handle query parameter construction correctly', async () => {
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			controls: true,
 			progress_bar: false,
@@ -286,7 +286,7 @@ describe('TikTok', () => {
 	});
 
 	it('should apply iframe positioning styles correctly', async () => {
-		render(TikTok, {
+		await render(TikTok, {
 			tiktokId: '7234660647688875814',
 			disable_observer: true,
 		});

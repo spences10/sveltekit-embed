@@ -1,17 +1,17 @@
-import Guild from '$lib/components/guild.svelte';
+import Guild from './guild.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Guild', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(Guild, { card_id: '1234' });
+		const { container } = await render(Guild, { card_id: '1234' });
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with correct src', async () => {
 		const card_id = '12345';
-		render(Guild, {
+		await render(Guild, {
 			height: '420px',
 			width: '500px',
 			card_id,
@@ -25,7 +25,7 @@ describe('Guild', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(Guild, {
+		const { container } = await render(Guild, {
 			height: '350px',
 			width: '80%',
 			card_id: '67890',
@@ -38,7 +38,7 @@ describe('Guild', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Guild, {
+		await render(Guild, {
 			height: '400px',
 			width: '600px',
 			card_id: 'abcde',
@@ -49,7 +49,7 @@ describe('Guild', () => {
 	});
 
 	it('should handle empty card_id gracefully', async () => {
-		render(Guild, {
+		await render(Guild, {
 			card_id: '',
 			disable_observer: true,
 		});
@@ -59,7 +59,7 @@ describe('Guild', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		render(Guild, {
+		await render(Guild, {
 			card_id: 'test123',
 			disable_observer: true,
 		});
@@ -82,7 +82,7 @@ describe('Guild', () => {
 		const card_id = 'test456';
 
 		// Test 'user' type
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			type: 'user',
 			disable_observer: true,
@@ -95,7 +95,7 @@ describe('Guild', () => {
 			);
 
 		// Test 'event' type
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			type: 'event',
 			disable_observer: true,
@@ -108,7 +108,7 @@ describe('Guild', () => {
 			);
 
 		// Test 'presentation' type
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			type: 'presentation',
 			disable_observer: true,
@@ -125,7 +125,7 @@ describe('Guild', () => {
 		const card_id = 'test789';
 
 		// Test 'item' display type
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			display_type: 'item',
 			disable_observer: true,
@@ -138,7 +138,7 @@ describe('Guild', () => {
 			);
 
 		// Test 'events/latest' display type
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			display_type: 'events/latest',
 			disable_observer: true,
@@ -151,7 +151,7 @@ describe('Guild', () => {
 			);
 
 		// Test 'presentations/upcoming' display type
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			display_type: 'presentations/upcoming',
 			disable_observer: true,
@@ -165,7 +165,7 @@ describe('Guild', () => {
 	});
 
 	it('should construct proper Guild embed URL', async () => {
-		render(Guild, {
+		await render(Guild, {
 			card_id: 'svelte-society-london',
 			type: 'guild',
 			display_type: 'events/upcoming',
@@ -180,7 +180,7 @@ describe('Guild', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const card_id = 'accessibility-test';
-		render(Guild, {
+		await render(Guild, {
 			card_id,
 			disable_observer: true,
 		});
@@ -198,7 +198,7 @@ describe('Guild', () => {
 	it('should handle special characters in card_id', async () => {
 		const specialCardId =
 			'user-name-with-dashes_and_underscores.dots';
-		render(Guild, {
+		await render(Guild, {
 			card_id: specialCardId,
 			disable_observer: true,
 		});
@@ -210,7 +210,7 @@ describe('Guild', () => {
 
 	it('should handle very long card_id values', async () => {
 		const longCardId = 'a'.repeat(100); // 100 character card ID
-		render(Guild, {
+		await render(Guild, {
 			card_id: longCardId,
 			disable_observer: true,
 		});
@@ -224,7 +224,7 @@ describe('Guild', () => {
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
-		render(Guild, {
+		await render(Guild, {
 			card_id: 'style-test',
 			height: '500px',
 			width: '300px',
@@ -264,7 +264,7 @@ describe('Guild', () => {
 
 	it('should handle numeric height and width values', async () => {
 		// Note: In Svelte, numeric values are typically converted to strings
-		render(Guild, {
+		await render(Guild, {
 			card_id: 'numeric-test',
 			height: '400px', // Already as string since TypeScript interface expects string
 			width: '250px', // Already as string since TypeScript interface expects string
@@ -279,7 +279,7 @@ describe('Guild', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { container } = render(Guild, {
+		const { container } = await render(Guild, {
 			card_id: 'class-test',
 			disable_observer: true,
 		});

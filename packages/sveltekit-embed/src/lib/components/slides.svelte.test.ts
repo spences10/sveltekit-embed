@@ -1,11 +1,11 @@
-import Slides from '$lib/components/slides.svelte';
+import Slides from './slides.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 
 describe('Slides', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(Slides);
+		const { container } = await render(Slides);
 		expect(container).toBeTruthy();
 	});
 
@@ -13,7 +13,7 @@ describe('Slides', () => {
 		const username = 'my-username';
 		const title = 'my-slides';
 
-		render(Slides, {
+		await render(Slides, {
 			username,
 			title,
 			byline: 'visible',
@@ -28,7 +28,7 @@ describe('Slides', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			width: '80%',
 			height: '300px',
 			username: 'my-username',
@@ -45,7 +45,7 @@ describe('Slides', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Slides, {
+		await render(Slides, {
 			username: 'my-username',
 			title: 'my-slides',
 			disable_observer: false,
@@ -56,7 +56,7 @@ describe('Slides', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty username gracefully', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username: '',
 			title: 'test-slides',
 			disable_observer: true,
@@ -68,7 +68,7 @@ describe('Slides', () => {
 	});
 
 	it('should handle empty title gracefully', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username: 'test-user',
 			title: '',
 			disable_observer: true,
@@ -80,7 +80,7 @@ describe('Slides', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
@@ -104,7 +104,7 @@ describe('Slides', () => {
 		const title = 'test-slides';
 
 		// Test light style
-		const { container: lightContainer } = render(Slides, {
+		const { container: lightContainer } = await render(Slides, {
 			username,
 			title,
 			style: 'light',
@@ -114,7 +114,7 @@ describe('Slides', () => {
 		expect(lightIframe?.getAttribute('src')).toContain('style=light');
 
 		// Test dark style
-		const { container: darkContainer } = render(Slides, {
+		const { container: darkContainer } = await render(Slides, {
 			username,
 			title,
 			style: 'dark',
@@ -124,7 +124,7 @@ describe('Slides', () => {
 		expect(darkIframe?.getAttribute('src')).toContain('style=dark');
 
 		// Test transparent style
-		const { container: transparentContainer } = render(Slides, {
+		const { container: transparentContainer } = await render(Slides, {
 			username,
 			title,
 			style: 'transparent',
@@ -142,7 +142,7 @@ describe('Slides', () => {
 		const title = 'test-slides';
 
 		// Test visible byline
-		const { container: visibleContainer } = render(Slides, {
+		const { container: visibleContainer } = await render(Slides, {
 			username,
 			title,
 			byline: 'visible',
@@ -154,7 +154,7 @@ describe('Slides', () => {
 		);
 
 		// Test hidden byline
-		const { container: hiddenContainer } = render(Slides, {
+		const { container: hiddenContainer } = await render(Slides, {
 			username,
 			title,
 			byline: 'hidden',
@@ -171,7 +171,7 @@ describe('Slides', () => {
 		const title = 'test-slides';
 
 		// Test visible share
-		const { container: visibleContainer } = render(Slides, {
+		const { container: visibleContainer } = await render(Slides, {
 			username,
 			title,
 			share: 'visible',
@@ -183,7 +183,7 @@ describe('Slides', () => {
 		);
 
 		// Test hidden share
-		const { container: hiddenContainer } = render(Slides, {
+		const { container: hiddenContainer } = await render(Slides, {
 			username,
 			title,
 			share: 'hidden',
@@ -198,7 +198,7 @@ describe('Slides', () => {
 	it('should construct proper Slides embed URL', async () => {
 		const username = 'example-user';
 		const title = 'example-presentation';
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username,
 			title,
 			style: 'light',
@@ -220,7 +220,7 @@ describe('Slides', () => {
 	it('should handle special characters in username and title', async () => {
 		const username = 'user-name_123';
 		const title = 'slide-title_with-chars';
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username,
 			title,
 			disable_observer: true,
@@ -236,7 +236,7 @@ describe('Slides', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const title = 'accessibility-test-slides';
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username: 'test-user',
 			title,
 			disable_observer: true,
@@ -253,7 +253,7 @@ describe('Slides', () => {
 	it('should handle very long username and title values', async () => {
 		const username = 'a'.repeat(50);
 		const title = 'b'.repeat(50);
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username,
 			title,
 			disable_observer: true,
@@ -267,7 +267,7 @@ describe('Slides', () => {
 	});
 
 	it('should handle numeric width and height values', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username: 'test-user',
 			title: 'test-slides',
 			width: '500',
@@ -283,7 +283,7 @@ describe('Slides', () => {
 	it('should handle malformed usernames and titles gracefully', async () => {
 		const username = 'user/with/slashes?and=query';
 		const title = 'title&with=params';
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username,
 			title,
 			disable_observer: true,
@@ -298,7 +298,7 @@ describe('Slides', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username: 'test-user',
 			title: 'test-slides',
 			disable_observer: true,
@@ -310,7 +310,7 @@ describe('Slides', () => {
 	});
 
 	it('should handle query parameter construction correctly', async () => {
-		const { container } = render(Slides, {
+		const { container } = await render(Slides, {
 			username: 'test-user',
 			title: 'test-slides',
 			style: 'light',

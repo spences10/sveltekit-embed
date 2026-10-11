@@ -51,7 +51,7 @@ afterEach(() => {
 
 describe('General Observer', () => {
 	it('mounts', async () => {
-		const { container } = render(GeneralObserver, {
+		const { container } = await render(GeneralObserver, {
 			disable_observer: true,
 			children: (() => 'Test content') as any,
 		});
@@ -61,7 +61,7 @@ describe('General Observer', () => {
 	describe('Observer Disabled', () => {
 		it.skip('should render children when disable_observer is true', async () => {
 			const testContent = 'Test content for disabled observer';
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: true,
 				children: (() => testContent) as any,
 			});
@@ -74,7 +74,7 @@ describe('General Observer', () => {
 	describe('Observer Enabled', () => {
 		it('should not render children initially when observer is enabled', async () => {
 			const testContent = 'Test content for enabled observer';
-			const { container } = render(GeneralObserver, {
+			const { container } = await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => testContent) as any,
 			});
@@ -84,7 +84,7 @@ describe('General Observer', () => {
 		});
 
 		it('should create IntersectionObserver when supported and enabled', async () => {
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});
@@ -97,7 +97,7 @@ describe('General Observer', () => {
 		});
 
 		it('should observe root element when observer is created', async () => {
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});
@@ -109,7 +109,7 @@ describe('General Observer', () => {
 
 		it('should handle custom threshold values', async () => {
 			const customThreshold = 0.8;
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: false,
 				threshold: customThreshold,
 				children: (() => 'Test content') as any,
@@ -125,7 +125,7 @@ describe('General Observer', () => {
 			const thresholds = [0, 1];
 
 			for (const threshold of thresholds) {
-				render(GeneralObserver, {
+				await render(GeneralObserver, {
 					disable_observer: false,
 					threshold,
 					children: (() => 'Test content') as any,
@@ -142,7 +142,7 @@ describe('General Observer', () => {
 	describe('IntersectionObserver Behavior', () => {
 		it.skip('should render children when intersection threshold is met', async () => {
 			const testContent = 'Content to show after intersection';
-			const { container } = render(GeneralObserver, {
+			const { container } = await render(GeneralObserver, {
 				disable_observer: false,
 				threshold: 0.5,
 				children: (() => testContent) as any,
@@ -158,14 +158,14 @@ describe('General Observer', () => {
 			);
 
 			// Wait for reactivity
-			await new Promise(resolve => setTimeout(resolve, 10));
+			await new Promise((resolve) => setTimeout(resolve, 10));
 
 			// Content should now be visible
 			expect(container.textContent).toContain(testContent);
 		});
 
 		it('should disconnect observer after successful intersection', async () => {
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});
@@ -181,7 +181,7 @@ describe('General Observer', () => {
 
 		it.skip('should handle multiple intersection entries correctly', async () => {
 			const testContent = 'Multiple entries test';
-			const { container } = render(GeneralObserver, {
+			const { container } = await render(GeneralObserver, {
 				disable_observer: false,
 				threshold: 0.5,
 				children: (() => testContent) as any,
@@ -197,7 +197,7 @@ describe('General Observer', () => {
 				lastObserverInstance as unknown as IntersectionObserver,
 			);
 
-			await new Promise(resolve => setTimeout(resolve, 10));
+			await new Promise((resolve) => setTimeout(resolve, 10));
 
 			// Content should be visible because one entry met threshold
 			expect(container.textContent).toContain(testContent);
@@ -208,7 +208,7 @@ describe('General Observer', () => {
 		it('should handle IntersectionObserver not supported gracefully', async () => {
 			vi.stubGlobal('IntersectionObserver', undefined);
 
-			const { container } = render(GeneralObserver, {
+			const { container } = await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Fallback content') as any,
 			});
@@ -220,12 +220,12 @@ describe('General Observer', () => {
 
 	describe('Component Lifecycle', () => {
 		it('should cleanup observer on component unmount', async () => {
-			const { unmount } = render(GeneralObserver, {
+			const { unmount } = await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});
 
-			unmount();
+			await unmount();
 
 			expect(mockDisconnect).toHaveBeenCalled();
 		});
@@ -233,7 +233,7 @@ describe('General Observer', () => {
 
 	describe('Edge Cases', () => {
 		it('should handle missing children gracefully', async () => {
-			const { container } = render(GeneralObserver, {
+			const { container } = await render(GeneralObserver, {
 				disable_observer: true,
 				children: undefined as any,
 			});
@@ -243,7 +243,7 @@ describe('General Observer', () => {
 		});
 
 		it('should maintain proper data-testid on root element', async () => {
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: true,
 				children: (() => 'Test content') as any,
 			});
@@ -255,7 +255,7 @@ describe('General Observer', () => {
 
 	describe('Configuration', () => {
 		it('should respect rootMargin configuration', async () => {
-			render(GeneralObserver, {
+			await render(GeneralObserver, {
 				disable_observer: false,
 				children: (() => 'Test content') as any,
 			});

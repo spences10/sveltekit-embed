@@ -1,112 +1,102 @@
 {
 	"name": "sveltekit-embed",
 	"version": "0.0.22",
+	"description": "A collection of embed components for SvelteKit. Easily embed content from YouTube, Spotify, Vimeo, CodePen, and many more with performant, lazy-loaded components.",
+	"keywords": [
+		"codepen",
+		"components",
+		"deezer",
+		"embed",
+		"gist",
+		"github",
+		"iframe",
+		"intersection-observer",
+		"lazy-loading",
+		"mastodon",
+		"performance",
+		"responsive",
+		"soundcloud",
+		"spotify",
+		"svelte",
+		"sveltekit",
+		"twitter",
+		"typescript",
+		"ui-components",
+		"vimeo",
+		"youtube"
+	],
+	"homepage": "https://github.com/spences10/sveltekit-embed#readme",
+	"bugs": {
+		"url": "https://github.com/spences10/sveltekit-embed/issues"
+	},
+	"license": "MIT",
 	"author": {
 		"name": "Scott Spence",
 		"email": "yo@scottspence.dev",
 		"url": "https://scottspence.com"
 	},
-	"description": "A collection of embed components for SvelteKit. Easily embed content from YouTube, Spotify, Vimeo, CodePen, and many more with performant, lazy-loaded components.",
-	"keywords": [
-		"svelte",
-		"sveltekit",
-		"embed",
-		"components",
-		"youtube",
-		"spotify",
-		"vimeo",
-		"codepen",
-		"deezer",
-		"soundcloud",
-		"twitter",
-		"mastodon",
-		"github",
-		"gist",
-		"iframe",
-		"lazy-loading",
-		"intersection-observer",
-		"performance",
-		"responsive",
-		"typescript",
-		"ui-components"
-	],
-	"license": "MIT",
-	"homepage": "https://github.com/spences10/sveltekit-embed#readme",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/spences10/sveltekit-embed.git",
 		"directory": "packages/sveltekit-embed"
 	},
-	"bugs": {
-		"url": "https://github.com/spences10/sveltekit-embed/issues"
-	},
 	"funding": {
 		"type": "github",
 		"url": "https://github.com/sponsors/spences10"
-	},
-	"engines": {
-		"node": ">=18.0.0"
-	},
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build && npm run package",
-		"preview": "vite preview",
-		"package": "svelte-kit sync && svelte-package && publint",
-		"prepublishOnly": "npm run package",
-		"test": "npm run test:integration && npm run test:unit",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write .",
-		"coverage": "pnpm exec vitest run --coverage",
-		"test:integration": "playwright test",
-		"test:unit": "vitest",
-		"test:ci": "vitest run"
-	},
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js"
-		}
 	},
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"svelte": "./dist/index.js",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"dev": "vp dev",
+		"build": "vp build && pnpm run package",
+		"preview": "vp preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "pnpm run package",
+		"test": "pnpm run test:integration && pnpm run test:ci",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --tsgo",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch --tsgo",
+		"lint": "pnpm -w lint",
+		"format": "pnpm -w format",
+		"coverage": "vp test --run --coverage",
+		"test:integration": "playwright test",
+		"test:unit": "vp test",
+		"test:ci": "vp test --run"
+	},
+	"devDependencies": {
+		"@playwright/test": "catalog:",
+		"@sveltejs/adapter-auto": "^8.0.0",
+		"@sveltejs/kit": "^3.0.0",
+		"@sveltejs/package": "^3.0.0",
+		"@sveltejs/vite-plugin-svelte": "^7.3.0",
+		"@typescript/native": "catalog:",
+		"@vitest/browser-playwright": "catalog:",
+		"@vitest/coverage-v8": "catalog:",
+		"playwright": "catalog:",
+		"publint": "^0.3.21",
+		"svelte": "^5.57.1",
+		"svelte-check": "^4.7.6",
+		"typescript": "catalog:",
+		"vite": "catalog:",
+		"vite-plus": "catalog:",
+		"vitest": "catalog:",
+		"vitest-browser-svelte": "^3.1.0"
+	},
 	"peerDependencies": {
 		"svelte": "^4.0.0 || ^5.0.0"
 	},
-	"devDependencies": {
-		"@eslint/compat": "^2.0.0",
-		"@eslint/js": "^9.39.1",
-		"@playwright/test": "^1.57.0",
-		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/kit": "^2.49.1",
-		"@sveltejs/package": "^2.5.7",
-		"@sveltejs/vite-plugin-svelte": "^6.2.1",
-		"@vitest/browser-playwright": "^4.0.15",
-		"@vitest/coverage-v8": "4.0.15",
-		"eslint": "^9.39.1",
-		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.13.1",
-		"fathom-client": "^3.7.2",
-		"globals": "^16.5.0",
-		"jsdom": "^27.2.0",
-		"playwright": "^1.57.0",
-		"prettier": "^3.7.4",
-		"prettier-plugin-svelte": "^3.4.0",
-		"prettier-plugin-tailwindcss": "^0.7.2",
-		"publint": "^0.3.15",
-		"svelte": "5.45.6",
-		"svelte-check": "^4.3.4",
-		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.48.1",
-		"vite": "^7.2.6",
-		"vitest": "^4.0.15",
-		"vitest-browser-svelte": "^2.0.1"
-	},
-	"svelte": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"type": "module"
+	"engines": {
+		"node": ">=24.15.0"
+	}
 }

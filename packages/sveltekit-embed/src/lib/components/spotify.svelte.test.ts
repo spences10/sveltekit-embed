@@ -1,11 +1,11 @@
-import Spotify from '$lib/components/spotify.svelte';
+import Spotify from './spotify.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Spotify', () => {
 	it('mounts with spotify link', async () => {
-		const { container } = render(Spotify, {
+		const { container } = await render(Spotify, {
 			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: true,
 		});
@@ -14,7 +14,7 @@ describe('Spotify', () => {
 
 	it('renders iframe with spotify link', async () => {
 		const spotifyLink = 'track/4uLU6hMCjMI75M1A2tKUQC';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
@@ -24,7 +24,7 @@ describe('Spotify', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: false,
 		});
@@ -34,7 +34,7 @@ describe('Spotify', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty spotifyLink gracefully', async () => {
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: '',
 			disable_observer: true,
 		});
@@ -44,7 +44,7 @@ describe('Spotify', () => {
 	});
 
 	it('should apply default height and width when not provided', async () => {
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'track/test',
 			disable_observer: true,
 		});
@@ -63,7 +63,7 @@ describe('Spotify', () => {
 
 	it('should construct proper Spotify embed URL', async () => {
 		const spotifyLink = 'playlist/37i9dQZF1DXcBWIGoYBM5M';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
@@ -74,7 +74,7 @@ describe('Spotify', () => {
 
 	it.skip('should handle different Spotify content types', async () => {
 		// Test track
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: true,
 		});
@@ -86,7 +86,7 @@ describe('Spotify', () => {
 			);
 
 		// Test album
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'album/1DFixLWuPkv3KT3TnV35m3',
 			disable_observer: true,
 		});
@@ -98,7 +98,7 @@ describe('Spotify', () => {
 			);
 
 		// Test playlist
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'playlist/37i9dQZF1DXcBWIGoYBM5M',
 			disable_observer: true,
 		});
@@ -110,7 +110,7 @@ describe('Spotify', () => {
 			);
 
 		// Test artist
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'artist/4NHQUGzhtTLFvgF5SZesLK',
 			disable_observer: true,
 		});
@@ -124,7 +124,7 @@ describe('Spotify', () => {
 
 	it('should handle special characters in spotifyLink', async () => {
 		const spotifyLink = 'track/abc123_def-456';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
@@ -142,7 +142,7 @@ describe('Spotify', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const spotifyLink = 'track/accessibility-test';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
@@ -162,7 +162,7 @@ describe('Spotify', () => {
 
 	it('should handle very long spotifyLink values', async () => {
 		const spotifyLink = 'track/' + 'a'.repeat(100);
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
@@ -177,7 +177,7 @@ describe('Spotify', () => {
 
 	it('should apply custom styles correctly', async () => {
 		const customStyles = 'border: 2px solid red; background: blue;';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'track/test',
 			iframe_styles: customStyles,
 			disable_observer: true,
@@ -192,7 +192,7 @@ describe('Spotify', () => {
 	});
 
 	it('should handle custom dimensions', async () => {
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'track/test',
 			width: '500px',
 			height: '300px',
@@ -208,7 +208,7 @@ describe('Spotify', () => {
 
 	it('should handle malformed Spotify links gracefully', async () => {
 		const spotifyLink = 'invalid/content/with/extra/slashes';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink,
 			disable_observer: true,
 		});
@@ -224,7 +224,7 @@ describe('Spotify', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: 'track/test',
 			disable_observer: true,
 		});
@@ -238,7 +238,7 @@ describe('Spotify', () => {
 	it.skip('should handle Spotify link variations', async () => {
 		// Test with query parameters
 		const linkWithParams = 'track/4uLU6hMCjMI75M1A2tKUQC?si=abc123';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: linkWithParams,
 			disable_observer: true,
 		});
@@ -251,7 +251,7 @@ describe('Spotify', () => {
 
 		// Test with just ID (no type prefix)
 		const justId = '4uLU6hMCjMI75M1A2tKUQC';
-		render(Spotify, {
+		await render(Spotify, {
 			spotifyLink: justId,
 			disable_observer: true,
 		});

@@ -1,11 +1,11 @@
-import Tweet from '$lib/components/tweet.svelte';
+import Tweet from './tweet.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Tweet', () => {
 	it('mounts with default values', async () => {
-		const { container } = render(Tweet, {
+		const { container } = await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
@@ -15,7 +15,7 @@ describe('Tweet', () => {
 	it('renders tweet with correct link', async () => {
 		const tweetLink = 'twitterdev/status/1399879412994844160';
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
@@ -29,7 +29,7 @@ describe('Tweet', () => {
 	it('should handle empty tweetLink gracefully', async () => {
 		const tweetLink = '';
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
@@ -40,7 +40,7 @@ describe('Tweet', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { container } = render(Tweet, {
+		const { container } = await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
@@ -63,7 +63,7 @@ describe('Tweet', () => {
 	it('should handle special characters in tweetLink', async () => {
 		const tweetLink = 'user.name/status/123_456';
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
@@ -76,7 +76,7 @@ describe('Tweet', () => {
 	it('should construct proper Twitter embed URL', async () => {
 		const tweetLink = 'username/status/123456789';
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
@@ -90,7 +90,7 @@ describe('Tweet', () => {
 	it('should handle very long tweetLink values', async () => {
 		const tweetLink = `${'a'.repeat(50)}/status/${'1'.repeat(20)}`;
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
@@ -101,7 +101,7 @@ describe('Tweet', () => {
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
-		const { container } = render(Tweet, {
+		const { container } = await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 			theme: 'dark',
 		});
@@ -133,7 +133,7 @@ describe('Tweet', () => {
 	it('should handle malformed tweet links gracefully', async () => {
 		const tweetLink = 'invalid/format/link';
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink,
 		});
 		const tweetElement = page.getByText('Loading Tweet...');
@@ -144,7 +144,7 @@ describe('Tweet', () => {
 	});
 
 	it('should render loading state properly', async () => {
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
@@ -159,7 +159,7 @@ describe('Tweet', () => {
 			.mockReturnValue(mockScript);
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
@@ -182,12 +182,12 @@ describe('Tweet', () => {
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 		const removeChildSpy = vi.spyOn(document.head, 'removeChild');
 
-		const { unmount } = render(Tweet, {
+		const { unmount } = await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
 		// Unmount component
-		unmount();
+		await unmount();
 
 		expect(removeChildSpy).toHaveBeenCalledWith(mockScript);
 
@@ -197,7 +197,7 @@ describe('Tweet', () => {
 	});
 
 	it.skip('should have proper accessibility attributes', async () => {
-		const { container } = render(Tweet, {
+		const { container } = await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
@@ -222,7 +222,7 @@ describe('Tweet', () => {
 		];
 
 		for (const tweetLink of testCases) {
-			render(Tweet, {
+			await render(Tweet, {
 				tweetLink,
 			});
 			const tweetElement = page.getByText('Loading Tweet...');
@@ -242,7 +242,7 @@ describe('Tweet', () => {
 		const createElementSpy = vi.spyOn(document, 'createElement');
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
-		render(Tweet, {
+		await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 		});
 
@@ -257,7 +257,7 @@ describe('Tweet', () => {
 	});
 
 	it('should handle theme prop correctly', async () => {
-		const { container } = render(Tweet, {
+		const { container } = await render(Tweet, {
 			tweetLink: 'twitterdev/status/1399879412994844160',
 			theme: 'dark',
 		});
