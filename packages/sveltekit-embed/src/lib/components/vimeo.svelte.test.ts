@@ -6,7 +6,7 @@ import { render } from 'vitest-browser-svelte';
 describe('Vimeo', () => {
 	it('mounts with default values', async () => {
 		const { container } = await render(Vimeo, {
-			vimeoId: '123456789',
+			vimeo_id: '123456789',
 			disable_observer: true,
 		});
 
@@ -14,24 +14,24 @@ describe('Vimeo', () => {
 	});
 
 	it('renders iframe with correct src', async () => {
-		const vimeoId = '987654321';
+		const vimeo_id = '987654321';
 		await render(Vimeo, {
-			vimeoId,
-			autoPlay: true,
-			aspectRatio: '4:3',
-			skipTo: { h: 1, m: 23, s: 45 },
+			vimeo_id,
+			autoplay: true,
+			aspect_ratio: '4:3',
+			skip_to: { h: 1, m: 23, s: 45 },
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=true#t=1h23m45s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=true#t=1h23m45s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom aspect ratio', async () => {
 		const { container } = await render(Vimeo, {
-			vimeoId: '123456789',
-			aspectRatio: '1:1',
+			vimeo_id: '123456789',
+			aspect_ratio: '1:1',
 			disable_observer: true,
 		});
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
@@ -43,7 +43,7 @@ describe('Vimeo', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(Vimeo, {
-			vimeoId: '123456789',
+			vimeo_id: '123456789',
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -52,31 +52,31 @@ describe('Vimeo', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty vimeoId gracefully', async () => {
-		const vimeoId = '';
+	it('should handle empty vimeo_id gracefully', async () => {
+		const vimeo_id = '';
 
 		await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
 		const expected_src = `https://player.vimeo.com/video/?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const vimeoId = '123456789';
+		const vimeo_id = '123456789';
 
 		const { container } = await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
 
 		// Check default values
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 
 		// Check default aspect ratio (16:9 = 56.25%)
@@ -86,7 +86,7 @@ describe('Vimeo', () => {
 	});
 
 	it('should handle different aspect ratio formats', async () => {
-		const aspectRatios = ['16:9', '4:3', '1:1', '3:2', '8.5'];
+		const aspect_ratios = ['16:9', '4:3', '1:1', '3:2', '8.5'];
 		const expectedPaddings = [
 			'56.25%',
 			'75%',
@@ -95,10 +95,10 @@ describe('Vimeo', () => {
 			'62.5%',
 		];
 
-		for (let i = 0; i < aspectRatios.length; i++) {
+		for (let i = 0; i < aspect_ratios.length; i++) {
 			const { container } = await render(Vimeo, {
-				vimeoId: '123456789',
-				aspectRatio: aspectRatios[i],
+				vimeo_id: '123456789',
+				aspect_ratio: aspect_ratios[i],
 				disable_observer: true,
 			});
 			const wrapper = container.querySelector('.vimeo-svelte-embed');
@@ -110,82 +110,82 @@ describe('Vimeo', () => {
 	});
 
 	it('should construct proper Vimeo player URL', async () => {
-		const vimeoId = '987654321';
+		const vimeo_id = '987654321';
 
 		await render(Vimeo, {
-			vimeoId,
-			autoPlay: false,
+			vimeo_id,
+			autoplay: false,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('should handle skipTo time parameter correctly', async () => {
-		const vimeoId = '123456789';
-		const skipTo = { h: 2, m: 15, s: 30 };
+	it('should handle skip_to time parameter correctly', async () => {
+		const vimeo_id = '123456789';
+		const skip_to = { h: 2, m: 15, s: 30 };
 
 		await render(Vimeo, {
-			vimeoId,
-			skipTo,
+			vimeo_id,
+			skip_to,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=2h15m30s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=2h15m30s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it.skip('should handle autoPlay parameter in URL', async () => {
-		const vimeoId = '123456789';
+	it.skip('should handle autoplay parameter in URL', async () => {
+		const vimeo_id = '123456789';
 
-		// Test autoPlay true
+		// Test autoplay true
 		await render(Vimeo, {
-			vimeoId,
-			autoPlay: true,
+			vimeo_id,
+			autoplay: true,
 			disable_observer: true,
 		});
-		const iframeTrue = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframeTrue = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src_true = `https://player.vimeo.com/video/${vimeoId}?autoplay=true#t=0h0m0s`;
+		const expected_src_true = `https://player.vimeo.com/video/${vimeo_id}?autoplay=true#t=0h0m0s`;
 		await expect
 			.element(iframeTrue)
 			.toHaveAttribute('src', expected_src_true);
 
-		// Test autoPlay false
+		// Test autoplay false
 		await render(Vimeo, {
-			vimeoId,
-			autoPlay: false,
+			vimeo_id,
+			autoplay: false,
 			disable_observer: true,
 		});
-		const iframeFalse = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframeFalse = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src_false = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src_false = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect
 			.element(iframeFalse)
 			.toHaveAttribute('src', expected_src_false);
 	});
 
-	it('should handle special characters in vimeoId', async () => {
-		const vimeoId = '123456789';
+	it('should handle special characters in vimeo_id', async () => {
+		const vimeo_id = '123456789';
 
 		await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
-		const vimeoId = '123456789';
+		const vimeo_id = '123456789';
 
 		const { container } = await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
@@ -195,7 +195,7 @@ describe('Vimeo', () => {
 			const iframeElement = iframe as HTMLIFrameElement;
 			await expect
 				.element(iframe)
-				.toHaveAttribute('title', `vimeo-${vimeoId}`);
+				.toHaveAttribute('title', `vimeo-${vimeo_id}`);
 			await expect
 				.element(iframe)
 				.toHaveAttribute('frameBorder', '0');
@@ -209,16 +209,16 @@ describe('Vimeo', () => {
 		}
 	});
 
-	it('should handle very long vimeoId values', async () => {
-		const vimeoId = '1'.repeat(20);
+	it('should handle very long vimeo_id values', async () => {
+		const vimeo_id = '1'.repeat(20);
 
 		await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
@@ -233,8 +233,8 @@ describe('Vimeo', () => {
 
 		for (const testCase of testCases) {
 			const { container } = await render(Vimeo, {
-				vimeoId: '123456789',
-				aspectRatio: testCase.ratio,
+				vimeo_id: '123456789',
+				aspect_ratio: testCase.ratio,
 				disable_observer: true,
 			});
 			const wrapper = container.querySelector('.vimeo-svelte-embed');
@@ -246,23 +246,23 @@ describe('Vimeo', () => {
 	});
 
 	it('should handle malformed vimeo IDs gracefully', async () => {
-		const vimeoId = 'abc123def';
+		const vimeo_id = 'abc123def';
 
 		await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const vimeoId = '123456789';
+		const vimeo_id = '123456789';
 
 		await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
 		const wrapper = page.getByTestId('vimeo');
@@ -272,50 +272,50 @@ describe('Vimeo', () => {
 			.toHaveAttribute('class', 'vimeo-svelte-embed');
 	});
 
-	it.skip('should handle skipTo with partial time values', async () => {
+	it.skip('should handle skip_to with partial time values', async () => {
 		const testCases = [
-			{ skipTo: { h: 1, m: 0, s: 0 }, expected: '1h0m0s' },
-			{ skipTo: { h: 0, m: 30, s: 0 }, expected: '0h30m0s' },
-			{ skipTo: { h: 0, m: 0, s: 45 }, expected: '0h0m45s' },
-			{ skipTo: { h: 2, m: 15, s: 0 }, expected: '2h15m0s' },
+			{ skip_to: { h: 1, m: 0, s: 0 }, expected: '1h0m0s' },
+			{ skip_to: { h: 0, m: 30, s: 0 }, expected: '0h30m0s' },
+			{ skip_to: { h: 0, m: 0, s: 45 }, expected: '0h0m45s' },
+			{ skip_to: { h: 2, m: 15, s: 0 }, expected: '2h15m0s' },
 		];
 
 		for (const testCase of testCases) {
-			const vimeoId = '123456789';
+			const vimeo_id = '123456789';
 			await render(Vimeo, {
-				vimeoId,
-				skipTo: testCase.skipTo,
+				vimeo_id,
+				skip_to: testCase.skip_to,
 				disable_observer: true,
 			});
-			const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+			const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-			const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=${testCase.expected}`;
+			const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=${testCase.expected}`;
 			await expect
 				.element(iframe)
 				.toHaveAttribute('src', expected_src);
 		}
 	});
 
-	it('should handle numeric vimeoId values', async () => {
-		const vimeoId = '987654321';
+	it('should handle numeric vimeo_id values', async () => {
+		const vimeo_id = '987654321';
 
 		await render(Vimeo, {
-			vimeoId,
+			vimeo_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`vimeo-${vimeoId}`);
+		const iframe = page.getByTitle(`vimeo-${vimeo_id}`);
 
-		const expected_src = `https://player.vimeo.com/video/${vimeoId}?autoplay=false#t=0h0m0s`;
+		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should handle undefined aspect ratio gracefully', async () => {
-		const vimeoId = '123456789';
+		const vimeo_id = '123456789';
 
 		// Test with invalid aspect ratio - should fallback to default
 		const { container } = await render(Vimeo, {
-			vimeoId,
-			aspectRatio: 'invalid:ratio' as any,
+			vimeo_id,
+			aspect_ratio: 'invalid:ratio' as any,
 			disable_observer: true,
 		});
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
@@ -324,5 +324,32 @@ describe('Vimeo', () => {
 		expect(wrapper?.getAttribute('style')).not.toContain(
 			'padding-top:',
 		);
+	});
+
+	it('should update the iframe when props change', async () => {
+		const { rerender } = await render(Vimeo, {
+			vimeo_id: '111111',
+			disable_observer: true,
+		});
+
+		await expect
+			.element(page.getByTitle('vimeo-111111'))
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/video/111111?'),
+			);
+
+		await rerender({ vimeo_id: '222222', skip_to: { m: 2, s: 5 } });
+
+		const iframe = page.getByTitle('vimeo-222222');
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/video/222222?'),
+			);
+		await expect
+			.element(iframe)
+			.toHaveAttribute('src', expect.stringContaining('#t=0h2m5s'));
 	});
 });

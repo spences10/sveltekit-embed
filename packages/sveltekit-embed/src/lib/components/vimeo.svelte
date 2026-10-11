@@ -3,22 +3,24 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		vimeoId?: string;
-		autoPlay?: boolean;
-		aspectRatio?: string;
-		skipTo?: any;
+		vimeo_id?: string;
+		autoplay?: boolean;
+		aspect_ratio?: string;
+		skip_to?: { h?: number; m?: number; s?: number };
 		disable_observer?: boolean;
 	}
 
 	let {
-		vimeoId = '',
-		autoPlay = false,
-		aspectRatio = '16:9',
-		skipTo = { h: 0, m: 0, s: 0 },
+		vimeo_id = '',
+		autoplay = false,
+		aspect_ratio = '16:9',
+		skip_to = { h: 0, m: 0, s: 0 },
 		disable_observer = false,
 	}: Props = $props();
 
-	const { h, m, s } = skipTo;
+	const src = $derived(
+		`https://player.vimeo.com/video/${vimeo_id}?autoplay=${autoplay}#t=${skip_to.h ?? 0}h${skip_to.m ?? 0}m${skip_to.s ?? 0}s`,
+	);
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -28,12 +30,12 @@
 		style={`
     	position: relative;
     	width: 100%;
-   		${getPadding(aspectRatio)}
+   		${getPadding(aspect_ratio)}
   `}
 	>
 		<iframe
-			title={`vimeo-${vimeoId}`}
-			src={`https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay}#t=${h}h${m}m${s}s`}
+			title={`vimeo-${vimeo_id}`}
+			{src}
 			frameBorder="0"
 			allow="autoplay; fullscreen; picture-in-picture"
 			allowFullScreen

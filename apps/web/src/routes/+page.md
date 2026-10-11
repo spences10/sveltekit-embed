@@ -727,24 +727,24 @@ Output:
 Props:
 
 ```ts
-vimeoId: string = ''
-autoPlay: boolean = false
-aspectRatio: string = '16:9'
-skipTo: { h: 0, m: 0, s: 0 }
+vimeo_id: string = ''
+autoplay: boolean = false
+aspect_ratio: string = '16:9'
+skip_to: { h: 0, m: 0, s: 0 }
 disable_observer: boolean = false
 ```
 
 Usage:
 
 ```html
-<Vimeo vimeoId="246846978" />
+<Vimeo vimeo_id="246846978" />
 ```
 
 Output:
 
 <Vimeo
   disable_observer={$disable_observer_store}
-  vimeoId="246846978" 
+  vimeo_id="246846978" 
 />
 
 ## YouTube
