@@ -1,22 +1,20 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { load_script } from '../attachments/load-script.js';
 
 	interface Props {
 		zencastr_id?: string;
 	}
 
 	let { zencastr_id = '' }: Props = $props();
-
-	// TODO: want to do this the Svelte way, but using <svelte:head> doesn't work
-	onMount(() => {
-		const script = document.createElement('script');
-		script.async = true;
-		script.src = 'https://zencastr.com/static/js/embed-player.js';
-		document.body.appendChild(script);
-	});
 </script>
 
-<section style="display:flex; justify-content: center;">
+<section
+	style="display:flex; justify-content: center;"
+	{@attach load_script(
+		'https://zencastr.com/static/js/embed-player.js',
+		{ parent: 'body' },
+	)}
+>
 	<blockquote
 		class="zenplayer"
 		data-episode-href={`https://zencastr.com/embed/${zencastr_id}`}

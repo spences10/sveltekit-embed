@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import type { Attachment } from 'svelte/attachments';
+	import { load_script } from '../attachments/load-script.js';
+
+	type TwitterWindow = Window & {
+		twttr?: { widgets?: { load: (element?: HTMLElement) => void } };
+	};
 
 	interface Props {
 		tweet_link?: string;
@@ -8,46 +13,42 @@
 
 	let { tweet_link = '', theme = 'light' }: Props = $props();
 
-	let twitter_widgets_script = $state.raw<HTMLScriptElement | null>(
-		null,
-	);
+	const widgets_src = 'https://platform.twitter.com/widgets.js';
 
-	const load_twitter_widgets_script = () => {
-		if (
-			document.querySelector(
-				'script[src*="platform.twitter.com/widgets.js"]',
-			)
-		) {
+	let loaded = $state(false);
+
+	const load_tweet: Attachment<HTMLElement> = (node) => {
+		const twttr = (window as TwitterWindow).twttr;
+
+		// The script has already run, so ask it to render this tweet.
+		if (twttr?.widgets) {
+			twttr.widgets.load(node);
+			loaded = true;
 			return;
 		}
 
-		if (twitter_widgets_script) return;
+		// Another tweet is loading the script, which renders every tweet
+		// on the page once it runs.
+		const pending = document.querySelector<HTMLScriptElement>(
+			`script[src="${widgets_src}"]`,
+		);
+		if (pending) {
+			const on_load = () => (loaded = true);
+			pending.addEventListener('load', on_load);
+			return () => pending.removeEventListener('load', on_load);
+		}
 
-		twitter_widgets_script = document.createElement('script');
-		twitter_widgets_script.src =
-			'https://platform.twitter.com/widgets.js';
-		twitter_widgets_script.async = true;
-		document.head.appendChild(twitter_widgets_script);
+		return load_script(widgets_src, {
+			on_load: () => (loaded = true),
+		})(node);
 	};
-
-	const remove_twitter_widget_script = () => {
-		if (!twitter_widgets_script) return;
-		document.head.removeChild(twitter_widgets_script);
-		twitter_widgets_script = null;
-	};
-
-	onMount(() => {
-		load_twitter_widgets_script();
-		return () => {
-			remove_twitter_widget_script();
-		};
-	});
 </script>
 
 <div
 	class="tweet-wrapper"
 	data-theme={theme}
-	data-loaded={twitter_widgets_script != null}
+	data-loaded={loaded}
+	{@attach load_tweet}
 >
 	<blockquote class="twitter-tweet" data-theme={theme}>
 		<a href={`https://twitter.com/${tweet_link}`}>Loading Tweet...</a>

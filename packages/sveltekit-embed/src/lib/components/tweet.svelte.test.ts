@@ -256,6 +256,29 @@ describe('Tweet', () => {
 		appendChildSpy.mockRestore();
 	});
 
+	it('asks an already loaded widgets script to render the tweet', async () => {
+		const load = vi.fn();
+		const twitter_window = window as Window & { twttr?: unknown };
+		twitter_window.twttr = { widgets: { load } };
+
+		try {
+			const { container } = await render(Tweet, {
+				tweet_link: 'twitterdev/status/1399879412994844160',
+			});
+			const wrapper = container.querySelector('.tweet-wrapper');
+
+			expect(load).toHaveBeenCalledWith(wrapper);
+			expect(wrapper?.getAttribute('data-loaded')).toBe('true');
+			expect(
+				document.querySelector(
+					'script[src="https://platform.twitter.com/widgets.js"]',
+				),
+			).toBeNull();
+		} finally {
+			delete twitter_window.twttr;
+		}
+	});
+
 	it('should handle theme prop correctly', async () => {
 		const { container } = await render(Tweet, {
 			tweet_link: 'twitterdev/status/1399879412994844160',

@@ -251,11 +251,12 @@ describe('Zencastr', () => {
 		// Verify script was added
 		expect(appendChildSpy).toHaveBeenCalledWith(mockScript);
 
-		// Unmount component - script should remain (no cleanup in onMount)
+		expect(mockScript.parentNode).toBe(document.body);
+
+		// Unmounting removes the script the component added
 		await unmount();
 
-		// Zencastr component doesn't implement cleanup, so script remains
-		expect(mockScript.parentNode).toBe(document.body);
+		expect(mockScript.parentNode).toBeNull();
 
 		createElementSpy.mockRestore();
 		appendChildSpy.mockRestore();
