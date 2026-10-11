@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	interface Props {
 		post_id?: string;
 		theme?: 'light' | 'dark' | 'system';
@@ -15,46 +13,34 @@
 		iframe_styles = '',
 	}: Props = $props();
 
+	const uid = $props.id();
+	const iframe_id = `bluesky-iframe-${uid}`;
+
 	let wrapper_height = $state('174.5px');
-	let iframe_id = $state('');
+	let iframe = $state<HTMLIFrameElement>();
 
 	const src = $derived(
 		`https://embed.bsky.app/embed/${post_id}?colorMode=${theme}`,
 	);
 
-	onMount(() => {
-		// Generate a unique ID for this iframe instance
-		iframe_id = `bluesky-iframe-${Math.random().toString(36).substr(2, 9)}`;
+	const handle_message = (event: MessageEvent) => {
+		if (event.origin !== 'https://embed.bsky.app') return;
+		if (typeof event.data !== 'object' || event.data === null) return;
 
-		const handle_message = (event: MessageEvent) => {
-			if (event.origin !== 'https://embed.bsky.app') return;
+		// Bluesky embeds don't say which post they are, so match the
+		// message to this iframe by its window.
+		if (event.source !== iframe?.contentWindow) return;
 
-			if (typeof event.data === 'object') {
-				// Check if this message is for this specific iframe
-				// Bluesky embeds don't send iframe IDs, so we need to use event.source
-				// to identify which iframe sent the message
-				const iframe_element = document.getElementById(
-					iframe_id,
-				) as HTMLIFrameElement;
-				if (
-					iframe_element &&
-					event.source === iframe_element.contentWindow
-				) {
-					wrapper_height = `${event.data.height || event.data.h || 500}px`;
-				}
-			}
-		};
-
-		window.addEventListener('message', handle_message);
-		return () => {
-			window.removeEventListener('message', handle_message);
-		};
-	});
+		wrapper_height = `${event.data.height || event.data.h || 500}px`;
+	};
 </script>
+
+<svelte:window onmessage={handle_message} />
 
 <div class="bluesky-wrapper-container">
 	<div class="bluesky-wrapper" style={`height: ${wrapper_height}`}>
 		<iframe
+			bind:this={iframe}
 			id={iframe_id}
 			data-testid="bluesky-embed"
 			title="Bluesky Post Embed"

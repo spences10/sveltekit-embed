@@ -294,11 +294,12 @@ describe('Bluesky', () => {
 		// Unmount the component
 		await unmount();
 
-		// Verify cleanup was called
-		expect(removeEventListenerSpy).toHaveBeenCalledWith(
-			'message',
-			expect.any(Function),
-		);
+		// Verify the message listener was removed
+		expect(
+			removeEventListenerSpy.mock.calls.some(
+				([type]) => type === 'message',
+			),
+		).toBe(true);
 
 		removeEventListenerSpy.mockRestore();
 	});
@@ -322,8 +323,8 @@ describe('Bluesky', () => {
 		expect(iframe1.id).toBeTruthy();
 		expect(iframe2.id).toBeTruthy();
 		expect(iframe1.id).not.toBe(iframe2.id);
-		expect(iframe1.id).toMatch(/^bluesky-iframe-[a-z0-9]{9}$/);
-		expect(iframe2.id).toMatch(/^bluesky-iframe-[a-z0-9]{9}$/);
+		expect(iframe1.id).toMatch(/^bluesky-iframe-.+$/);
+		expect(iframe2.id).toMatch(/^bluesky-iframe-.+$/);
 	});
 
 	it('should only update height for the specific iframe that sent the message', async () => {
@@ -473,7 +474,7 @@ describe('Bluesky', () => {
 			const iframe = container.querySelector(
 				'iframe',
 			) as HTMLIFrameElement;
-			expect(iframe.id).toMatch(/^bluesky-iframe-[a-z0-9]{9}$/);
+			expect(iframe.id).toMatch(/^bluesky-iframe-.+$/);
 			expect(iframe.src).toBe(
 				`https://embed.bsky.app/embed/${post_ids[index]}?colorMode=light`,
 			);
