@@ -11,7 +11,7 @@
 	import '../app.css';
 	import '../prism.css';
 
-	let { data, children } = $props();
+	let { children } = $props();
 
 	onMount(() => {
 		Fathom.load(PUBLIC_FATHOM_ID, {
@@ -49,28 +49,6 @@
 		</div>
 	</span>
 </header>
-
-{#if !data.is_cloudflare}
-	<div
-		role="banner"
-		class="relative mb-8 rounded-box bg-primary text-center shadow-lg lg:mx-20 prose-a:text-info-content"
-	>
-		<h2
-			class="p-4 text-3xl font-bold tracking-wide text-primary-content"
-		>
-			We've moved to Cloudflare!
-		</h2>
-		<p class="px-4 pb-6 text-xl text-primary-content">
-			This is now being hosted on Cloudflare Pages. You can check it
-			out on <a
-				href="https://sveltekit-embed.pages.dev"
-				class="link link-secondary"
-			>
-				https://sveltekit-embed.pages.dev
-			</a>
-		</p>
-	</div>
-{/if}
 
 <main class="container mx-auto prose prose-xl mb-20 max-w-3xl px-4">
 	{@render children?.()}
