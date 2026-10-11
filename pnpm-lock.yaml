@@ -223,7 +223,7 @@ importers:
         version: 1.63.0
       '@sveltejs/adapter-auto':
         specifier: ^7.0.0
-        version: 7.0.0(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))
+        version: 7.0.1(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))
       '@sveltejs/kit':
         specifier: ^2.61.0
         version: 2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3)
@@ -1069,8 +1069,8 @@ packages:
     peerDependencies:
       acorn: ^8.9.0
 
-  '@sveltejs/adapter-auto@7.0.0':
-    resolution: {integrity: sha512-ImDWaErTOCkRS4Gt+5gZuymKFBobnhChXUZ9lhUZLahUgvA4OOvRzi3sahzYgbxGj5nkA6OV0GAW378+dl/gyw==}
+  '@sveltejs/adapter-auto@7.0.1':
+    resolution: {integrity: sha512-dvuPm1E7M9NI/+canIQ6KKQDU2AkEefEZ2Dp7cY6uKoPq9Z/PhOXABe526UdW2mN986gjVkuSLkOYIBnS/M2LQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
@@ -1280,9 +1280,6 @@ packages:
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
-
-  '@types/estree@1.0.8':
-    resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
@@ -3538,13 +3535,13 @@ snapshots:
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
       '@jridgewell/set-array': 1.2.1
-      '@jridgewell/sourcemap-codec': 1.5.0
-      '@jridgewell/trace-mapping': 0.3.25
+      '@jridgewell/sourcemap-codec': 1.6.0
+      '@jridgewell/trace-mapping': 0.3.31
 
   '@jridgewell/remapping@2.3.5':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
-      '@jridgewell/trace-mapping': 0.3.25
+      '@jridgewell/trace-mapping': 0.3.31
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
@@ -3750,7 +3747,7 @@ snapshots:
     dependencies:
       acorn: 8.19.0
 
-  '@sveltejs/adapter-auto@7.0.0(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))':
+  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))':
     dependencies:
       '@sveltejs/kit': 2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.0.0(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.8.2))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3)
 
@@ -3945,8 +3942,6 @@ snapshots:
   '@types/cookie@0.6.0': {}
 
   '@types/deep-eql@4.0.2': {}
-
-  '@types/estree@1.0.8': {}
 
   '@types/estree@1.0.9': {}
 
@@ -4549,7 +4544,7 @@ snapshots:
 
   estree-walker@3.0.3:
     dependencies:
-      '@types/estree': 1.0.8
+      '@types/estree': 1.0.9
 
   expect-type@1.4.0: {}
 
@@ -4888,7 +4883,7 @@ snapshots:
 
   magic-string@0.30.21:
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.5
+      '@jridgewell/sourcemap-codec': 1.6.0
 
   magic-string@1.4.3:
     dependencies:
