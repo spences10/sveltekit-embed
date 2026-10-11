@@ -532,10 +532,10 @@ Output:
 Props:
 
 ```ts
-soundcloudLink: string = '';
+soundcloud_link: string = '';
 width: string = '100%';
 height: string = '300px';
-showVisual: boolean = true;
+show_visual: boolean = true;
 disable_observer: boolean = false;
 iframe_styles: string = '';
 ```
@@ -544,7 +544,7 @@ Usage:
 
 ```html
 <SoundCloud
-	soundcloudLink="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
+	soundcloud_link="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
 />
 ```
 
@@ -552,7 +552,7 @@ Output:
 
 <SoundCloud
   disable_observer={$disable_observer_store}
-  soundcloudLink="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
+  soundcloud_link="https://soundcloud.com/dimension_uk/sets/prospa-want-need-love"
 />
 
 ## Spotify
