@@ -3,7 +3,7 @@
 
 	interface Props {
 		theme?: string;
-		frameSrc?: string;
+		frame_src?: string;
 		height?: string;
 		width?: string;
 		disable_observer?: boolean;
@@ -12,25 +12,30 @@
 
 	let {
 		theme = 'auto',
-		frameSrc = '',
+		frame_src = '',
 		height = '300px',
 		width = '100%',
 		disable_observer = false,
-		iframe_styles = `
+		iframe_styles,
+	}: Props = $props();
+
+	const styles = $derived(
+		iframe_styles ??
+			`
 			border-radius: 0.6rem;
 			height: ${height};
-			width: ${width};	
+			width: ${width};
 		`,
-	}: Props = $props();
+	);
 </script>
 
 <GeneralObserver {disable_observer}>
 	<iframe
 		title="deezer-widget"
-		src={`https://widget.deezer.com/widget/${theme}/${frameSrc}`}
+		src={`https://widget.deezer.com/widget/${theme}/${frame_src}`}
 		frameborder="0"
 		allowtransparency
 		allow="encrypted-media; clipboard-write"
-		style={iframe_styles}
+		style={styles}
 	></iframe>
 </GeneralObserver>

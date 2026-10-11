@@ -291,7 +291,7 @@ Props:
 
 ```ts
 theme: string = 'auto';
-frameSrc: string = '';
+frame_src: string = '';
 height: string = '300px';
 width: string = '100%';
 disable_observer: boolean = false;
@@ -305,14 +305,14 @@ iframe_styles: string = `
 Usage:
 
 ```html
-<Deezer frameSrc="show/496882" />
+<Deezer frame_src="show/496882" />
 ```
 
 Output:
 
 <Deezer
   disable_observer={$disable_observer_store}
-  frameSrc="show/496882"
+  frame_src="show/496882"
 />
 
 ## GenericEmbed

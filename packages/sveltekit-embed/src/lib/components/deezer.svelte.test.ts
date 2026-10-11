@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 const theme = 'auto';
-const frameSrc = 'track/1366751722';
+const frame_src = 'track/1366751722';
 const height = '300px';
 const width = '100%';
 
@@ -17,20 +17,20 @@ describe('Deezer', () => {
 	it('renders iframe with correct src', async () => {
 		await render(Deezer, {
 			theme,
-			frameSrc,
+			frame_src,
 			height,
 			width,
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('deezer-widget');
-		const expected_src = `https://widget.deezer.com/widget/${theme}/${frameSrc}`;
+		const expected_src = `https://widget.deezer.com/widget/${theme}/${frame_src}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
 		const { container } = await render(Deezer, {
 			theme,
-			frameSrc,
+			frame_src,
 			height: '200px',
 			width: '50%',
 			disable_observer: true,
@@ -44,7 +44,7 @@ describe('Deezer', () => {
 	it('renders with a GeneralObserver', async () => {
 		await render(Deezer, {
 			theme,
-			frameSrc,
+			frame_src,
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -52,26 +52,26 @@ describe('Deezer', () => {
 	});
 
 	describe('Edge Cases', () => {
-		it('should handle empty frameSrc gracefully', async () => {
+		it('should handle empty frame_src gracefully', async () => {
 			await render(Deezer, {
 				theme,
-				frameSrc: '',
+				frame_src: '',
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
-			// Should still construct a valid URL even with empty frameSrc
+			// Should still construct a valid URL even with empty frame_src
 			expect(element.src).toBe(
 				`https://widget.deezer.com/widget/${theme}/`,
 			);
 		});
 
-		it('should handle special characters in frameSrc', async () => {
+		it('should handle special characters in frame_src', async () => {
 			const specialFrameSrc = 'track/123-test_track';
 			await render(Deezer, {
 				theme,
-				frameSrc: specialFrameSrc,
+				frame_src: specialFrameSrc,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
@@ -80,11 +80,11 @@ describe('Deezer', () => {
 			expect(element.src).toContain(specialFrameSrc);
 		});
 
-		it('should handle very long frameSrc values', async () => {
+		it('should handle very long frame_src values', async () => {
 			const longFrameSrc = 'track/' + 'a'.repeat(1000);
 			await render(Deezer, {
 				theme,
-				frameSrc: longFrameSrc,
+				frame_src: longFrameSrc,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
@@ -97,7 +97,7 @@ describe('Deezer', () => {
 	describe('Default Props', () => {
 		it('should apply default theme when not provided', async () => {
 			await render(Deezer, {
-				frameSrc,
+				frame_src,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
@@ -109,7 +109,7 @@ describe('Deezer', () => {
 		it('should apply default border-radius styling', async () => {
 			await render(Deezer, {
 				theme,
-				frameSrc,
+				frame_src,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
@@ -128,7 +128,7 @@ describe('Deezer', () => {
 				const uniqueFrameSrc = `track/${i}`;
 				await render(Deezer, {
 					theme: testTheme,
-					frameSrc: uniqueFrameSrc,
+					frame_src: uniqueFrameSrc,
 					disable_observer: true,
 				});
 				const iframe = page.getByTitle('deezer-widget');
@@ -146,7 +146,7 @@ describe('Deezer', () => {
 			const customStyles = 'border: 2px solid red; background: blue;';
 			await render(Deezer, {
 				theme,
-				frameSrc,
+				frame_src,
 				iframe_styles: customStyles,
 				disable_observer: true,
 			});
@@ -159,7 +159,7 @@ describe('Deezer', () => {
 		it('should handle numeric height and width values', async () => {
 			const { container } = await render(Deezer, {
 				theme,
-				frameSrc,
+				frame_src,
 				height: '400px',
 				width: '80%',
 				disable_observer: true,
@@ -177,7 +177,7 @@ describe('Deezer', () => {
 			const testFrameSrc = 'playlist/123456';
 			await render(Deezer, {
 				theme: testTheme,
-				frameSrc: testFrameSrc,
+				frame_src: testFrameSrc,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
@@ -192,7 +192,7 @@ describe('Deezer', () => {
 		it('should have proper iframe accessibility and security attributes', async () => {
 			await render(Deezer, {
 				theme,
-				frameSrc,
+				frame_src,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('deezer-widget');
@@ -209,6 +209,36 @@ describe('Deezer', () => {
 			await expect
 				.element(iframe)
 				.toHaveAttribute('allow', 'encrypted-media; clipboard-write');
+		});
+	});
+
+	describe('Reactivity', () => {
+		it('should update the iframe when props change', async () => {
+			const { rerender } = await render(Deezer, {
+				frame_src: 'show/111',
+				disable_observer: true,
+			});
+			const iframe = page.getByTitle('deezer-widget');
+
+			await expect
+				.element(iframe)
+				.toHaveAttribute('src', expect.stringContaining('show/111'));
+
+			await rerender({
+				frame_src: 'show/222',
+				theme: 'dark',
+				height: '200px',
+			});
+
+			await expect
+				.element(iframe)
+				.toHaveAttribute(
+					'src',
+					expect.stringContaining('widget/dark/show/222'),
+				);
+			await expect
+				.element(iframe)
+				.toHaveAttribute('style', expect.stringContaining('200px'));
 		});
 	});
 });
