@@ -3,7 +3,6 @@ export { default as Bluesky } from './components/bluesky.svelte';
 export { default as Buzzsprout } from './components/buzzsprout.svelte';
 export { default as CodePen } from './components/code-pen.svelte';
 export { default as Deezer } from './components/deezer.svelte';
-export { default as GeneralObserver } from './components/general-observer.svelte';
 export { default as GenericEmbed } from './components/generic-embed.svelte';
 export { default as Gist } from './components/gist.svelte';
 export { default as Guild } from './components/guild.svelte';

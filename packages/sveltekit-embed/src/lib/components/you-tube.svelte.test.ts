@@ -105,16 +105,6 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('loading', 'eager');
 	});
 
-	it('renders the iframe without an observer wrapper', async () => {
-		const { container } = await render(YouTube, {
-			youtube_id: 'abc123',
-		});
-		expect(
-			container.querySelector('[data-testid="general-observer"]'),
-		).toBeNull();
-		expect(container.querySelector('iframe')).not.toBeNull();
-	});
-
 	// Coverage gaps - test stubs to implement
 	it('should calculate correct start time with complex skip_to values', async () => {
 		await render(YouTube, {
