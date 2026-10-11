@@ -232,3 +232,39 @@
 .doc :where(code):not(:where(pre *))::after {
 	content: none;
 }
+
+/* Set by the embed_loading attachment while an embed is on its way */
+[data-embed-loading] {
+	position: relative;
+	min-height: 5rem;
+}
+
+[data-embed-loading]::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	width: 2.25rem;
+	height: 2.25rem;
+	margin: auto;
+	border: 3px solid var(--color-base-300);
+	border-top-color: var(--color-primary);
+	border-radius: 50%;
+	/* A disc behind the ring keeps it legible over a half drawn embed */
+	background: var(--color-base-100);
+	box-shadow: 0 0 0 0.5rem var(--color-base-100);
+	pointer-events: none;
+	animation: embed-spin 0.8s linear infinite;
+}
+
+@keyframes embed-spin {
+	to {
+		rotate: 1turn;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-embed-loading]::after {
+		animation-duration: 2.4s;
+	}
+}

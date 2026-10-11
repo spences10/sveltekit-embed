@@ -17,9 +17,22 @@ const renderer = create_renderer({
 		ts: 'typescript',
 	},
 	on_unknown_language: 'plain',
+	// Every block carries its numbers, CodeBlock's toggle shows them
+	line_numbers: true,
 	// Lets keyboard users scroll wide code blocks
 	render: { attributes: { tabindex: 0 } },
 });
+
+// Which grammar an alias resolves to, for CodeBlock to pick an icon
+const grammars: Record<string, string> = {
+	bash: 'bash',
+	html: 'svelte',
+	sh: 'bash',
+	shell: 'bash',
+	svelte: 'svelte',
+	ts: 'typescript',
+	typescript: 'typescript',
+};
 
 const labels: Record<string, string> = {
 	bash: 'Terminal',
@@ -83,6 +96,8 @@ export function highlight_code(
 	// in the highlighted source as template syntax
 	const props = [
 		`html={${JSON.stringify(html)}}`,
+		grammars[normalised] &&
+			`language={${JSON.stringify(grammars[normalised])}}`,
 		label && `label={${JSON.stringify(label)}}`,
 	]
 		.filter(Boolean)

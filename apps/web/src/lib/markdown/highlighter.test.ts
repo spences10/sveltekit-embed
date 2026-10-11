@@ -14,6 +14,24 @@ describe('highlight_code', () => {
 		expect(output).toContain('label={"TypeScript"}');
 	});
 
+	it('names the grammar an alias resolves to', () => {
+		expect(highlight_code('a', 'ts')).toContain(
+			'language={"typescript"}',
+		);
+		expect(highlight_code('a', 'html')).toContain(
+			'language={"svelte"}',
+		);
+		expect(highlight_code('a', 'powershell')).not.toContain(
+			' language={',
+		);
+	});
+
+	it('numbers every line for the toggle to reveal', () => {
+		const output = highlight_code('const a = 1;\nconst b = 2;', 'ts');
+
+		expect(output.match(/class=\\"ln\\"/g)).toHaveLength(2);
+	});
+
 	it('highlights every language the docs fence', () => {
 		for (const language of ['bash', 'svelte', 'ts', 'html']) {
 			expect(highlight_code('a', language)).toContain(

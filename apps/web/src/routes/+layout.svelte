@@ -2,7 +2,7 @@
 	import CommandPalette from '#lib/components/command-palette.svelte';
 	import SiteFooter from '#lib/components/site-footer.svelte';
 	import SiteHeader from '#lib/components/site-header.svelte';
-	import { read_stored_mode } from '#lib/state/theme.svelte.js';
+	import { read_stored_code } from '#lib/state/code.svelte.js';
 	import {
 		PUBLIC_FATHOM_ID,
 		PUBLIC_FATHOM_URL,
@@ -15,7 +15,7 @@
 	let { children } = $props();
 
 	onMount(() => {
-		read_stored_mode();
+		read_stored_code();
 		Fathom.load(PUBLIC_FATHOM_ID, {
 			url: PUBLIC_FATHOM_URL,
 		});

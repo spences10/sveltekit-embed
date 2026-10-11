@@ -293,9 +293,15 @@ importers:
       fathom-client:
         specifier: ^3.7.2
         version: 3.7.2
+      lucide:
+        specifier: ^1.54.0
+        version: 1.54.0
       mdsvex:
         specifier: ^0.12.8
         version: 0.12.8(svelte@5.57.2(@typescript-eslint/types@8.48.1))
+      morphicons:
+        specifier: ^1.7.1
+        version: 1.7.1(svelte@5.57.2(@typescript-eslint/types@8.48.1))
       playwright:
         specifier: 'catalog:'
         version: 1.63.0
@@ -2758,6 +2764,9 @@ packages:
     resolution: {integrity: sha512-B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg==}
     engines: {node: 20 || >=22}
 
+  lucide@1.54.0:
+    resolution: {integrity: sha512-2N2brA+7NYLDlxG2QNcmGej5Qhw3pYMPN9MLktTNkQfs7Sk/2g2e8s0CUWibLz5lPVKMYesxm+k/ndDB7E1JjQ==}
+
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -2782,6 +2791,26 @@ packages:
   miniflare@5.20261006.1-alpha:
     resolution: {integrity: sha512-6ylv8tamkrspDI2R/cAYfv+YWmfGNdXe76Pi9TauEUWsFVXn3LNF9Yk8oduzf1a+TYsSRYTqlOE7+nGGRsMHdw==}
     engines: {node: '>=22.0.0'}
+
+  morphicons@1.7.1:
+    resolution: {integrity: sha512-q5ylxy5/d7vBg0OAzanlooXf05PekovMYDuuQVpr6vAQZxl99lrJbaIi+jJ32PXQf9WEEaDO2pbNBsx1ZhEnFQ==}
+    peerDependencies:
+      react: '>=18'
+      react-native: '>=0.71'
+      react-native-svg: '>=14'
+      svelte: '>=5'
+      vue: '>=3.3'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-native:
+        optional: true
+      react-native-svg:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -5186,6 +5215,8 @@ snapshots:
   lru-cache@11.2.4:
     optional: true
 
+  lucide@1.54.0: {}
+
   lz-string@1.5.0: {}
 
   magic-string@0.30.21:
@@ -5227,6 +5258,10 @@ snapshots:
       - '@types/node'
       - bufferutil
       - utf-8-validate
+
+  morphicons@1.7.1(svelte@5.57.2(@typescript-eslint/types@8.48.1)):
+    optionalDependencies:
+      svelte: 5.57.2(@typescript-eslint/types@8.48.1)
 
   mri@1.2.0: {}
 

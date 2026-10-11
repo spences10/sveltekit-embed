@@ -1,33 +1,81 @@
 <script lang="ts">
+	import { embed_loading } from '#lib/attachments/embed-loading.js';
 	import '#lib/markdown/twinkleplop.css';
+	import {
+		code,
+		toggle_line_numbers,
+	} from '#lib/state/code.svelte.js';
+	import ListOrderedIcon from '@lucide/svelte/icons/list-ordered';
 	import type { Snippet } from 'svelte';
 	import CopyButton from './copy-button.svelte';
+	import LanguageIcon from './language-icon.svelte';
 
 	// Emitted by the mdsvex highlighter. `html` is twinkleplop output,
-	// `label` the language name (absent for plain text) and `children`
-	// the rendered example when the fence is marked `live`
+	// `language` what it was highlighted as, `label` the language name
+	// or the fence's title (absent for plain text) and `children` the
+	// rendered example when the fence is marked `live`
 	let {
 		html,
+		language,
 		label,
 		children,
-	}: { html: string; label?: string; children?: Snippet } = $props();
+	}: {
+		html: string;
+		language?: string;
+		label?: string;
+		children?: Snippet;
+	} = $props();
 
 	let block: HTMLDivElement | undefined;
 
-	const code_text = () =>
-		block?.querySelector('pre code')?.textContent ?? '';
+	// Line numbers are in the markup either way, so leave them out
+	function code_text() {
+		const copy = block?.querySelector('pre code')?.cloneNode(true);
+		if (!(copy instanceof HTMLElement)) return '';
+		for (const number of copy.querySelectorAll('.ln'))
+			number.remove();
+		return copy.textContent ?? '';
+	}
 </script>
 
 <div class="not-prose example" class:live={children}>
 	{#if children}
-		<div class="stage">
+		<div class="stage" {@attach embed_loading}>
 			{@render children()}
 		</div>
 	{/if}
-	<div class="code" bind:this={block}>
+	<div
+		class="code"
+		data-line-numbers={code.line_numbers ? '' : undefined}
+		bind:this={block}
+	>
 		<div class="bar">
-			<span class="font-mono text-xs text-muted">{label}</span>
-			<CopyButton text={code_text} />
+			<span
+				class="flex items-center gap-2 font-mono text-xs text-muted"
+			>
+				{#if label}
+					<LanguageIcon {language} />
+					{label}
+				{/if}
+			</span>
+			<span class="flex items-center">
+				<button
+					type="button"
+					class={[
+						'btn btn-square btn-ghost btn-sm hover:text-base-content',
+						code.line_numbers ? 'text-primary' : 'text-muted',
+					]}
+					aria-label="Line numbers"
+					aria-pressed={code.line_numbers}
+					title={code.line_numbers
+						? 'Hide line numbers'
+						: 'Show line numbers'}
+					onclick={toggle_line_numbers}
+				>
+					<ListOrderedIcon class="size-4" aria-hidden="true" />
+				</button>
+				<CopyButton text={code_text} />
+			</span>
 		</div>
 		{@html html}
 	</div>

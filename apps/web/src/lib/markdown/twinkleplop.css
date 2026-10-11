@@ -90,14 +90,19 @@
 	box-shadow: inset 3px 0 0 var(--color-secondary);
 }
 
-/* `:line-numbers` fence meta */
+/* Every block is rendered with line numbers. They stay out of the
+   way until CodeBlock's toggle sets the attribute */
 .twinkleplop .ln {
-	display: inline-block;
+	display: none;
 	width: 2ch;
 	margin-right: 1.25rem;
 	color: var(--twp-comment);
 	text-align: right;
 	user-select: none;
+}
+
+[data-line-numbers] .twinkleplop .ln {
+	display: inline-block;
 }
 
 /* `/word/` fence meta */

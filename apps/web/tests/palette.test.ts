@@ -82,3 +82,57 @@ test('component page renders the embed and its props', async ({
 		page.getByRole('rowheader', { name: /^youtube_id/ }),
 	).toBeVisible();
 });
+
+test('theme toggle cycles light, dark and system', async ({
+	page,
+}) => {
+	await page.goto('/');
+	const toggle = page.getByRole('button', { name: /^Theme:/ });
+	const html = page.locator('html');
+
+	await expect(toggle).toHaveAccessibleName(/^Theme: System/);
+
+	await toggle.click();
+	await expect(html).toHaveAttribute('data-theme', 'light');
+
+	await toggle.click();
+	await expect(html).toHaveAttribute('data-theme', 'dark');
+
+	// The choice is there before the app starts on the next visit
+	await page.reload();
+	await expect(html).toHaveAttribute('data-theme', 'dark');
+	await expect(toggle).toHaveAccessibleName(/^Theme: Dark/);
+
+	await toggle.click();
+	await expect(html).not.toHaveAttribute('data-theme');
+	await expect(toggle).toHaveAccessibleName(/^Theme: System/);
+});
+
+test('line numbers toggle on every code block and stay out of copies', async ({
+	page,
+	context,
+}) => {
+	await context.grantPermissions([
+		'clipboard-read',
+		'clipboard-write',
+	]);
+	await page.goto('/lazy-loading');
+
+	const numbers = page.locator('.twinkleplop .ln');
+	await expect(numbers.first()).toBeHidden();
+
+	await page
+		.getByRole('button', { name: 'Line numbers' })
+		.first()
+		.click();
+	await expect(numbers.first()).toBeVisible();
+	await expect(numbers.last()).toBeVisible();
+
+	await page
+		.getByRole('button', { name: 'Copy code' })
+		.first()
+		.click();
+	expect(
+		await page.evaluate(() => navigator.clipboard.readText()),
+	).toBe('<YouTube youtube_id="dQw4w9WgXcQ" loading="eager" />');
+});

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import CheckIcon from '@lucide/svelte/icons/check';
-	import CopyIcon from '@lucide/svelte/icons/copy';
+	import { Check, Copy } from 'lucide';
+	import { MorphIcon } from 'morphicons/svelte';
 	import { onMount } from 'svelte';
 
 	// `text` is read on click, so it can be a function for content
@@ -32,15 +32,19 @@
 
 <button
 	type="button"
-	class="btn btn-square text-muted btn-ghost btn-sm hover:text-base-content"
+	class={[
+		'btn btn-square btn-ghost btn-sm hover:text-base-content',
+		status === 'Copied' ? 'text-success' : 'text-muted',
+	]}
 	aria-label={label}
 	title={status || label}
 	onclick={copy}
 >
-	{#if status === 'Copied'}
-		<CheckIcon class="size-4 text-success" aria-hidden="true" />
-	{:else}
-		<CopyIcon class="size-4" aria-hidden="true" />
-	{/if}
+	<MorphIcon
+		icon={status === 'Copied' ? Check : Copy}
+		size={16}
+		spring="snappy"
+		reducedMotion="user"
+	/>
 </button>
 <span class="sr-only" role="status">{status}</span>

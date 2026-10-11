@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { href_of } from '#lib/docs/components.js';
+	import { embed_loading } from '#lib/attachments/embed-loading.js';
 	import '#lib/markdown/twinkleplop.css';
 	import { onMount } from 'svelte';
 	import { CodePen, Spotify, YouTube } from 'sveltekit-embed';
@@ -84,7 +85,7 @@
 		>
 	</label>
 
-	<div class="stage">
+	<div class="stage" {@attach embed_loading}>
 		{#if !embedded}
 			<p class="py-16 text-center text-muted">
 				Paste an ID above to load the embed.
