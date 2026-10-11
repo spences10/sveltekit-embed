@@ -251,7 +251,7 @@ Props:
 ```ts
 height: string = '500px'
 width: string = '100%'
-codePenId: string = ''
+codepen_id: string = ''
 tabs:
   | string[]
   | 'js'
@@ -259,7 +259,7 @@ tabs:
   | 'scss'
   | 'less'
   | 'result' = 'result'
-clickToLoad: boolean = true
+click_to_load: boolean = true
 editable: boolean = true
 theme: string | 'light' | 'dark' | 'default' = 'default'
 disable_observer: boolean = false
@@ -272,17 +272,17 @@ iframe_styles: string = `
 Usage:
 
 For a CodePen URL like this: https://codepen.io/spences10/pen/WNMvXpa
-take the `codePenId` this `WNMvXpa` and add it to the component.
+take the `codepen_id` this `WNMvXpa` and add it to the component.
 
 ```html
-<CodePen codePenId="WNMvXpa" />
+<CodePen codepen_id="WNMvXpa" />
 ```
 
 Output:
 
 <CodePen
   disable_observer={$disable_observer_store}
-  codePenId="WNMvXpa"
+  codepen_id="WNMvXpa"
 />
 
 ## Deezer

@@ -3,12 +3,12 @@ import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
-let codePenId = 'abcde';
+let codepen_id = 'abcde';
 
 describe('CodePen', () => {
 	it('mounts', async () => {
 		const { container } = await render(CodePen, {
-			codePenId,
+			codepen_id,
 			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
@@ -16,17 +16,17 @@ describe('CodePen', () => {
 
 	it('renders iframe with correct attributes', async () => {
 		await render(CodePen, {
-			codePenId,
+			codepen_id,
 			disable_observer: true,
 		});
 
-		const iframe = page.getByTitle(`codepen-${codePenId}`);
+		const iframe = page.getByTitle(`codepen-${codepen_id}`);
 		const element = iframe.element();
 
 		expect(element.getAttribute('src')).toContain(
 			`codepen.io/team/codepen/embed`,
 		);
-		expect(element.getAttribute('src')).toContain(`/${codePenId}/`);
+		expect(element.getAttribute('src')).toContain(`/${codepen_id}/`);
 		expect(element.getAttribute('src')).toContain(`height=500px`);
 		expect(element.getAttribute('src')).toContain(`theme-id=default`);
 		expect(element.getAttribute('src')).toContain(
@@ -44,7 +44,7 @@ describe('CodePen', () => {
 
 	it('mounts with custom height and width', async () => {
 		const { container } = await render(CodePen, {
-			codePenId,
+			codepen_id,
 			height: '200px',
 			width: '50%',
 			disable_observer: true,
@@ -56,7 +56,7 @@ describe('CodePen', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(CodePen, {
-			codePenId,
+			codepen_id,
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -64,9 +64,9 @@ describe('CodePen', () => {
 	});
 
 	describe('Edge Cases', () => {
-		it('should handle empty codePenId gracefully', async () => {
+		it('should handle empty codepen_id gracefully', async () => {
 			await render(CodePen, {
-				codePenId: '',
+				codepen_id: '',
 				disable_observer: true,
 			});
 
@@ -78,10 +78,10 @@ describe('CodePen', () => {
 			expect(element.src).toContain('//'); // Double slash where ID would be
 		});
 
-		it('should handle special characters in codePenId', async () => {
+		it('should handle special characters in codepen_id', async () => {
 			const specialId = 'abc-123_test';
 			await render(CodePen, {
-				codePenId: specialId,
+				codepen_id: specialId,
 				disable_observer: true,
 			});
 
@@ -96,7 +96,7 @@ describe('CodePen', () => {
 	describe('Default Props', () => {
 		it('should apply default prop values when not provided', async () => {
 			const { container } = await render(CodePen, {
-				codePenId,
+				codepen_id,
 				disable_observer: true,
 			});
 
@@ -109,7 +109,7 @@ describe('CodePen', () => {
 			expect(iframe.src).toContain('theme-id=default'); // default theme
 			expect(iframe.src).toContain('default-tab=result'); // default tabs
 			expect(iframe.src).toContain('editable=true'); // default editable
-			expect(iframe.src).toContain('/preview'); // default clickToLoad=true
+			expect(iframe.src).toContain('/preview'); // default click_to_load=true
 			expect(iframe.style.height).toBe('500px');
 			expect(iframe.style.width).toBe('100%');
 		});
@@ -121,9 +121,9 @@ describe('CodePen', () => {
 
 			for (let i = 0; i < tabOptions.length; i++) {
 				const tab = tabOptions[i];
-				const uniqueId = `${codePenId}-tab-${i}`;
+				const uniqueId = `${codepen_id}-tab-${i}`;
 				await render(CodePen, {
-					codePenId: uniqueId,
+					codepen_id: uniqueId,
 					tabs: tab as any,
 					disable_observer: true,
 				});
@@ -137,9 +137,9 @@ describe('CodePen', () => {
 
 		it('should handle array of tabs configuration', async () => {
 			const tabsArray = ['js', 'css'];
-			const uniqueId = `${codePenId}-array`;
+			const uniqueId = `${codepen_id}-array`;
 			await render(CodePen, {
-				codePenId: uniqueId,
+				codepen_id: uniqueId,
 				tabs: tabsArray as any,
 				disable_observer: true,
 			});
@@ -158,9 +158,9 @@ describe('CodePen', () => {
 
 			for (let i = 0; i < themes.length; i++) {
 				const theme = themes[i];
-				const uniqueId = `${codePenId}-theme-${i}`;
+				const uniqueId = `${codepen_id}-theme-${i}`;
 				await render(CodePen, {
-					codePenId: uniqueId,
+					codepen_id: uniqueId,
 					theme,
 					disable_observer: true,
 				});
@@ -174,12 +174,12 @@ describe('CodePen', () => {
 	});
 
 	describe('Click to Load', () => {
-		it('should toggle clickToLoad properly in URL', async () => {
-			// Test clickToLoad = false (no /preview in URL)
-			const falseId = `${codePenId}-click-false`;
+		it('should toggle click_to_load properly in URL', async () => {
+			// Test click_to_load = false (no /preview in URL)
+			const falseId = `${codepen_id}-click-false`;
 			await render(CodePen, {
-				codePenId: falseId,
-				clickToLoad: false,
+				codepen_id: falseId,
+				click_to_load: false,
 				disable_observer: true,
 			});
 
@@ -189,11 +189,11 @@ describe('CodePen', () => {
 			expect(elementFalse.src).not.toContain('/preview');
 			expect(elementFalse.src).toContain(`/${falseId}/`);
 
-			// Test clickToLoad = true (includes /preview in URL)
-			const trueId = `${codePenId}-click-true`;
+			// Test click_to_load = true (includes /preview in URL)
+			const trueId = `${codepen_id}-click-true`;
 			await render(CodePen, {
-				codePenId: trueId,
-				clickToLoad: true,
+				codepen_id: trueId,
+				click_to_load: true,
 				disable_observer: true,
 			});
 
@@ -207,9 +207,9 @@ describe('CodePen', () => {
 	describe('Editable Parameter', () => {
 		it('should handle editable parameter correctly', async () => {
 			// Test editable = false
-			const falseId = `${codePenId}-edit-false`;
+			const falseId = `${codepen_id}-edit-false`;
 			await render(CodePen, {
-				codePenId: falseId,
+				codepen_id: falseId,
 				editable: false,
 				disable_observer: true,
 			});
@@ -220,9 +220,9 @@ describe('CodePen', () => {
 			expect(elementFalse.src).toContain('editable=false');
 
 			// Test editable = true
-			const trueId = `${codePenId}-edit-true`;
+			const trueId = `${codepen_id}-edit-true`;
 			await render(CodePen, {
-				codePenId: trueId,
+				codepen_id: trueId,
 				editable: true,
 				disable_observer: true,
 			});
@@ -239,12 +239,12 @@ describe('CodePen', () => {
 			const customStyles =
 				'border: 2px solid red; border-radius: 8px;';
 			await render(CodePen, {
-				codePenId,
+				codepen_id,
 				iframe_styles: customStyles,
 				disable_observer: true,
 			});
 
-			const iframe = page.getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codepen_id}`);
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.getAttribute('style')).toBe(customStyles);
@@ -254,13 +254,13 @@ describe('CodePen', () => {
 			const customHeight = '300px';
 			const customWidth = '80%';
 			await render(CodePen, {
-				codePenId,
+				codepen_id,
 				height: customHeight,
 				width: customWidth,
 				disable_observer: true,
 			});
 
-			const iframe = page.getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codepen_id}`);
 			const element = iframe.element() as HTMLIFrameElement;
 
 			expect(element.style.height).toBe(customHeight);
@@ -272,12 +272,12 @@ describe('CodePen', () => {
 	describe('URL Construction', () => {
 		it('should construct proper URL for all parameter combinations', async () => {
 			await render(CodePen, {
-				codePenId: 'test123',
+				codepen_id: 'test123',
 				height: '400px',
 				theme: 'dark',
 				tabs: 'js',
 				editable: false,
-				clickToLoad: false,
+				click_to_load: false,
 				disable_observer: true,
 			});
 
@@ -291,22 +291,22 @@ describe('CodePen', () => {
 			expect(src).toContain('theme-id=dark');
 			expect(src).toContain('default-tab=js');
 			expect(src).toContain('editable=false');
-			expect(src).not.toContain('/preview'); // clickToLoad=false
+			expect(src).not.toContain('/preview'); // click_to_load=false
 		});
 	});
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility attributes', async () => {
 			await render(CodePen, {
-				codePenId,
+				codepen_id,
 				disable_observer: true,
 			});
 
-			const iframe = page.getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codepen_id}`);
 
 			await expect
 				.element(iframe)
-				.toHaveAttribute('title', `codepen-${codePenId}`);
+				.toHaveAttribute('title', `codepen-${codepen_id}`);
 			await expect
 				.element(iframe)
 				.toHaveAttribute('frameborder', 'no');
@@ -317,15 +317,50 @@ describe('CodePen', () => {
 
 		it('should render with proper CSS class', async () => {
 			await render(CodePen, {
-				codePenId,
+				codepen_id,
 				disable_observer: true,
 			});
 
-			const iframe = page.getByTitle(`codepen-${codePenId}`);
+			const iframe = page.getByTitle(`codepen-${codepen_id}`);
 
 			await expect
 				.element(iframe)
 				.toHaveClass('code-pen-sveltekit-embed');
+		});
+	});
+
+	describe('Reactivity', () => {
+		it('should update the iframe when props change', async () => {
+			const first_id = `${codepen_id}-reactive-a`;
+			const second_id = `${codepen_id}-reactive-b`;
+			const { rerender } = await render(CodePen, {
+				codepen_id: first_id,
+				disable_observer: true,
+			});
+
+			await expect
+				.element(page.getByTitle(`codepen-${first_id}`))
+				.toHaveAttribute('src', expect.stringContaining(first_id));
+
+			await rerender({
+				codepen_id: second_id,
+				theme: 'dark',
+				height: '300px',
+			});
+
+			const iframe = page.getByTitle(`codepen-${second_id}`);
+			await expect
+				.element(iframe)
+				.toHaveAttribute('src', expect.stringContaining(second_id));
+			await expect
+				.element(iframe)
+				.toHaveAttribute(
+					'src',
+					expect.stringContaining('theme-id=dark'),
+				);
+			await expect
+				.element(iframe)
+				.toHaveAttribute('style', expect.stringContaining('300px'));
 		});
 	});
 });

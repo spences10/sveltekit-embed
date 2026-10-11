@@ -58,7 +58,7 @@ Import and use any component in your Svelte/SvelteKit application:
 />
 
 <!-- CodePen -->
-<CodePen codePenId="xxGYWQG" height="300" defaultTab="result" />
+<CodePen codepen_id="xxGYWQG" height="300px" tabs="result" />
 ```
 
 ## 🌟 Supported Platforms
@@ -121,9 +121,9 @@ Import and use any component in your Svelte/SvelteKit application:
 </script>
 
 <CodePen
-	codePenId="xxGYWQG"
-	height="400"
-	defaultTab="result"
+	codepen_id="xxGYWQG"
+	height="400px"
+	tabs="result"
 	theme="dark"
 />
 ```
