@@ -2,14 +2,14 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		episodeUrl: string;
+		episode_url: string;
 		height?: string;
 		width?: string;
 		disable_observer?: boolean;
 	}
 
 	let {
-		episodeUrl,
+		episode_url,
 		height = '100px',
 		width = '100%',
 		disable_observer = false,
@@ -27,8 +27,8 @@
 	>
 		<iframe
 			data-testid="anchor-fm-episode"
-			title={`anchor-fm-${episodeUrl}`}
-			src={`https://anchor.fm/${episodeUrl}`}
+			title={`anchor-fm-${episode_url}`}
+			src={`https://anchor.fm/${episode_url}`}
 			frameborder="0"
 			scrolling="no"
 			style={`

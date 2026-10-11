@@ -129,7 +129,7 @@ pnpm i -D sveltekit-embed # npm or yarn even
 </script>
 
 <AnchorFm
-	episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
+	episode_url="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 ```
 
@@ -165,7 +165,7 @@ or open a [PR](https://github.com/spences10/sveltekit-embed/pulls).
 Props:
 
 ```ts
-episodeUrl: string;
+episode_url: string;
 height: string = '100px';
 width: string = '100%';
 disable_observer: boolean = false;
@@ -175,7 +175,7 @@ Usage:
 
 ```html
 <AnchorFm
-	episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
+	episode_url="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 ```
 
@@ -183,7 +183,7 @@ Output:
 
 <AnchorFm
   disable_observer={$disable_observer_store}
-  episodeUrl="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
+  episode_url="purrfect-dev/embed/episodes/3-6---Effective-Testing-using-Cypress-io-e1vbg9m"
 />
 
 ## Bluesky

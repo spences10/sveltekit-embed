@@ -34,7 +34,7 @@ Use like a normal Svelte component:
 
 <AnchorFm
 	height="165"
-	episodeUrl="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
+	episode_url="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
 />
 ```
 

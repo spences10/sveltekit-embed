@@ -1,15 +1,15 @@
-import AnchorFm from './anchor-fm.svelte';
-import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
+import AnchorFm from './anchor-fm.svelte';
 
-let episodeUrl =
+let episode_url =
 	'purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a';
 
 describe('AnchorFm', () => {
 	it('mounts with episode url', async () => {
 		const { container } = await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
@@ -17,17 +17,17 @@ describe('AnchorFm', () => {
 
 	it('renders iframe with episode url', async () => {
 		await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
-		const expected_src = `https://anchor.fm/${episodeUrl}`;
+		const expected_src = `https://anchor.fm/${episode_url}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
 		const { container } = await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			height: '200px',
 			width: '50%',
 			disable_observer: true,
@@ -40,7 +40,7 @@ describe('AnchorFm', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -48,10 +48,10 @@ describe('AnchorFm', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty episodeUrl gracefully', async () => {
+	it('should handle empty episode_url gracefully', async () => {
 		// Test edge case: empty or invalid episode URL
 		await render(AnchorFm, {
-			episodeUrl: '',
+			episode_url: '',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
@@ -66,7 +66,7 @@ describe('AnchorFm', () => {
 	it('should apply default height and width when not provided', async () => {
 		// Test default prop values (height: '100px', width: '100%')
 		const { container } = await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
@@ -75,12 +75,12 @@ describe('AnchorFm', () => {
 		expect(iframe?.parentElement?.style.width).toBe('100%');
 	});
 
-	it('should handle special characters in episodeUrl', async () => {
+	it('should handle special characters in episode_url', async () => {
 		// Test URL encoding and special characters
 		const specialUrl =
 			'test-podcast/episodes/episode-with-special-chars-!@#$%^&*()';
 		await render(AnchorFm, {
-			episodeUrl: specialUrl,
+			episode_url: specialUrl,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
@@ -94,23 +94,23 @@ describe('AnchorFm', () => {
 	it('should have proper iframe accessibility attributes', async () => {
 		// Test title attribute, aria-labels, etc.
 		await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
 
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `anchor-fm-${episodeUrl}`);
+			.toHaveAttribute('title', `anchor-fm-${episode_url}`);
 		await expect.element(iframe).toHaveAttribute('frameborder', '0');
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 
-	it('should handle very long episodeUrl values', async () => {
+	it('should handle very long episode_url values', async () => {
 		// Test edge case: extremely long URLs
 		const longUrl = 'a'.repeat(1000) + '/episodes/' + 'b'.repeat(500);
 		await render(AnchorFm, {
-			episodeUrl: longUrl,
+			episode_url: longUrl,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('anchor-fm-episode');
@@ -123,7 +123,7 @@ describe('AnchorFm', () => {
 		const customHeight = '300px';
 		const customWidth = '75%';
 		const { container } = await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			height: customHeight,
 			width: customWidth,
 			disable_observer: true,
@@ -146,7 +146,7 @@ describe('AnchorFm', () => {
 	it('should handle numeric height and width values', async () => {
 		// Test passing numbers instead of strings for dimensions
 		const { container } = await render(AnchorFm, {
-			episodeUrl,
+			episode_url,
 			height: '250px',
 			width: '80%',
 			disable_observer: true,
