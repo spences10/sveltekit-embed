@@ -1,4 +1,6 @@
-export const load = async ({ platform }) => {
+import type { LayoutServerLoad } from './$types';
+
+export const load: LayoutServerLoad = async ({ platform }) => {
 	const is_cloudflare = platform?.env?.CF_PAGES === '1';
 
 	return {

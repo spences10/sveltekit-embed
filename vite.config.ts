@@ -25,7 +25,6 @@ export default defineConfig({
 	},
 	lint: {
 		ignorePatterns: [
-			'apps/web/**',
 			'**/.svelte-kit/**',
 			'**/build/**',
 			'**/coverage/**',
