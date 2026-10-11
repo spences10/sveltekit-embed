@@ -2,12 +2,28 @@
 'sveltekit-embed': minor
 ---
 
-Breaking: all component props are now snake_case, and Svelte 5 is
-required.
+Breaking: all component props are now snake_case, iframe embeds use
+native lazy loading instead of `GeneralObserver`, and Svelte 5.29 or
+later is required.
 
-**Svelte 5 only.** The peer dependency is now `svelte@^5.0.0`. Every
-release since 0.0.15 has shipped runes, so Svelte 4 never worked with
-them. If you are on Svelte 4, stay on `sveltekit-embed@0.0.14`.
+**Svelte 5.29+ only.** The peer dependency is now `svelte@^5.29.0`.
+Every release since 0.0.15 has shipped runes, so Svelte 4 never worked
+with them. If you are on Svelte 4, stay on `sveltekit-embed@0.0.14`.
+If you are on an earlier Svelte 5, update Svelte first.
+
+**Native lazy loading.** Every iframe embed now renders its iframe
+directly with `loading="lazy"`:
+
+- `disable_observer` is replaced by `loading` (`'lazy' | 'eager'`,
+  default `'lazy'`). Replace `disable_observer={true}` with
+  `loading="eager"`.
+- The iframe is in the server-rendered HTML and holds its space, so
+  the page no longer jumps as embeds load.
+- The wrapping `div` (`data-testid="general-observer"`) and the
+  fade-in are gone.
+- The `GeneralObserver` component is no longer exported. To lazy load
+  your own markup, use the new `in_view` attachment:
+  `<div {@attach in_view({ on_enter: () => (visible = true) })}>`.
 
 **Renamed props.** Update your usage as follows:
 
