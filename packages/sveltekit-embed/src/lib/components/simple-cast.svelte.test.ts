@@ -1,7 +1,7 @@
-import SimpleCast from './simple-cast.svelte';
-import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
+import SimpleCast from './simple-cast.svelte';
 
 describe('SimpleCast', () => {
 	it('mounts with default props', async () => {
@@ -10,20 +10,20 @@ describe('SimpleCast', () => {
 	});
 
 	it('renders iframe with correct src', async () => {
-		const episodeId = '12345';
+		const episode_id = '12345';
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'dark',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
-		const expected_src = `https://player.simplecast.com/${episodeId}?dark=true`;
+		const expected_src = `https://player.simplecast.com/${episode_id}?dark=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with a GeneralObserver', async () => {
 		await render(SimpleCast, {
-			episodeId: '67890',
+			episode_id: '67890',
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -31,9 +31,9 @@ describe('SimpleCast', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it.skip('should handle empty episodeId gracefully', async () => {
+	it.skip('should handle empty episode_id gracefully', async () => {
 		await render(SimpleCast, {
-			episodeId: '',
+			episode_id: '',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
@@ -46,7 +46,7 @@ describe('SimpleCast', () => {
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
-		// Default episodeId is '', theme is 'dark'
+		// Default episode_id is '', theme is 'dark'
 		const expected_src = 'https://player.simplecast.com/?dark=true';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 		await expect
@@ -55,11 +55,11 @@ describe('SimpleCast', () => {
 	});
 
 	it.skip('should handle different theme options', async () => {
-		const episodeId = 'test123';
+		const episode_id = 'test123';
 
 		// Test light theme
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'light',
 			disable_observer: true,
 		});
@@ -68,12 +68,12 @@ describe('SimpleCast', () => {
 			.element(lightIframe)
 			.toHaveAttribute(
 				'src',
-				`https://player.simplecast.com/${episodeId}`,
+				`https://player.simplecast.com/${episode_id}`,
 			);
 
 		// Test dark theme
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'dark',
 			disable_observer: true,
 		});
@@ -82,67 +82,67 @@ describe('SimpleCast', () => {
 			.element(darkIframe)
 			.toHaveAttribute(
 				'src',
-				`https://player.simplecast.com/${episodeId}?dark=true`,
+				`https://player.simplecast.com/${episode_id}?dark=true`,
 			);
 	});
 
 	it('should construct proper SimpleCast player URL', async () => {
-		const episodeId = 'abc123def';
+		const episode_id = 'abc123def';
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'dark',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
-		const expected_src = `https://player.simplecast.com/${episodeId}?dark=true`;
+		const expected_src = `https://player.simplecast.com/${episode_id}?dark=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('should handle special characters in episodeId', async () => {
-		const episodeId = 'test-episode_123';
+	it('should handle special characters in episode_id', async () => {
+		const episode_id = 'test-episode_123';
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'light',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
-		const expected_src = `https://player.simplecast.com/${episodeId}`;
+		const expected_src = `https://player.simplecast.com/${episode_id}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `simplecast-${episodeId}`);
+			.toHaveAttribute('title', `simplecast-${episode_id}`);
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
-		const episodeId = 'accessibility-test';
+		const episode_id = 'accessibility-test';
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `simplecast-${episodeId}`);
+			.toHaveAttribute('title', `simplecast-${episode_id}`);
 		await expect.element(iframe).toHaveAttribute('frameBorder', 'no');
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 		await expect.element(iframe).toHaveAttribute('seamless');
 	});
 
-	it('should handle very long episodeId values', async () => {
-		const episodeId = 'a'.repeat(100);
+	it('should handle very long episode_id values', async () => {
+		const episode_id = 'a'.repeat(100);
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'light',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
-		const expected_src = `https://player.simplecast.com/${episodeId}`;
+		const expected_src = `https://player.simplecast.com/${episode_id}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
 		await render(SimpleCast, {
-			episodeId: 'style-test',
+			episode_id: 'style-test',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
@@ -158,7 +158,7 @@ describe('SimpleCast', () => {
 
 	it('should handle numeric height and width values', async () => {
 		const { container } = await render(SimpleCast, {
-			episodeId: 'numeric-test',
+			episode_id: 'numeric-test',
 			disable_observer: true,
 		});
 
@@ -172,20 +172,20 @@ describe('SimpleCast', () => {
 	});
 
 	it('should handle malformed episode IDs gracefully', async () => {
-		const episodeId = '12345/malformed?test=true&other=false';
+		const episode_id = '12345/malformed?test=true&other=false';
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'dark',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
-		const expected_src = `https://player.simplecast.com/${episodeId}?dark=true`;
+		const expected_src = `https://player.simplecast.com/${episode_id}?dark=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should render with proper CSS class structure', async () => {
 		const { container } = await render(SimpleCast, {
-			episodeId: 'class-test',
+			episode_id: 'class-test',
 			disable_observer: true,
 		});
 
@@ -199,11 +199,11 @@ describe('SimpleCast', () => {
 	});
 
 	it.skip('should handle theme parameter in URL correctly', async () => {
-		const episodeId = 'url-test';
+		const episode_id = 'url-test';
 
 		// Test that non-dark themes don't add the parameter
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'light',
 			disable_observer: true,
 		});
@@ -212,12 +212,12 @@ describe('SimpleCast', () => {
 			.element(lightIframe)
 			.toHaveAttribute(
 				'src',
-				`https://player.simplecast.com/${episodeId}`,
+				`https://player.simplecast.com/${episode_id}`,
 			);
 
 		// Test that dark theme adds the parameter
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'dark',
 			disable_observer: true,
 		});
@@ -226,12 +226,12 @@ describe('SimpleCast', () => {
 			.element(darkIframe)
 			.toHaveAttribute(
 				'src',
-				`https://player.simplecast.com/${episodeId}?dark=true`,
+				`https://player.simplecast.com/${episode_id}?dark=true`,
 			);
 
 		// Test custom theme value
 		await render(SimpleCast, {
-			episodeId,
+			episode_id,
 			theme: 'custom',
 			disable_observer: true,
 		});
@@ -240,7 +240,7 @@ describe('SimpleCast', () => {
 			.element(customIframe)
 			.toHaveAttribute(
 				'src',
-				`https://player.simplecast.com/${episodeId}`,
+				`https://player.simplecast.com/${episode_id}`,
 			);
 	});
 });

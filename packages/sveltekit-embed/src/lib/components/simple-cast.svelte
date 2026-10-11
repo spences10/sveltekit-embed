@@ -2,13 +2,13 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		episodeId?: string;
+		episode_id?: string;
 		theme?: string;
 		disable_observer?: boolean;
 	}
 
 	let {
-		episodeId = '',
+		episode_id = '',
 		theme = `dark`,
 		disable_observer = false,
 	}: Props = $props();
@@ -25,8 +25,8 @@
 	>
 		<iframe
 			data-testid="simplecast-episode"
-			title={`simplecast-${episodeId}`}
-			src={`https://player.simplecast.com/${episodeId}${
+			title={`simplecast-${episode_id}`}
+			src={`https://player.simplecast.com/${episode_id}${
 				theme === `dark` ? `?dark=true` : ``
 			}`}
 			frameBorder="no"

@@ -472,7 +472,7 @@ Output:
 Props:
 
 ```ts
-episodeId: string = '';
+episode_id: string = '';
 theme: string = `dark`;
 disable_observer: boolean = false;
 ```
@@ -480,14 +480,14 @@ disable_observer: boolean = false;
 Usage:
 
 ```html
-<SimpleCast episodeId="1c254f66-5d75-48ef-b960-4cfec94baa0b" />
+<SimpleCast episode_id="1c254f66-5d75-48ef-b960-4cfec94baa0b" />
 ```
 
 Output:
 
 <SimpleCast 
   disable_observer={$disable_observer_store}
-  episodeId="1c254f66-5d75-48ef-b960-4cfec94baa0b" 
+  episode_id="1c254f66-5d75-48ef-b960-4cfec94baa0b" 
 />
 
 ## Slides
