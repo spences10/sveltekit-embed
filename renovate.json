@@ -1,3 +1,39 @@
 {
-	"extends": ["config:recommended"]
+	"extends": ["config:recommended"],
+	"minimumReleaseAge": "2 days",
+	"packageRules": [
+		{
+			"description": "SvelteKit requires the TypeScript 6 compiler API; the @typescript/native alias can track TypeScript 7 independently.",
+			"matchDepNames": ["typescript"],
+			"allowedVersions": "<7"
+		},
+		{
+			"description": "Update Vite+ and its aliased Vite core together; run vp migrate to align bundled test dependencies.",
+			"matchPackageNames": [
+				"vite-plus",
+				"@voidzero-dev/vite-plus-core"
+			],
+			"groupName": "vite-plus-toolchain",
+			"rangeStrategy": "pin"
+		},
+		{
+			"description": "Managed by Vite+'s bundled Vitest version; upgrade through vp migrate, not independent runner or plugin bumps.",
+			"matchPackageNames": [
+				"vitest",
+				"@vitest/browser",
+				"@vitest/browser-playwright",
+				"@vitest/coverage-v8"
+			],
+			"enabled": false
+		},
+		{
+			"description": "Keep installed Playwright packages aligned with the CI browser images.",
+			"matchPackageNames": [
+				"playwright",
+				"@playwright/test",
+				"mcr.microsoft.com/playwright"
+			],
+			"groupName": "playwright"
+		}
+	]
 }

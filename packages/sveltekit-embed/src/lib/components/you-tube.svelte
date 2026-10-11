@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPadding } from '$lib/utils/index.js';
+	import { getPadding } from '../utils/index.js';
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {

@@ -19,7 +19,9 @@
 
 	const remove_mastodon_embed_script = () => {
 		if (mastodon_embed_script && mastodon_embed_script.parentNode) {
-			mastodon_embed_script.parentNode.removeChild(mastodon_embed_script);
+			mastodon_embed_script.parentNode.removeChild(
+				mastodon_embed_script,
+			);
 			mastodon_embed_script = null;
 		}
 	};

@@ -1,4 +1,4 @@
-import Deezer from '$lib/components/deezer.svelte';
+import Deezer from './deezer.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
@@ -10,12 +10,12 @@ const width = '100%';
 
 describe('Deezer', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(Deezer);
+		const { container } = await render(Deezer);
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with correct src', async () => {
-		render(Deezer, {
+		await render(Deezer, {
 			theme,
 			frameSrc,
 			height,
@@ -28,7 +28,7 @@ describe('Deezer', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(Deezer, {
+		const { container } = await render(Deezer, {
 			theme,
 			frameSrc,
 			height: '200px',
@@ -42,7 +42,7 @@ describe('Deezer', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Deezer, {
+		await render(Deezer, {
 			theme,
 			frameSrc,
 			disable_observer: false,
@@ -53,7 +53,7 @@ describe('Deezer', () => {
 
 	describe('Edge Cases', () => {
 		it('should handle empty frameSrc gracefully', async () => {
-			render(Deezer, {
+			await render(Deezer, {
 				theme,
 				frameSrc: '',
 				disable_observer: true,
@@ -69,7 +69,7 @@ describe('Deezer', () => {
 
 		it('should handle special characters in frameSrc', async () => {
 			const specialFrameSrc = 'track/123-test_track';
-			render(Deezer, {
+			await render(Deezer, {
 				theme,
 				frameSrc: specialFrameSrc,
 				disable_observer: true,
@@ -82,7 +82,7 @@ describe('Deezer', () => {
 
 		it('should handle very long frameSrc values', async () => {
 			const longFrameSrc = 'track/' + 'a'.repeat(1000);
-			render(Deezer, {
+			await render(Deezer, {
 				theme,
 				frameSrc: longFrameSrc,
 				disable_observer: true,
@@ -96,7 +96,7 @@ describe('Deezer', () => {
 
 	describe('Default Props', () => {
 		it('should apply default theme when not provided', async () => {
-			render(Deezer, {
+			await render(Deezer, {
 				frameSrc,
 				disable_observer: true,
 			});
@@ -107,7 +107,7 @@ describe('Deezer', () => {
 		});
 
 		it('should apply default border-radius styling', async () => {
-			render(Deezer, {
+			await render(Deezer, {
 				theme,
 				frameSrc,
 				disable_observer: true,
@@ -126,7 +126,7 @@ describe('Deezer', () => {
 			for (let i = 0; i < themes.length; i++) {
 				const testTheme = themes[i];
 				const uniqueFrameSrc = `track/${i}`;
-				render(Deezer, {
+				await render(Deezer, {
 					theme: testTheme,
 					frameSrc: uniqueFrameSrc,
 					disable_observer: true,
@@ -144,7 +144,7 @@ describe('Deezer', () => {
 	describe('Custom Styling', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles = 'border: 2px solid red; background: blue;';
-			render(Deezer, {
+			await render(Deezer, {
 				theme,
 				frameSrc,
 				iframe_styles: customStyles,
@@ -157,7 +157,7 @@ describe('Deezer', () => {
 		});
 
 		it('should handle numeric height and width values', async () => {
-			const { container } = render(Deezer, {
+			const { container } = await render(Deezer, {
 				theme,
 				frameSrc,
 				height: '400px',
@@ -175,7 +175,7 @@ describe('Deezer', () => {
 		it('should construct widget URL correctly', async () => {
 			const testTheme = 'dark';
 			const testFrameSrc = 'playlist/123456';
-			render(Deezer, {
+			await render(Deezer, {
 				theme: testTheme,
 				frameSrc: testFrameSrc,
 				disable_observer: true,
@@ -190,7 +190,7 @@ describe('Deezer', () => {
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility and security attributes', async () => {
-			render(Deezer, {
+			await render(Deezer, {
 				theme,
 				frameSrc,
 				disable_observer: true,

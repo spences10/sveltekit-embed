@@ -2,6 +2,7 @@
 	"recommendations": [
 		"streetsidesoftware.code-spell-checker",
 		"svelte.svelte-vscode",
+		"oxc.oxc-vscode",
 		"bradlc.vscode-tailwindcss"
 	]
 }

@@ -1,17 +1,17 @@
-import SimpleCast from '$lib/components/simple-cast.svelte';
+import SimpleCast from './simple-cast.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('SimpleCast', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(SimpleCast);
+		const { container } = await render(SimpleCast);
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with correct src', async () => {
 		const episodeId = '12345';
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'dark',
 			disable_observer: true,
@@ -22,7 +22,7 @@ describe('SimpleCast', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId: '67890',
 			disable_observer: false,
 		});
@@ -32,7 +32,7 @@ describe('SimpleCast', () => {
 
 	// Coverage gaps - test stubs to implement
 	it.skip('should handle empty episodeId gracefully', async () => {
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId: '',
 			disable_observer: true,
 		});
@@ -42,7 +42,7 @@ describe('SimpleCast', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('simplecast-episode');
@@ -58,7 +58,7 @@ describe('SimpleCast', () => {
 		const episodeId = 'test123';
 
 		// Test light theme
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'light',
 			disable_observer: true,
@@ -72,7 +72,7 @@ describe('SimpleCast', () => {
 			);
 
 		// Test dark theme
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'dark',
 			disable_observer: true,
@@ -88,7 +88,7 @@ describe('SimpleCast', () => {
 
 	it('should construct proper SimpleCast player URL', async () => {
 		const episodeId = 'abc123def';
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'dark',
 			disable_observer: true,
@@ -100,7 +100,7 @@ describe('SimpleCast', () => {
 
 	it('should handle special characters in episodeId', async () => {
 		const episodeId = 'test-episode_123';
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'light',
 			disable_observer: true,
@@ -115,7 +115,7 @@ describe('SimpleCast', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const episodeId = 'accessibility-test';
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			disable_observer: true,
 		});
@@ -130,7 +130,7 @@ describe('SimpleCast', () => {
 
 	it('should handle very long episodeId values', async () => {
 		const episodeId = 'a'.repeat(100);
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'light',
 			disable_observer: true,
@@ -141,7 +141,7 @@ describe('SimpleCast', () => {
 	});
 
 	it('should apply custom CSS styles correctly', async () => {
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId: 'style-test',
 			disable_observer: true,
 		});
@@ -157,7 +157,7 @@ describe('SimpleCast', () => {
 	});
 
 	it('should handle numeric height and width values', async () => {
-		const { container } = render(SimpleCast, {
+		const { container } = await render(SimpleCast, {
 			episodeId: 'numeric-test',
 			disable_observer: true,
 		});
@@ -173,7 +173,7 @@ describe('SimpleCast', () => {
 
 	it('should handle malformed episode IDs gracefully', async () => {
 		const episodeId = '12345/malformed?test=true&other=false';
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'dark',
 			disable_observer: true,
@@ -184,7 +184,7 @@ describe('SimpleCast', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { container } = render(SimpleCast, {
+		const { container } = await render(SimpleCast, {
 			episodeId: 'class-test',
 			disable_observer: true,
 		});
@@ -202,7 +202,7 @@ describe('SimpleCast', () => {
 		const episodeId = 'url-test';
 
 		// Test that non-dark themes don't add the parameter
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'light',
 			disable_observer: true,
@@ -216,7 +216,7 @@ describe('SimpleCast', () => {
 			);
 
 		// Test that dark theme adds the parameter
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'dark',
 			disable_observer: true,
@@ -230,7 +230,7 @@ describe('SimpleCast', () => {
 			);
 
 		// Test custom theme value
-		render(SimpleCast, {
+		await render(SimpleCast, {
 			episodeId,
 			theme: 'custom',
 			disable_observer: true,

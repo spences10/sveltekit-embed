@@ -1,11 +1,11 @@
-import Vimeo from '$lib/components/vimeo.svelte';
+import Vimeo from './vimeo.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('Vimeo', () => {
 	it('mounts with default values', async () => {
-		const { container } = render(Vimeo, {
+		const { container } = await render(Vimeo, {
 			vimeoId: '123456789',
 			disable_observer: true,
 		});
@@ -15,7 +15,7 @@ describe('Vimeo', () => {
 
 	it('renders iframe with correct src', async () => {
 		const vimeoId = '987654321';
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			autoPlay: true,
 			aspectRatio: '4:3',
@@ -29,7 +29,7 @@ describe('Vimeo', () => {
 	});
 
 	it('mounts with custom aspect ratio', async () => {
-		const { container } = render(Vimeo, {
+		const { container } = await render(Vimeo, {
 			vimeoId: '123456789',
 			aspectRatio: '1:1',
 			disable_observer: true,
@@ -42,7 +42,7 @@ describe('Vimeo', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId: '123456789',
 			disable_observer: false,
 		});
@@ -55,7 +55,7 @@ describe('Vimeo', () => {
 	it('should handle empty vimeoId gracefully', async () => {
 		const vimeoId = '';
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -68,7 +68,7 @@ describe('Vimeo', () => {
 	it('should apply default prop values when not provided', async () => {
 		const vimeoId = '123456789';
 
-		const { container } = render(Vimeo, {
+		const { container } = await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -96,7 +96,7 @@ describe('Vimeo', () => {
 		];
 
 		for (let i = 0; i < aspectRatios.length; i++) {
-			const { container } = render(Vimeo, {
+			const { container } = await render(Vimeo, {
 				vimeoId: '123456789',
 				aspectRatio: aspectRatios[i],
 				disable_observer: true,
@@ -112,7 +112,7 @@ describe('Vimeo', () => {
 	it('should construct proper Vimeo player URL', async () => {
 		const vimeoId = '987654321';
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			autoPlay: false,
 			disable_observer: true,
@@ -127,7 +127,7 @@ describe('Vimeo', () => {
 		const vimeoId = '123456789';
 		const skipTo = { h: 2, m: 15, s: 30 };
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			skipTo,
 			disable_observer: true,
@@ -142,7 +142,7 @@ describe('Vimeo', () => {
 		const vimeoId = '123456789';
 
 		// Test autoPlay true
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			autoPlay: true,
 			disable_observer: true,
@@ -155,7 +155,7 @@ describe('Vimeo', () => {
 			.toHaveAttribute('src', expected_src_true);
 
 		// Test autoPlay false
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			autoPlay: false,
 			disable_observer: true,
@@ -171,7 +171,7 @@ describe('Vimeo', () => {
 	it('should handle special characters in vimeoId', async () => {
 		const vimeoId = '123456789';
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -184,7 +184,7 @@ describe('Vimeo', () => {
 	it('should have proper iframe accessibility attributes', async () => {
 		const vimeoId = '123456789';
 
-		const { container } = render(Vimeo, {
+		const { container } = await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -212,7 +212,7 @@ describe('Vimeo', () => {
 	it('should handle very long vimeoId values', async () => {
 		const vimeoId = '1'.repeat(20);
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -232,7 +232,7 @@ describe('Vimeo', () => {
 		];
 
 		for (const testCase of testCases) {
-			const { container } = render(Vimeo, {
+			const { container } = await render(Vimeo, {
 				vimeoId: '123456789',
 				aspectRatio: testCase.ratio,
 				disable_observer: true,
@@ -248,7 +248,7 @@ describe('Vimeo', () => {
 	it('should handle malformed vimeo IDs gracefully', async () => {
 		const vimeoId = 'abc123def';
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -261,7 +261,7 @@ describe('Vimeo', () => {
 	it('should render with proper CSS class structure', async () => {
 		const vimeoId = '123456789';
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -282,7 +282,7 @@ describe('Vimeo', () => {
 
 		for (const testCase of testCases) {
 			const vimeoId = '123456789';
-			render(Vimeo, {
+			await render(Vimeo, {
 				vimeoId,
 				skipTo: testCase.skipTo,
 				disable_observer: true,
@@ -299,7 +299,7 @@ describe('Vimeo', () => {
 	it('should handle numeric vimeoId values', async () => {
 		const vimeoId = '987654321';
 
-		render(Vimeo, {
+		await render(Vimeo, {
 			vimeoId,
 			disable_observer: true,
 		});
@@ -313,7 +313,7 @@ describe('Vimeo', () => {
 		const vimeoId = '123456789';
 
 		// Test with invalid aspect ratio - should fallback to default
-		const { container } = render(Vimeo, {
+		const { container } = await render(Vimeo, {
 			vimeoId,
 			aspectRatio: 'invalid:ratio' as any,
 			disable_observer: true,

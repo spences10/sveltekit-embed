@@ -1,4 +1,4 @@
-import CodePen from '$lib/components/code-pen.svelte';
+import CodePen from './code-pen.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
@@ -7,7 +7,7 @@ let codePenId = 'abcde';
 
 describe('CodePen', () => {
 	it('mounts', async () => {
-		const { container } = render(CodePen, {
+		const { container } = await render(CodePen, {
 			codePenId,
 			disable_observer: true,
 		});
@@ -15,7 +15,7 @@ describe('CodePen', () => {
 	});
 
 	it('renders iframe with correct attributes', async () => {
-		render(CodePen, {
+		await render(CodePen, {
 			codePenId,
 			disable_observer: true,
 		});
@@ -43,7 +43,7 @@ describe('CodePen', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(CodePen, {
+		const { container } = await render(CodePen, {
 			codePenId,
 			height: '200px',
 			width: '50%',
@@ -55,7 +55,7 @@ describe('CodePen', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(CodePen, {
+		await render(CodePen, {
 			codePenId,
 			disable_observer: false,
 		});
@@ -65,7 +65,7 @@ describe('CodePen', () => {
 
 	describe('Edge Cases', () => {
 		it('should handle empty codePenId gracefully', async () => {
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: '',
 				disable_observer: true,
 			});
@@ -80,7 +80,7 @@ describe('CodePen', () => {
 
 		it('should handle special characters in codePenId', async () => {
 			const specialId = 'abc-123_test';
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: specialId,
 				disable_observer: true,
 			});
@@ -95,7 +95,7 @@ describe('CodePen', () => {
 
 	describe('Default Props', () => {
 		it('should apply default prop values when not provided', async () => {
-			const { container } = render(CodePen, {
+			const { container } = await render(CodePen, {
 				codePenId,
 				disable_observer: true,
 			});
@@ -122,7 +122,7 @@ describe('CodePen', () => {
 			for (let i = 0; i < tabOptions.length; i++) {
 				const tab = tabOptions[i];
 				const uniqueId = `${codePenId}-tab-${i}`;
-				render(CodePen, {
+				await render(CodePen, {
 					codePenId: uniqueId,
 					tabs: tab as any,
 					disable_observer: true,
@@ -138,7 +138,7 @@ describe('CodePen', () => {
 		it('should handle array of tabs configuration', async () => {
 			const tabsArray = ['js', 'css'];
 			const uniqueId = `${codePenId}-array`;
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: uniqueId,
 				tabs: tabsArray as any,
 				disable_observer: true,
@@ -159,7 +159,7 @@ describe('CodePen', () => {
 			for (let i = 0; i < themes.length; i++) {
 				const theme = themes[i];
 				const uniqueId = `${codePenId}-theme-${i}`;
-				render(CodePen, {
+				await render(CodePen, {
 					codePenId: uniqueId,
 					theme,
 					disable_observer: true,
@@ -177,7 +177,7 @@ describe('CodePen', () => {
 		it('should toggle clickToLoad properly in URL', async () => {
 			// Test clickToLoad = false (no /preview in URL)
 			const falseId = `${codePenId}-click-false`;
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: falseId,
 				clickToLoad: false,
 				disable_observer: true,
@@ -191,7 +191,7 @@ describe('CodePen', () => {
 
 			// Test clickToLoad = true (includes /preview in URL)
 			const trueId = `${codePenId}-click-true`;
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: trueId,
 				clickToLoad: true,
 				disable_observer: true,
@@ -208,7 +208,7 @@ describe('CodePen', () => {
 		it('should handle editable parameter correctly', async () => {
 			// Test editable = false
 			const falseId = `${codePenId}-edit-false`;
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: falseId,
 				editable: false,
 				disable_observer: true,
@@ -221,7 +221,7 @@ describe('CodePen', () => {
 
 			// Test editable = true
 			const trueId = `${codePenId}-edit-true`;
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: trueId,
 				editable: true,
 				disable_observer: true,
@@ -238,7 +238,7 @@ describe('CodePen', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles =
 				'border: 2px solid red; border-radius: 8px;';
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId,
 				iframe_styles: customStyles,
 				disable_observer: true,
@@ -253,7 +253,7 @@ describe('CodePen', () => {
 		it('should handle custom height and width in iframe styles', async () => {
 			const customHeight = '300px';
 			const customWidth = '80%';
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId,
 				height: customHeight,
 				width: customWidth,
@@ -271,7 +271,7 @@ describe('CodePen', () => {
 
 	describe('URL Construction', () => {
 		it('should construct proper URL for all parameter combinations', async () => {
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId: 'test123',
 				height: '400px',
 				theme: 'dark',
@@ -297,7 +297,7 @@ describe('CodePen', () => {
 
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility attributes', async () => {
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId,
 				disable_observer: true,
 			});
@@ -316,7 +316,7 @@ describe('CodePen', () => {
 		});
 
 		it('should render with proper CSS class', async () => {
-			render(CodePen, {
+			await render(CodePen, {
 				codePenId,
 				disable_observer: true,
 			});

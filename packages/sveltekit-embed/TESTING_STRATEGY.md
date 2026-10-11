@@ -843,7 +843,7 @@ function renderWithDefaults(Component: any, props = {}) {
 
 // Test helper for waiting for async operations
 async function waitForElement(container: Element, selector: string) {
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 		const observer = new MutationObserver(() => {
 			const element = container.querySelector(selector);
 			if (element) {

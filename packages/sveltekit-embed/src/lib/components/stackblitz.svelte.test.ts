@@ -1,11 +1,11 @@
-import StackBlitz from '$lib/components/stackblitz.svelte';
+import StackBlitz from './stackblitz.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 
 describe('StackBlitz', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'svelte-kit-template',
 			file: 'src/app.html',
 			disable_observer: true,
@@ -16,7 +16,7 @@ describe('StackBlitz', () => {
 	it.skip('renders iframe with correct src', async () => {
 		const id = 'svelte-kit-template';
 		const file = 'src/app.html';
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id,
 			file,
 			view: 'editor',
@@ -42,7 +42,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(StackBlitz, {
+		await render(StackBlitz, {
 			id: 'svelte-kit-template',
 			file: 'src/app.html',
 			disable_observer: false,
@@ -53,7 +53,7 @@ describe('StackBlitz', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should handle empty id gracefully', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: '',
 			file: 'src/app.html',
 			disable_observer: true,
@@ -65,7 +65,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('should apply default prop values when not provided', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'test-project',
 			file: 'index.js',
 			disable_observer: true,
@@ -89,7 +89,7 @@ describe('StackBlitz', () => {
 
 	it('should handle different view options', async () => {
 		// Test editor view
-		const { container: editorContainer } = render(StackBlitz, {
+		const { container: editorContainer } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			view: 'editor',
@@ -101,7 +101,7 @@ describe('StackBlitz', () => {
 		);
 
 		// Test preview view
-		const { container: previewContainer } = render(StackBlitz, {
+		const { container: previewContainer } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			view: 'preview',
@@ -113,7 +113,7 @@ describe('StackBlitz', () => {
 		);
 
 		// Test default view (should not include view parameter)
-		const { container: defaultContainer } = render(StackBlitz, {
+		const { container: defaultContainer } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			view: 'default',
@@ -126,7 +126,7 @@ describe('StackBlitz', () => {
 	it('should construct proper StackBlitz embed URL', async () => {
 		const id = 'my-awesome-project';
 		const file = 'src/components/App.svelte';
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id,
 			file,
 			theme: 'light',
@@ -149,7 +149,7 @@ describe('StackBlitz', () => {
 	it('should handle special characters in id and file', async () => {
 		const id = 'project-with_special-chars123';
 		const file = 'src/components/My_Component-test.svelte';
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id,
 			file,
 			disable_observer: true,
@@ -164,7 +164,7 @@ describe('StackBlitz', () => {
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const id = 'accessibility-test';
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id,
 			file: 'index.js',
 			disable_observer: true,
@@ -180,7 +180,7 @@ describe('StackBlitz', () => {
 	it('should handle very long id and file values', async () => {
 		const id = 'a'.repeat(50);
 		const file = 'b'.repeat(100) + '.js';
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id,
 			file,
 			disable_observer: true,
@@ -195,7 +195,7 @@ describe('StackBlitz', () => {
 	it('should apply custom styles correctly', async () => {
 		const customStyles =
 			'border: 2px solid blue; background: yellow;';
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			iframe_styles: customStyles,
@@ -208,7 +208,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('should handle boolean configuration options', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			clickToLoad: true,
@@ -226,7 +226,7 @@ describe('StackBlitz', () => {
 
 	it('should handle different theme options', async () => {
 		// Test light theme
-		const { container: lightContainer } = render(StackBlitz, {
+		const { container: lightContainer } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			theme: 'light',
@@ -236,7 +236,7 @@ describe('StackBlitz', () => {
 		expect(lightIframe?.getAttribute('src')).toContain('theme=light');
 
 		// Test dark theme
-		const { container: darkContainer } = render(StackBlitz, {
+		const { container: darkContainer } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			theme: 'dark',
@@ -246,7 +246,7 @@ describe('StackBlitz', () => {
 		expect(darkIframe?.getAttribute('src')).toContain('theme=dark');
 
 		// Test custom theme
-		const { container: customContainer } = render(StackBlitz, {
+		const { container: customContainer } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			theme: 'custom-theme',
@@ -259,7 +259,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('should handle custom dimensions', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
 			width: '800px',
@@ -274,7 +274,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('should handle missing file parameter gracefully', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'test-project',
 			file: undefined,
 			disable_observer: true,
@@ -290,7 +290,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('should render with proper CSS class structure', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'class-test',
 			file: 'index.js',
 			disable_observer: true,
@@ -301,7 +301,7 @@ describe('StackBlitz', () => {
 	});
 
 	it('should handle query parameter construction correctly', async () => {
-		const { container } = render(StackBlitz, {
+		const { container } = await render(StackBlitz, {
 			id: 'test',
 			file: 'app.js',
 			view: 'editor',

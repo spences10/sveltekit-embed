@@ -21,7 +21,7 @@
 	<button
 		on:click={scrollToTop}
 		transition:fly={{ y: 200, duration: 300 }}
-		class="btn btn-secondary fixed bottom-8 right-8 normal-case shadow-2xl"
+		class="btn fixed right-8 bottom-8 normal-case shadow-2xl btn-secondary"
 	>
 		Back to top
 	</button>

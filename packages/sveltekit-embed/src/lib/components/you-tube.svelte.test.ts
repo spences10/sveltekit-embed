@@ -1,11 +1,11 @@
-import YouTube from '$lib/components/you-tube.svelte';
+import YouTube from './you-tube.svelte';
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 describe('YouTube', () => {
 	it('mounts with video id', async () => {
-		const { container } = render(YouTube, {
+		const { container } = await render(YouTube, {
 			youTubeId: 'abc123',
 			listId: '',
 			autoPlay: false,
@@ -18,7 +18,7 @@ describe('YouTube', () => {
 	});
 
 	it('renders iframe with correct src for video with default options', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			listId: '',
 			autoPlay: false,
@@ -33,7 +33,7 @@ describe('YouTube', () => {
 	});
 
 	it('renders iframe with correct src for video with custom options', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			listId: '',
 			autoPlay: true,
@@ -54,7 +54,7 @@ describe('YouTube', () => {
 
 	it('renders iframe with correct src for playlist with default options', async () => {
 		const listId = '123abc';
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: '',
 			listId,
 			autoPlay: false,
@@ -69,7 +69,7 @@ describe('YouTube', () => {
 	});
 
 	it('sets aspect ratio using padding-top style', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			listId: '',
 			autoPlay: false,
@@ -89,7 +89,7 @@ describe('YouTube', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			listId: '',
 			autoPlay: false,
@@ -104,7 +104,7 @@ describe('YouTube', () => {
 
 	// Coverage gaps - test stubs to implement
 	it('should calculate correct start time with complex skipTo values', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			skipTo: { h: 1, m: 30, s: 45 },
 			disable_observer: true,
@@ -118,7 +118,7 @@ describe('YouTube', () => {
 	});
 
 	it('should handle invalid skipTo values gracefully', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			skipTo: { h: -1, m: -30, s: -45 },
 			disable_observer: true,
@@ -131,7 +131,7 @@ describe('YouTube', () => {
 	});
 
 	it.skip('should handle both youTubeId and listId provided', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			listId: 'playlist456',
 			disable_observer: true,
@@ -144,7 +144,7 @@ describe('YouTube', () => {
 	});
 
 	it('should handle empty youTubeId and listId', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: '',
 			listId: '',
 			disable_observer: true,
@@ -157,7 +157,7 @@ describe('YouTube', () => {
 	});
 
 	it('should handle invalid aspect ratios', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			aspectRatio: 'invalid:ratio' as any,
 			disable_observer: true,
@@ -183,7 +183,7 @@ describe('YouTube', () => {
 		];
 
 		for (const testCase of aspectRatios) {
-			render(YouTube, {
+			await render(YouTube, {
 				youTubeId: 'abc123',
 				aspectRatio: testCase.ratio,
 				disable_observer: true,
@@ -202,7 +202,7 @@ describe('YouTube', () => {
 	it('should handle custom iframe styles properly', async () => {
 		const customStyles =
 			'border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1);';
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			iframe_styles: customStyles,
 			disable_observer: true,
@@ -219,7 +219,7 @@ describe('YouTube', () => {
 
 	it('should handle playlist with custom index', async () => {
 		const listId = 'playlist123';
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: '',
 			listId,
 			index: 5,
@@ -232,7 +232,7 @@ describe('YouTube', () => {
 	});
 
 	it('should have proper accessibility attributes', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			disable_observer: true,
 		});
@@ -254,7 +254,7 @@ describe('YouTube', () => {
 	});
 
 	it('should handle very large skipTo values', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			skipTo: { h: 25, m: 70, s: 120 },
 			disable_observer: true,
@@ -269,7 +269,7 @@ describe('YouTube', () => {
 
 	it('should handle special characters in youTubeId', async () => {
 		const youTubeId = 'abc-123_def';
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId,
 			disable_observer: true,
 		});
@@ -281,7 +281,7 @@ describe('YouTube', () => {
 
 	it('should handle special characters in listId', async () => {
 		const listId = 'playlist-123_abc';
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: '',
 			listId,
 			disable_observer: true,
@@ -293,7 +293,7 @@ describe('YouTube', () => {
 	});
 
 	it('should apply default iframe_styles when not provided', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			// iframe_styles not provided, should use default
 			disable_observer: true,
@@ -309,7 +309,7 @@ describe('YouTube', () => {
 
 	it.skip('should handle boolean props as different data types', async () => {
 		// Test with string values that should be converted to booleans
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			autoPlay: 'true' as any,
 			mute: 'false' as any,
@@ -326,7 +326,7 @@ describe('YouTube', () => {
 	});
 
 	it('should handle zero values in skipTo correctly', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			skipTo: { h: 0, m: 0, s: 0 },
 			disable_observer: true,
@@ -338,7 +338,7 @@ describe('YouTube', () => {
 	});
 
 	it.skip('should handle missing skipTo properties gracefully', async () => {
-		render(YouTube, {
+		await render(YouTube, {
 			youTubeId: 'abc123',
 			skipTo: { h: 1 } as any, // Missing m and s properties
 			disable_observer: true,

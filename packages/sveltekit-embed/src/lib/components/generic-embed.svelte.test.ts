@@ -1,11 +1,11 @@
-import GenericEmbed from '$lib/components/generic-embed.svelte';
+import GenericEmbed from './generic-embed.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 
 describe('GenericEmbed', () => {
 	it('mounts with default props', async () => {
-		const { container } = render(GenericEmbed, {
+		const { container } = await render(GenericEmbed, {
 			src: '',
 			title: 'Test Title',
 			height: '152px',
@@ -22,7 +22,7 @@ describe('GenericEmbed', () => {
 			'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)';
 		const height = '500px';
 		const width = '100%';
-		render(GenericEmbed, {
+		await render(GenericEmbed, {
 			src,
 			title,
 			height,
@@ -38,7 +38,7 @@ describe('GenericEmbed', () => {
 	});
 
 	it('mounts with custom height and width', async () => {
-		const { container } = render(GenericEmbed, {
+		const { container } = await render(GenericEmbed, {
 			src: 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
 			title:
 				'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)',
@@ -57,7 +57,7 @@ describe('GenericEmbed', () => {
 	});
 
 	it('renders with a GeneralObserver', async () => {
-		render(GenericEmbed, {
+		await render(GenericEmbed, {
 			src: 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
 			title:
 				'Rick Astley - Never Gonna Give You Up (Remastered 4K 60fps,AI)',
@@ -72,7 +72,7 @@ describe('GenericEmbed', () => {
 
 	describe('Edge Cases', () => {
 		it('should handle empty src gracefully', async () => {
-			const { container } = render(GenericEmbed, {
+			const { container } = await render(GenericEmbed, {
 				src: '',
 				title: 'Test Title',
 				height: '152px',
@@ -89,7 +89,7 @@ describe('GenericEmbed', () => {
 		it('should handle special characters in src URL', async () => {
 			const specialSrc =
 				'https://example.com/video?id=test&param=value%20with%20spaces';
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: specialSrc,
 				title: 'Special URL Test',
 				height: '152px',
@@ -104,7 +104,7 @@ describe('GenericEmbed', () => {
 
 		it('should handle special characters in title', async () => {
 			const specialTitle = 'Test "Title" with <tags> & symbols!';
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: specialTitle,
 				height: '152px',
@@ -121,7 +121,7 @@ describe('GenericEmbed', () => {
 
 		it('should handle very long src URLs', async () => {
 			const longSrc = 'https://example.com/' + 'a'.repeat(1000);
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: longSrc,
 				title: 'Long URL Test',
 				height: '152px',
@@ -136,7 +136,7 @@ describe('GenericEmbed', () => {
 
 		it('should handle very long titles', async () => {
 			const longTitle = 'Long Title '.repeat(100);
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: longTitle,
 				height: '152px',
@@ -153,7 +153,7 @@ describe('GenericEmbed', () => {
 
 		it('should handle malformed URLs gracefully', async () => {
 			const malformedUrl = 'not-a-valid-url';
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: malformedUrl,
 				title: 'Malformed URL Test',
 				height: '152px',
@@ -172,7 +172,7 @@ describe('GenericEmbed', () => {
 
 	describe('Default Props', () => {
 		it('should apply default prop values when not provided', async () => {
-			const { container } = render(GenericEmbed, {
+			const { container } = await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Default Props Test',
 				height: '152px',
@@ -193,7 +193,7 @@ describe('GenericEmbed', () => {
 
 	describe('Custom Dimensions', () => {
 		it('should handle numeric height and width values', async () => {
-			const { container } = render(GenericEmbed, {
+			const { container } = await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Numeric Dimensions Test',
 				height: '300px',
@@ -213,7 +213,7 @@ describe('GenericEmbed', () => {
 
 	describe('Security', () => {
 		it('should have proper iframe security attributes', async () => {
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Security Test',
 				height: '152px',
@@ -234,7 +234,7 @@ describe('GenericEmbed', () => {
 
 	describe('Structure', () => {
 		it('should maintain proper iframe structure', async () => {
-			const { container } = render(GenericEmbed, {
+			const { container } = await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Structure Test',
 				height: '152px',
@@ -251,7 +251,7 @@ describe('GenericEmbed', () => {
 
 	describe('Additional Attributes', () => {
 		it('should pass through additional attributes via rest props', async () => {
-			render(GenericEmbed, {
+			await render(GenericEmbed, {
 				src: 'https://example.com/video',
 				title: 'Rest Props Test',
 				height: '152px',

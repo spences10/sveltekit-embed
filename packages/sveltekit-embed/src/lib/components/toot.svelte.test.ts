@@ -1,4 +1,4 @@
-import Toot from '$lib/components/toot.svelte';
+import Toot from './toot.svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
@@ -11,14 +11,14 @@ describe('Toot', () => {
 		const scripts = document.head.querySelectorAll(
 			'script[src*="embed.js"]',
 		);
-		scripts.forEach(script => script.remove());
+		scripts.forEach((script) => script.remove());
 	});
 	it('renders iframe with correct src', async () => {
 		const instance = 'my-instance';
 		const username = 'my-username';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -34,7 +34,7 @@ describe('Toot', () => {
 		const username = 'my-username';
 		const tootId = '123';
 
-		const { container } = render(Toot, {
+		const { container } = await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -52,7 +52,7 @@ describe('Toot', () => {
 		const username = '@testuser';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -69,7 +69,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -86,7 +86,7 @@ describe('Toot', () => {
 		const username = '  testuser  ';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -105,7 +105,7 @@ describe('Toot', () => {
 
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -113,7 +113,7 @@ describe('Toot', () => {
 
 		// Verify script was appended
 		const appendedScript = appendChildSpy.mock.calls.find(
-			call =>
+			(call) =>
 				call[0] instanceof HTMLScriptElement &&
 				(call[0] as HTMLScriptElement).src.includes('embed.js'),
 		)?.[0] as HTMLScriptElement;
@@ -137,14 +137,14 @@ describe('Toot', () => {
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 		const removeChildSpy = vi.spyOn(document.head, 'removeChild');
 
-		const { unmount } = render(Toot, {
+		const { unmount } = await render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
 
 		// Unmount component
-		unmount();
+		await unmount();
 
 		expect(removeChildSpy).toHaveBeenCalledWith(mockScript);
 
@@ -169,13 +169,13 @@ describe('Toot', () => {
 			});
 
 		// Should not throw an error
-		expect(() => {
+		await expect(
 			render(Toot, {
 				instance,
 				username,
 				tootId,
-			});
-		}).not.toThrow();
+			}),
+		).resolves.toBeDefined();
 
 		createElementSpy.mockRestore();
 		appendChildSpy.mockRestore();
@@ -193,14 +193,14 @@ describe('Toot', () => {
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
 		// Render first component
-		const { unmount: unmount1 } = render(Toot, {
+		const { unmount: unmount1 } = await render(Toot, {
 			instance,
 			username,
 			tootId,
 		});
 
 		// Render second component
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId: '456',
@@ -210,7 +210,7 @@ describe('Toot', () => {
 		expect(createElementSpy).toHaveBeenCalledTimes(1);
 		expect(appendChildSpy).toHaveBeenCalledTimes(1);
 
-		unmount1();
+		await unmount1();
 		createElementSpy.mockRestore();
 		appendChildSpy.mockRestore();
 	});
@@ -220,7 +220,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -236,7 +236,7 @@ describe('Toot', () => {
 		const username = '';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -252,7 +252,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -268,7 +268,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -284,7 +284,7 @@ describe('Toot', () => {
 		const username = 'test.user_123';
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -300,7 +300,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123456789012345';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -316,7 +316,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		const { container } = render(Toot, {
+		const { container } = await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -337,7 +337,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123';
 
-		const { container } = render(Toot, {
+		const { container } = await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -368,7 +368,7 @@ describe('Toot', () => {
 		const username = 'a'.repeat(100);
 		const tootId = '123';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
@@ -384,7 +384,7 @@ describe('Toot', () => {
 		const username = 'testuser';
 		const tootId = '123456789';
 
-		render(Toot, {
+		await render(Toot, {
 			instance,
 			username,
 			tootId,
