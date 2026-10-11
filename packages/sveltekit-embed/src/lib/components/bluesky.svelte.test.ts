@@ -1,6 +1,6 @@
-import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
 import Bluesky from './bluesky.svelte';
 
 describe('Bluesky', () => {
@@ -18,7 +18,7 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = page.getByTestId('bluesky-embed');
-		const expected_src = `https://embed.bsky.app/embed/${test_post_id}`;
+		const expected_src = `https://embed.bsky.app/embed/${test_post_id}?colorMode=light`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
@@ -60,8 +60,37 @@ describe('Bluesky', () => {
 		expect(style_text).toContain('width: 100%');
 		expect(style_text).toContain('height: 100%');
 		expect(style_text).toContain('border: 0px');
+		expect(style_text).toContain('color-scheme: light');
 		await expect.element(iframe).toHaveAttribute('frameborder', '0');
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
+	});
+
+	it('passes the theme to the embed', async () => {
+		const { rerender } = await render(Bluesky, {
+			post_id: test_post_id,
+			theme: 'dark',
+		});
+
+		const iframe = page.getByTestId('bluesky-embed');
+		const element = iframe.element() as HTMLElement;
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				`https://embed.bsky.app/embed/${test_post_id}?colorMode=dark`,
+			);
+		// Bluesky's document keeps a light color scheme in every mode
+		expect(element.style.colorScheme).toBe('light');
+
+		await rerender({ theme: 'system' });
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				`https://embed.bsky.app/embed/${test_post_id}?colorMode=system`,
+			);
+		expect(element.style.colorScheme).toBe('light');
 	});
 
 	it('combines default and custom iframe styles correctly', async () => {
@@ -137,7 +166,8 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = page.getByTestId('bluesky-embed');
-		const expected_src = 'https://embed.bsky.app/embed/';
+		const expected_src =
+			'https://embed.bsky.app/embed/?colorMode=light';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
@@ -445,7 +475,7 @@ describe('Bluesky', () => {
 			) as HTMLIFrameElement;
 			expect(iframe.id).toMatch(/^bluesky-iframe-[a-z0-9]{9}$/);
 			expect(iframe.src).toBe(
-				`https://embed.bsky.app/embed/${post_ids[index]}`,
+				`https://embed.bsky.app/embed/${post_ids[index]}?colorMode=light`,
 			);
 		});
 
@@ -469,7 +499,7 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = page.getByTestId('bluesky-embed');
-		const expected_src = `https://embed.bsky.app/embed/${long_post_id}`;
+		const expected_src = `https://embed.bsky.app/embed/${long_post_id}?colorMode=light`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
@@ -540,7 +570,7 @@ describe('Bluesky', () => {
 		});
 
 		const iframe = page.getByTestId('bluesky-embed');
-		const expected_src = `https://embed.bsky.app/embed/${special_post_id}`;
+		const expected_src = `https://embed.bsky.app/embed/${special_post_id}?colorMode=light`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 

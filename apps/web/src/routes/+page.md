@@ -194,6 +194,7 @@ Props:
 
 ```ts
 post_id = '',
+theme: 'light' | 'dark' | 'system' = 'light',
 width = '100%',
 iframe_styles = '',
 ```
@@ -204,18 +205,31 @@ Usage:
 
 ```html
 <Bluesky
-	disable_observer="{$disable_observer_store}"
 	post_id="did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k"
-	iframe_styles="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
 />
 ```
 
 Output:
 
 <Bluesky
-  disable_observer={$disable_observer_store}
   post_id="did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k"
-  iframe_styles="border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" 
+/>
+
+Set `theme` to `dark`, or to `system` to follow the visitor's
+preference:
+
+```html
+<Bluesky
+	theme="dark"
+	post_id="did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k"
+/>
+```
+
+Output:
+
+<Bluesky
+  theme="dark"
+  post_id="did:plc:nlvjelw3dy3pddq7qoglleko/app.bsky.feed.post/3l6ud34tnwn2k"
 />
 
 ## Buzzsprout

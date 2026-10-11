@@ -3,12 +3,14 @@
 
 	interface Props {
 		post_id?: string;
+		theme?: 'light' | 'dark' | 'system';
 		width?: string;
 		iframe_styles?: string;
 	}
 
 	let {
 		post_id = '',
+		theme = 'light',
 		width = '100%',
 		iframe_styles = '',
 	}: Props = $props();
@@ -16,9 +18,9 @@
 	let wrapper_height = $state('174.5px');
 	let iframe_id = $state('');
 
-	const get_embed_url = (post_id: string) => {
-		return `https://embed.bsky.app/embed/${post_id}`;
-	};
+	const src = $derived(
+		`https://embed.bsky.app/embed/${post_id}?colorMode=${theme}`,
+	);
 
 	onMount(() => {
 		// Generate a unique ID for this iframe instance
@@ -56,7 +58,7 @@
 			id={iframe_id}
 			data-testid="bluesky-embed"
 			title="Bluesky Post Embed"
-			src={get_embed_url(post_id)}
+			{src}
 			{width}
 			frameborder="0"
 			scrolling="no"
@@ -67,6 +69,7 @@
 				width: 100%;
 				height: 100%;
 				border: 0px;
+				color-scheme: light;
 				${iframe_styles}
 			`}
 		></iframe>
