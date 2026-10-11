@@ -1,7 +1,8 @@
 <script lang="ts">
 	import CopyButton from '#lib/components/copy-button.svelte';
 	import PropsTable from '#lib/components/props-table.svelte';
-	import { site } from '#lib/config.js';
+	import ShareCardMeta from '#lib/components/share-card-meta.svelte';
+	import { share_card_url, site } from '#lib/config.js';
 	import {
 		categories,
 		href_of,
@@ -28,8 +29,12 @@
 		description: `${component.description} Props, defaults and a live example of the ${component.name} component from sveltekit-embed.`,
 		url: `${site.url}${href_of(component.name)}`,
 		website: site.url,
+		open_graph_image: share_card_url(slug_of(component.name)),
+		open_graph_image_alt: `${component.name}. ${component.description}`,
+		twitter_card_type: 'summary_large_image',
 	}}
 />
+<ShareCardMeta />
 
 <article class="site-width py-10 lg:py-14">
 	<div class="mx-auto max-w-3xl">

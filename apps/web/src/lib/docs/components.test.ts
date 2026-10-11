@@ -18,6 +18,16 @@ const pages = Object.keys(
 	import.meta.glob('../content/components/*.md'),
 ).map((path) => path.split('/').at(-1)!.replace(/\.md$/, ''));
 
+// Vite won't glob static/, the cards are checked from the server
+const cards = Object.keys(
+	import.meta.glob('../../../static/og/*.png', { query: '?url' }),
+).map((path) =>
+	path
+		.split('/')
+		.at(-1)!
+		.replace(/\.png$/, ''),
+);
+
 const source_of = (file: string) =>
 	sources[`${library}/components/${file}.svelte`];
 
@@ -51,6 +61,16 @@ describe('component docs', () => {
 	it('has a page for every component', () => {
 		expect([...pages].sort()).toEqual(
 			components.map(({ name }) => slug_of(name)).sort(),
+		);
+	});
+
+	it('has a share card for every page', () => {
+		expect([...cards].sort()).toEqual(
+			[
+				'home',
+				'lazy-loading',
+				...components.map(({ name }) => slug_of(name)),
+			].sort(),
 		);
 	});
 

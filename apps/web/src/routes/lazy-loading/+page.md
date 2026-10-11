@@ -1,5 +1,6 @@
 <script>
-	import { site } from '#lib/config.js';
+	import ShareCardMeta from '#lib/components/share-card-meta.svelte';
+	import { share_card_url, site } from '#lib/config.js';
 	import { in_view } from 'sveltekit-embed';
 	import { Head } from 'svead';
 
@@ -18,8 +19,13 @@
 			'How sveltekit-embed components lazy load, how to load one eagerly, and how to lazy load your own markup with the in_view attachment.',
 		url: `${site.url}/lazy-loading`,
 		website: site.url,
+		open_graph_image: share_card_url('lazy-loading'),
+		open_graph_image_alt:
+			'Lazy loading. How embeds load, and the in_view attachment.',
+		twitter_card_type: 'summary_large_image',
 	}}
 />
+<ShareCardMeta />
 
 <article class="site-width py-10 lg:py-14">
 <div class="doc prose mx-auto max-w-3xl">
