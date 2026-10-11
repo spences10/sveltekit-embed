@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { GitHub, Twitter, YouTube } from '#lib/icons/index.js';
-	import spencee_img from '#lib/images/spencee.png';
+	import CommandPalette from '#lib/components/command-palette.svelte';
+	import SiteFooter from '#lib/components/site-footer.svelte';
+	import SiteHeader from '#lib/components/site-header.svelte';
+	import { read_stored_code } from '#lib/state/code.svelte.js';
 	import {
 		PUBLIC_FATHOM_ID,
 		PUBLIC_FATHOM_URL,
@@ -9,11 +11,11 @@
 	import * as Fathom from 'fathom-client';
 	import { onMount } from 'svelte';
 	import '../app.css';
-	import '../prism.css';
 
-	let { data, children } = $props();
+	let { children } = $props();
 
 	onMount(() => {
+		read_stored_code();
 		Fathom.load(PUBLIC_FATHOM_ID, {
 			url: PUBLIC_FATHOM_URL,
 		});
@@ -26,113 +28,19 @@
 	});
 </script>
 
-<header class="text-right">
-	<span
-		class="tooltip tooltip-bottom m-4 before:text-xs before:content-[attr(data-tip)]"
-		data-tip="GitHub"
-	>
-		<div class="flex-none items-center">
-			<a
-				aria-label="Github"
-				onclick={() => Fathom.trackEvent(`GitHub project link click`)}
-				target="_blank"
-				href="https://github.com/spences10/sveltekit-embed"
-				rel="noopener noreferrer"
-				class="drawer-button btn btn-square normal-case btn-ghost"
-			>
-				<GitHub
-					height="30"
-					width="30"
-					fill="fill-white fill-primary"
-				/>
-			</a>
-		</div>
-	</span>
-</header>
+<a
+	href="#main"
+	class="btn sr-only btn-primary focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-30"
+>
+	Skip to content
+</a>
 
-{#if !data.is_cloudflare}
-	<div
-		role="banner"
-		class="relative mb-8 rounded-box bg-primary text-center shadow-lg lg:mx-20 prose-a:text-info-content"
-	>
-		<h2
-			class="p-4 text-3xl font-bold tracking-wide text-primary-content"
-		>
-			We've moved to Cloudflare!
-		</h2>
-		<p class="px-4 pb-6 text-xl text-primary-content">
-			This is now being hosted on Cloudflare Pages. You can check it
-			out on <a
-				href="https://sveltekit-embed.pages.dev"
-				class="link link-secondary"
-			>
-				https://sveltekit-embed.pages.dev
-			</a>
-		</p>
-	</div>
-{/if}
+<SiteHeader />
 
-<main class="container mx-auto prose prose-xl mb-20 max-w-3xl px-4">
+<main id="main">
 	{@render children?.()}
 </main>
 
-<footer
-	class="footer-center footer footer-horizontal bg-primary p-10 text-primary-content"
->
-	<div class="text-xl">
-		<img
-			src={spencee_img}
-			alt="Scott avatar"
-			class="h-20 rounded-full"
-		/>
-		<p class="font-bold">
-			Made with <span role="img" aria-label="red heart">❤️</span> by
-			<a
-				class="link transition hover:text-secondary"
-				onclick={() => Fathom.trackEvent(`scottspence.com click`)}
-				href="https://scottspence.com"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Scott Spence
-			</a>
-		</p>
-		<p>
-			Copyright © 2021-{`${new Date().getFullYear()}`}. All rights
-			reserved
-			<span role="img" aria-label="shrugging emoji">🤷</span>
-		</p>
-	</div>
-	<div>
-		<div class="grid grid-flow-col gap-4">
-			<a
-				aria-label="Twitter"
-				onclick={() => Fathom.trackEvent(`spences10 Twitter click`)}
-				target="_blank"
-				rel="noopener noreferrer"
-				href="https://twitter.com/spences10"
-			>
-				<Twitter />
-			</a>
-			<a
-				aria-label="GitHub"
-				onclick={() =>
-					Fathom.trackEvent(`spences10 GitHub link click`)}
-				target="_blank"
-				rel="noopener noreferrer"
-				href="https://github.com/spences10"
-			>
-				<GitHub />
-			</a>
-			<a
-				aria-label="YouTube"
-				onclick={() => Fathom.trackEvent(`spences10 YouTube click`)}
-				target="_blank"
-				rel="noopener noreferrer"
-				href="https://ss10/yt"
-			>
-				<YouTube />
-			</a>
-		</div>
-	</div>
-</footer>
+<SiteFooter />
+
+<CommandPalette />

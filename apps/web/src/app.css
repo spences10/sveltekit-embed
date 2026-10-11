@@ -1,9 +1,270 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/atkinson-hyperlegible-next';
+@import '@fontsource-variable/jetbrains-mono';
 
 /* Plugin configurations */
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-	themes:
-		light --default,
-		dark --prefersdark;
+	themes: false;
+}
+
+/* Ultramarine ink on cool paper, marigold for the one loud moment
+   (the embed stage). `light` and `dark` replace daisyUI's built-ins
+   so `data-theme` and prefers-color-scheme keep working as before. */
+@plugin "daisyui/theme" {
+	name: 'light';
+	default: true;
+	prefersdark: false;
+	color-scheme: light;
+	--color-base-100: #fbfbfe;
+	--color-base-200: #f0f1f9;
+	--color-base-300: #dcdeee;
+	--color-base-content: #15172b;
+	--color-primary: #3340e8;
+	--color-primary-content: #ffffff;
+	--color-secondary: #ffb627;
+	--color-secondary-content: #2a1b00;
+	--color-accent: #8a3fd1;
+	--color-accent-content: #ffffff;
+	--color-neutral: #15172b;
+	--color-neutral-content: #f0f1f9;
+	--color-info: #0a6c9c;
+	--color-info-content: #ffffff;
+	--color-success: #0b7a55;
+	--color-success-content: #ffffff;
+	--color-warning: #b4530a;
+	--color-warning-content: #ffffff;
+	--color-error: #c2264d;
+	--color-error-content: #ffffff;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.5rem;
+	--radius-box: 0.75rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@plugin "daisyui/theme" {
+	name: 'dark';
+	default: false;
+	prefersdark: true;
+	color-scheme: dark;
+	--color-base-100: #0f1124;
+	--color-base-200: #171a35;
+	--color-base-300: #2a2e55;
+	--color-base-content: #e6e8fa;
+	--color-primary: #98a2ff;
+	--color-primary-content: #0b0d22;
+	--color-secondary: #ffc552;
+	--color-secondary-content: #2a1b00;
+	--color-accent: #d0a2ff;
+	--color-accent-content: #0b0d22;
+	--color-neutral: #e6e8fa;
+	--color-neutral-content: #0f1124;
+	--color-info: #7fd0f5;
+	--color-info-content: #0b0d22;
+	--color-success: #7ee0b4;
+	--color-success-content: #0b0d22;
+	--color-warning: #ffc552;
+	--color-warning-content: #0b0d22;
+	--color-error: #ff8fa8;
+	--color-error-content: #0b0d22;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.5rem;
+	--radius-box: 0.75rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@theme {
+	--font-sans:
+		'Atkinson Hyperlegible Next Variable', ui-sans-serif, system-ui,
+		sans-serif;
+	--font-display:
+		'Bricolage Grotesque Variable', ui-sans-serif, system-ui,
+		sans-serif;
+	--font-mono:
+		'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo,
+		Consolas, monospace;
+}
+
+@layer base {
+	:root {
+		/* Quieter text for descriptions and meta, readable on base-100
+		   and base-200 in both themes */
+		--color-muted: color-mix(
+			in oklch,
+			var(--color-base-content) 68%,
+			var(--color-base-100)
+		);
+		--site-gutter: clamp(1rem, 4vw, 2.5rem);
+	}
+
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 5rem;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+
+	body {
+		font-family: var(--font-sans);
+		font-size: 1.0625rem;
+		line-height: 1.6;
+		background: var(--color-base-100);
+		color: var(--color-base-content);
+		text-rendering: optimizeLegibility;
+	}
+
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-display);
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+
+	::selection {
+		background: color-mix(
+			in oklch,
+			var(--color-secondary) 55%,
+			transparent
+		);
+	}
+}
+
+@utility text-muted {
+	color: var(--color-muted);
+}
+
+@utility site-width {
+	width: 100%;
+	max-width: 72rem;
+	margin-inline: auto;
+	padding-inline: var(--site-gutter);
+}
+
+/* Markdown content. Typography supplies the rhythm, these pull it
+   onto the site's type and colours. */
+.doc {
+	font-size: 1.0625rem;
+	--tw-prose-body: var(--color-base-content);
+	--tw-prose-headings: var(--color-base-content);
+	--tw-prose-links: var(--color-primary);
+	--tw-prose-bold: var(--color-base-content);
+	--tw-prose-code: var(--color-base-content);
+	--tw-prose-hr: var(--color-base-300);
+	--tw-prose-bullets: var(--color-muted);
+	--tw-prose-counters: var(--color-muted);
+}
+
+.doc :where(p, ul, ol) {
+	max-width: 68ch;
+}
+
+.doc :where(h2, h3) {
+	font-family: var(--font-display);
+	font-weight: 650;
+	letter-spacing: -0.02em;
+}
+
+.doc :where(h1) {
+	margin-bottom: 0.6em;
+	font-family: var(--font-display);
+	font-size: clamp(2.5rem, 7vw, 3.75rem);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.doc :where(h2) {
+	margin-top: 2.5em;
+	font-size: 1.6rem;
+}
+
+.doc :where(h3) {
+	font-size: 1.25rem;
+}
+
+/* rehype-autolink-headings wraps the heading text in a link */
+.doc :where(h1, h2, h3) > a {
+	color: inherit;
+	font-weight: inherit;
+	text-decoration: none;
+}
+
+.doc :where(h1, h2, h3) > a:hover {
+	text-decoration: underline;
+	text-decoration-color: var(--color-secondary);
+	text-decoration-thickness: 3px;
+	text-underline-offset: 0.2em;
+}
+
+.doc :where(a) {
+	text-underline-offset: 0.2em;
+}
+
+.doc :where(code):not(:where(pre *)) {
+	padding: 0.15em 0.35em;
+	border-radius: 0.3rem;
+	background: var(--color-base-200);
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+	font-weight: 500;
+}
+
+.doc :where(code):not(:where(pre *))::before,
+.doc :where(code):not(:where(pre *))::after {
+	content: none;
+}
+
+/* Set by the embed_loading attachment while an embed is on its way */
+[data-embed-loading] {
+	position: relative;
+	min-height: 5rem;
+}
+
+[data-embed-loading]::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	width: 2.25rem;
+	height: 2.25rem;
+	margin: auto;
+	border: 3px solid var(--color-base-300);
+	border-top-color: var(--color-primary);
+	border-radius: 50%;
+	/* A disc behind the ring keeps it legible over a half drawn embed */
+	background: var(--color-base-100);
+	box-shadow: 0 0 0 0.5rem var(--color-base-100);
+	pointer-events: none;
+	animation: embed-spin 0.8s linear infinite;
+}
+
+@keyframes embed-spin {
+	to {
+		rotate: 1turn;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-embed-loading]::after {
+		animation-duration: 2.4s;
+	}
 }
