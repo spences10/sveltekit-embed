@@ -1,7 +1,7 @@
-import Toot from './toot.svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
+import Toot from './toot.svelte';
 
 describe('Toot', () => {
 	afterEach(() => {
@@ -16,12 +16,12 @@ describe('Toot', () => {
 	it('renders iframe with correct src', async () => {
 		const instance = 'my-instance';
 		const username = 'my-username';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -32,12 +32,12 @@ describe('Toot', () => {
 	it('renders with a default width', async () => {
 		const instance = 'my-instance';
 		const username = 'my-username';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const { container } = await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -50,12 +50,12 @@ describe('Toot', () => {
 	it('should handle username with existing @ symbol', async () => {
 		const instance = 'mastodon.social';
 		const username = '@testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -67,12 +67,12 @@ describe('Toot', () => {
 	it('should handle username without @ symbol', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -84,12 +84,12 @@ describe('Toot', () => {
 	it('should handle username with whitespace', async () => {
 		const instance = 'mastodon.social';
 		const username = '  testuser  ';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -101,14 +101,14 @@ describe('Toot', () => {
 	it('should load mastodon embed script on mount', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const appendChildSpy = vi.spyOn(document.head, 'appendChild');
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 
 		// Verify script was appended
@@ -128,7 +128,7 @@ describe('Toot', () => {
 	it.skip('should remove mastodon embed script on unmount', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const mockScript = document.createElement('script');
 		const createElementSpy = vi
@@ -140,7 +140,7 @@ describe('Toot', () => {
 		const { unmount } = await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 
 		// Unmount component
@@ -156,7 +156,7 @@ describe('Toot', () => {
 	it.skip('should handle script loading errors gracefully', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const mockScript = document.createElement('script');
 		const createElementSpy = vi
@@ -173,7 +173,7 @@ describe('Toot', () => {
 			render(Toot, {
 				instance,
 				username,
-				tootId,
+				toot_id,
 			}),
 		).resolves.toBeDefined();
 
@@ -184,7 +184,7 @@ describe('Toot', () => {
 	it.skip('should not load duplicate scripts', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const mockScript = document.createElement('script');
 		const createElementSpy = vi
@@ -196,14 +196,14 @@ describe('Toot', () => {
 		const { unmount: unmount1 } = await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 
 		// Render second component
 		await render(Toot, {
 			instance,
 			username,
-			tootId: '456',
+			toot_id: '456',
 		});
 
 		// Should only create one script
@@ -218,12 +218,12 @@ describe('Toot', () => {
 	it('should handle empty instance value', async () => {
 		const instance = '';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -234,12 +234,12 @@ describe('Toot', () => {
 	it('should handle empty username value', async () => {
 		const instance = 'mastodon.social';
 		const username = '';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -247,15 +247,15 @@ describe('Toot', () => {
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('should handle empty tootId value', async () => {
+	it('should handle empty toot_id value', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '';
+		const toot_id = '';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -266,12 +266,12 @@ describe('Toot', () => {
 	it('should handle special characters in instance URL', async () => {
 		const instance = 'test-instance.co.uk';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -282,12 +282,12 @@ describe('Toot', () => {
 	it('should handle special characters in username', async () => {
 		const instance = 'mastodon.social';
 		const username = 'test.user_123';
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -295,15 +295,15 @@ describe('Toot', () => {
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('should handle special characters in tootId', async () => {
+	it('should handle special characters in toot_id', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123456789012345';
+		const toot_id = '123456789012345';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -314,12 +314,12 @@ describe('Toot', () => {
 	it.skip('should have proper iframe accessibility attributes', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const { container } = await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = container.querySelector('iframe');
 
@@ -335,12 +335,12 @@ describe('Toot', () => {
 	it.skip('should apply correct CSS styles', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123';
+		const toot_id = '123';
 
 		const { container } = await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const wrapper = container.querySelector('div');
 		const iframe = container.querySelector('iframe');
@@ -366,12 +366,12 @@ describe('Toot', () => {
 	it('should handle very long usernames', async () => {
 		const instance = 'mastodon.social';
 		const username = 'a'.repeat(100);
-		const tootId = '123';
+		const toot_id = '123';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 
@@ -379,15 +379,15 @@ describe('Toot', () => {
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
-	it('should handle numeric tootId values', async () => {
+	it('should handle numeric toot_id values', async () => {
 		const instance = 'mastodon.social';
 		const username = 'testuser';
-		const tootId = '123456789';
+		const toot_id = '123456789';
 
 		await render(Toot, {
 			instance,
 			username,
-			tootId,
+			toot_id,
 		});
 		const iframe = page.getByTitle('');
 

@@ -676,7 +676,7 @@ Props:
 ```ts
 instance: string = '';
 username: string = '';
-tootId: string = '';
+toot_id: string = '';
 ```
 
 Usage:
@@ -685,7 +685,7 @@ Usage:
 <Toot
 	instance="mas.to"
 	username="@spences10"
-	tootId="109252587760962553"
+	toot_id="109252587760962553"
 />
 ```
 
@@ -694,7 +694,7 @@ Output:
 <Toot 
   instance="mas.to" 
   username="@spences10" 
-  tootId="109252587760962553"
+  toot_id="109252587760962553"
 />
 
 ## Tweet

@@ -2,10 +2,14 @@
 	interface Props {
 		instance?: string;
 		username?: string;
-		tootId?: string;
+		toot_id?: string;
 	}
 
-	let { instance = '', username = '', tootId = '' }: Props = $props();
+	let {
+		instance = '',
+		username = '',
+		toot_id = '',
+	}: Props = $props();
 
 	let mastodon_embed_script: HTMLScriptElement | null = null;
 
@@ -44,7 +48,7 @@
 <div>
 	<iframe
 		title=""
-		src={`https://${instance}/${atUsername}/${tootId}/embed`}
+		src={`https://${instance}/${atUsername}/${toot_id}/embed`}
 		class="mastodon-embed"
 		width="400"
 		allowfullscreen
