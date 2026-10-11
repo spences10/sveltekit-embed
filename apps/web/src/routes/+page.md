@@ -449,7 +449,7 @@ Output:
 Props:
 
 ```ts
-reliveId: string = '';
+relive_id: string = '';
 width: string = '100%';
 disable_observer: boolean = false;
 ```
@@ -457,14 +457,14 @@ disable_observer: boolean = false;
 Usage:
 
 ```html
-<Relive reliveId="vAOZokmYVo6" />
+<Relive relive_id="vAOZokmYVo6" />
 ```
 
 Output:
 
 <Relive
   disable_observer={$disable_observer_store}
-  reliveId="vAOZokmYVo6" 
+  relive_id="vAOZokmYVo6" 
 />
 
 ## SimpleCast

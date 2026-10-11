@@ -1,9 +1,9 @@
-import Relive from './relive.svelte';
-import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
+import Relive from './relive.svelte';
 
-const reliveId = '12345678-abcd-1234-5678-123456789abc';
+const relive_id = '12345678-abcd-1234-5678-123456789abc';
 
 describe('Relive', () => {
 	it('mounts with default props', async () => {
@@ -13,18 +13,18 @@ describe('Relive', () => {
 
 	it('renders iframe with correct src', async () => {
 		await render(Relive, {
-			reliveId,
+			relive_id,
 			disable_observer: true,
 		});
-		const iframe = page.getByTitle(`relive-${reliveId}`);
-		const expected_src = `https://www.relive.cc/view/${reliveId}/widget`;
+		const iframe = page.getByTitle(`relive-${relive_id}`);
+		const expected_src = `https://www.relive.cc/view/${relive_id}/widget`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it.skip('mounts with custom width', async () => {
 		const customWidth = '50%';
 		const { container } = await render(Relive, {
-			reliveId,
+			relive_id,
 			width: customWidth,
 			disable_observer: true,
 		});
@@ -37,7 +37,7 @@ describe('Relive', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(Relive, {
-			reliveId,
+			relive_id,
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -45,9 +45,9 @@ describe('Relive', () => {
 	});
 
 	describe('Edge Cases', () => {
-		it('should handle empty reliveId gracefully', async () => {
+		it('should handle empty relive_id gracefully', async () => {
 			const { container } = await render(Relive, {
-				reliveId: '',
+				relive_id: '',
 				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
@@ -58,10 +58,10 @@ describe('Relive', () => {
 			expect(iframe?.getAttribute('title')).toBe('relive-');
 		});
 
-		it('should handle special characters in reliveId', async () => {
+		it('should handle special characters in relive_id', async () => {
 			const specialReliveId = 'test-id_123';
 			await render(Relive, {
-				reliveId: specialReliveId,
+				relive_id: specialReliveId,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${specialReliveId}`);
@@ -72,10 +72,10 @@ describe('Relive', () => {
 			);
 		});
 
-		it('should handle very long reliveId values', async () => {
+		it('should handle very long relive_id values', async () => {
 			const longReliveId = 'a'.repeat(1000);
 			await render(Relive, {
-				reliveId: longReliveId,
+				relive_id: longReliveId,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${longReliveId}`);
@@ -84,10 +84,10 @@ describe('Relive', () => {
 			expect(element.src).toContain(longReliveId);
 		});
 
-		it('should handle malformed reliveId gracefully', async () => {
+		it('should handle malformed relive_id gracefully', async () => {
 			const malformedId = 'not/a/valid/id';
 			await render(Relive, {
-				reliveId: malformedId,
+				relive_id: malformedId,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${malformedId}`);
@@ -103,7 +103,7 @@ describe('Relive', () => {
 	describe('Default Props', () => {
 		it.skip('should apply default width when not provided', async () => {
 			const { container } = await render(Relive, {
-				reliveId,
+				relive_id,
 				disable_observer: true,
 			});
 			const wrapper = container.querySelector('div');
@@ -115,7 +115,7 @@ describe('Relive', () => {
 	describe('Layout and Styling', () => {
 		it.skip('should apply proper aspect ratio and positioning', async () => {
 			const { container } = await render(Relive, {
-				reliveId,
+				relive_id,
 				disable_observer: true,
 			});
 			const wrapper = container.querySelector('div');
@@ -141,7 +141,7 @@ describe('Relive', () => {
 
 			for (const width of widths) {
 				const { container } = await render(Relive, {
-					reliveId: `${reliveId}-${width}`,
+					relive_id: `${relive_id}-${width}`,
 					width,
 					disable_observer: true,
 				});
@@ -158,7 +158,7 @@ describe('Relive', () => {
 		it('should construct proper Relive widget URL', async () => {
 			const testReliveId = 'test-123-abc';
 			await render(Relive, {
-				reliveId: testReliveId,
+				relive_id: testReliveId,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle(`relive-${testReliveId}`);
@@ -172,14 +172,14 @@ describe('Relive', () => {
 	describe('Accessibility and Security', () => {
 		it('should have proper iframe accessibility and security attributes', async () => {
 			await render(Relive, {
-				reliveId,
+				relive_id,
 				disable_observer: true,
 			});
-			const iframe = page.getByTitle(`relive-${reliveId}`);
+			const iframe = page.getByTitle(`relive-${relive_id}`);
 
 			await expect
 				.element(iframe)
-				.toHaveAttribute('title', `relive-${reliveId}`);
+				.toHaveAttribute('title', `relive-${relive_id}`);
 			await expect
 				.element(iframe)
 				.toHaveAttribute('frameborder', '0');
@@ -193,7 +193,7 @@ describe('Relive', () => {
 	describe('Component Structure', () => {
 		it('should maintain proper wrapper and iframe structure', async () => {
 			const { container } = await render(Relive, {
-				reliveId,
+				relive_id,
 				disable_observer: true,
 			});
 
@@ -209,7 +209,7 @@ describe('Relive', () => {
 	describe('Constants', () => {
 		it('should use correct default margin value', async () => {
 			const { container } = await render(Relive, {
-				reliveId,
+				relive_id,
 				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');

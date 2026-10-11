@@ -2,13 +2,13 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		reliveId?: string;
+		relive_id?: string;
 		width?: string;
 		disable_observer?: boolean;
 	}
 
 	let {
-		reliveId = '',
+		relive_id = '',
 		width = '100%',
 		disable_observer = false,
 	}: Props = $props();
@@ -26,8 +26,8 @@
     `}
 	>
 		<iframe
-			title={`relive-${reliveId}`}
-			src={`https://www.relive.cc/view/${reliveId}/widget`}
+			title={`relive-${relive_id}`}
+			src={`https://www.relive.cc/view/${relive_id}/widget`}
 			scrolling="no"
 			frameborder="0"
 			allowfullscreen
