@@ -560,9 +560,9 @@ Output:
 Props:
 
 ```ts
-spotifyLink: string = '';
-height: string = '100%';
-width: string = '152px';
+spotify_link: string = '';
+width: string = '100%';
+height: string = '152px';
 disable_observer: boolean = false;
 iframe_styles: string = `
   border-radius: 0.8rem;
@@ -574,14 +574,14 @@ iframe_styles: string = `
 Usage:
 
 ```html
-<Spotify spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5" />
+<Spotify spotify_link="show/4XPl3uEEL9hvqMkoZrzbx5" />
 ```
 
 Output:
 
 <Spotify
   disable_observer={$disable_observer_store}
-  spotifyLink="show/4XPl3uEEL9hvqMkoZrzbx5" 
+  spotify_link="show/4XPl3uEEL9hvqMkoZrzbx5" 
 />
 
 ## StackBlitz

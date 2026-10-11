@@ -6,26 +6,26 @@ import { render } from 'vitest-browser-svelte';
 describe('Spotify', () => {
 	it('mounts with spotify link', async () => {
 		const { container } = await render(Spotify, {
-			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
+			spotify_link: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with spotify link', async () => {
-		const spotifyLink = 'track/4uLU6hMCjMI75M1A2tKUQC';
+		const spotify_link = 'track/4uLU6hMCjMI75M1A2tKUQC';
 		await render(Spotify, {
-			spotifyLink,
+			spotify_link,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
-		const expected_src = `https://open.spotify.com/embed/${spotifyLink}`;
+		const expected_src = `https://open.spotify.com/embed/${spotify_link}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('renders with a GeneralObserver', async () => {
 		await render(Spotify, {
-			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
+			spotify_link: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -33,9 +33,9 @@ describe('Spotify', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty spotifyLink gracefully', async () => {
+	it('should handle empty spotify_link gracefully', async () => {
 		await render(Spotify, {
-			spotifyLink: '',
+			spotify_link: '',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
@@ -45,7 +45,7 @@ describe('Spotify', () => {
 
 	it('should apply default height and width when not provided', async () => {
 		await render(Spotify, {
-			spotifyLink: 'track/test',
+			spotify_link: 'track/test',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
@@ -62,20 +62,20 @@ describe('Spotify', () => {
 	});
 
 	it('should construct proper Spotify embed URL', async () => {
-		const spotifyLink = 'playlist/37i9dQZF1DXcBWIGoYBM5M';
+		const spotify_link = 'playlist/37i9dQZF1DXcBWIGoYBM5M';
 		await render(Spotify, {
-			spotifyLink,
+			spotify_link,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
-		const expected_src = `https://open.spotify.com/embed/${spotifyLink}`;
+		const expected_src = `https://open.spotify.com/embed/${spotify_link}`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it.skip('should handle different Spotify content types', async () => {
 		// Test track
 		await render(Spotify, {
-			spotifyLink: 'track/4uLU6hMCjMI75M1A2tKUQC',
+			spotify_link: 'track/4uLU6hMCjMI75M1A2tKUQC',
 			disable_observer: true,
 		});
 		await expect
@@ -87,7 +87,7 @@ describe('Spotify', () => {
 
 		// Test album
 		await render(Spotify, {
-			spotifyLink: 'album/1DFixLWuPkv3KT3TnV35m3',
+			spotify_link: 'album/1DFixLWuPkv3KT3TnV35m3',
 			disable_observer: true,
 		});
 		await expect
@@ -99,7 +99,7 @@ describe('Spotify', () => {
 
 		// Test playlist
 		await render(Spotify, {
-			spotifyLink: 'playlist/37i9dQZF1DXcBWIGoYBM5M',
+			spotify_link: 'playlist/37i9dQZF1DXcBWIGoYBM5M',
 			disable_observer: true,
 		});
 		await expect
@@ -111,7 +111,7 @@ describe('Spotify', () => {
 
 		// Test artist
 		await render(Spotify, {
-			spotifyLink: 'artist/4NHQUGzhtTLFvgF5SZesLK',
+			spotify_link: 'artist/4NHQUGzhtTLFvgF5SZesLK',
 			disable_observer: true,
 		});
 		await expect
@@ -122,10 +122,10 @@ describe('Spotify', () => {
 			);
 	});
 
-	it('should handle special characters in spotifyLink', async () => {
-		const spotifyLink = 'track/abc123_def-456';
+	it('should handle special characters in spotify_link', async () => {
+		const spotify_link = 'track/abc123_def-456';
 		await render(Spotify, {
-			spotifyLink,
+			spotify_link,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
@@ -133,24 +133,24 @@ describe('Spotify', () => {
 			.element(iframe)
 			.toHaveAttribute(
 				'src',
-				`https://open.spotify.com/embed/${spotifyLink}`,
+				`https://open.spotify.com/embed/${spotify_link}`,
 			);
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `spotify-${spotifyLink}`);
+			.toHaveAttribute('title', `spotify-${spotify_link}`);
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
-		const spotifyLink = 'track/accessibility-test';
+		const spotify_link = 'track/accessibility-test';
 		await render(Spotify, {
-			spotifyLink,
+			spotify_link,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
 
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `spotify-${spotifyLink}`);
+			.toHaveAttribute('title', `spotify-${spotify_link}`);
 		await expect.element(iframe).toHaveAttribute('frameBorder', '0');
 		await expect
 			.element(iframe)
@@ -160,10 +160,10 @@ describe('Spotify', () => {
 			.toHaveClass('spotify-sveltekit-embed');
 	});
 
-	it('should handle very long spotifyLink values', async () => {
-		const spotifyLink = 'track/' + 'a'.repeat(100);
+	it('should handle very long spotify_link values', async () => {
+		const spotify_link = 'track/' + 'a'.repeat(100);
 		await render(Spotify, {
-			spotifyLink,
+			spotify_link,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
@@ -171,14 +171,14 @@ describe('Spotify', () => {
 			.element(iframe)
 			.toHaveAttribute(
 				'src',
-				`https://open.spotify.com/embed/${spotifyLink}`,
+				`https://open.spotify.com/embed/${spotify_link}`,
 			);
 	});
 
 	it('should apply custom styles correctly', async () => {
 		const customStyles = 'border: 2px solid red; background: blue;';
 		await render(Spotify, {
-			spotifyLink: 'track/test',
+			spotify_link: 'track/test',
 			iframe_styles: customStyles,
 			disable_observer: true,
 		});
@@ -193,7 +193,7 @@ describe('Spotify', () => {
 
 	it('should handle custom dimensions', async () => {
 		await render(Spotify, {
-			spotifyLink: 'track/test',
+			spotify_link: 'track/test',
 			width: '500px',
 			height: '300px',
 			disable_observer: true,
@@ -207,9 +207,9 @@ describe('Spotify', () => {
 	});
 
 	it('should handle malformed Spotify links gracefully', async () => {
-		const spotifyLink = 'invalid/content/with/extra/slashes';
+		const spotify_link = 'invalid/content/with/extra/slashes';
 		await render(Spotify, {
-			spotifyLink,
+			spotify_link,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
@@ -219,13 +219,13 @@ describe('Spotify', () => {
 			.element(iframe)
 			.toHaveAttribute(
 				'src',
-				`https://open.spotify.com/embed/${spotifyLink}`,
+				`https://open.spotify.com/embed/${spotify_link}`,
 			);
 	});
 
 	it('should render with proper CSS class structure', async () => {
 		await render(Spotify, {
-			spotifyLink: 'track/test',
+			spotify_link: 'track/test',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('spotify');
@@ -239,7 +239,7 @@ describe('Spotify', () => {
 		// Test with query parameters
 		const linkWithParams = 'track/4uLU6hMCjMI75M1A2tKUQC?si=abc123';
 		await render(Spotify, {
-			spotifyLink: linkWithParams,
+			spotify_link: linkWithParams,
 			disable_observer: true,
 		});
 		await expect
@@ -252,7 +252,7 @@ describe('Spotify', () => {
 		// Test with just ID (no type prefix)
 		const justId = '4uLU6hMCjMI75M1A2tKUQC';
 		await render(Spotify, {
-			spotifyLink: justId,
+			spotify_link: justId,
 			disable_observer: true,
 		});
 		await expect

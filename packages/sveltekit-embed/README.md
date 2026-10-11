@@ -52,7 +52,7 @@ Import and use any component in your Svelte/SvelteKit application:
 
 <!-- Spotify Track -->
 <Spotify
-	spotifyLink="track/4iV5W9uYEdYUVa79Axb7Rh"
+	spotify_link="track/4iV5W9uYEdYUVa79Axb7Rh"
 	width="100%"
 	height="152"
 />
@@ -104,13 +104,13 @@ Import and use any component in your Svelte/SvelteKit application:
 </script>
 
 <!-- Track -->
-<Spotify spotifyLink="track/4iV5W9uYEdYUVa79Axb7Rh" />
+<Spotify spotify_link="track/4iV5W9uYEdYUVa79Axb7Rh" />
 
 <!-- Album -->
-<Spotify spotifyLink="album/1DFixLWuPkv3KT3TnV35m3" />
+<Spotify spotify_link="album/1DFixLWuPkv3KT3TnV35m3" />
 
 <!-- Playlist -->
-<Spotify spotifyLink="playlist/37i9dQZF1DXcBWIGoYBM5M" />
+<Spotify spotify_link="playlist/37i9dQZF1DXcBWIGoYBM5M" />
 ```
 
 ### CodePen
