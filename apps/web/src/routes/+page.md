@@ -317,8 +317,9 @@ Output:
 
 ## GenericEmbed
 
-This component passes all provided props to the iframe This component
-also provides a slot, to bring your own markup besides the iframe
+This component passes all provided props to the iframe. It also
+renders any children you pass, to bring your own markup besides the
+iframe.
 
 Props:
 
@@ -340,7 +341,7 @@ Usage:
   data-testid="spotify"
   title="spotify-generic"
   src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
-  frameBorder="0"
+  frameborder="0"
   allow="encrypted-media"
   style="border-radius: 0.9rem;"
 />
@@ -355,7 +356,7 @@ Output:
   data-testid="spotify"
   title="spotify-generic"
   src={`https://open.spotify.com/embed/show/4XPl3uEEL9hvqMkoZrzbx5`}
-  frameBorder="0"
+  frameborder="0"
   allow="encrypted-media"
   style="border-radius: 0.9rem;"
 />

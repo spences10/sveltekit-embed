@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import type { HTMLIframeAttributes } from 'svelte/elements';
 	import GeneralObserver from './general-observer.svelte';
 
-	interface Props {
-		src: string;
-		title: string;
-		height: string;
-		width: string;
-		disable_observer: boolean;
-		children: Snippet;
+	interface Props extends HTMLIframeAttributes {
+		src?: string;
+		title?: string;
+		height?: string;
+		width?: string;
+		disable_observer?: boolean;
+		children?: Snippet;
 	}
 
 	let {
