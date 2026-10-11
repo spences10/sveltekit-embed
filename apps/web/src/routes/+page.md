@@ -827,17 +827,17 @@ Output:
 Props:
 
 ```ts
-zencastrId: string = '';
+zencastr_id: string = '';
 ```
 
 Usage:
 
 ```html
-<Zencastr zencastrId="TARGseQu" />
+<Zencastr zencastr_id="TARGseQu" />
 ```
 
 Output:
 
 <Zencastr 
-  zencastrId="TARGseQu" 
+  zencastr_id="TARGseQu" 
 />

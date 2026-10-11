@@ -5,7 +5,7 @@ import { render } from 'vitest-browser-svelte';
 describe('Zencastr', () => {
 	it('mounts', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		expect(container).toBeTruthy();
@@ -13,7 +13,7 @@ describe('Zencastr', () => {
 
 	it('sets data-episode-href for Zencastr player', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const player = container.querySelector('blockquote');
@@ -28,7 +28,7 @@ describe('Zencastr', () => {
 
 	it('sets href for Zencastr player link', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const link = container.querySelector('a');
@@ -42,9 +42,9 @@ describe('Zencastr', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty zencastrId gracefully', async () => {
+	it('should handle empty zencastr_id gracefully', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: '',
+			zencastr_id: '',
 		});
 
 		const player = container.querySelector('blockquote');
@@ -65,7 +65,7 @@ describe('Zencastr', () => {
 
 	it('should apply default prop values when not provided', async () => {
 		const { container } = await render(Zencastr, {
-			// zencastrId not provided - should use default empty string
+			// zencastr_id not provided - should use default empty string
 		});
 
 		const player = container.querySelector('blockquote');
@@ -85,9 +85,9 @@ describe('Zencastr', () => {
 	});
 
 	it('should construct proper Zencastr embed URL', async () => {
-		const zencastrId = 'test-episode-123';
+		const zencastr_id = 'test-episode-123';
 		const { container } = await render(Zencastr, {
-			zencastrId,
+			zencastr_id,
 		});
 
 		const player = container.querySelector('blockquote');
@@ -97,7 +97,7 @@ describe('Zencastr', () => {
 		expect(link).toBeTruthy();
 
 		if (player && link) {
-			const expectedUrl = `https://zencastr.com/embed/${zencastrId}`;
+			const expectedUrl = `https://zencastr.com/embed/${zencastr_id}`;
 			expect(player.getAttribute('data-episode-href')).toBe(
 				expectedUrl,
 			);
@@ -105,17 +105,17 @@ describe('Zencastr', () => {
 		}
 	});
 
-	it('should handle special characters in zencastrId', async () => {
-		const zencastrId = 'test-episode_123.special';
+	it('should handle special characters in zencastr_id', async () => {
+		const zencastr_id = 'test-episode_123.special';
 		const { container } = await render(Zencastr, {
-			zencastrId,
+			zencastr_id,
 		});
 
 		const player = container.querySelector('blockquote');
 		const link = container.querySelector('a');
 
 		if (player && link) {
-			const expectedUrl = `https://zencastr.com/embed/${zencastrId}`;
+			const expectedUrl = `https://zencastr.com/embed/${zencastr_id}`;
 			expect(player.getAttribute('data-episode-href')).toBe(
 				expectedUrl,
 			);
@@ -125,7 +125,7 @@ describe('Zencastr', () => {
 
 	it('should have proper blockquote structure and attributes', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const blockquote = container.querySelector('blockquote');
@@ -152,17 +152,17 @@ describe('Zencastr', () => {
 		}
 	});
 
-	it('should handle very long zencastrId values', async () => {
-		const zencastrId = 'a'.repeat(100);
+	it('should handle very long zencastr_id values', async () => {
+		const zencastr_id = 'a'.repeat(100);
 		const { container } = await render(Zencastr, {
-			zencastrId,
+			zencastr_id,
 		});
 
 		const player = container.querySelector('blockquote');
 		const link = container.querySelector('a');
 
 		if (player && link) {
-			const expectedUrl = `https://zencastr.com/embed/${zencastrId}`;
+			const expectedUrl = `https://zencastr.com/embed/${zencastr_id}`;
 			expect(player.getAttribute('data-episode-href')).toBe(
 				expectedUrl,
 			);
@@ -172,7 +172,7 @@ describe('Zencastr', () => {
 
 	it('should render proper link text and structure', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const link = container.querySelector('a');
@@ -198,16 +198,16 @@ describe('Zencastr', () => {
 	});
 
 	it('should handle malformed zencastr IDs gracefully', async () => {
-		const zencastrId = 'invalid/id/with/slashes';
+		const zencastr_id = 'invalid/id/with/slashes';
 		const { container } = await render(Zencastr, {
-			zencastrId,
+			zencastr_id,
 		});
 
 		const player = container.querySelector('blockquote');
 		const link = container.querySelector('a');
 
 		if (player && link) {
-			const expectedUrl = `https://zencastr.com/embed/${zencastrId}`;
+			const expectedUrl = `https://zencastr.com/embed/${zencastr_id}`;
 			expect(player.getAttribute('data-episode-href')).toBe(
 				expectedUrl,
 			);
@@ -223,7 +223,7 @@ describe('Zencastr', () => {
 		const appendChildSpy = vi.spyOn(document.body, 'appendChild');
 
 		await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		expect(createElementSpy).toHaveBeenCalledWith('script');
@@ -245,7 +245,7 @@ describe('Zencastr', () => {
 		const appendChildSpy = vi.spyOn(document.body, 'appendChild');
 
 		const { unmount } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		// Verify script was added
@@ -263,7 +263,7 @@ describe('Zencastr', () => {
 
 	it('should have proper accessibility attributes', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const img = container.querySelector('img');
@@ -295,7 +295,7 @@ describe('Zencastr', () => {
 		const appendChildSpy = vi.spyOn(document.body, 'appendChild');
 
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		// Verify the player container is ready for initialization
@@ -314,7 +314,7 @@ describe('Zencastr', () => {
 
 	it('should render with proper section wrapper and centering', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const section = container.querySelector('section');
@@ -330,7 +330,7 @@ describe('Zencastr', () => {
 
 	it('should handle img element structure correctly', async () => {
 		const { container } = await render(Zencastr, {
-			zencastrId: 'abc123',
+			zencastr_id: 'abc123',
 		});
 
 		const img = container.querySelector('img');
