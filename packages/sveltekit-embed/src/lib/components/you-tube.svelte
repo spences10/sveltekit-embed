@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPadding } from '../utils/index.js';
+	import { get_aspect_ratio } from '../utils/index.js';
 
 	interface Props {
 		youtube_id?: string;
@@ -57,7 +57,7 @@
 	style={`
     	position: relative;
     	width: 100%;
-  	  ${getPadding(aspect_ratio)}
+  	  ${get_aspect_ratio(aspect_ratio)}
   `}
 >
 	<iframe
@@ -65,7 +65,6 @@
 		title={`youTube-${list_id.length > 0 ? list_id : youtube_id}`}
 		{loading}
 		{src}
-		frameborder="0"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowfullscreen
 		style={`
@@ -78,3 +77,9 @@
     `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

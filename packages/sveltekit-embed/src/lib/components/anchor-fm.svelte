@@ -27,7 +27,6 @@
 		title={`anchor-fm-${episode_url}`}
 		{loading}
 		src={`https://anchor.fm/${episode_url}`}
-		frameborder="0"
 		scrolling="no"
 		style={`
         position: absolute;
@@ -38,3 +37,9 @@
       `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

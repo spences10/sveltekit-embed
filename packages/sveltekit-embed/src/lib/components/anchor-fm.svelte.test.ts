@@ -95,7 +95,9 @@ describe('AnchorFm', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', `anchor-fm-${episode_url}`);
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 

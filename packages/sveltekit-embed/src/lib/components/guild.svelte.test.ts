@@ -179,7 +179,9 @@ describe('Guild', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', `guild-card-${card_id}`);
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 

@@ -62,7 +62,12 @@
 	title={`stackblitz-${id}`}
 	{loading}
 	{src}
-	frameborder="no"
 	allowfullscreen
 	style={styles}
 ></iframe>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

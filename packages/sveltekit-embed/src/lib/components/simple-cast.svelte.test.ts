@@ -114,7 +114,9 @@ describe('SimpleCast', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', `simplecast-${episode_id}`);
-		await expect.element(iframe).toHaveAttribute('frameBorder', 'no');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 		await expect.element(iframe).toHaveAttribute('seamless');
 	});

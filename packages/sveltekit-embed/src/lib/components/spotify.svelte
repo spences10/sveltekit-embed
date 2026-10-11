@@ -31,7 +31,12 @@
 	class="spotify-sveltekit-embed"
 	{loading}
 	src={`https://open.spotify.com/embed/${spotify_link}`}
-	frameBorder="0"
 	allow="encrypted-media"
 	style={styles}
 ></iframe>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

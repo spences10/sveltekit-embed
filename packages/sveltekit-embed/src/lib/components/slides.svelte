@@ -34,7 +34,12 @@
 	{height}
 	{title}
 	scrolling="no"
-	frameborder="0"
 	allowfullscreen
 	style="width: 100%;"
 ></iframe>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

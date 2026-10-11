@@ -84,7 +84,9 @@ describe('Slides', () => {
 		expect(iframe?.getAttribute('width')).toBe('100%');
 		expect(iframe?.getAttribute('height')).toBe('420px');
 		expect(iframe?.getAttribute('scrolling')).toBe('no');
-		expect(iframe?.getAttribute('frameborder')).toBe('0');
+		expect(iframe && getComputedStyle(iframe).borderTopWidth).toBe(
+			'0px',
+		);
 		expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
 
 		const src = iframe?.getAttribute('src');
@@ -228,7 +230,9 @@ describe('Slides', () => {
 		const iframe = container.querySelector('iframe');
 
 		expect(iframe?.getAttribute('title')).toBe(title);
-		expect(iframe?.getAttribute('frameborder')).toBe('0');
+		expect(iframe && getComputedStyle(iframe).borderTopWidth).toBe(
+			'0px',
+		);
 		expect(iframe?.getAttribute('scrolling')).toBe('no');
 		expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
 		expect(iframe?.style.width).toBe('100%');

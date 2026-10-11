@@ -188,12 +188,9 @@ describe('Deezer', () => {
 			await expect
 				.element(iframe)
 				.toHaveAttribute('title', 'deezer-widget');
-			await expect
-				.element(iframe)
-				.toHaveAttribute('frameborder', '0');
-			await expect
-				.element(iframe)
-				.toHaveAttribute('allowtransparency', '');
+			expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+				'0px',
+			);
 			await expect
 				.element(iframe)
 				.toHaveAttribute('allow', 'encrypted-media; clipboard-write');

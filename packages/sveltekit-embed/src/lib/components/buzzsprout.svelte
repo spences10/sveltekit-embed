@@ -27,7 +27,6 @@
 		title={`buzzsprout-${buzzsprout_id}`}
 		{loading}
 		src={`https://www.buzzsprout.com/${buzzsprout_id}?client_source=admin&iframe=true`}
-		frameBorder="0"
 		scrolling="no"
 		style={`
         position: absolute;
@@ -38,3 +37,9 @@
       `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

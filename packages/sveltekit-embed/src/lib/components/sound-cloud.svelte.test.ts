@@ -71,8 +71,10 @@ describe('SoundCloud', () => {
 
 		expect(iframe?.getAttribute('width')).toBe('100%');
 		expect(iframe?.getAttribute('height')).toBe('300px');
-		expect(iframe?.getAttribute('scrolling')).toBe('false');
-		expect(iframe?.getAttribute('frameborder')).toBe('0');
+		expect(iframe?.getAttribute('scrolling')).toBe('no');
+		expect(iframe && getComputedStyle(iframe).borderTopWidth).toBe(
+			'0px',
+		);
 		expect(iframe?.getAttribute('allow')).toBe('autoplay');
 	});
 
@@ -113,8 +115,10 @@ describe('SoundCloud', () => {
 		expect(iframe?.getAttribute('title')).toBe(
 			`soundcloud-${soundcloud_link}`,
 		);
-		expect(iframe?.getAttribute('frameborder')).toBe('0');
-		expect(iframe?.getAttribute('scrolling')).toBe('false');
+		expect(iframe && getComputedStyle(iframe).borderTopWidth).toBe(
+			'0px',
+		);
+		expect(iframe?.getAttribute('scrolling')).toBe('no');
 		expect(iframe?.getAttribute('allow')).toBe('autoplay');
 	});
 

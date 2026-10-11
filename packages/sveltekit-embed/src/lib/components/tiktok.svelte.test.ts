@@ -71,7 +71,9 @@ describe('TikTok', () => {
 		});
 		const iframe = page.getByTestId('tiktok-embed');
 
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 		await expect
 			.element(iframe)
@@ -130,7 +132,9 @@ describe('TikTok', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', `tiktok-${tiktok_id}`);
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 		await expect
 			.element(iframe)

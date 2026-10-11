@@ -22,10 +22,15 @@
 	{width}
 	{height}
 	title={`soundcloud-${soundcloud_link}`}
-	scrolling="false"
-	frameborder="0"
+	scrolling="no"
 	allow="autoplay"
 	{loading}
 	src="https://w.soundcloud.com/player/?url={soundcloud_link}&visual={show_visual}"
 	style={iframe_styles}
 ></iframe>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

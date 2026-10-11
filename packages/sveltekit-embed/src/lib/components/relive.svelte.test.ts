@@ -169,9 +169,9 @@ describe('Relive', () => {
 			await expect
 				.element(iframe)
 				.toHaveAttribute('title', `relive-${relive_id}`);
-			await expect
-				.element(iframe)
-				.toHaveAttribute('frameborder', '0');
+			expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+				'0px',
+			);
 			await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 			await expect
 				.element(iframe)

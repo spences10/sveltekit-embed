@@ -61,7 +61,9 @@ describe('Bluesky', () => {
 		expect(style_text).toContain('height: 100%');
 		expect(style_text).toContain('border: 0px');
 		expect(style_text).toContain('color-scheme: light');
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 
@@ -554,7 +556,9 @@ describe('Bluesky', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', 'Bluesky Post Embed');
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 
 		// Test data-testid for testing accessibility

@@ -69,12 +69,16 @@ describe('StackBlitz', () => {
 		const iframe = container.querySelector('iframe');
 		expect(iframe).toBeTruthy();
 
-		expect(iframe?.getAttribute('frameborder')).toBe('no');
+		expect(iframe && getComputedStyle(iframe).borderTopWidth).toBe(
+			'0px',
+		);
 		expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
 		expect(iframe?.getAttribute('title')).toBe(
 			'stackblitz-test-project',
 		);
-		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
+		expect(
+			iframe?.classList.contains('stackblitz-sveltekit-embed'),
+		).toBe(true);
 
 		const src = iframe?.getAttribute('src');
 		expect(src).toContain('ctl=1'); // click_to_load default true
@@ -162,9 +166,13 @@ describe('StackBlitz', () => {
 		const iframe = container.querySelector('iframe');
 
 		expect(iframe?.getAttribute('title')).toBe(`stackblitz-${id}`);
-		expect(iframe?.getAttribute('frameborder')).toBe('no');
+		expect(iframe && getComputedStyle(iframe).borderTopWidth).toBe(
+			'0px',
+		);
 		expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
-		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
+		expect(
+			iframe?.classList.contains('stackblitz-sveltekit-embed'),
+		).toBe(true);
 	});
 
 	it('should handle very long id and file values', async () => {
@@ -278,7 +286,9 @@ describe('StackBlitz', () => {
 		});
 
 		const iframe = container.querySelector('iframe');
-		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
+		expect(
+			iframe?.classList.contains('stackblitz-sveltekit-embed'),
+		).toBe(true);
 	});
 
 	it('should handle query parameter construction correctly', async () => {

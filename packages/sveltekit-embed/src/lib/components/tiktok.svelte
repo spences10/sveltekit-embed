@@ -73,7 +73,6 @@
 		title={`tiktok-${tiktok_id}`}
 		{loading}
 		{src}
-		frameborder="0"
 		scrolling="no"
 		allow="encrypted-media; picture-in-picture; fullscreen"
 		style={`
@@ -85,3 +84,9 @@
       `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

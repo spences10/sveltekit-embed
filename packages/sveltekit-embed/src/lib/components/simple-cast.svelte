@@ -27,7 +27,6 @@
 		src={`https://player.simplecast.com/${episode_id}${
 			theme === `dark` ? `?dark=true` : ``
 		}`}
-		frameBorder="no"
 		scrolling="no"
 		seamless
 		style={`
@@ -39,3 +38,9 @@
       `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

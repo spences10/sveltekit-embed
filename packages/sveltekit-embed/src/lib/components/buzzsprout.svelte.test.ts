@@ -90,7 +90,9 @@ describe('Buzzsprout', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', `buzzsprout-${testBuzzsproutId}`);
-		await expect.element(iframe).toHaveAttribute('frameBorder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 

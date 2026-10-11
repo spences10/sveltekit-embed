@@ -32,7 +32,9 @@ describe('CodePen', () => {
 		);
 		expect(element.getAttribute('src')).toContain(`editable=true`);
 		expect(element.getAttribute('src')).toContain('/preview');
-		await expect.element(iframe).toHaveAttribute('frameborder', 'no');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect
 			.element(iframe)
 			.toHaveAttribute('allowfullscreen', '');
@@ -290,9 +292,9 @@ describe('CodePen', () => {
 			await expect
 				.element(iframe)
 				.toHaveAttribute('title', `codepen-${codepen_id}`);
-			await expect
-				.element(iframe)
-				.toHaveAttribute('frameborder', 'no');
+			expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+				'0px',
+			);
 			await expect
 				.element(iframe)
 				.toHaveAttribute('allowfullscreen', '');

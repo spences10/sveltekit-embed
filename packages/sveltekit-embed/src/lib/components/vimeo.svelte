@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPadding } from '../utils/index.js';
+	import { get_aspect_ratio } from '../utils/index.js';
 
 	interface Props {
 		vimeo_id?: string;
@@ -28,16 +28,15 @@
 	style={`
     	position: relative;
     	width: 100%;
-   		${getPadding(aspect_ratio)}
+   		${get_aspect_ratio(aspect_ratio)}
   `}
 >
 	<iframe
 		title={`vimeo-${vimeo_id}`}
 		{loading}
 		{src}
-		frameBorder="0"
 		allow="autoplay; fullscreen; picture-in-picture"
-		allowFullScreen
+		allowfullscreen
 		style={`
       position: absolute;
       top: 0;
@@ -47,3 +46,9 @@
     `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

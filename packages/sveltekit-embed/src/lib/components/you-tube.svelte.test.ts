@@ -64,7 +64,7 @@ describe('YouTube', () => {
 		await expect.element(iframe).toHaveAttribute('src', expectedSrc);
 	});
 
-	it('sets aspect ratio using padding-top style', async () => {
+	it('sets the aspect ratio on the wrapper', async () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			list_id: '',
@@ -79,7 +79,7 @@ describe('YouTube', () => {
 		const iframeWrapper = iframeElement.parentElement;
 
 		expect(iframeWrapper?.getAttribute('style')).toContain(
-			'padding-top: 75%;',
+			'aspect-ratio: 4 / 3;',
 		);
 	});
 
@@ -165,19 +165,19 @@ describe('YouTube', () => {
 		const iframeElement = iframe.element();
 		const iframeWrapper = iframeElement.parentElement;
 
-		// Should not have padding-top since aspect ratio is invalid
-		expect(iframeWrapper?.getAttribute('style')).not.toContain(
-			'padding-top:',
+		// An unreadable ratio falls back to 16:9
+		expect(iframeWrapper?.getAttribute('style')).toContain(
+			'aspect-ratio: 16 / 9;',
 		);
 	});
 
 	it.skip('should apply all supported aspect ratios correctly', async () => {
 		const aspect_ratios = [
-			{ ratio: '1:1', expected: '100%' },
-			{ ratio: '16:9', expected: '56.25%' },
-			{ ratio: '4:3', expected: '75%' },
-			{ ratio: '3:2', expected: '66.66%' },
-			{ ratio: '8.5', expected: '62.5%' },
+			{ ratio: '1:1', expected: '1 / 1' },
+			{ ratio: '16:9', expected: '16 / 9' },
+			{ ratio: '4:3', expected: '4 / 3' },
+			{ ratio: '3:2', expected: '3 / 2' },
+			{ ratio: '8:5', expected: '8 / 5' },
 		];
 
 		for (const testCase of aspect_ratios) {
@@ -191,7 +191,7 @@ describe('YouTube', () => {
 			const iframeWrapper = iframeElement.parentElement;
 
 			expect(iframeWrapper?.getAttribute('style')).toContain(
-				`padding-top: ${testCase.expected};`,
+				`aspect-ratio: ${testCase.expected};`,
 			);
 		}
 	});
@@ -232,12 +232,13 @@ describe('YouTube', () => {
 		});
 
 		const iframe = page.getByTestId('youTube');
-		const iframeElement = iframe.element() as HTMLIFrameElement;
 
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', 'youTube-abc123');
-		await expect.element(iframe).toHaveAttribute('frameborder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect
 			.element(iframe)
 			.toHaveAttribute(

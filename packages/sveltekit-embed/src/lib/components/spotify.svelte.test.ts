@@ -50,7 +50,9 @@ describe('Spotify', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', 'spotify-track/test');
-		await expect.element(iframe).toHaveAttribute('frameBorder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect
 			.element(iframe)
 			.toHaveAttribute('allow', 'encrypted-media');
@@ -140,7 +142,9 @@ describe('Spotify', () => {
 		await expect
 			.element(iframe)
 			.toHaveAttribute('title', `spotify-${spotify_link}`);
-		await expect.element(iframe).toHaveAttribute('frameBorder', '0');
+		expect(getComputedStyle(iframe.element()).borderTopWidth).toBe(
+			'0px',
+		);
 		await expect
 			.element(iframe)
 			.toHaveAttribute('allow', 'encrypted-media');

@@ -46,7 +46,6 @@
 			title="Bluesky Post Embed"
 			{src}
 			{width}
-			frameborder="0"
 			scrolling="no"
 			style={`
 				position: absolute;

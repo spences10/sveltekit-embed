@@ -27,7 +27,6 @@
 		{loading}
 		src={`https://www.relive.cc/view/${relive_id}/widget`}
 		scrolling="no"
-		frameborder="0"
 		allowfullscreen
 		style={`
         position: absolute;
@@ -38,3 +37,9 @@
       `}
 	></iframe>
 </div>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

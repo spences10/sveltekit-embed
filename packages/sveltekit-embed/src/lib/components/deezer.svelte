@@ -31,8 +31,12 @@
 	title="deezer-widget"
 	{loading}
 	src={`https://widget.deezer.com/widget/${theme}/${frame_src}`}
-	frameborder="0"
-	allowtransparency
 	allow="encrypted-media; clipboard-write"
 	style={styles}
 ></iframe>
+
+<style>
+	iframe {
+		border: 0;
+	}
+</style>

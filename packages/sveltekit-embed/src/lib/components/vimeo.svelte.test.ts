@@ -34,7 +34,7 @@ describe('Vimeo', () => {
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
 
 		expect(wrapper?.getAttribute('style')).toContain(
-			'padding-top: 100%;',
+			'aspect-ratio: 1 / 1;',
 		);
 	});
 
@@ -73,20 +73,20 @@ describe('Vimeo', () => {
 		const expected_src = `https://player.vimeo.com/video/${vimeo_id}?autoplay=false#t=0h0m0s`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 
-		// Check default aspect ratio (16:9 = 56.25%)
+		// Check default aspect ratio (16:9)
 		expect(wrapper?.getAttribute('style')).toContain(
-			'padding-top: 56.25%;',
+			'aspect-ratio: 16 / 9;',
 		);
 	});
 
 	it('should handle different aspect ratio formats', async () => {
-		const aspect_ratios = ['16:9', '4:3', '1:1', '3:2', '8.5'];
-		const expectedPaddings = [
-			'56.25%',
-			'75%',
-			'100%',
-			'66.66%',
-			'62.5%',
+		const aspect_ratios = ['16:9', '4:3', '1:1', '3:2', '8:5'];
+		const expected_ratios = [
+			'16 / 9',
+			'4 / 3',
+			'1 / 1',
+			'3 / 2',
+			'8 / 5',
 		];
 
 		for (let i = 0; i < aspect_ratios.length; i++) {
@@ -97,7 +97,7 @@ describe('Vimeo', () => {
 			const wrapper = container.querySelector('.vimeo-svelte-embed');
 
 			expect(wrapper?.getAttribute('style')).toContain(
-				`padding-top: ${expectedPaddings[i]};`,
+				`aspect-ratio: ${expected_ratios[i]};`,
 			);
 		}
 	});
@@ -183,9 +183,9 @@ describe('Vimeo', () => {
 			await expect
 				.element(iframe)
 				.toHaveAttribute('title', `vimeo-${vimeo_id}`);
-			await expect
-				.element(iframe)
-				.toHaveAttribute('frameBorder', '0');
+			expect(getComputedStyle(iframeElement).borderTopWidth).toBe(
+				'0px',
+			);
 			await expect
 				.element(iframe)
 				.toHaveAttribute(
@@ -210,11 +210,11 @@ describe('Vimeo', () => {
 
 	it('should calculate aspect ratio padding correctly', async () => {
 		const testCases = [
-			{ ratio: '16:9', expected: '56.25%' },
-			{ ratio: '4:3', expected: '75%' },
-			{ ratio: '1:1', expected: '100%' },
-			{ ratio: '3:2', expected: '66.66%' },
-			{ ratio: '8.5', expected: '62.5%' },
+			{ ratio: '16:9', expected: '16 / 9' },
+			{ ratio: '4:3', expected: '4 / 3' },
+			{ ratio: '1:1', expected: '1 / 1' },
+			{ ratio: '3:2', expected: '3 / 2' },
+			{ ratio: '8:5', expected: '8 / 5' },
 		];
 
 		for (const testCase of testCases) {
@@ -225,7 +225,7 @@ describe('Vimeo', () => {
 			const wrapper = container.querySelector('.vimeo-svelte-embed');
 
 			expect(wrapper?.getAttribute('style')).toContain(
-				`padding-top: ${testCase.expected};`,
+				`aspect-ratio: ${testCase.expected};`,
 			);
 		}
 	});
@@ -300,9 +300,9 @@ describe('Vimeo', () => {
 		});
 		const wrapper = container.querySelector('.vimeo-svelte-embed');
 
-		// Should not have padding-top since aspect ratio is invalid
-		expect(wrapper?.getAttribute('style')).not.toContain(
-			'padding-top:',
+		// An unreadable ratio falls back to 16:9
+		expect(wrapper?.getAttribute('style')).toContain(
+			'aspect-ratio: 16 / 9;',
 		);
 	});
 
