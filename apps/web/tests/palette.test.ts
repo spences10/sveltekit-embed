@@ -153,3 +153,20 @@ test('pages point at a share card that exists', async ({
 		expect(card.headers()['content-type']).toBe('image/png');
 	}
 });
+
+test('pages carry structured data', async ({ page }) => {
+	await page.goto('/components/youtube');
+
+	const json = await page
+		.locator('script[type="application/ld+json"]')
+		.textContent();
+	const types = JSON.parse(json!)['@graph'].map(
+		(node: { '@type': string }) => node['@type'],
+	);
+
+	expect(types).toEqual(['WebSite', 'TechArticle', 'BreadcrumbList']);
+	await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+		'href',
+		'https://sveltekit-embed.pages.dev/components/youtube',
+	);
+});

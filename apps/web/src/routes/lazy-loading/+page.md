@@ -1,8 +1,19 @@
 <script>
-	import ShareCardMeta from '#lib/components/share-card-meta.svelte';
-	import { share_card_url, site } from '#lib/config.js';
+	import Seo from '#lib/components/seo.svelte';
+	import { guide_schema } from '#lib/seo.js';
 	import { in_view } from 'sveltekit-embed';
-	import { Head } from 'svead';
+
+	const page = {
+		title: 'Lazy loading',
+		description:
+			'How sveltekit-embed components lazy load, how to load one eagerly, and how to lazy load your own markup with the in_view attachment.',
+		path: '/lazy-loading',
+		card: 'lazy-loading',
+		card_alt: 'Lazy loading. How embeds load, and the in_view attachment.',
+	};
+
+	// Built here, the formatter wraps long lines in the markdown below
+	const schema = guide_schema(page, 'Lazy loading embeds in SvelteKit');
 
 	let visible = $state(false);
 	const status = $derived(
@@ -12,20 +23,7 @@
 	);
 </script>
 
-<Head
-	seo_config={{
-		title: 'Lazy loading | SvelteKit Embed',
-		description:
-			'How sveltekit-embed components lazy load, how to load one eagerly, and how to lazy load your own markup with the in_view attachment.',
-		url: `${site.url}/lazy-loading`,
-		website: site.url,
-		open_graph_image: share_card_url('lazy-loading'),
-		open_graph_image_alt:
-			'Lazy loading. How embeds load, and the in_view attachment.',
-		twitter_card_type: 'summary_large_image',
-	}}
-/>
-<ShareCardMeta />
+<Seo {page} {schema} />
 
 <article class="site-width py-10 lg:py-14">
 <div class="doc prose mx-auto max-w-3xl">

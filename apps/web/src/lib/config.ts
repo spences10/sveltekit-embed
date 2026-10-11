@@ -10,6 +10,11 @@ export const site = {
 	share_card: { width: 1200, height: 630 },
 	discussions:
 		'https://github.com/spences10/sveltekit-embed/discussions',
+	author: {
+		name: 'Scott Spence',
+		url: 'https://scottspence.com',
+		twitter: '@spences10',
+	},
 };
 
 /** The link-preview card for a page, named as in static/og */

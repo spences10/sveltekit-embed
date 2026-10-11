@@ -1,7 +1,7 @@
 <script lang="ts">
 	import HeroDemo from '#lib/components/hero-demo.svelte';
-	import ShareCardMeta from '#lib/components/share-card-meta.svelte';
-	import { share_card_url, site } from '#lib/config.js';
+	import Seo from '#lib/components/seo.svelte';
+	import { site } from '#lib/config.js';
 	import Install from '#lib/content/install.md';
 	import {
 		categories,
@@ -10,11 +10,11 @@
 		find_component,
 		href_of,
 	} from '#lib/docs/components.js';
+	import { home_schema } from '#lib/seo.js';
 	import { palette } from '#lib/state/palette.svelte.js';
 	import { goto } from '$app/navigation';
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import SearchIcon from '@lucide/svelte/icons/search';
-	import { Head } from 'svead';
 	import { onMount } from 'svelte';
 
 	// The docs used to be one page with a heading per component, so
@@ -27,19 +27,17 @@
 	});
 </script>
 
-<Head
-	seo_config={{
-		title: 'SvelteKit Embed',
+<Seo
+	page={{
+		title: site.name,
 		description: site.description,
-		url: site.url,
-		website: site.url,
-		open_graph_image: share_card_url('home'),
-		open_graph_image_alt:
+		path: '/',
+		card: 'home',
+		card_alt:
 			'Paste an ID. Get the player. Svelte components for videos, podcasts, posts and pens.',
-		twitter_card_type: 'summary_large_image',
 	}}
+	schema={home_schema()}
 />
-<ShareCardMeta />
 
 <section
 	class="site-width grid items-center gap-x-12 gap-y-10 py-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:py-20"
