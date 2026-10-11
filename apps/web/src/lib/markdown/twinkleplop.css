@@ -1,0 +1,169 @@
+/* Twinkleplop theme for the site. Twinkleplop themes are `--twp-*`
+   custom properties applied to `.twinkleplop .<token>` selectors, so
+   rather than a theme package this sets them from the site palette
+   and follows `data-theme` (or the system preference) with it.
+   https://twinkleplop.pngwn.at/docs/themes */
+
+:root {
+	--twp-background: var(--color-base-200);
+	--twp-identifier: var(--color-base-content);
+	--twp-comment: #666a88;
+	--twp-punctuation: #4a4e6e;
+	--twp-keyword: #3340e8;
+	--twp-string: #0b7a55;
+	--twp-type: #a34a06;
+	--twp-function: #8a3fd1;
+	--twp-property: #0a6c9c;
+	--twp-constant: #c2264d;
+	--twp-highlight: color-mix(
+		in oklch,
+		var(--color-secondary) 22%,
+		transparent
+	);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--twp-comment: #8b90b3;
+		--twp-punctuation: #b2b6d6;
+		--twp-keyword: #a3acff;
+		--twp-string: #7ee0b4;
+		--twp-type: #ffc552;
+		--twp-function: #d0a2ff;
+		--twp-property: #7fd0f5;
+		--twp-constant: #ff8fa8;
+	}
+}
+
+:root[data-theme='dark'] {
+	--twp-comment: #8b90b3;
+	--twp-punctuation: #b2b6d6;
+	--twp-keyword: #a3acff;
+	--twp-string: #7ee0b4;
+	--twp-type: #ffc552;
+	--twp-function: #d0a2ff;
+	--twp-property: #7fd0f5;
+	--twp-constant: #ff8fa8;
+}
+
+.twinkleplop {
+	margin: 0;
+	color: var(--twp-identifier);
+	background: var(--twp-background);
+	font-family: var(--font-mono);
+	/* `=>` should read as the two characters you type */
+	font-variant-ligatures: none;
+	font-size: 0.875rem;
+	line-height: 1.7;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-wrap: normal;
+	tab-size: 2;
+	hyphens: none;
+	overflow: auto;
+	/* The gutter lives on each line so highlights run edge to edge */
+	padding-block: 1rem;
+	padding-inline: 0;
+}
+
+/* Each line is a full width row, as wide as the longest line when the
+   block scrolls */
+.twinkleplop code {
+	display: grid;
+	min-width: 100%;
+	width: max-content;
+	color: inherit;
+	font: inherit;
+	white-space: inherit;
+}
+
+.twinkleplop .l {
+	min-height: 1lh;
+	padding-inline: var(--code-gutter, 1.25rem);
+}
+
+/* `{1,3-4}` fence meta */
+.twinkleplop .l.highlight {
+	background: var(--twp-highlight);
+	box-shadow: inset 3px 0 0 var(--color-secondary);
+}
+
+/* `:line-numbers` fence meta */
+.twinkleplop .ln {
+	display: inline-block;
+	width: 2ch;
+	margin-right: 1.25rem;
+	color: var(--twp-comment);
+	text-align: right;
+	user-select: none;
+}
+
+/* `/word/` fence meta */
+.twinkleplop .highlighted-word {
+	border-radius: 0.25rem;
+	background: var(--twp-highlight);
+	box-shadow: 0 0 0 2px var(--twp-highlight);
+}
+
+.twinkleplop .comment {
+	color: var(--twp-comment);
+	font-style: italic;
+}
+
+.twinkleplop :is(.punctuation, .operator, .attr_sigil) {
+	color: var(--twp-punctuation);
+}
+
+.twinkleplop
+	:is(
+		.keyword,
+		.tag,
+		.tag_name,
+		.svelte_block,
+		.svelte_directive,
+		.directive,
+		.selector
+	) {
+	color: var(--twp-keyword);
+}
+
+.twinkleplop
+	:is(.string, .template, .regex, .plain_scalar, .url, .url_link) {
+	color: var(--twp-string);
+}
+
+.twinkleplop
+	:is(.type, .class_name, .builtin, .namespace, .selector_class) {
+	color: var(--twp-type);
+}
+
+.twinkleplop :is(.function, .decorator, .entity, .prompt) {
+	color: var(--twp-function);
+}
+
+.twinkleplop :is(.property, .attr_name, .attribute, .css_variable) {
+	color: var(--twp-property);
+}
+
+.twinkleplop
+	:is(
+		.number,
+		.boolean,
+		.null,
+		.constant,
+		.string_escape,
+		.escape,
+		.unit
+	) {
+	color: var(--twp-constant);
+}
+
+.twinkleplop .output {
+	color: var(--twp-comment);
+}
+
+.twinkleplop :is(.space, .tab, .newline) {
+	white-space: pre;
+}

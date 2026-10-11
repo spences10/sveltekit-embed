@@ -12,3 +12,4 @@ vite.config.ts.timestamp-*
 .vercel
 .env*.local
 .wrangler
+test-results
