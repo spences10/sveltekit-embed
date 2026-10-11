@@ -304,7 +304,7 @@ importers:
         version: 5.0.1(@voidzero-dev/vite-plus-core@1.0.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.6.1)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(playwright@1.63.0)(vitest@5.0.1)
       daisyui:
         specifier: ^5.5.8
-        version: 5.5.8
+        version: 5.7.47
       fathom-client:
         specifier: ^3.7.2
         version: 3.7.2
@@ -2476,8 +2476,8 @@ packages:
     resolution: {integrity: sha512-OytmFH+13/QXONJcC75QNdMtKpceNk3u8ThBjyyYjkEcy/ekBwR1mMAuNvi3gdBPW3N5TlCzQ0WZw8H0lN/bDw==}
     engines: {node: '>=20'}
 
-  daisyui@5.5.8:
-    resolution: {integrity: sha512-6psL9jIEOFOw68V10j/BKCWcRgx8dh81mmNxShr+g7HDM6UHNoPharlp9zq/PQkHNuGU1ZQsajR3HgpvavbRKQ==}
+  daisyui@5.7.47:
+    resolution: {integrity: sha512-NOl4vPifelRqB3CMzoU751zc44KCDD9HdHMTTqQ30uiYVpIyK7+s94/ySDWgYqjdl1tQCaCrgGBx4KCizm+a3Q==}
 
   data-urls@6.0.0:
     resolution: {integrity: sha512-BnBS08aLUM+DKamupXs3w2tJJoqU+AkaE/+6vQxi/G/DPmIZFJJp9Dkb1kM03AZx8ADehDUZgsNxju3mPXZYIA==}
@@ -5040,7 +5040,7 @@ snapshots:
       css-tree: 3.1.0
     optional: true
 
-  daisyui@5.5.8: {}
+  daisyui@5.7.47: {}
 
   data-urls@6.0.0:
     dependencies:
