@@ -1,7 +1,7 @@
-import StackBlitz from './stackblitz.svelte';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
+import StackBlitz from './stackblitz.svelte';
 
 describe('StackBlitz', () => {
 	it('mounts with default props', async () => {
@@ -20,9 +20,9 @@ describe('StackBlitz', () => {
 			id,
 			file,
 			view: 'editor',
-			clickToLoad: false,
-			hideNavigation: true,
-			hideExplorer: false,
+			click_to_load: false,
+			hide_navigation: true,
+			hide_explorer: false,
 			theme: 'light',
 			disable_observer: true,
 		});
@@ -81,9 +81,9 @@ describe('StackBlitz', () => {
 		expect(iframe?.className).toBe('stackblitz-sveltekit-embed');
 
 		const src = iframe?.getAttribute('src');
-		expect(src).toContain('ctl=1'); // clickToLoad default true
-		expect(src).toContain('hideExplorer=1'); // hideExplorer default true
-		expect(src).toContain('hideNavigation=0'); // hideNavigation default false
+		expect(src).toContain('ctl=1'); // click_to_load default true
+		expect(src).toContain('hideExplorer=1'); // hide_explorer default true
+		expect(src).toContain('hideNavigation=0'); // hide_navigation default false
 		expect(src).toContain('theme=dark'); // theme default dark
 	});
 
@@ -131,7 +131,7 @@ describe('StackBlitz', () => {
 			file,
 			theme: 'light',
 			view: 'editor',
-			clickToLoad: false,
+			click_to_load: false,
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
@@ -211,9 +211,9 @@ describe('StackBlitz', () => {
 		const { container } = await render(StackBlitz, {
 			id: 'test',
 			file: 'index.js',
-			clickToLoad: true,
-			hideNavigation: true,
-			hideExplorer: false,
+			click_to_load: true,
+			hide_navigation: true,
+			hide_explorer: false,
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
@@ -306,9 +306,9 @@ describe('StackBlitz', () => {
 			file: 'app.js',
 			view: 'editor',
 			theme: 'light',
-			clickToLoad: false,
-			hideNavigation: true,
-			hideExplorer: false,
+			click_to_load: false,
+			hide_navigation: true,
+			hide_explorer: false,
 			disable_observer: true,
 		});
 		const iframe = container.querySelector('iframe');
@@ -326,5 +326,42 @@ describe('StackBlitz', () => {
 		expect(src).toMatch(
 			/^https:\/\/stackblitz\.com\/edit\/test\?embed=1&/,
 		);
+	});
+
+	it('should update the iframe when props change', async () => {
+		const { rerender } = await render(StackBlitz, {
+			id: 'reactive-one',
+			disable_observer: true,
+		});
+
+		await expect
+			.element(page.getByTitle('stackblitz-reactive-one'))
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/edit/reactive-one?embed=1'),
+			);
+
+		await rerender({
+			id: 'reactive-two',
+			theme: 'light',
+			hide_navigation: true,
+		});
+
+		const iframe = page.getByTitle('stackblitz-reactive-two');
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/edit/reactive-two?embed=1'),
+			);
+		await expect
+			.element(iframe)
+			.toHaveAttribute('src', expect.stringContaining('theme=light'));
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('hideNavigation=1'),
+			);
 	});
 });

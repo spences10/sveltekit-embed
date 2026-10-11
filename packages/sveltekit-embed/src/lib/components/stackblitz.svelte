@@ -10,11 +10,11 @@
 		height?: string;
 		id?: string;
 		view?: 'editor' | 'preview' | 'default';
-		clickToLoad?: boolean;
-		hideNavigation?: boolean;
-		hideExplorer?: boolean;
+		click_to_load?: boolean;
+		hide_navigation?: boolean;
+		hide_explorer?: boolean;
 		theme?: string | 'light' | 'dark' | 'default';
-		file: string | undefined;
+		file?: string;
 		disable_observer?: boolean;
 		iframe_styles?: string;
 	}
@@ -24,33 +24,39 @@
 		height = '500px',
 		id = '',
 		view = 'default',
-		clickToLoad = true,
-		hideNavigation = false,
-		hideExplorer = true,
+		click_to_load = true,
+		hide_navigation = false,
+		hide_explorer = true,
 		theme = 'dark',
 		file,
 		disable_observer = false,
-		iframe_styles = `
+		iframe_styles,
+	}: Props = $props();
+
+	const styles = $derived(
+		iframe_styles ??
+			`
 			height: ${height};
 			width: ${width};
 		`,
-	}: Props = $props();
+	);
 
-	let baseUrl = `https://stackblitz.com/edit/${id}?embed=1`;
-	const config: Config = {
-		ctl: `${clickToLoad ? 1 : 0}`,
-		hideExplorer: `${hideExplorer ? 1 : 0}`,
-		hideNavigation: `${hideNavigation ? 1 : 0}`,
-		theme,
-	};
-	if (view !== 'default') {
-		config['view'] = view;
-	}
-	if (file) {
-		config['file'] = file;
-	}
-	const queryString = new URLSearchParams(config);
-	const src = `${baseUrl}&${queryString.toString()}`;
+	const src = $derived.by(() => {
+		const config: Config = {
+			ctl: `${click_to_load ? 1 : 0}`,
+			hideExplorer: `${hide_explorer ? 1 : 0}`,
+			hideNavigation: `${hide_navigation ? 1 : 0}`,
+			theme,
+		};
+		if (view !== 'default') {
+			config['view'] = view;
+		}
+		if (file) {
+			config['file'] = file;
+		}
+		const queryString = new URLSearchParams(config);
+		return `https://stackblitz.com/edit/${id}?embed=1&${queryString.toString()}`;
+	});
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -60,6 +66,6 @@
 		{src}
 		frameborder="no"
 		allowfullscreen
-		style={iframe_styles}
+		style={styles}
 	></iframe>
 </GeneralObserver>

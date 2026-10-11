@@ -593,9 +593,9 @@ width: string = '100%'
 height: string = '500px'
 id: string = ''
 view: 'editor' | 'preview' | 'default' = 'default'
-clickToLoad: boolean = true //ctl
-hideNavigation: boolean = false //hideNavigation
-hideExplorer: boolean = true
+click_to_load: boolean = true //ctl
+hide_navigation: boolean = false //hideNavigation
+hide_explorer: boolean = true
 theme: string | 'light' | 'dark' | 'default' = 'dark'
 file: string | undefined
 disable_observer: boolean = false
@@ -615,7 +615,7 @@ Output:
 <StackBlitz
   disable_observer={$disable_observer_store}
   id="vitejs-vite-yyoood"
-  hideNavigation
+  hide_navigation
 />
 
 ## TikTok
