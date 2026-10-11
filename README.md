@@ -10,55 +10,97 @@
 
 [![Tests: Unit](https://github.com/spences10/sveltekit-embed/actions/workflows/unit-test.yml/badge.svg)](https://github.com/spences10/sveltekit-embed/actions/workflows/unit-test.yml)
 
-This is a collection of embed components I use on a regular basis
-packaged up for use.
+Embed media in your Svelte apps.
 
-![sveltekit embed cover](.github/sveltekit-embed.jpg)
+A collection of embed components I use on a regular basis, packaged up
+for use: videos, podcasts, social posts and code. They work in Svelte
+files and in Markdown with mdsvex.
+
+**Docs and live examples: <https://sveltekit-embed.pages.dev>**
+
+[![Embed media in your Svelte apps](apps/web/static/og/home.png)](https://sveltekit-embed.pages.dev)
+
+## Use it
+
+Add the package to a SvelteKit project. It needs Svelte 5.29 or later.
+
+```bash
+pnpm add -D sveltekit-embed
+```
+
+Import the component you need and give it an ID or a link:
+
+```svelte
+<script>
+	import { YouTube } from 'sveltekit-embed';
+</script>
+
+<YouTube youtube_id="dQw4w9WgXcQ" />
+```
+
+It works the same way in Markdown with mdsvex:
+
+```markdown
+<script>
+	import { YouTube } from 'sveltekit-embed';
+</script>
+
+# My post
+
+<YouTube youtube_id="dQw4w9WgXcQ" />
+```
+
+## Components
+
+Each one has a page on the docs site with a live example, usage and a
+table of its props.
+
+**Video**
+
+- [TikTok](https://sveltekit-embed.pages.dev/components/tiktok)
+- [Vimeo](https://sveltekit-embed.pages.dev/components/vimeo)
+- [YouTube](https://sveltekit-embed.pages.dev/components/youtube)
+
+**Audio and podcasts**
+
+- [AnchorFm](https://sveltekit-embed.pages.dev/components/anchorfm)
+- [Buzzsprout](https://sveltekit-embed.pages.dev/components/buzzsprout)
+- [Deezer](https://sveltekit-embed.pages.dev/components/deezer)
+- [SimpleCast](https://sveltekit-embed.pages.dev/components/simplecast)
+- [SoundCloud](https://sveltekit-embed.pages.dev/components/soundcloud)
+- [Spotify](https://sveltekit-embed.pages.dev/components/spotify)
+- [Zencastr](https://sveltekit-embed.pages.dev/components/zencastr)
+
+**Social posts**
+
+- [Bluesky](https://sveltekit-embed.pages.dev/components/bluesky)
+- [Threads](https://sveltekit-embed.pages.dev/components/threads)
+- [Toot](https://sveltekit-embed.pages.dev/components/toot)
+- [Tweet](https://sveltekit-embed.pages.dev/components/tweet)
+
+**Code**
+
+- [CodePen](https://sveltekit-embed.pages.dev/components/codepen)
+- [Gist](https://sveltekit-embed.pages.dev/components/gist)
+- [StackBlitz](https://sveltekit-embed.pages.dev/components/stackblitz)
+
+**Everything else**
+
+- [GenericEmbed](https://sveltekit-embed.pages.dev/components/genericembed),
+  an iframe for anything without its own component yet
+- [Guild](https://sveltekit-embed.pages.dev/components/guild)
+- [Relive](https://sveltekit-embed.pages.dev/components/relive)
+- [Slides](https://sveltekit-embed.pages.dev/components/slides)
+
+## Lazy loading
 
 Every iframe embed sets `loading="lazy"`, so the browser only loads it
 when it is close to the viewport. Pass `loading="eager"` to load one
 straight away.
 
-## Use it
-
-```bash
-npm i -D sveltekit-embed
-```
-
-Use like a normal Svelte component:
-
-```html
-<script>
-	import { AnchorFm } from 'sveltekit-embed';
-</script>
-
-<AnchorFm
-	height="165"
-	episode_url="purrfect-dev/embed/episodes/1-31---Delivering-Digital-Content-with-GraphCMS-e14g55c/a-a650v9a"
-/>
-```
-
-## Supported platforms
-
-- AnchorFm
-- Buzzsprout
-- CodePen
-- Deezer
-- GenericEmbed
-- Gist
-- Guild
-- Relive
-- SimpleCast
-- Slides
-- SoundCloud
-- Spotify
-- StackBlitz
-- Threads
-- Toot
-- Tweet
-- Vimeo
-- YouTube
-- Zencastr
+The package also exports `in_view`, an attachment for lazy loading
+your own markup. See
+[how lazy loading works](https://sveltekit-embed.pages.dev/lazy-loading).
 
 ## Got questions?
 
@@ -71,12 +113,21 @@ Create an
 
 ## Developing locally
 
-For the `web` page and testing new components there you'll need to
-have empty `env` variables. Rename the `.sample.env` file to `.env`.
+For the `web` app and testing new components there you'll need to have
+empty `env` variables. Rename the `.sample.env` file to `.env`.
 
 ```bash
 mv .sample.env apps/web/.env
 ```
+
+Start the docs site, which packages the library first:
+
+```bash
+pnpm install
+pnpm run dev:web
+```
+
+### Adding a component
 
 Create the component in the
 `packages/sveltekit-embed/src/lib/components` directory.
@@ -88,46 +139,42 @@ Export the component from the
 export { default as MyComponent } from './components/my-component.svelte';
 ```
 
-Import the component locally into the `src/routes/+page.md` file, or
-create your own (`+page.svelte`) page for testing:
+Then document it in the `web` app. The docs tests fail until all three
+of these are done, so a component can't ship without them.
 
-```svelte
-import {MyComponent} from 'sveltekit-embed'
+1. Add an entry to `apps/web/src/lib/docs/components.ts` with its
+   name, category, description, search keywords and props. The home
+   page, the command palette and the props table are built from this.
+
+2. Add its page at
+   `apps/web/src/lib/content/components/mycomponent.md`, named as the
+   component in lower case. A fence marked `live` renders the embed
+   and shows its source:
+
+   ````markdown
+   <script>
+   	import { MyComponent } from 'sveltekit-embed';
+   </script>
+
+   ```svelte live
+   <MyComponent my_component_id="..." />
+   ```
+
+   Anything a reader needs to know to find the ID goes here.
+   ````
+
+3. Render its share image:
+
+   ```bash
+   pnpm --filter=web run share-cards
+   ```
+
+Run the checks, then submit a PR 🙏
+
+```bash
+pnpm run check
+pnpm run test:ci
 ```
-
-After importing the component, add it to the
-`Available Components List` and document it:
-
-```markdown
-## Available Components List
-
-- [MyComponent](#mycomponent)
-```
-
-````markdown
-## MyComponent
-
-Props:
-
-```ts
-myComponentId: string = '';
-```
-
-Usage:
-
-```html
-<MyComponent myComponentId="..." />
-```
-
-Output:
-
-<MyComponent myComponentId="..." />
-````
-
-Running the dev server on the `web` page will package the changes for
-use in the web app.
-
-Test locally, then submit a PR 🙏
 
 ## Thanks
 

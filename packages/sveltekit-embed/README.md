@@ -9,6 +9,8 @@ A collection of embed components for SvelteKit applications. Easily
 embed content from popular platforms like YouTube, Spotify, Vimeo,
 CodePen, and many more with performant, lazy-loaded components.
 
+**Docs and live examples: <https://sveltekit-embed.pages.dev>**
+
 ## ✨ Features
 
 - 🚀 **Lazy Loading**: Every iframe embed uses the browser's native
@@ -21,7 +23,7 @@ CodePen, and many more with performant, lazy-loaded components.
   definitions
 - ⚡ **SvelteKit Optimized**: Built specifically for SvelteKit
   applications
-- 🌐 **19 Platforms Supported**: Wide range of supported embed
+- 🌐 **21 Platforms Supported**: Wide range of supported embed
   platforms
 
 ## 📦 Installation
@@ -66,6 +68,7 @@ Import and use any component in your Svelte/SvelteKit application:
 | Platform         | Component          | Description                         |
 | ---------------- | ------------------ | ----------------------------------- |
 | **AnchorFm**     | `<AnchorFm />`     | Podcast episodes from Anchor.fm     |
+| **Bluesky**      | `<Bluesky />`      | Bluesky posts                       |
 | **Buzzsprout**   | `<Buzzsprout />`   | Podcast episodes from Buzzsprout    |
 | **CodePen**      | `<CodePen />`      | Interactive code examples           |
 | **Deezer**       | `<Deezer />`       | Music tracks and playlists          |
@@ -79,6 +82,7 @@ Import and use any component in your Svelte/SvelteKit application:
 | **Spotify**      | `<Spotify />`      | Music tracks, albums, and playlists |
 | **StackBlitz**   | `<StackBlitz />`   | Live coding environments            |
 | **Threads**      | `<Threads />`      | Threads posts                       |
+| **TikTok**       | `<TikTok />`       | TikTok videos                       |
 | **Toot**         | `<Toot />`         | Mastodon posts                      |
 | **Tweet**        | `<Tweet />`        | Twitter/X posts                     |
 | **Vimeo**        | `<Vimeo />`        | Vimeo videos                        |
@@ -190,7 +194,7 @@ This project was inspired by
 
 ## 📋 Links
 
-- [Documentation](https://github.com/spences10/sveltekit-embed#readme)
+- [Documentation](https://sveltekit-embed.pages.dev)
 - [GitHub Repository](https://github.com/spences10/sveltekit-embed)
 - [Issues](https://github.com/spences10/sveltekit-embed/issues)
 - [Discussions](https://github.com/spences10/sveltekit-embed/discussions)
