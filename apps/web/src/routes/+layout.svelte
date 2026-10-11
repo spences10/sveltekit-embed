@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { GitHub, Twitter, YouTube } from '#lib/icons/index.js';
 	import spencee_img from '#lib/images/spencee.png';
-	import { browser } from '$app/env';
 	import {
 		PUBLIC_FATHOM_ID,
 		PUBLIC_FATHOM_URL,
@@ -21,7 +20,9 @@
 	});
 
 	$effect(() => {
-		(page.url.pathname, browser && Fathom.trackPageview());
+		// read the pathname so this re-runs on every navigation
+		void page.url.pathname;
+		Fathom.trackPageview();
 	});
 </script>
 

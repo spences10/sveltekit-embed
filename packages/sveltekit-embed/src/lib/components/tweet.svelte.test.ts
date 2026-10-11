@@ -114,7 +114,6 @@ describe('Tweet', () => {
 
 		if (wrapper && blockquote) {
 			const wrapperElement = wrapper as HTMLDivElement;
-			const blockquoteElement = blockquote as HTMLElement;
 
 			// Check computed styles
 			const wrapperStyles = window.getComputedStyle(wrapperElement);

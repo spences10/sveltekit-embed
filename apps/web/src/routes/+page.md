@@ -400,7 +400,7 @@ Output:
 <Guild
   type="guild"
   card_id="svelte-society-london"
-  display_type="card"
+  display_type="events/latest"
 />
 
 ## Relive
@@ -561,7 +561,7 @@ iframe_styles: string = `
 Usage:
 
 ```html
-<StackBlitz id="vitejs-vite-yyoood" theme="light" />
+<StackBlitz id="vitejs-vite-yyoood" hide_navigation />
 ```
 
 Output:
