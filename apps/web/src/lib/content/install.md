@@ -13,3 +13,16 @@ Import the component you need and give it an ID or a link.
 
 <YouTube youtube_id="dQw4w9WgXcQ" />
 ```
+
+It works the same way in Markdown with mdsvex, which is how the pages
+on this site are written.
+
+```svelte title="+page.md"
+<script>
+	import { YouTube } from 'sveltekit-embed';
+</script>
+
+# My post
+
+<YouTube youtube_id="dQw4w9WgXcQ" />
+```

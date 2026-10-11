@@ -34,24 +34,25 @@
 		path: '/',
 		card: 'home',
 		card_alt:
-			'Paste an ID. Get the player. Svelte components for videos, podcasts, posts and pens.',
+			'Embed media in your Svelte apps. Components for videos, podcasts, posts and pens.',
 	}}
 	schema={home_schema()}
 />
 
 <section
-	class="site-width grid items-center gap-x-12 gap-y-10 py-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:py-20"
+	class="site-width grid items-center gap-x-12 gap-y-10 py-12 lg:grid-cols-2 lg:py-20"
 >
 	<div>
 		<h1
-			class="text-5xl leading-[0.95] font-extrabold sm:text-6xl xl:text-7xl"
+			class="text-4xl leading-[0.95] font-extrabold sm:text-6xl lg:text-5xl xl:text-6xl"
 		>
-			Paste an ID.<br />Get the player.
+			Embed media in<br />your Svelte apps.
 		</h1>
 		<p class="mt-6 max-w-136 text-xl text-muted">
-			{components.length} Svelte components for the videos, podcasts, posts
-			and pens you embed in SvelteKit pages. Each one takes an ID or a link,
-			and lazy loads by default.
+			A collection of {components.length} embed components I use on a regular
+			basis, packaged up for use: videos, podcasts, social posts and code.
+			They work in Svelte files and in Markdown with mdsvex, which is how
+			this site is written.
 		</p>
 		<div class="mt-8 flex flex-wrap gap-3">
 			<button

@@ -198,10 +198,9 @@ const cards: Card[] = [
 	{
 		file: 'home',
 		context: `${components.length} components`,
-		title: ['Paste an ID.', 'Get the player.'],
+		title: ['Embed media in', 'your Svelte apps.'],
 		// One line: the two line title leaves no room for a second
-		description:
-			'Svelte components for videos, podcasts, posts and pens.',
+		description: 'Components for videos, podcasts, posts and pens.',
 		code: [
 			[CODE.punctuation, '$ '],
 			[INK, `pnpm add -D ${site.package}`],

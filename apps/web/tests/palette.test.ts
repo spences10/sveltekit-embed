@@ -4,7 +4,10 @@ test('home page lists the components', async ({ page }) => {
 	await page.goto('/');
 
 	await expect(
-		page.getByRole('heading', { level: 1, name: /Paste an ID/ }),
+		page.getByRole('heading', {
+			level: 1,
+			name: /Embed media in your Svelte apps/,
+		}),
 	).toBeVisible();
 	await expect(
 		page.getByRole('link', { name: /^YouTube A YouTube video/ }),
