@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { page } from '$app/state';
+	import { GitHub, Twitter, YouTube } from '#lib/icons/index.js';
+	import spencee_img from '#lib/images/spencee.png';
+	import { browser } from '$app/env';
 	import {
 		PUBLIC_FATHOM_ID,
 		PUBLIC_FATHOM_URL,
-	} from '$env/static/public';
-	import { GitHub, Twitter, YouTube } from '$lib/icons';
-	import spencee_img from '$lib/images/spencee.png';
+	} from '$app/env/public';
+	import { page } from '$app/state';
 	import * as Fathom from 'fathom-client';
 	import { onMount } from 'svelte';
 	import '../app.css';

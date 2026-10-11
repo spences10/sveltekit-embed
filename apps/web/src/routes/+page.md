@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-	import { page } from '$app/stores'
+	import { browser } from '$app/env'
+	import { page } from '$app/state'
 	import {
 		AnchorFm,
 		Bluesky,
@@ -34,7 +34,7 @@
 		'Embed 3rd part media in your SvelteKit projects with SvelteKit Embed.'
 	let image = `https://og.tailgraph.com/og?fontFamily=Roboto&title=SvelteKit%20Embed&titleTailwind=text-gray-800+font-bold+text-6xl&text=Embed%203rd%20part%20media%20in%20your%20SvelteKit%20projects%20with%20SvelteKit%20Embed.&textTailwind=text-gray-700+text-2xl+mt-4&logoTailwind=h-8&bgTailwind=bg-white&footer=sveltekit-embed.vercel.app&footerTailwind=text-teal-600`
 	let website = 'https://sveltekit-embed.vercel.app'
-	let url = $page.url.toString()
+	let url = page.url.toString()
 
 	const default_value = true
 	const stored_value = browser
@@ -68,7 +68,15 @@
 		: 'disabled so components are only loaded when they scroll into viewport'
 </script>
 
-<Head {title} {description} {image} {url} {website} />
+<Head
+  seo_config={{
+    title,
+    description,
+    url,
+    website,
+    open_graph_image: image,
+  }}
+/>
 
 <!-- cSpell:ignore yyoood,Zokm,Zrzbx -->
 

@@ -6,18 +6,27 @@ minimumReleaseAge: 2880
 
 catalog:
   '@playwright/test': 1.63.0
+  '@sveltejs/adapter-cloudflare': ^8.0.0
+  '@sveltejs/kit': ^3.0.0
+  '@sveltejs/vite-plugin-svelte': ^7.3.0
   '@typescript/native': npm:typescript@^7.0.2
   '@vitest/browser-playwright': 5.0.1
   '@vitest/coverage-v8': 5.0.1
   playwright: 1.63.0
+  svelte: ^5.57.1
+  svelte-check: ^4.7.6
   typescript: ^6.0.3
   vite: npm:@voidzero-dev/vite-plus-core@1.0.0
   vite-plus: 1.0.0
   vitest: 5.0.1
+  vitest-browser-svelte: ^3.1.0
+  wrangler: ^4.118.0
 
 allowBuilds:
   '@tailwindcss/oxide': true
   esbuild: true
+  sharp: true
+  workerd: true
 
 overrides:
   vite@*: 'catalog:'
