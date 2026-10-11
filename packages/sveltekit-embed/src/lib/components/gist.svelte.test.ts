@@ -1,9 +1,9 @@
-import Gist from './gist.svelte';
-import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
+import Gist from './gist.svelte';
 
-const gistUri = 'gauravchl';
+const gist_uri = 'gauravchl';
 
 describe('Gist', () => {
 	it('mounts with default props', async () => {
@@ -13,17 +13,17 @@ describe('Gist', () => {
 
 	it('renders iframe with correct src', async () => {
 		await render(Gist, {
-			gistUri,
+			gist_uri,
 			disable_observer: true,
 		});
 		const iframe = page.getByTitle('gist-widget');
-		const expected_src = `https://gist.github.com/${gistUri}.pibb`;
+		const expected_src = `https://gist.github.com/${gist_uri}.pibb`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
 		const { container } = await render(Gist, {
-			gistUri,
+			gist_uri,
 			height: '200px',
 			width: '50%',
 			disable_observer: true,
@@ -36,7 +36,7 @@ describe('Gist', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(Gist, {
-			gistUri,
+			gist_uri,
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -44,22 +44,22 @@ describe('Gist', () => {
 	});
 
 	describe('Edge Cases', () => {
-		it('should handle empty gistUri gracefully', async () => {
+		it('should handle empty gist_uri gracefully', async () => {
 			await render(Gist, {
-				gistUri: '',
+				gist_uri: '',
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
-			// Should still construct a valid URL even with empty gistUri
+			// Should still construct a valid URL even with empty gist_uri
 			expect(element.src).toBe('https://gist.github.com/.pibb');
 		});
 
-		it('should handle special characters in gistUri', async () => {
+		it('should handle special characters in gist_uri', async () => {
 			const specialGistUri = 'user-name/gist_id-123';
 			await render(Gist, {
-				gistUri: specialGistUri,
+				gist_uri: specialGistUri,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
@@ -71,10 +71,10 @@ describe('Gist', () => {
 			);
 		});
 
-		it('should handle very long gistUri values', async () => {
+		it('should handle very long gist_uri values', async () => {
 			const longGistUri = 'user/' + 'a'.repeat(1000);
 			await render(Gist, {
-				gistUri: longGistUri,
+				gist_uri: longGistUri,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
@@ -89,7 +89,7 @@ describe('Gist', () => {
 		it('should handle malformed gist URIs gracefully', async () => {
 			const malformedUri = 'not/a/valid/gist/uri';
 			await render(Gist, {
-				gistUri: malformedUri,
+				gist_uri: malformedUri,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
@@ -105,7 +105,7 @@ describe('Gist', () => {
 	describe('Default Props', () => {
 		it('should apply default height and width when not provided', async () => {
 			const { container } = await render(Gist, {
-				gistUri,
+				gist_uri,
 				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
@@ -119,7 +119,7 @@ describe('Gist', () => {
 		it('should apply custom iframe styles correctly', async () => {
 			const customStyles = 'border: 2px solid red; background: blue;';
 			await render(Gist, {
-				gistUri,
+				gist_uri,
 				iframe_styles: customStyles,
 				disable_observer: true,
 			});
@@ -131,7 +131,7 @@ describe('Gist', () => {
 
 		it('should handle numeric height and width values', async () => {
 			const { container } = await render(Gist, {
-				gistUri,
+				gist_uri,
 				height: '400px',
 				width: '80%',
 				disable_observer: true,
@@ -147,7 +147,7 @@ describe('Gist', () => {
 		it('should construct proper GitHub gist URL', async () => {
 			const testGistUri = 'username/gist123456';
 			await render(Gist, {
-				gistUri: testGistUri,
+				gist_uri: testGistUri,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
@@ -160,13 +160,13 @@ describe('Gist', () => {
 		it('should handle gist with file parameter', async () => {
 			const gistWithFile = 'username/gist123456?file=example.js';
 			await render(Gist, {
-				gistUri: gistWithFile,
+				gist_uri: gistWithFile,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
 			const element = iframe.element() as HTMLIFrameElement;
 
-			// Note: The file parameter gets included in the URL as part of gistUri
+			// Note: The file parameter gets included in the URL as part of gist_uri
 			expect(element.src).toBe(
 				`https://gist.github.com/${gistWithFile}.pibb`,
 			);
@@ -176,7 +176,7 @@ describe('Gist', () => {
 	describe('Accessibility', () => {
 		it('should have proper iframe accessibility attributes', async () => {
 			await render(Gist, {
-				gistUri,
+				gist_uri,
 				disable_observer: true,
 			});
 			const iframe = page.getByTitle('gist-widget');
@@ -190,13 +190,42 @@ describe('Gist', () => {
 	describe('CSS Styling', () => {
 		it('should apply default CSS styles from component', async () => {
 			const { container } = await render(Gist, {
-				gistUri,
+				gist_uri,
 				disable_observer: true,
 			});
 			const iframe = container.querySelector('iframe');
 
 			// The component has CSS rules that should be applied
 			expect(iframe).toBeTruthy();
+		});
+	});
+
+	describe('Reactivity', () => {
+		it('should update the iframe when props change', async () => {
+			const { rerender } = await render(Gist, {
+				gist_uri: 'user/aaa111',
+				disable_observer: true,
+			});
+			const iframe = page.getByTitle('gist-widget');
+
+			await expect
+				.element(iframe)
+				.toHaveAttribute(
+					'src',
+					'https://gist.github.com/user/aaa111.pibb',
+				);
+
+			await rerender({ gist_uri: 'user/bbb222', height: '200px' });
+
+			await expect
+				.element(iframe)
+				.toHaveAttribute(
+					'src',
+					'https://gist.github.com/user/bbb222.pibb',
+				);
+			await expect
+				.element(iframe)
+				.toHaveAttribute('style', expect.stringContaining('200px'));
 		});
 	});
 });

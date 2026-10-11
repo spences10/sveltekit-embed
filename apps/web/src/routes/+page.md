@@ -368,7 +368,7 @@ Props:
 ```ts
 width = '100%';
 height = '320px';
-gistUri = '';
+gist_uri = '';
 disable_observer: boolean = false;
 iframe_styles: string = `
   height: ${height};
@@ -379,14 +379,14 @@ iframe_styles: string = `
 Usage:
 
 ```html
-<Gist gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
+<Gist gist_uri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" />
 ```
 
 Output:
 
 <Gist
   disable_observer={$disable_observer_store}
-  gistUri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" 
+  gist_uri="Ennoriel/8c89dc3615292f0a40b04f4f876afd77" 
 />
 
 ## Guild

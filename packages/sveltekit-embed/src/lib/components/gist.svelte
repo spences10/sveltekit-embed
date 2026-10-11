@@ -4,7 +4,7 @@
 	interface Props {
 		width?: string;
 		height?: string;
-		gistUri?: string;
+		gist_uri?: string;
 		disable_observer?: boolean;
 		iframe_styles?: string;
 	}
@@ -12,20 +12,25 @@
 	let {
 		width = '100%',
 		height = '320px',
-		gistUri = '',
+		gist_uri = '',
 		disable_observer = false,
-		iframe_styles = `
+		iframe_styles,
+	}: Props = $props();
+
+	const styles = $derived(
+		iframe_styles ??
+			`
 			height: ${height};
 			width: ${width};
 		`,
-	}: Props = $props();
+	);
 </script>
 
 <GeneralObserver {disable_observer}>
 	<iframe
 		title="gist-widget"
-		src="https://gist.github.com/{gistUri}.pibb"
-		style={iframe_styles}
+		src="https://gist.github.com/{gist_uri}.pibb"
+		style={styles}
 	></iframe>
 </GeneralObserver>
 
