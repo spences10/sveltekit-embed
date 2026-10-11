@@ -1,37 +1,37 @@
-import TikTok from './tiktok.svelte';
-import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
+import TikTok from './tiktok.svelte';
 
 describe('TikTok', () => {
 	it('mounts with default props', async () => {
 		const { container } = await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
 
 	it('renders iframe with correct src', async () => {
-		const tiktokId = '7234660647688875814';
+		const tiktok_id = '7234660647688875814';
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain(
-			`https://www.tiktok.com/player/v1/${tiktokId}?`,
+			`https://www.tiktok.com/player/v1/${tiktok_id}?`,
 		);
 		expect(src).toContain('controls=1');
 		expect(src).toContain('progress_bar=1');
 	});
 
 	it('renders with custom configurations', async () => {
-		const tiktokId = '7234660647688875814';
+		const tiktok_id = '7234660647688875814';
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			controls: false,
 			autoplay: true,
 			loop: true,
@@ -51,7 +51,7 @@ describe('TikTok', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -59,9 +59,9 @@ describe('TikTok', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty tiktokId gracefully', async () => {
+	it('should handle empty tiktok_id gracefully', async () => {
 		await render(TikTok, {
-			tiktokId: '',
+			tiktok_id: '',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
@@ -71,7 +71,7 @@ describe('TikTok', () => {
 
 	it('should apply default prop values when not provided', async () => {
 		const { container } = await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
@@ -95,9 +95,9 @@ describe('TikTok', () => {
 	});
 
 	it('should construct proper TikTok player URL', async () => {
-		const tiktokId = '1234567890123456789';
+		const tiktok_id = '1234567890123456789';
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			controls: true,
 			autoplay: false,
 			disable_observer: true,
@@ -106,38 +106,38 @@ describe('TikTok', () => {
 		const src = iframe.element().getAttribute('src');
 
 		expect(src).toContain(
-			`https://www.tiktok.com/player/v1/${tiktokId}?`,
+			`https://www.tiktok.com/player/v1/${tiktok_id}?`,
 		);
 		expect(src).toContain('controls=1');
 		expect(src).toContain('autoplay=0');
 	});
 
-	it('should handle special characters in tiktokId', async () => {
-		const tiktokId = 'abc123_def-456';
+	it('should handle special characters in tiktok_id', async () => {
+		const tiktok_id = 'abc123_def-456';
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
 
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `tiktok-${tiktokId}`);
+			.toHaveAttribute('title', `tiktok-${tiktok_id}`);
 		const src = iframe.element().getAttribute('src');
-		expect(src).toContain(tiktokId);
+		expect(src).toContain(tiktok_id);
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
-		const tiktokId = 'accessibility-test';
+		const tiktok_id = 'accessibility-test';
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
 
 		await expect
 			.element(iframe)
-			.toHaveAttribute('title', `tiktok-${tiktokId}`);
+			.toHaveAttribute('title', `tiktok-${tiktok_id}`);
 		await expect.element(iframe).toHaveAttribute('frameborder', '0');
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 		await expect
@@ -148,21 +148,21 @@ describe('TikTok', () => {
 			);
 	});
 
-	it('should handle very long tiktokId values', async () => {
-		const tiktokId = '1'.repeat(50);
+	it('should handle very long tiktok_id values', async () => {
+		const tiktok_id = '1'.repeat(50);
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
 		const src = iframe.element().getAttribute('src');
 
-		expect(src).toContain(tiktokId);
+		expect(src).toContain(tiktok_id);
 	});
 
 	it('should apply custom dimensions correctly', async () => {
 		const { container } = await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			width: '500px',
 			height: '400px',
 			disable_observer: true,
@@ -179,7 +179,7 @@ describe('TikTok', () => {
 
 	it('should handle boolean control options correctly', async () => {
 		await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			controls: false,
 			progress_bar: false,
 			play_button: false,
@@ -213,22 +213,22 @@ describe('TikTok', () => {
 		expect(src).toContain('closed_caption=0');
 	});
 
-	it('should handle malformed tiktokId gracefully', async () => {
-		const tiktokId = 'invalid/id/with/slashes';
+	it('should handle malformed tiktok_id gracefully', async () => {
+		const tiktok_id = 'invalid/id/with/slashes';
 		await render(TikTok, {
-			tiktokId,
+			tiktok_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
 
 		// Component should still render, even if ID is malformed
 		const src = iframe.element().getAttribute('src');
-		expect(src).toContain(tiktokId);
+		expect(src).toContain(tiktok_id);
 	});
 
 	it('should render with proper CSS class structure', async () => {
 		const { container } = await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			disable_observer: true,
 		});
 
@@ -242,7 +242,7 @@ describe('TikTok', () => {
 	it.skip('should handle different TikTok content formats', async () => {
 		// Test standard video ID
 		await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			disable_observer: true,
 		});
 		const standardIframe = page.getByTestId('tiktok-embed');
@@ -252,7 +252,7 @@ describe('TikTok', () => {
 
 		// Test different ID format
 		await render(TikTok, {
-			tiktokId: '6982674499405171973',
+			tiktok_id: '6982674499405171973',
 			disable_observer: true,
 		});
 		const differentIframe = page.getByTestId('tiktok-embed');
@@ -263,7 +263,7 @@ describe('TikTok', () => {
 
 	it.skip('should handle query parameter construction correctly', async () => {
 		await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			controls: true,
 			progress_bar: false,
 			autoplay: true,
@@ -287,7 +287,7 @@ describe('TikTok', () => {
 
 	it('should apply iframe positioning styles correctly', async () => {
 		await render(TikTok, {
-			tiktokId: '7234660647688875814',
+			tiktok_id: '7234660647688875814',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('tiktok-embed');
@@ -299,5 +299,32 @@ describe('TikTok', () => {
 		expect(styles.left).toBe('0px');
 		expect(styles.width).toBe('100%');
 		expect(styles.height).toBe('100%');
+	});
+
+	it('should update the iframe when props change', async () => {
+		const { rerender } = await render(TikTok, {
+			tiktok_id: '1111111111',
+			disable_observer: true,
+		});
+		const iframe = page.getByTestId('tiktok-embed');
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/player/v1/1111111111?'),
+			);
+
+		await rerender({ tiktok_id: '2222222222', loop: true });
+
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('/player/v1/2222222222?'),
+			);
+		await expect
+			.element(iframe)
+			.toHaveAttribute('src', expect.stringContaining('loop=1'));
 	});
 });

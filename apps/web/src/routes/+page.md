@@ -623,7 +623,7 @@ Output:
 Props:
 
 ```ts
-tiktokId: string;
+tiktok_id: string;
 width?: string = '100%';
 height?: string = '600px';
 controls?: boolean = true;
@@ -646,7 +646,7 @@ Usage:
 
 ```html
 <TikTok
-	tiktokId="6718335390845095173"
+	tiktok_id="6718335390845095173"
 	width="100%"
 	height="600px"
 	autoplay="{false}"
@@ -660,7 +660,7 @@ Output:
 
 <TikTok
   disable_observer={$disable_observer_store}
-  tiktokId="6718335390845095173"
+  tiktok_id="6718335390845095173"
   width="100%"
   height="600px"
   autoplay={false}

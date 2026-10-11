@@ -2,7 +2,7 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		tiktokId: string;
+		tiktok_id: string;
 		width?: string;
 		height?: string;
 		controls?: boolean;
@@ -22,7 +22,7 @@
 	}
 
 	let {
-		tiktokId,
+		tiktok_id,
 		width = '100%',
 		height = '600px',
 		controls = true,
@@ -41,23 +41,25 @@
 		disable_observer = false,
 	}: Props = $props();
 
-	const query_params = new URLSearchParams({
-		controls: controls ? '1' : '0',
-		progress_bar: progress_bar ? '1' : '0',
-		play_button: play_button ? '1' : '0',
-		volume_control: volume_control ? '1' : '0',
-		fullscreen_button: fullscreen_button ? '1' : '0',
-		timestamp: timestamp ? '1' : '0',
-		loop: loop ? '1' : '0',
-		autoplay: autoplay ? '1' : '0',
-		music_info: music_info ? '1' : '0',
-		description: description ? '1' : '0',
-		rel: rel ? '1' : '0',
-		native_context_menu: native_context_menu ? '1' : '0',
-		closed_caption: closed_caption ? '1' : '0',
-	});
+	const src = $derived.by(() => {
+		const query_params = new URLSearchParams({
+			controls: controls ? '1' : '0',
+			progress_bar: progress_bar ? '1' : '0',
+			play_button: play_button ? '1' : '0',
+			volume_control: volume_control ? '1' : '0',
+			fullscreen_button: fullscreen_button ? '1' : '0',
+			timestamp: timestamp ? '1' : '0',
+			loop: loop ? '1' : '0',
+			autoplay: autoplay ? '1' : '0',
+			music_info: music_info ? '1' : '0',
+			description: description ? '1' : '0',
+			rel: rel ? '1' : '0',
+			native_context_menu: native_context_menu ? '1' : '0',
+			closed_caption: closed_caption ? '1' : '0',
+		});
 
-	const src = `https://www.tiktok.com/player/v1/${tiktokId}?${query_params.toString()}`;
+		return `https://www.tiktok.com/player/v1/${tiktok_id}?${query_params.toString()}`;
+	});
 </script>
 
 <GeneralObserver {disable_observer}>
@@ -71,7 +73,7 @@
 	>
 		<iframe
 			data-testid="tiktok-embed"
-			title={`tiktok-${tiktokId}`}
+			title={`tiktok-${tiktok_id}`}
 			{src}
 			frameborder="0"
 			scrolling="no"
