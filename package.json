@@ -28,8 +28,8 @@
 		"release": "pnpm run build:packages && changeset publish"
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.29.8",
-		"cspell": "^9.4.0",
+		"@changesets/cli": "^3.0.3",
+		"cspell": "^10.3.6",
 		"typescript": "catalog:",
 		"vite": "catalog:",
 		"vite-plus": "catalog:"
