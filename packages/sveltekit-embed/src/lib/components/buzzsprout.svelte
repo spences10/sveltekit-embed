@@ -2,14 +2,14 @@
 	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
-		buzzsproutId: string;
+		buzzsprout_id: string;
 		width?: string;
 		height?: string;
 		disable_observer?: boolean;
 	}
 
 	let {
-		buzzsproutId,
+		buzzsprout_id,
 		width = '100%',
 		height = '200px',
 		disable_observer = false,
@@ -27,8 +27,8 @@
 	>
 		<iframe
 			data-testid="buzzsprout"
-			title={`buzzsprout-${buzzsproutId}`}
-			src={`https://www.buzzsprout.com/${buzzsproutId}?client_source=admin&amp;iframe=true`}
+			title={`buzzsprout-${buzzsprout_id}`}
+			src={`https://www.buzzsprout.com/${buzzsprout_id}?client_source=admin&iframe=true`}
 			frameBorder="0"
 			scrolling="no"
 			style={`

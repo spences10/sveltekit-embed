@@ -223,7 +223,7 @@ Output:
 Props:
 
 ```ts
-buzzsproutId: string;
+buzzsprout_id: string;
 width: string = '100%';
 height: string = '200px';
 disable_observer: boolean = false;
@@ -233,7 +233,7 @@ Usage:
 
 ```html
 <Buzzsprout
-	buzzsproutId="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
+	buzzsprout_id="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
 />
 ```
 
@@ -241,7 +241,7 @@ Output:
 
 <Buzzsprout
   disable_observer={$disable_observer_store}
-  buzzsproutId="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
+  buzzsprout_id="190346/9866589-185-scott-spence-from-vba-analyst-to-webdev"
 />
 
 ## CodePen

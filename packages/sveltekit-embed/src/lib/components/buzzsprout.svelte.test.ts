@@ -3,30 +3,30 @@ import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
-let buzzsproutId = '12345';
+let buzzsprout_id = '12345';
 
 describe('Buzzsprout', () => {
-	it('mounts with buzzsproutId', async () => {
+	it('mounts with buzzsprout_id', async () => {
 		const { container } = await render(Buzzsprout, {
-			buzzsproutId,
+			buzzsprout_id,
 			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
 
-	it('renders iframe with buzzsproutId', async () => {
+	it('renders iframe with buzzsprout_id', async () => {
 		await render(Buzzsprout, {
-			buzzsproutId,
+			buzzsprout_id,
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('buzzsprout');
-		const expected_src = `https://www.buzzsprout.com/${buzzsproutId}?client_source=admin&amp;iframe=true`;
+		const expected_src = `https://www.buzzsprout.com/${buzzsprout_id}?client_source=admin&iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('mounts with custom height and width', async () => {
 		const { container } = await render(Buzzsprout, {
-			buzzsproutId,
+			buzzsprout_id,
 			height: '200px',
 			width: '50%',
 			disable_observer: true,
@@ -39,7 +39,7 @@ describe('Buzzsprout', () => {
 
 	it('renders with a GeneralObserver', async () => {
 		await render(Buzzsprout, {
-			buzzsproutId,
+			buzzsprout_id,
 			disable_observer: false,
 		});
 		const general_observer = page.getByTestId('general-observer');
@@ -47,20 +47,20 @@ describe('Buzzsprout', () => {
 	});
 
 	// Coverage gaps - test stubs to implement
-	it('should handle empty buzzsproutId gracefully', async () => {
+	it('should handle empty buzzsprout_id gracefully', async () => {
 		await render(Buzzsprout, {
-			buzzsproutId: '',
+			buzzsprout_id: '',
 			disable_observer: true,
 		});
 		const iframe = page.getByTestId('buzzsprout');
 		const expected_src =
-			'https://www.buzzsprout.com/?client_source=admin&amp;iframe=true';
+			'https://www.buzzsprout.com/?client_source=admin&iframe=true';
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should apply default height and width when not provided', async () => {
 		await render(Buzzsprout, {
-			buzzsproutId: 'test123',
+			buzzsprout_id: 'test123',
 			disable_observer: true,
 		});
 
@@ -72,22 +72,22 @@ describe('Buzzsprout', () => {
 		expect(parent?.style.width).toBe('100%');
 	});
 
-	it('should handle special characters in buzzsproutId', async () => {
+	it('should handle special characters in buzzsprout_id', async () => {
 		const specialBuzzsproutId = 'show-123_with-dashes.and.dots';
 		await render(Buzzsprout, {
-			buzzsproutId: specialBuzzsproutId,
+			buzzsprout_id: specialBuzzsproutId,
 			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
-		const expected_src = `https://www.buzzsprout.com/${specialBuzzsproutId}?client_source=admin&amp;iframe=true`;
+		const expected_src = `https://www.buzzsprout.com/${specialBuzzsproutId}?client_source=admin&iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 	});
 
 	it('should have proper iframe accessibility attributes', async () => {
 		const testBuzzsproutId = 'accessibility-test';
 		await render(Buzzsprout, {
-			buzzsproutId: testBuzzsproutId,
+			buzzsprout_id: testBuzzsproutId,
 			disable_observer: true,
 		});
 
@@ -101,15 +101,15 @@ describe('Buzzsprout', () => {
 		await expect.element(iframe).toHaveAttribute('scrolling', 'no');
 	});
 
-	it('should handle very long buzzsproutId values', async () => {
+	it('should handle very long buzzsprout_id values', async () => {
 		const longBuzzsproutId = 'a'.repeat(100); // 100 character buzzsprout ID
 		await render(Buzzsprout, {
-			buzzsproutId: longBuzzsproutId,
+			buzzsprout_id: longBuzzsproutId,
 			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('buzzsprout');
-		const expected_src = `https://www.buzzsprout.com/${longBuzzsproutId}?client_source=admin&amp;iframe=true`;
+		const expected_src = `https://www.buzzsprout.com/${longBuzzsproutId}?client_source=admin&iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expected_src);
 		await expect
 			.element(iframe)
@@ -118,7 +118,7 @@ describe('Buzzsprout', () => {
 
 	it('should apply custom CSS styles correctly', async () => {
 		await render(Buzzsprout, {
-			buzzsproutId: 'style-test',
+			buzzsprout_id: 'style-test',
 			height: '300px',
 			width: '400px',
 			disable_observer: true,
@@ -144,7 +144,7 @@ describe('Buzzsprout', () => {
 	it('should handle numeric height and width values', async () => {
 		// Note: TypeScript interface expects string values
 		await render(Buzzsprout, {
-			buzzsproutId: 'numeric-test',
+			buzzsprout_id: 'numeric-test',
 			height: '250px',
 			width: '80%',
 			disable_observer: true,
@@ -160,7 +160,7 @@ describe('Buzzsprout', () => {
 	it('should construct iframe src URL correctly with query parameters', async () => {
 		const testId = 'url-construction-test';
 		await render(Buzzsprout, {
-			buzzsproutId: testId,
+			buzzsprout_id: testId,
 			disable_observer: true,
 		});
 
@@ -168,7 +168,7 @@ describe('Buzzsprout', () => {
 		const iframeElement = iframe.element() as HTMLIFrameElement;
 
 		// Verify exact URL construction with specific query parameters
-		const expectedUrl = `https://www.buzzsprout.com/${testId}?client_source=admin&amp;iframe=true`;
+		const expectedUrl = `https://www.buzzsprout.com/${testId}?client_source=admin&iframe=true`;
 		await expect.element(iframe).toHaveAttribute('src', expectedUrl);
 
 		// Also verify the URL contains the required components
@@ -181,7 +181,7 @@ describe('Buzzsprout', () => {
 
 	it('should render with proper CSS class structure', async () => {
 		const { container } = await render(Buzzsprout, {
-			buzzsproutId: 'class-test',
+			buzzsprout_id: 'class-test',
 			disable_observer: true,
 		});
 
