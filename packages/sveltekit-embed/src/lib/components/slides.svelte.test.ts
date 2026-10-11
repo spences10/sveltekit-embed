@@ -329,4 +329,32 @@ describe('Slides', () => {
 		// Check that parameters are properly formatted
 		expect(src).toMatch(/embed\?&.*style=.*&byline=.*&share=/);
 	});
+
+	it('should update the iframe when props change', async () => {
+		const { rerender } = await render(Slides, {
+			username: 'reactive-user',
+			title: 'deck-one',
+			disable_observer: true,
+		});
+
+		await expect
+			.element(page.getByTitle('deck-one'))
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('slides.com/reactive-user/deck-one/'),
+			);
+
+		await rerender({ title: 'deck-two', style: 'light' });
+
+		const iframe = page.getByTitle('deck-two');
+		await expect
+			.element(iframe)
+			.toHaveAttribute(
+				'src',
+				expect.stringContaining('slides.com/reactive-user/deck-two/'),
+			);
+		await expect
+			.element(iframe)
+			.toHaveAttribute('src', expect.stringContaining('style=light'));
+	});
 });

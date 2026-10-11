@@ -23,15 +23,10 @@
 		disable_observer = false,
 	}: Props = $props();
 
-	let baseUrl = `https://slides.com/${username}/${title}/embed?`;
-	const config = {
-		style,
-		byline,
-		share,
-	};
-
-	const queryString = new URLSearchParams(config);
-	const src = `${baseUrl}&${queryString.toString()}`;
+	const src = $derived.by(() => {
+		const queryString = new URLSearchParams({ style, byline, share });
+		return `https://slides.com/${username}/${title}/embed?&${queryString.toString()}`;
+	});
 </script>
 
 <GeneralObserver {disable_observer}>
