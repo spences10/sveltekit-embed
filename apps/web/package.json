@@ -13,6 +13,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
+		"test:ci": "vitest run",
 		"build:packages": "pnpm -r --filter=\"../../packages/*\" run build"
 	},
 	"devDependencies": {
