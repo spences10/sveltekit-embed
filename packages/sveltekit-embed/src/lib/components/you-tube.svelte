@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getPadding } from '../utils/index.js';
-	import GeneralObserver from './general-observer.svelte';
 
 	interface Props {
 		youtube_id?: string;
@@ -9,7 +8,7 @@
 		autoplay?: boolean;
 		aspect_ratio?: string;
 		skip_to?: { h?: number; m?: number; s?: number };
-		disable_observer?: boolean;
+		loading?: 'lazy' | 'eager';
 		iframe_styles?: string;
 		mute?: boolean;
 		controls?: boolean;
@@ -25,7 +24,7 @@
 		autoplay = false,
 		aspect_ratio = '16:9',
 		skip_to = { h: 0, m: 0, s: 0 },
-		disable_observer = false,
+		loading = 'lazy',
 		iframe_styles = `
 			border-radius: 0.6rem;
 		`,
@@ -54,29 +53,28 @@
 	);
 </script>
 
-<GeneralObserver {disable_observer}>
-	<div
-		style={`
+<div
+	style={`
     	position: relative;
     	width: 100%;
   	  ${getPadding(aspect_ratio)}
   `}
-	>
-		<iframe
-			data-testid="youTube"
-			title={`youTube-${list_id.length > 0 ? list_id : youtube_id}`}
-			{src}
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-			allowfullscreen
-			style={`
-	      position: absolute;
+>
+	<iframe
+		data-testid="youTube"
+		title={`youTube-${list_id.length > 0 ? list_id : youtube_id}`}
+		{loading}
+		{src}
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen
+		style={`
+      position: absolute;
   	    top: 0;
     	  left: 0;
       	width: 100%;
       	height: 100%;
-				${iframe_styles}
+			${iframe_styles}
     `}
-		></iframe>
-	</div>
-</GeneralObserver>
+	></iframe>
+</div>

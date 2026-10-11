@@ -12,7 +12,6 @@ describe('YouTube', () => {
 			skip_to: { h: 0, m: 0, s: 0 },
 			aspect_ratio: '16:9',
 			iframe_styles: '',
-			disable_observer: true,
 		});
 		expect(container).toBeTruthy();
 	});
@@ -25,7 +24,6 @@ describe('YouTube', () => {
 			skip_to: { h: 0, m: 0, s: 0 },
 			aspect_ratio: '16:9',
 			iframe_styles: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
@@ -45,7 +43,6 @@ describe('YouTube', () => {
 			skip_to: { h: 0, m: 0, s: 0 },
 			aspect_ratio: '16:9',
 			iframe_styles: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/abc123?autoplay=1&start=0&mute=1&controls=0&loop=1&modestbranding=1&rel=1`;
@@ -61,7 +58,6 @@ describe('YouTube', () => {
 			skip_to: { h: 0, m: 0, s: 0 },
 			aspect_ratio: '16:9',
 			iframe_styles: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`youTube-${list_id}`);
 		const expectedSrc = `https://www.youtube-nocookie.com/embed/?videoseries&list=${list_id}&index=0&autoplay=0&start=0&mute=0&controls=1&loop=0&modestbranding=0&rel=0`;
@@ -76,7 +72,6 @@ describe('YouTube', () => {
 			skip_to: { h: 0, m: 0, s: 0 },
 			aspect_ratio: '4:3',
 			iframe_styles: 'border-radius: 0.8rem;',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('youTube');
@@ -96,10 +91,28 @@ describe('YouTube', () => {
 			skip_to: { h: 0, m: 0, s: 0 },
 			aspect_ratio: '16:9',
 			iframe_styles: '',
-			disable_observer: false,
 		});
-		const general_observer = page.getByTestId('general-observer');
-		await expect.element(general_observer).toBeInTheDocument();
+		const iframe = page.getByTestId('youTube');
+		await expect.element(iframe).toHaveAttribute('loading', 'lazy');
+	});
+
+	it('loads eagerly when asked to', async () => {
+		await render(YouTube, {
+			youtube_id: 'abc123',
+			loading: 'eager',
+		});
+		const iframe = page.getByTestId('youTube');
+		await expect.element(iframe).toHaveAttribute('loading', 'eager');
+	});
+
+	it('renders the iframe without an observer wrapper', async () => {
+		const { container } = await render(YouTube, {
+			youtube_id: 'abc123',
+		});
+		expect(
+			container.querySelector('[data-testid="general-observer"]'),
+		).toBeNull();
+		expect(container.querySelector('iframe')).not.toBeNull();
 	});
 
 	// Coverage gaps - test stubs to implement
@@ -107,7 +120,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			skip_to: { h: 1, m: 30, s: 45 },
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -121,7 +133,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			skip_to: { h: -1, m: -30, s: -45 },
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -134,7 +145,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			list_id: 'playlist456',
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -147,7 +157,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: '',
 			list_id: '',
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-');
 
@@ -160,7 +169,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			aspect_ratio: 'invalid:ratio' as any,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('youTube');
@@ -186,7 +194,6 @@ describe('YouTube', () => {
 			await render(YouTube, {
 				youtube_id: 'abc123',
 				aspect_ratio: testCase.ratio,
-				disable_observer: true,
 			});
 
 			const iframe = page.getByTestId('youTube');
@@ -205,7 +212,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			iframe_styles: customStyles,
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('youTube');
@@ -223,7 +229,6 @@ describe('YouTube', () => {
 			youtube_id: '',
 			list_id,
 			index: 5,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`youTube-${list_id}`);
 
@@ -234,7 +239,6 @@ describe('YouTube', () => {
 	it('should have proper accessibility attributes', async () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('youTube');
@@ -257,7 +261,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			skip_to: { h: 25, m: 70, s: 120 },
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -271,7 +274,6 @@ describe('YouTube', () => {
 		const youtube_id = 'abc-123_def';
 		await render(YouTube, {
 			youtube_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`youTube-${youtube_id}`);
 
@@ -284,7 +286,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: '',
 			list_id,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle(`youTube-${list_id}`);
 
@@ -296,7 +297,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			// iframe_styles not provided, should use default
-			disable_observer: true,
 		});
 
 		const iframe = page.getByTestId('youTube');
@@ -315,7 +315,6 @@ describe('YouTube', () => {
 			mute: 'false' as any,
 			controls: 1 as any,
 			loop: 0 as any,
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -329,7 +328,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			skip_to: { h: 0, m: 0, s: 0 },
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -341,7 +339,6 @@ describe('YouTube', () => {
 		await render(YouTube, {
 			youtube_id: 'abc123',
 			skip_to: { h: 1 } as any, // Missing m and s properties
-			disable_observer: true,
 		});
 		const iframe = page.getByTitle('youTube-abc123');
 
@@ -353,7 +350,6 @@ describe('YouTube', () => {
 	it('should update the iframe when props change', async () => {
 		const { rerender } = await render(YouTube, {
 			youtube_id: 'reactive111',
-			disable_observer: true,
 		});
 		const iframe = page.getByTestId('youTube');
 

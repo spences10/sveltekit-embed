@@ -758,7 +758,7 @@ index?: number = 0;
 autoplay?: boolean = false;
 aspect_ratio?: string = '16:9';
 skip_to?: { h: number; m: number; s: number } = { h: 0, m: 0, s: 0 };
-disable_observer?: boolean = false;
+loading?: 'lazy' | 'eager' = 'lazy';
 iframe_styles?: string = '';
 mute?: boolean = false;
 controls?: boolean = true;
@@ -800,7 +800,6 @@ Usage with timestamp:
 Output:
 
 <YouTube
-  disable_observer={$disable_observer_store}
   youtube_id="dQw4w9WgXcQ"
   aspect_ratio="16:9"
 />
@@ -819,7 +818,8 @@ Output:
 - `aspect_ratio`: Set the aspect ratio (default: '16:9')
 - `skip_to`: Start at specific timestamp (default:
   `{ h: 0, m: 0, s: 0 }`)
-- `disable_observer`: Disable lazy loading (default: false)
+- `loading`: `'lazy'` defers loading until the video is near the
+  viewport, `'eager'` loads it straight away (default: 'lazy')
 - `iframe_styles`: Custom CSS styles for the iframe
 
 ## Zencastr
