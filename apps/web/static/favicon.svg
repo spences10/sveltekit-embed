@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-	<!-- The embed stage: an ultramarine frame on a marigold offset -->
-	<rect x="7" y="7" width="24" height="24" rx="5" fill="#ffb627" />
-	<rect x="1" y="1" width="24" height="24" rx="5" fill="#3340e8" />
-	<path d="M10 7.5v11l9-5.5z" fill="#fff" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="24" height="24" x="7" y="7" fill="#ffb627" rx="5"/><rect width="24" height="24" x="1" y="1" fill="#3340e8" rx="5"/><path fill="#fff" d="M10 7.5v11l9-5.5z"/></svg>
