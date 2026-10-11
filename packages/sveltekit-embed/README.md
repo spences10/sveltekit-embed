@@ -171,9 +171,17 @@ attachment:
 Full TypeScript support is included with proper type definitions for
 all components and their props.
 
+To get the type of a component's props, use Svelte's `ComponentProps`:
+
 ```typescript
-import type { YouTubeProps, SpotifyProps } from 'sveltekit-embed';
+import type { ComponentProps } from 'svelte';
+import type { YouTube } from 'sveltekit-embed';
+
+type YouTubeProps = ComponentProps<typeof YouTube>;
 ```
+
+The options for the `in_view` attachment are exported as
+`InViewOptions`.
 
 ## 🤝 Contributing
 
