@@ -330,8 +330,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       svead:
-        specifier: ^0.0.16
-        version: 0.0.16(svelte@5.57.2(@typescript-eslint/types@8.48.1))
+        specifier: ^0.1.0
+        version: 0.1.0(svelte@5.57.2(@typescript-eslint/types@8.48.1))
       svelte:
         specifier: 'catalog:'
         version: 5.57.2(@typescript-eslint/types@8.48.1)
@@ -3126,10 +3126,11 @@ packages:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
     engines: {node: '>=18'}
 
-  svead@0.0.16:
-    resolution: {integrity: sha512-lEMqEK55hslRRJxIRRe8HvtK3gUJhyK+743KK9W7vThsmgcz7DJQQX9H470CyaqbCBTPbZ/mflgEiSEM0DLB5w==}
+  svead@0.1.0:
+    resolution: {integrity: sha512-eqyOrztjNNSOpgo/i9vK1kHQoaGW3T1Bmjb0lviabdQx+ISqE8/UTWAlRklRbNRSIihjVIxfzXBUyvKts2m+0Q==}
+    engines: {node: '>=24.15.0'}
     peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0
+      svelte: ^5.0.0
 
   svelte-check@4.7.6:
     resolution: {integrity: sha512-t2scM//ZuVbSY/T2w6FSBw1v9s2NEmh/g+sy1lqtosW5ylBV5AF4wFb1Ts9Kf3MbfPDUDJDZ9L436YT0SPTdvw==}
@@ -5661,7 +5662,7 @@ snapshots:
 
   supports-color@10.2.2: {}
 
-  svead@0.0.16(svelte@5.57.2(@typescript-eslint/types@8.48.1)):
+  svead@0.1.0(svelte@5.57.2(@typescript-eslint/types@8.48.1)):
     dependencies:
       schema-dts: 2.1.0
       svelte: 5.57.2(@typescript-eslint/types@8.48.1)
