@@ -169,7 +169,7 @@ catalogs:
       version: 1.64.1
     '@sveltejs/adapter-cloudflare':
       specifier: ^8.0.0
-      version: 8.0.0
+      version: 8.0.1
     '@sveltejs/kit':
       specifier: ^3.0.0
       version: 3.0.1
@@ -268,7 +268,7 @@ importers:
         version: 2.6.2
       '@sveltejs/adapter-cloudflare':
         specifier: 'catalog:'
-        version: 8.0.0(@sveltejs/kit@3.0.1(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))(wrangler@4.152.0(@types/node@26.6.4))
+        version: 8.0.1(@sveltejs/kit@3.0.1(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))(wrangler@4.152.0(@types/node@26.6.4))
       '@sveltejs/kit':
         specifier: 'catalog:'
         version: 3.0.1(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3)
@@ -1644,8 +1644,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^3.0.0-next.0
 
-  '@sveltejs/adapter-cloudflare@8.0.0':
-    resolution: {integrity: sha512-68jVq1x4nya+/Dpg1NrWlz6LFWAX/F3DrsR8KQGl1bOt4G8oUp0kLLeMx+LI4AZQccGEmE7Nt2tOZwsParE6FA==}
+  '@sveltejs/adapter-cloudflare@8.0.1':
+    resolution: {integrity: sha512-KISMvrFOLpn7sm7wQr26XhkVIBYQLq1wYcFZvNgHqWxyN/kVZb/ldu7+jJtWi+Ai0mNw+OPRecHadzEB5TGQ6A==}
     peerDependencies:
       '@sveltejs/kit': ^3.0.0-next.0
       wrangler: ^4.118.0
@@ -4274,7 +4274,7 @@ snapshots:
     dependencies:
       '@sveltejs/kit': 3.0.1(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3)
 
-  '@sveltejs/adapter-cloudflare@8.0.0(@sveltejs/kit@3.0.1(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))(wrangler@4.152.0(@types/node@26.6.4))':
+  '@sveltejs/adapter-cloudflare@8.0.1(@sveltejs/kit@3.0.1(@sveltejs/vite-plugin-svelte@7.3.1(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))(svelte@5.57.2(@typescript-eslint/types@8.48.1))(typescript@6.0.3))(wrangler@4.152.0(@types/node@26.6.4))':
     dependencies:
       '@cloudflare/workers-types': 5.20261009.1
       '@rolldown/pluginutils': 1.0.1
