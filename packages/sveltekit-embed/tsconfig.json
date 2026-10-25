@@ -11,5 +11,6 @@
 		"strict": true,
 		"moduleResolution": "bundler",
 		"types": ["vitest-browser-svelte", "$app/types"]
-	}
+	},
+	"include": ["src", "*"]
 }
