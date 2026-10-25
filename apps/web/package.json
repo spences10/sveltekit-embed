@@ -48,7 +48,7 @@
 		"fathom-client": "^3.7.2",
 		"lucide": "^1.54.0",
 		"mdsvex": "^0.12.8",
-		"morphicons": "^1.7.1",
+		"morphicons": "^2.0.0",
 		"playwright": "catalog:",
 		"rehype-autolink-headings": "^7.1.0",
 		"rehype-external-links": "^3.0.0",
