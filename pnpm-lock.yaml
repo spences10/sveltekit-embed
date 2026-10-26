@@ -316,7 +316,7 @@ importers:
         version: 0.12.8(svelte@5.57.2(@typescript-eslint/types@8.48.1))
       morphicons:
         specifier: ^2.0.0
-        version: 2.0.0(svelte@5.57.2(@typescript-eslint/types@8.48.1))
+        version: 2.0.1(svelte@5.57.2(@typescript-eslint/types@8.48.1))
       playwright:
         specifier: 'catalog:'
         version: 1.64.1
@@ -2804,8 +2804,8 @@ packages:
     resolution: {integrity: sha512-QNgCA/axizZ7kv7RV3nwbRoz+w4watBlwIsyXjwgYHw4eSw5BrR1F2152s3Kz+Bzy/YxjKFHrZl3LzBRbPgYoQ==}
     engines: {node: '>=22.0.0'}
 
-  morphicons@2.0.0:
-    resolution: {integrity: sha512-/pyqQjUhq8FUKz2SjJ6sXe4KjAa0QEmEbtzG13158/pl+G6bCJGvo1zIEDGNQ+Hagl69hIu4Mn9kJgTvvTf8Ew==}
+  morphicons@2.0.1:
+    resolution: {integrity: sha512-Y1IUBWnSDFtlx5PUMB2fCgImAKhgK+BklHJrlTToKdFnTTLM9nVHDW1fltA8tVtkuQcWQOmUuOCmQNkkD0AhYA==}
     peerDependencies:
       react: '>=18'
       react-native: '>=0.71'
@@ -5285,7 +5285,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  morphicons@2.0.0(svelte@5.57.2(@typescript-eslint/types@8.48.1)):
+  morphicons@2.0.1(svelte@5.57.2(@typescript-eslint/types@8.48.1)):
     optionalDependencies:
       svelte: 5.57.2(@typescript-eslint/types@8.48.1)
 
