@@ -331,7 +331,7 @@ importers:
         version: 6.0.0
       svead:
         specifier: ^0.1.0
-        version: 0.1.0(svelte@5.57.3(@typescript-eslint/types@8.48.1))
+        version: 0.1.1(svelte@5.57.3(@typescript-eslint/types@8.48.1))
       svelte:
         specifier: 'catalog:'
         version: 5.57.3(@typescript-eslint/types@8.48.1)
@@ -3037,8 +3037,8 @@ packages:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
     engines: {node: '>=18'}
 
-  svead@0.1.0:
-    resolution: {integrity: sha512-eqyOrztjNNSOpgo/i9vK1kHQoaGW3T1Bmjb0lviabdQx+ISqE8/UTWAlRklRbNRSIihjVIxfzXBUyvKts2m+0Q==}
+  svead@0.1.1:
+    resolution: {integrity: sha512-hqC5EcPPh6n/B3nIDsPvsVL9ABtppdhLh/+5mrIKmvuRMTbPnICvkFH7cJ3JYt/cttA9gcCWH4JvZPG3tw6YRA==}
     engines: {node: '>=24.15.0'}
     peerDependencies:
       svelte: ^5.0.0
@@ -5529,7 +5529,7 @@ snapshots:
 
   supports-color@10.2.2: {}
 
-  svead@0.1.0(svelte@5.57.3(@typescript-eslint/types@8.48.1)):
+  svead@0.1.1(svelte@5.57.3(@typescript-eslint/types@8.48.1)):
     dependencies:
       schema-dts: 2.1.0
       svelte: 5.57.3(@typescript-eslint/types@8.48.1)
