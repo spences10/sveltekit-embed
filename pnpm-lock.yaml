@@ -259,7 +259,7 @@ importers:
         version: 5.3.0
       '@lucide/svelte':
         specifier: ^1.54.0
-        version: 1.66.0(svelte@5.57.3(@typescript-eslint/types@8.48.1))
+        version: 1.68.0(svelte@5.57.3(@typescript-eslint/types@8.48.1))
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.64.1
@@ -310,7 +310,7 @@ importers:
         version: 3.7.2
       lucide:
         specifier: ^1.54.0
-        version: 1.66.0
+        version: 1.68.0
       mdsvex:
         specifier: ^0.12.8
         version: 0.12.8(svelte@5.57.3(@typescript-eslint/types@8.48.1))
@@ -1214,8 +1214,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@lucide/svelte@1.66.0':
-    resolution: {integrity: sha512-G2qFyutQpgk9TY0QYgqXk9rQtUt8p509mFpQzmTpyc894hfRSFhGNcGAVAUgB8znAyVsp5WTF/2vmCwprnNQ/w==}
+  '@lucide/svelte@1.68.0':
+    resolution: {integrity: sha512-5iOupZmuGCJD89emoHsTlwkwMHzuNTBUwt/IbH3YVnmphBNqKqz4CKepzsOBXpf+c17DXlTOeV8nhzV0pU+5qw==}
     peerDependencies:
       svelte: ^5
 
@@ -2701,8 +2701,8 @@ packages:
     resolution: {integrity: sha512-B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg==}
     engines: {node: 20 || >=22}
 
-  lucide@1.66.0:
-    resolution: {integrity: sha512-Ngq8coV3XJ9S/DLTNnIWk9lmdJusoSnuuoO1rK7C0H9/VaV93LoWkv/u5GyUAJhL+rFesAd4gL3YG544bnH6gQ==}
+  lucide@1.68.0:
+    resolution: {integrity: sha512-rs3/CGsK3g8pex8lsN5QDxUsEe3awxhMLsxqeK441WBmOlyF9X1sYIdGxTNV0ubpGu6rYSuj0pxuf189ziUKvw==}
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -3947,7 +3947,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@lucide/svelte@1.66.0(svelte@5.57.3(@typescript-eslint/types@8.48.1))':
+  '@lucide/svelte@1.68.0(svelte@5.57.3(@typescript-eslint/types@8.48.1))':
     dependencies:
       svelte: 5.57.3(@typescript-eslint/types@8.48.1)
 
@@ -5113,7 +5113,7 @@ snapshots:
   lru-cache@11.2.4:
     optional: true
 
-  lucide@1.66.0: {}
+  lucide@1.68.0: {}
 
   lz-string@1.5.0: {}
 
