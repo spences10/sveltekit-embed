@@ -18,12 +18,15 @@ test('command palette finds a component by keyword', async ({
 	page,
 }) => {
 	await page.goto('/');
-	await page.keyboard.press('Control+k');
 
 	const input = page.getByRole('combobox', {
 		name: 'Search components',
 	});
-	await expect(input).toBeFocused();
+	// A shortcut sent before hydration has no listener yet.
+	await expect(async () => {
+		await page.keyboard.press('Control+k');
+		await expect(input).toBeFocused({ timeout: 1000 });
+	}).toPass({ timeout: 10000 });
 
 	// "mastodon" is a keyword of Toot, it isn't in the name
 	await input.fill('mastodon');
@@ -53,8 +56,12 @@ test('command palette opens from the header and closes on escape', async ({
 
 test('command palette switches theme', async ({ page }) => {
 	await page.goto('/');
-	await page.keyboard.press('/');
-	await page.getByRole('combobox').fill('dark');
+	const input = page.getByRole('combobox');
+	await expect(async () => {
+		await page.keyboard.press('/');
+		await expect(input).toBeFocused({ timeout: 1000 });
+	}).toPass({ timeout: 10000 });
+	await input.fill('dark');
 	await page.keyboard.press('Enter');
 
 	await expect(page.locator('html')).toHaveAttribute(
