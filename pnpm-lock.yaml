@@ -316,7 +316,7 @@ importers:
         version: 3.7.2
       lucide:
         specifier: ^1.54.0
-        version: 1.74.0
+        version: 1.76.0
       mdsvex:
         specifier: ^0.12.8
         version: 0.12.8(svelte@5.58.0(@typescript-eslint/types@8.48.1))
@@ -2885,8 +2885,8 @@ packages:
     resolution: {integrity: sha512-B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg==}
     engines: {node: 20 || >=22}
 
-  lucide@1.74.0:
-    resolution: {integrity: sha512-jFklpbqbUN+lZtOVHojkJ+AL5AHF9F6ShtedFIcmEsdDATVzdxlHYnTRZu4aexmJ8DrrneXaDJpaRTxlrclMJQ==}
+  lucide@1.76.0:
+    resolution: {integrity: sha512-70XF2WJ156zj40BnibNXNnE9yq5Cf8tegPRgiryAXQHOZXBZV66jqqFluT+Td1weQNrhkURr/cQum2ReAJsydg==}
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -5544,7 +5544,7 @@ snapshots:
   lru-cache@11.2.4:
     optional: true
 
-  lucide@1.74.0: {}
+  lucide@1.76.0: {}
 
   lz-string@1.5.0: {}
 
