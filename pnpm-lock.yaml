@@ -295,7 +295,7 @@ importers:
         version: 0.2.2
       '@twinkleplop/svelte':
         specifier: ^0.1.7
-        version: 0.1.7
+        version: 0.1.8
       '@twinkleplop/typescript':
         specifier: ^0.1.7
         version: 0.1.7
@@ -1887,17 +1887,26 @@ packages:
   '@twinkleplop/css@0.1.7':
     resolution: {integrity: sha512-eznre7EgC0IBE3/jqAUKXG2S4iWLczOSAxwLnknS+9BQQGuD82u2A2rCok94E+nMpjkeshhbSvnQxDSEo8YpUA==}
 
+  '@twinkleplop/css@0.1.8':
+    resolution: {integrity: sha512-OwPt+cYSOUP3sVXq7Zt6pWVY4ce87t1EUgyHakhz36TGxYitnIA7DXeFmoyHCnFW8ZjfNjKCa8HAwARLTZstmQ==}
+
   '@twinkleplop/html@0.1.7':
     resolution: {integrity: sha512-tpc+I1OXR5UJYkIhna74rxxEBYUJMWTNkjAVH9sA6fKeWq9lmbLRhutb10PHeMuF6BTHuHgD9oyET7yKdZGeQA==}
+
+  '@twinkleplop/html@0.1.8':
+    resolution: {integrity: sha512-j9AnYXx7u53UmXYEcw6CztJMRpC9VqGPxk9ahR+vUUfU7tlWRzKrSP8OwPW5pVki32SDeeak+NU2fjvsru/BEA==}
 
   '@twinkleplop/javascript@0.1.7':
     resolution: {integrity: sha512-qZDFx0bTM8YdKBTCxIS+6dZ1itaTnn1Udf2wFW5Uo+S6liGm40Lq2rlCk3PYa+Hm4lmX6HSzFeO4ZaDqk6Cn9Q==}
 
+  '@twinkleplop/javascript@0.1.8':
+    resolution: {integrity: sha512-2VAws4GFrZ19Gfr7s6/cxoATIqVbOYEsmsASu1YZaPo/qBW7sLVqoWQlN7Ft1qakudgdoPFx7s71Caeyn+2C5g==}
+
   '@twinkleplop/markdown-core@0.2.2':
     resolution: {integrity: sha512-PCQQFHGA4wRg3X4XGfiIv5z4ZePza8FHJEPWCiL19qkWnWHqR0JiDUnVmBIyc/YbxpCjhJjFe4r1JohWkJBZTQ==}
 
-  '@twinkleplop/svelte@0.1.7':
-    resolution: {integrity: sha512-8Zz7WYm7ERGNTZeCjiceRWDB+spcrDA9ToUV/AtavMl68ZM28E1AIPOdo2ddKkBDnHim8Vs7tVlFr9T3Mq1NlA==}
+  '@twinkleplop/svelte@0.1.8':
+    resolution: {integrity: sha512-9gJ6QwdcxR8ns2Mg7CRqSHr3eFhUikB2RT9r5moKcx/cZncSOGfyn5erwT80r3SBBb4nzO2qPiaGHhcuAem4Cw==}
 
   '@twinkleplop/typescript@0.1.7':
     resolution: {integrity: sha512-3lVdFUnOc40QQUJPnmTsiyTf7+RSEoXhDnmMwkUQ5Kzgemkk6eeXQGietPjxro8k+QuTAY/aQuWOtR/nUgfENw==}
@@ -4649,11 +4658,21 @@ snapshots:
     dependencies:
       '@twinkleplop/core': 0.3.1
 
+  '@twinkleplop/css@0.1.8':
+    dependencies:
+      '@twinkleplop/core': 0.3.2
+
   '@twinkleplop/html@0.1.7':
     dependencies:
       '@twinkleplop/core': 0.3.1
       '@twinkleplop/css': 0.1.7
       '@twinkleplop/javascript': 0.1.7
+
+  '@twinkleplop/html@0.1.8':
+    dependencies:
+      '@twinkleplop/core': 0.3.2
+      '@twinkleplop/css': 0.1.8
+      '@twinkleplop/javascript': 0.1.8
 
   '@twinkleplop/javascript@0.1.7':
     dependencies:
@@ -4661,15 +4680,21 @@ snapshots:
       '@twinkleplop/css': 0.1.7
       '@twinkleplop/html': 0.1.7
 
+  '@twinkleplop/javascript@0.1.8':
+    dependencies:
+      '@twinkleplop/core': 0.3.2
+      '@twinkleplop/css': 0.1.8
+      '@twinkleplop/html': 0.1.8
+
   '@twinkleplop/markdown-core@0.2.2':
     dependencies:
       '@twinkleplop/core': 0.3.2
 
-  '@twinkleplop/svelte@0.1.7':
+  '@twinkleplop/svelte@0.1.8':
     dependencies:
-      '@twinkleplop/core': 0.3.1
-      '@twinkleplop/css': 0.1.7
-      '@twinkleplop/javascript': 0.1.7
+      '@twinkleplop/core': 0.3.2
+      '@twinkleplop/css': 0.1.8
+      '@twinkleplop/javascript': 0.1.8
 
   '@twinkleplop/typescript@0.1.7':
     dependencies:
