@@ -298,7 +298,7 @@ importers:
         version: 0.1.8
       '@twinkleplop/typescript':
         specifier: ^0.1.7
-        version: 0.1.7
+        version: 0.1.8
       '@types/node':
         specifier: ^26.6.4
         version: 26.6.6
@@ -1878,26 +1878,14 @@ packages:
   '@twinkleplop/bash@0.1.8':
     resolution: {integrity: sha512-7YQWMDIyHTWz8HUSM+0PxpTkpY9uX4koSi5+JcBSgImLjSdBnwvkXAY6uAVy2yKKvZjMuwMPyja9Z874/COzTA==}
 
-  '@twinkleplop/core@0.3.1':
-    resolution: {integrity: sha512-fMbce7NcJlVROsyI34tz3DCWkAWRWLRlBNCbgwz36mm6yoEO09eyafi8JRN5HJGQIzMr0qjXQ3t3asc7MFSh8Q==}
-
   '@twinkleplop/core@0.3.2':
     resolution: {integrity: sha512-K4sKQFqTSpEjFz4eCmJGQA6ivtZgpBKdZzu3AzKIP5jwstJWHPI5eWtJgfv6vTsxDVHr3WY02gXnwL3+Rzndhg==}
-
-  '@twinkleplop/css@0.1.7':
-    resolution: {integrity: sha512-eznre7EgC0IBE3/jqAUKXG2S4iWLczOSAxwLnknS+9BQQGuD82u2A2rCok94E+nMpjkeshhbSvnQxDSEo8YpUA==}
 
   '@twinkleplop/css@0.1.8':
     resolution: {integrity: sha512-OwPt+cYSOUP3sVXq7Zt6pWVY4ce87t1EUgyHakhz36TGxYitnIA7DXeFmoyHCnFW8ZjfNjKCa8HAwARLTZstmQ==}
 
-  '@twinkleplop/html@0.1.7':
-    resolution: {integrity: sha512-tpc+I1OXR5UJYkIhna74rxxEBYUJMWTNkjAVH9sA6fKeWq9lmbLRhutb10PHeMuF6BTHuHgD9oyET7yKdZGeQA==}
-
   '@twinkleplop/html@0.1.8':
     resolution: {integrity: sha512-j9AnYXx7u53UmXYEcw6CztJMRpC9VqGPxk9ahR+vUUfU7tlWRzKrSP8OwPW5pVki32SDeeak+NU2fjvsru/BEA==}
-
-  '@twinkleplop/javascript@0.1.7':
-    resolution: {integrity: sha512-qZDFx0bTM8YdKBTCxIS+6dZ1itaTnn1Udf2wFW5Uo+S6liGm40Lq2rlCk3PYa+Hm4lmX6HSzFeO4ZaDqk6Cn9Q==}
 
   '@twinkleplop/javascript@0.1.8':
     resolution: {integrity: sha512-2VAws4GFrZ19Gfr7s6/cxoATIqVbOYEsmsASu1YZaPo/qBW7sLVqoWQlN7Ft1qakudgdoPFx7s71Caeyn+2C5g==}
@@ -1908,8 +1896,8 @@ packages:
   '@twinkleplop/svelte@0.1.8':
     resolution: {integrity: sha512-9gJ6QwdcxR8ns2Mg7CRqSHr3eFhUikB2RT9r5moKcx/cZncSOGfyn5erwT80r3SBBb4nzO2qPiaGHhcuAem4Cw==}
 
-  '@twinkleplop/typescript@0.1.7':
-    resolution: {integrity: sha512-3lVdFUnOc40QQUJPnmTsiyTf7+RSEoXhDnmMwkUQ5Kzgemkk6eeXQGietPjxro8k+QuTAY/aQuWOtR/nUgfENw==}
+  '@twinkleplop/typescript@0.1.8':
+    resolution: {integrity: sha512-5f0xc1HyY4YjwNUgLWX09T8tnKn5QrigLrOw+BLT0nQ+WWkeHeI7Knt8gmOnndba7H1fKLI1+kWOuNuHioX+5A==}
 
   '@types/aria-query@5.0.4':
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
@@ -4650,35 +4638,17 @@ snapshots:
     dependencies:
       '@twinkleplop/core': 0.3.2
 
-  '@twinkleplop/core@0.3.1': {}
-
   '@twinkleplop/core@0.3.2': {}
-
-  '@twinkleplop/css@0.1.7':
-    dependencies:
-      '@twinkleplop/core': 0.3.1
 
   '@twinkleplop/css@0.1.8':
     dependencies:
       '@twinkleplop/core': 0.3.2
-
-  '@twinkleplop/html@0.1.7':
-    dependencies:
-      '@twinkleplop/core': 0.3.1
-      '@twinkleplop/css': 0.1.7
-      '@twinkleplop/javascript': 0.1.7
 
   '@twinkleplop/html@0.1.8':
     dependencies:
       '@twinkleplop/core': 0.3.2
       '@twinkleplop/css': 0.1.8
       '@twinkleplop/javascript': 0.1.8
-
-  '@twinkleplop/javascript@0.1.7':
-    dependencies:
-      '@twinkleplop/core': 0.3.1
-      '@twinkleplop/css': 0.1.7
-      '@twinkleplop/html': 0.1.7
 
   '@twinkleplop/javascript@0.1.8':
     dependencies:
@@ -4696,10 +4666,10 @@ snapshots:
       '@twinkleplop/css': 0.1.8
       '@twinkleplop/javascript': 0.1.8
 
-  '@twinkleplop/typescript@0.1.7':
+  '@twinkleplop/typescript@0.1.8':
     dependencies:
-      '@twinkleplop/core': 0.3.1
-      '@twinkleplop/javascript': 0.1.7
+      '@twinkleplop/core': 0.3.2
+      '@twinkleplop/javascript': 0.1.8
 
   '@types/aria-query@5.0.4': {}
 
