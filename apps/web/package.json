@@ -47,7 +47,7 @@
 		"daisyui": "^5.5.8",
 		"fathom-client": "^3.7.2",
 		"lucide": "^1.54.0",
-		"mdsvex": "^0.12.8",
+		"mdsvex": "^1.0.0",
 		"morphicons": "^2.0.0",
 		"playwright": "catalog:",
 		"rehype-autolink-headings": "^7.1.0",
