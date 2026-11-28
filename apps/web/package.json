@@ -38,7 +38,7 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.17",
 		"@twinkleplop/bash": "^0.1.7",
-		"@twinkleplop/markdown-core": "^0.2.1",
+		"@twinkleplop/markdown-core": "^0.3.0",
 		"@twinkleplop/svelte": "^0.1.7",
 		"@twinkleplop/typescript": "^0.1.7",
 		"@types/node": "^26.6.4",
