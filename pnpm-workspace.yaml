@@ -6,7 +6,7 @@ minimumReleaseAge: 2880
 
 catalog:
   '@playwright/test': 1.65.1
-  '@sveltejs/adapter-cloudflare': ^8.0.0
+  '@sveltejs/adapter-cloudflare': ^9.0.0
   '@sveltejs/kit': ^3.0.0
   '@sveltejs/vite-plugin-svelte': ^7.3.0
   '@typescript/native': npm:typescript@^7.0.2
