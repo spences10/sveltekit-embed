@@ -299,7 +299,7 @@ importers:
         version: 4.3.5(@voidzero-dev/vite-plus-core@8.3.8001(@types/node@26.6.7)(esbuild@0.28.2)(jiti@2.7.0)(publint@0.3.25)(typescript@6.0.3)(yaml@2.9.1))
       '@twinkleplop/bash':
         specifier: ^0.1.7
-        version: 0.1.8
+        version: 0.1.10
       '@twinkleplop/markdown-core':
         specifier: ^0.2.1
         version: 0.2.2
@@ -1885,11 +1885,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@twinkleplop/bash@0.1.8':
-    resolution: {integrity: sha512-7YQWMDIyHTWz8HUSM+0PxpTkpY9uX4koSi5+JcBSgImLjSdBnwvkXAY6uAVy2yKKvZjMuwMPyja9Z874/COzTA==}
+  '@twinkleplop/bash@0.1.10':
+    resolution: {integrity: sha512-l07rw+wyWy91QpPWiKY/80S/uEQH/GsglexfJv0rdYxA93OImWu/hnx/sIJkFyGN2arsz58GiAw7U40jxHm53Q==}
 
   '@twinkleplop/core@0.3.2':
     resolution: {integrity: sha512-K4sKQFqTSpEjFz4eCmJGQA6ivtZgpBKdZzu3AzKIP5jwstJWHPI5eWtJgfv6vTsxDVHr3WY02gXnwL3+Rzndhg==}
+
+  '@twinkleplop/core@0.4.1':
+    resolution: {integrity: sha512-NOErtBHmvj2HHQZut5auMTiPRNQO5/FO6IUtVunoRiaPV6bSmO+DYUPwo2AJck6NnaH9/iteD9uk8Pt1Liso8w==}
 
   '@twinkleplop/css@0.1.8':
     resolution: {integrity: sha512-OwPt+cYSOUP3sVXq7Zt6pWVY4ce87t1EUgyHakhz36TGxYitnIA7DXeFmoyHCnFW8ZjfNjKCa8HAwARLTZstmQ==}
@@ -4662,11 +4665,13 @@ snapshots:
   '@tsrs/win32-x64@7.1.0-beta.tsrs4':
     optional: true
 
-  '@twinkleplop/bash@0.1.8':
+  '@twinkleplop/bash@0.1.10':
     dependencies:
-      '@twinkleplop/core': 0.3.2
+      '@twinkleplop/core': 0.4.1
 
   '@twinkleplop/core@0.3.2': {}
+
+  '@twinkleplop/core@0.4.1': {}
 
   '@twinkleplop/css@0.1.8':
     dependencies:
